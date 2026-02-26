@@ -52,6 +52,108 @@ const AGENTS = [
 
 const TAGS = ['All', ...new Set(AGENTS.map(a => a.tag))]
 
+const STARTER_PROMPTS = [
+  {
+    id: 's1', category: 'Work', color: '#f59e0b',
+    title: 'Summarize This Email',
+    desc: 'Paste in any long email and get the key points in 3 bullets.',
+    prompt: 'Summarize the following email in 3 concise bullet points. Highlight any action items or deadlines.\n\nEmail:\n[PASTE EMAIL HERE]',
+  },
+  {
+    id: 's2', category: 'Work', color: '#f59e0b',
+    title: 'Write a Performance Review',
+    desc: 'Generate a professional review from a few notes.',
+    prompt: 'Write a professional performance review based on these notes. Include strengths, areas for improvement, and a summary.\n\nRole: [ROLE]\nNotes: [YOUR NOTES HERE]',
+  },
+  {
+    id: 's3', category: 'Work', color: '#f59e0b',
+    title: 'Meeting Notes → Action Items',
+    desc: 'Paste raw notes, get a clean action item list.',
+    prompt: 'Convert these meeting notes into a clean action item list. For each item include: task, owner (if mentioned), deadline (if mentioned).\n\nNotes:\n[PASTE NOTES HERE]',
+  },
+  {
+    id: 's4', category: 'Work', color: '#f59e0b',
+    title: 'Reply to a Difficult Email',
+    desc: 'Draft a calm, professional response to a tough message.',
+    prompt: 'Help me write a professional, calm reply to this email. My goal is to [YOUR GOAL]. Keep it concise and respectful.\n\nOriginal email:\n[PASTE EMAIL HERE]',
+  },
+  {
+    id: 's5', category: 'Writing', color: '#a78bfa',
+    title: "Explain Like I'm 5",
+    desc: 'Make any complex topic simple and clear.',
+    prompt: "Explain the following concept as if talking to a curious 10-year-old. Use simple language, a relatable analogy, under 150 words.\n\nConcept: [TOPIC HERE]",
+  },
+  {
+    id: 's6', category: 'Writing', color: '#a78bfa',
+    title: 'Improve My Writing',
+    desc: 'Paste any text and get a cleaner, sharper version.',
+    prompt: 'Improve this text. Make it clearer, more concise, and professional while keeping my original voice and meaning. Show the revised version only.\n\n[PASTE YOUR TEXT HERE]',
+  },
+  {
+    id: 's7', category: 'Writing', color: '#a78bfa',
+    title: 'Write a LinkedIn Post',
+    desc: 'Turn a story or idea into an engaging post.',
+    prompt: 'Write a LinkedIn post from this idea. Strong opening line, short paragraphs, end with a question or CTA. 150-200 words.\n\nIdea: [DESCRIBE HERE]',
+  },
+  {
+    id: 's8', category: 'Writing', color: '#a78bfa',
+    title: 'Proofread & Fix Grammar',
+    desc: 'Clean up any text without changing your meaning.',
+    prompt: 'Proofread and fix all grammar, spelling, and punctuation errors in this text. Do not change the tone or meaning. Return only the corrected version.\n\n[PASTE TEXT HERE]',
+  },
+  {
+    id: 's9', category: 'Learning', color: '#34d399',
+    title: 'Teach Me Anything',
+    desc: "Get a structured beginner's guide on any topic.",
+    prompt: 'Teach me [TOPIC] from scratch. Give me: (1) one-sentence summary, (2) why it matters, (3) the 3 most important concepts, (4) the best next step to learn more.',
+  },
+  {
+    id: 's10', category: 'Learning', color: '#34d399',
+    title: 'Make a Study Plan',
+    desc: 'Get a week-by-week roadmap for any skill.',
+    prompt: 'Create a 4-week study plan for learning [SKILL]. I have [X hours] per week. Include resources, daily tasks, and a milestone per week.',
+  },
+  {
+    id: 's11', category: 'Learning', color: '#34d399',
+    title: 'Summarize an Article',
+    desc: 'Paste any article and get the core ideas fast.',
+    prompt: 'Summarize this article: (1) main argument in one sentence, (2) 3 key points, (3) one thing I should do or think about as a result.\n\nArticle:\n[PASTE HERE]',
+  },
+  {
+    id: 's12', category: 'Learning', color: '#34d399',
+    title: 'Quiz Me on This Topic',
+    desc: 'Test your understanding with AI-generated questions.',
+    prompt: 'Create a 5-question quiz to test my understanding of [TOPIC]. Mix multiple choice, true/false, and one short answer. After I respond, give me answers and explain any I got wrong.',
+  },
+  {
+    id: 's13', category: 'Life', color: '#60a5fa',
+    title: 'Help Me Make a Decision',
+    desc: 'Think through any big decision clearly.',
+    prompt: 'Help me think through this decision. Give me pros and cons, what I might be overlooking, and the one question I should ask myself to get clarity.\n\nDecision: [DESCRIBE IT]',
+  },
+  {
+    id: 's14', category: 'Life', color: '#60a5fa',
+    title: 'Plan My Week',
+    desc: 'Turn your task list into a realistic schedule.',
+    prompt: 'Help me plan my week. Organize these tasks into a day-by-day schedule Mon-Fri. Flag anything overloaded and suggest what could move.\n\nTasks:\n[LIST TASKS AND MEETINGS]',
+  },
+  {
+    id: 's15', category: 'Life', color: '#60a5fa',
+    title: 'Write My Bio',
+    desc: 'Generate a professional bio from a few bullet points.',
+    prompt: 'Write a professional third-person bio under 100 words. Warm but credible.\n\nName: [NAME]\nRole: [JOB TITLE]\nBackground: [KEY FACTS]',
+  },
+  {
+    id: 's16', category: 'Life', color: '#60a5fa',
+    title: 'Give Me Honest Feedback',
+    desc: "Get direct, constructive critique on any idea.",
+    prompt: "Give me honest, direct feedback. Don't sugarcoat — tell me what's weak, what's strong, and the single most important thing to change.\n\n[PASTE YOUR IDEA OR WORK HERE]",
+  },
+]
+
+const STARTER_CATEGORIES = ['All', 'Work', 'Writing', 'Learning', 'Life']
+
+
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@600;700;800&display=swap');
   ::-webkit-scrollbar { width: 5px; }
@@ -180,6 +282,8 @@ export default function PromptForge() {
   const [custName, setCustName] = useState('')
   const [custDesc, setCustDesc] = useState('')
   const [libSearch, setLibSearch] = useState('')
+  const [starterCat, setStarterCat] = useState('All')
+  const [starterCopied, setStarterCopied] = useState(null)
   const [mounted, setMounted] = useState(false)
   const [showWalkthrough, setShowWalkthrough] = useState(false)
   const [walkthroughStep, setWalkthroughStep] = useState(0)
@@ -492,6 +596,7 @@ export default function PromptForge() {
             <button className={`nav-tab ${view === 'library' ? 'on' : ''}`} onClick={() => setView('library')}>
               Library {library.length > 0 && <span style={{ color: '#2a2a2a', marginLeft: 3 }}>({library.length})</span>}
             </button>
+            <button className={`nav-tab ${view === 'starter' ? 'on' : ''}`} onClick={() => setView('starter')}>Starter</button>
           </div>
           <button className="btn cyan" style={{ fontSize: 9 }} onClick={() => atLimit ? setModal('upgrade') : setModal('custom')}>
             + Custom Agent
@@ -621,6 +726,59 @@ export default function PromptForge() {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+
+        {/* Starter Pack */}
+        {view === 'starter' && (
+          <div className="fu">
+            <div style={{ marginBottom: 20 }}>
+              <p style={{ fontSize: 11, color: '#333', lineHeight: 1.7, marginBottom: 16 }}>
+                New to AI? Start here. These are ready-to-use prompts for everyday tasks — just copy, paste into any AI tool, and fill in the brackets.
+              </p>
+              <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
+                {STARTER_CATEGORIES.map(c => (
+                  <button key={c} className={`pill ${starterCat === c ? 'on' : ''}`} onClick={() => setStarterCat(c)}>{c}</button>
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 9 }}>
+              {STARTER_PROMPTS.filter(p => starterCat === 'All' || p.category === starterCat).map(item => (
+                <div key={item.id} style={{
+                  background: '#0f0f0f', border: '1px solid #1c1c1c', borderRadius: 6,
+                  padding: '18px 18px 16px', position: 'relative', transition: 'border-color 0.14s',
+                }}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = item.color + '55'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = '#1c1c1c'}
+                >
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 8, gap: 10 }}>
+                    <div>
+                      <div style={{ fontSize: 8, color: item.color, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 4 }}>{item.category}</div>
+                      <div style={{ fontFamily: "'Syne', sans-serif", fontWeight: 700, fontSize: 13, color: '#eee' }}>{item.title}</div>
+                    </div>
+                    <button
+                      className={`btn ${starterCopied === item.id ? 'green' : 'amber'}`}
+                      style={{ padding: '4px 10px', fontSize: 9, flexShrink: 0 }}
+                      onClick={() => {
+                        navigator.clipboard.writeText(item.prompt)
+                        setStarterCopied(item.id)
+                        setTimeout(() => setStarterCopied(null), 2000)
+                      }}
+                    >{starterCopied === item.id ? '✓' : 'Copy'}</button>
+                  </div>
+                  <div style={{ fontSize: 11, color: '#383838', lineHeight: 1.6, marginBottom: 12 }}>{item.desc}</div>
+                  <div style={{
+                    background: '#0a0a0a', border: '1px solid #161616', borderRadius: 4,
+                    padding: '10px 12px', fontSize: 10.5, color: '#2e2e2e', lineHeight: 1.7,
+                    fontFamily: "'DM Mono', monospace", whiteSpace: 'pre-wrap',
+                    maxHeight: 80, overflow: 'hidden', position: 'relative',
+                  }}>
+                    {item.prompt.slice(0, 120)}{item.prompt.length > 120 ? '...' : ''}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
