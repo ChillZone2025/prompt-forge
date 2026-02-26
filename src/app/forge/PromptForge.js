@@ -6,6 +6,34 @@ const FREE_LIMIT = 3
 const LS_USAGE = 'pf_usage'
 const LS_PRO = 'pf_pro'
 const LS_LIB = 'pf_library'
+const LS_SEEN = 'pf_seen'
+
+const WALKTHROUGH = [
+  {
+    step: 1,
+    icon: '◈',
+    title: 'Pick an Agent',
+    body: 'Browse the agent grid and click any card to instantly generate a fully packaged system prompt for that role. No typing required.',
+  },
+  {
+    step: 2,
+    icon: '⚡',
+    title: 'Forge It',
+    body: 'Claude generates a professional, deployment-ready prompt in seconds — with identity, capabilities, behavior rules, and an activation phrase built in.',
+  },
+  {
+    step: 3,
+    icon: '◎',
+    title: 'Copy & Paste',
+    body: 'Hit Copy Prompt and paste it into the "System Prompt" or "Custom Instructions" field of any AI tool — Claude, ChatGPT, or your own API.',
+  },
+  {
+    step: 4,
+    icon: '✦',
+    title: 'Save to Your Library',
+    body: 'Save your best prompts to your personal library. They persist across sessions so your agent collection grows over time.',
+  },
+]
 
 const AGENTS = [
   { id: 'treasury',    icon: '◈', name: 'FX Treasury Analyst',   desc: 'Hedging, derivatives, currency risk',    color: '#f59e0b', tag: 'Finance'     },
@@ -153,6 +181,8 @@ export default function PromptForge() {
   const [custDesc, setCustDesc] = useState('')
   const [libSearch, setLibSearch] = useState('')
   const [mounted, setMounted] = useState(false)
+  const [showWalkthrough, setShowWalkthrough] = useState(false)
+  const [walkthroughStep, setWalkthroughStep] = useState(0)
 
   useEffect(() => {
     setMounted(true)
@@ -161,8 +191,17 @@ export default function PromptForge() {
       setIsPro(localStorage.getItem(LS_PRO) === 'true')
       const lib = JSON.parse(localStorage.getItem(LS_LIB) || '[]')
       setLibrary(lib)
+      if (!localStorage.getItem(LS_SEEN)) setShowWalkthrough(true)
     } catch {}
   }, [])
+
+  const closeWalkthrough = () => {
+    setShowWalkthrough(false)
+    setWalkthroughStep(0)
+    try { localStorage.setItem(LS_SEEN, 'true') } catch {}
+  }
+
+  const openWalkthrough = () => { setWalkthroughStep(0); setShowWalkthrough(true) }
 
   useEffect(() => {
     if (!loading) return
@@ -241,6 +280,74 @@ export default function PromptForge() {
     <div style={{ minHeight: '100vh', background: '#080808', color: '#d0d0d0', fontFamily: "'DM Mono', monospace" }}>
       <style>{CSS}</style>
       <div className="scanline" />
+
+      {/* ? Button */}
+      <button
+        onClick={openWalkthrough}
+        style={{
+          position: 'fixed', bottom: 24, right: 24, zIndex: 400,
+          width: 36, height: 36, borderRadius: '50%',
+          background: '#0f0f0f', border: '1px solid #2a2a2a',
+          color: '#444', fontFamily: "'DM Mono', monospace",
+          fontSize: 14, cursor: 'pointer', transition: 'all 0.14s',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}
+        onMouseEnter={e => { e.target.style.borderColor = '#f59e0b'; e.target.style.color = '#f59e0b' }}
+        onMouseLeave={e => { e.target.style.borderColor = '#2a2a2a'; e.target.style.color = '#444' }}
+      >?</button>
+
+      {/* Walkthrough Modal */}
+      {showWalkthrough && (
+        <div className="overlay" onClick={closeWalkthrough}>
+          <div className="modal" style={{ maxWidth: 480, width: '92%' }} onClick={e => e.stopPropagation()}>
+            {/* Step indicators */}
+            <div style={{ display: 'flex', gap: 6, marginBottom: 28 }}>
+              {WALKTHROUGH.map((_, i) => (
+                <div key={i} style={{
+                  height: 2, flex: 1, borderRadius: 2,
+                  background: i <= walkthroughStep ? '#f59e0b' : '#1e1e1e',
+                  transition: 'background 0.2s',
+                }} />
+              ))}
+            </div>
+
+            {/* Step content */}
+            <div style={{ marginBottom: 32 }}>
+              <div style={{ fontSize: 28, marginBottom: 14, color: '#f59e0b' }}>
+                {WALKTHROUGH[walkthroughStep].icon}
+              </div>
+              <div style={{ fontSize: 9, color: '#333', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 8 }}>
+                Step {WALKTHROUGH[walkthroughStep].step} of {WALKTHROUGH.length}
+              </div>
+              <h2 style={{ fontFamily: "'Syne', sans-serif", fontWeight: 800, fontSize: 24, color: '#f0f0f0', marginBottom: 12, letterSpacing: '-0.02em' }}>
+                {WALKTHROUGH[walkthroughStep].title}
+              </h2>
+              <p style={{ color: '#555', fontSize: 13, lineHeight: 1.8 }}>
+                {WALKTHROUGH[walkthroughStep].body}
+              </p>
+            </div>
+
+            {/* Navigation */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <button
+                className="btn"
+                style={{ visibility: walkthroughStep === 0 ? 'hidden' : 'visible' }}
+                onClick={() => setWalkthroughStep(s => s - 1)}
+              >← Back</button>
+
+              {walkthroughStep < WALKTHROUGH.length - 1 ? (
+                <button className="btn amber" onClick={() => setWalkthroughStep(s => s + 1)}>
+                  Next →
+                </button>
+              ) : (
+                <button className="btn amber" onClick={closeWalkthrough}>
+                  Start Forging →
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Upgrade Modal */}
       {modal === 'upgrade' && (
