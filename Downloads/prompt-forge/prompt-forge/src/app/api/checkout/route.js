@@ -1,10 +1,14 @@
 import Stripe from 'stripe'
+import { NextResponse } from 'next/server'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
-
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const { userId } = await request.json()
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2023-10-16',
+    })
+
+    const body = await req.json()
+    const userId = body.userId || 'anonymous'
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -17,14 +21,12 @@ export async function POST(request) {
       ],
       success_url: `${process.env.NEXT_PUBLIC_APP_URL}/forge?upgraded=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/forge?cancelled=true`,
-      metadata: {
-        userId: userId || 'anonymous',
-      },
+      metadata: { userId },
     })
 
-    return Response.json({ url: session.url })
+    return NextResponse.json({ url: session.url })
   } catch (err) {
-    console.error('Checkout error:', err)
-    return Response.json({ error: 'Failed to create checkout session' }, { status: 500 })
+    console.error('Checkout error:', err.message)
+    return NextResponse.json({ error: err.message }, { status: 500 })
   }
 }
