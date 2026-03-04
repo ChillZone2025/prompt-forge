@@ -428,7 +428,7 @@ export default function PromptForge() {
     if (modal?.id === id) setModal(null)
   }
 
-  const activatePro = () => {
+  const activatePro = async () => {
     setIsPro(true)
     try { localStorage.setItem(LS_PRO, 'true') } catch {}
     setModal(null)
