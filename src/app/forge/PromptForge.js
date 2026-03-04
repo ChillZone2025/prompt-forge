@@ -429,9 +429,18 @@ export default function PromptForge() {
   }
 
   const activatePro = async () => {
-    setIsPro(true)
-    try { localStorage.setItem(LS_PRO, 'true') } catch {}
-    setModal(null)
+    try {
+      setModal(null)
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: 'user_' + Date.now() }),
+      })
+      const data = await res.json()
+      if (data.url) window.location.href = data.url
+    } catch (err) {
+      console.error('Checkout error:', err)
+    }
   }
 
   const copy = (text) => {
