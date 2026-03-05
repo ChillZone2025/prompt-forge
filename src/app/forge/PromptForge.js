@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-const FREE_LIMIT = 3
+const FREE_LIMIT = 5
 const LS_USAGE = 'pf_usage'
 const LS_PRO = 'pf_pro'
 const LS_LIB = 'pf_library'
