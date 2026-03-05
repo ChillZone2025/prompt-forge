@@ -3,16 +3,52 @@ import './globals.css'
 export const metadata = {
   title: 'Prompt Forge — One-Click Agent Prompts',
   description: 'Generate fully packaged, deployment-ready AI agent system prompts in one click. No setup required.',
+  manifest: '/manifest.json',
+  themeColor: '#f5c518',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Prompt Forge',
+  },
   openGraph: {
     title: 'Prompt Forge',
-    description: 'One-click AI agent prompt generator. Zero setup.',
-  }
+    description: 'One-click AI agent prompt generator for professionals. 42 archetypes across 7 industries.',
+    url: 'https://getpromptforge.net',
+    siteName: 'Prompt Forge',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Prompt Forge',
+    description: 'One-click AI agent prompt generator for professionals.',
+  },
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <meta name="application-name" content="Prompt Forge" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Prompt Forge" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#f5c518" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+      </head>
+      <body>
+        {children}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            if ('serviceWorker' in navigator) {
+              window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js');
+              });
+            }
+          `
+        }} />
+      </body>
     </html>
   )
 }
