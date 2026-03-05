@@ -67,7 +67,14 @@ const INDUSTRIES = {
     { id: 'micro_invest',icon: '🌱', name: 'Micro-Investing Agent', desc: 'Goal-based portfolio rebalancing',          color: '#4d8cd4' },
     { id: 'fraud_watch', icon: '🛡', name: 'Fraud Watchdog',        desc: 'Credit monitoring, identity protection',    color: '#c44d4d' },
   ],
-  'Retail & Ops': [
+  Parenting: [
+    { id: 'homework',    icon: '📚', name: 'Homework Helper',         desc: 'Subject tutoring, step-by-step explanations',  color: '#60a5fa' },
+    { id: 'scheduler',   icon: '📅', name: 'Family Scheduler',        desc: 'Activity coordination, calendar management',    color: '#34d399' },
+    { id: 'development', icon: '🌱', name: 'Child Development Tracker',desc: 'Milestone tracking, age-appropriate guidance',  color: '#a78bfa' },
+    { id: 'stories',     icon: '🌙', name: 'Bedtime Story Agent',     desc: 'Custom stories, reading level adaptation',      color: '#fb923c' },
+    { id: 'coach',       icon: '🤝', name: 'Parent Coach',            desc: 'Behavior strategies, emotional regulation',     color: '#f472b6' },
+  ],
+   'Retail & Ops': [
     { id: 'inventory',   icon: '📦', name: 'Inventory Optimizer',   desc: 'Demand forecasting, returns logistics',     color: '#d4a84d' },
     { id: 'commerce',    icon: '🛒', name: 'Agentic Commerce',      desc: 'Instant checkout, autonomous buying',       color: '#e8913a' },
     { id: 'supply_chain',icon: '⛓', name: 'Supply Chain Agent',    desc: 'Bottleneck detection, re-routing',          color: '#4daed4' },
