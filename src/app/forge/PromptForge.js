@@ -384,15 +384,7 @@ export default function PromptForge() {
 
   const atLimit = !isPro && usage >= FREE_LIMIT
   const remaining = Math.max(0, FREE_LIMIT - usage)
-useEffect(() => {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('upgraded') === 'true') {
-      setIsPro(true)
-      try { localStorage.setItem(LS_PRO, 'true') } catch {}
-      window.history.replaceState({}, '', '/forge')
-    }
-  }, [])
+
   const closeWalkthrough = () => {
     setShowWalkthrough(false); setWStep(0)
     try { localStorage.setItem(LS_SEEN, 'true') } catch {}
@@ -445,11 +437,24 @@ useEffect(() => {
         body: JSON.stringify({ userId: 'user_' + Date.now() }),
       })
       const data = await res.json()
-      if (data.url) window.location.href = data.url
+      if (data.url) {
+        window.location.href = data.url
+      }
     } catch (err) {
       console.error('Checkout error:', err)
     }
   }
+
+  // Grant pro on return from Stripe success
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('upgraded') === 'true') {
+      setIsPro(true)
+      try { localStorage.setItem(LS_PRO, 'true') } catch {}
+      window.history.replaceState({}, '', '/forge')
+    }
+  }, [])
 
   const copy = (text) => {
     navigator.clipboard.writeText(text)
