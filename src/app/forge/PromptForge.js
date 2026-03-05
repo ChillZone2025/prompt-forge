@@ -384,7 +384,15 @@ export default function PromptForge() {
 
   const atLimit = !isPro && usage >= FREE_LIMIT
   const remaining = Math.max(0, FREE_LIMIT - usage)
-
+useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('upgraded') === 'true') {
+      setIsPro(true)
+      try { localStorage.setItem(LS_PRO, 'true') } catch {}
+      window.history.replaceState({}, '', '/forge')
+    }
+  }, [])
   const closeWalkthrough = () => {
     setShowWalkthrough(false); setWStep(0)
     try { localStorage.setItem(LS_SEEN, 'true') } catch {}
