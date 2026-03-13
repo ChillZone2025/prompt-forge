@@ -18,7 +18,29 @@ const WALKTHROUGH = [
 
 // ─── Industry Agent Data ──────────────────────────────────────────────────────
 const INDUSTRIES = {
-  General: [
+  General: [{ id: 'sop_gen', icon: '📋', name: 'SOP Generator', desc: 'Upload any file → get a full Standard Operating Procedure', color: '#f5c518', isNew: true, fixedPrompt: `You are a Technical Writer and Process Consultant. Your goal is to create a comprehensive Standard Operating Procedure (SOP) for how to generate an uploaded file from scratch.
+
+Follow these instructions strictly:
+
+ANALYZE: Review the uploaded file to understand its structure, data points, and formatting.
+
+INQUIRY PHASE: Do NOT write the SOP yet. Instead, ask me one question at a time to determine the manual or automated steps, software used, data sources, and approvals required to create this file.
+
+ITERATE: Wait for my answer before asking the next question. Continue until you have enough information to map the entire end-to-end process.
+
+DRAFTING PHASE: Once you have covered the process, tell me you are ready to generate the SOP.
+
+The final SOP must include:
+1. Title & Version Control
+2. Objective: The purpose of the process
+3. Scope: Who performs this and what systems are involved
+4. Prerequisites: Access levels, software, or baseline data needed
+5. Step-by-Step Instructions: Clear, numbered actions (including pro-tips for accuracy)
+6. Troubleshooting/Exceptions: How to handle common errors or discrepancies
+7. Review & Approval: Who signs off on the final output
+
+## ACTIVATION PHRASE
+"I am uploading a file. Please analyze it and begin the SOP inquiry process."` },
     { id: 'treasury',    icon: '◈', name: 'FX Treasury Analyst',    desc: 'Hedging, derivatives, currency risk',       color: '#e8913a' },
     { id: 'cyber',       icon: '⬡', name: 'Cyber Investigator',     desc: 'Threat hunting, forensics, OSINT',          color: '#4db8c8' },
     { id: 'code_review', icon: '⟨⟩',name: 'Code Reviewer',          desc: 'Security, performance, best practices',     color: '#9b7fd4' },
@@ -177,7 +199,12 @@ const CSS = `
   .agent-card.locked { opacity: 0.35; cursor: not-allowed; }
   .agent-card.locked:hover { transform: none; box-shadow: none; border-color: #2a2d42; background: #1c1f30; }
   .agent-card.locked::after { content: '🔒 Pro Only'; color: #3a3d52; }
-
+.agent-new-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: #f5c518; color: #13151f;
+    font-size: 8px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 4px;
+  }
   .btn {
     background: none; border: 1px solid #2e3248; color: #6b7280;
     padding: 8px 16px; font-family: 'Inter', sans-serif;
@@ -324,58 +351,38 @@ export default function PromptForge() {
     try { localStorage.setItem(LS_SEEN, 'true') } catch {}
   }
 
-  const generate = async (name, desc, agentObj) => {
+  const generate = async (agent) => {
     if (atLimit) { setModal('upgrade'); return }
-    const agent = agentObj || { id: 'custom', name, desc, color: '#4d8cd4', icon: '✦' }
-    setSelected(agent); setPrompt(''); setLoading(true); setCopied(false); setSaved(false)
-    const newUsage = usage + 1
-    setUsage(newUsage)
-    try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
+    setSelected(agent)
+    setPrompt('')
+    setSaved(false)
+    setCopied(false)
+
+    // Fixed prompts skip the API
+    if (agent.fixedPrompt) {
+      const newUsage = usage + 1
+      setUsage(newUsage)
+      try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
+      setPrompt(agent.fixedPrompt)
+      return
+    }
+
+    setLoading(true)
     try {
       const res = await fetch('/api/generate', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ agentName: name, agentDesc: desc }),
-      })
-      const data = await res.json()
-      setPrompt(data.text || data.error || 'Error generating.')
-    } catch { setPrompt('Connection error. Try again.') }
-    finally { setLoading(false) }
-  }
-
-  const saveToLib = () => {
-    const item = {
-      id: `${selected.id}_${Date.now()}`,
-      agentName: selected.name, agentDesc: selected.desc,
-      agentColor: selected.color, agentIcon: selected.icon,
-      prompt, savedAt: Date.now(),
-    }
-    const updated = [item, ...library]
-    setLibrary(updated)
-    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
-    setSaved(true)
-  }
-
-  const deleteFromLib = (id) => {
-    const updated = library.filter(i => i.id !== id)
-    setLibrary(updated)
-    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
-    if (modal?.id === id) setModal(null)
-  }
-
-  const activatePro = async () => {
-    try {
-      setModal(null)
-      const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: 'user_' + Date.now() }),
+        body: JSON.stringify({ agentName: agent.name, agentDesc: agent.desc }),
       })
       const data = await res.json()
-      if (data.url) {
-        window.location.href = data.url
-      }
+      const newUsage = usage + 1
+      setUsage(newUsage)
+      try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
+      setPrompt(data.text || '')
     } catch (err) {
-      console.error('Checkout error:', err)
+      console.error(err)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -635,7 +642,7 @@ export default function PromptForge() {
 
         {/* ══ OUTPUT VIEW ══ */}
         {view === 'forge' && selected && (
-          <div className="fu" style={{ marginTop: 24 }}>
+          <div className="fu" style={{ marginTop: 24 }}>{agent.isNew && <span className="agent-new-badge">NEW</span>}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <button className="btn" onClick={reset}>← Back</button>
