@@ -630,6 +630,7 @@ export default function PromptForge() {
                     style={{ '--ac': agent.color }}
                     onClick={() => !locked && generate(agent.name, agent.desc, agent)}
                   >
+                    {agent.isNew && <span className="agent-new-badge">NEW</span>}
                     <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
                     <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', marginBottom: 6, lineHeight: 1.4 }}>{agent.name}</div>
                     <div style={{ fontSize: 11, color: '#6b7280', lineHeight: 1.6 }}>{agent.desc}</div>
@@ -642,7 +643,7 @@ export default function PromptForge() {
 
         {/* ══ OUTPUT VIEW ══ */}
         {view === 'forge' && selected && (
-          <div className="fu" style={{ marginTop: 24 }}>{agent.isNew && <span className="agent-new-badge">NEW</span>}
+          <div className="fu" style={{ marginTop: 24 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <button className="btn" onClick={reset}>← Back</button>
@@ -807,3 +808,4 @@ export default function PromptForge() {
     </div>
   )
 }
+
