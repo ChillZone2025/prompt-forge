@@ -351,6 +351,31 @@ export default function PromptForge() {
     try { localStorage.setItem(LS_SEEN, 'true') } catch {}
   }
 
+  const activatePro = async () => {
+    try {
+      setModal(null)
+      const res = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId: 'user_' + Date.now() }),
+      })
+      const data = await res.json()
+      if (data.url) window.location.href = data.url
+    } catch (err) {
+      console.error('Checkout error:', err)
+    }
+  }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('upgraded') === 'true') {
+      setIsPro(true)
+      try { localStorage.setItem(LS_PRO, 'true') } catch {}
+      window.history.replaceState({}, '', '/forge')
+    }
+  }, [])
+
   const generate = async (agent) => {
     if (atLimit) { setModal('upgrade'); return }
     setSelected(agent)
