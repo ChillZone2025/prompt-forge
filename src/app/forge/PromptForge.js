@@ -628,7 +628,7 @@ export default function PromptForge() {
                 return (
                   <div key={agent.id} className={`agent-card ${locked ? 'locked' : ''}`}
                     style={{ '--ac': agent.color }}
-                    onClick={() => !locked && generate(agent.name, agent.desc, agent)}
+                    onClick={() => !locked && generate(agent)}
                   >
                     {agent.isNew && <span className="agent-new-badge">NEW</span>}
                     <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
@@ -653,7 +653,7 @@ export default function PromptForge() {
               </div>
               {!loading && prompt && (
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button className="btn" onClick={() => generate(selected.name, selected.desc, selected)}>↺ Reforge</button>
+                  <button className="btn" onClick={() => generate(selected)}>↺ Reforge</button>
                   {!saved
                     ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
                     : <button className="btn iron" disabled>✓ Saved</button>
