@@ -1,490 +1,402 @@
 export const metadata = {
-  title: 'Privacy Policy | Prompt Forge',
-  description: 'Privacy Policy for Prompt Forge by Hilbert Entertainment, LLC',
+  title: 'Terms and Conditions | Prompt Forge',
+  description: 'Terms and Conditions for Prompt Forge by Hilbert Entertainment, LLC',
 };
 
-export default function PrivacyPolicyPage() {
+export default function TermsPage() {
   return (
     <main className="max-w-4xl mx-auto px-6 py-16 text-gray-700">
-      <h1 className="text-3xl font-bold text-gray-900 mb-2">Privacy Policy</h1>
+      <h1 className="text-3xl font-bold text-gray-900 mb-2">Terms and Conditions</h1>
       <p className="text-sm text-gray-500 mb-10">Last updated: March 14, 2026</p>
 
-      {/* Intro */}
       <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">Agreement to Our Legal Terms</h2>
         <p className="mb-3">
-          This Privacy Notice for <strong>Hilbert Entertainment, LLC</strong> (doing business as{' '}
-          <strong>Prompt Forge</strong>) (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) describes how and why we
-          might access, collect, store, use, and/or share (&quot;process&quot;) your personal information when
-          you use our services (&quot;Services&quot;), including when you:
-        </p>
-        <ul className="list-disc list-inside ml-4 space-y-2 mb-4">
-          <li>Download and use our mobile application (Prompt Forge), or any other application of ours that links to this Privacy Notice</li>
-          <li>
-            Use getpromptforge.net. Prompt Forge is a web-based SaaS application that generates
-            deployment-ready AI agent system prompts. Users select from a library of AI agent templates
-            across multiple industries, and the platform generates customized system prompts using the
-            Anthropic Claude API. The app offers a free tier with limited generations and a paid Pro
-            subscription ($12/month) processed through Stripe. Users do not need to create an account to
-            use the free tier.
-          </li>
-          <li>Engage with us in other related ways, including any marketing or events</li>
-        </ul>
-        <p>
-          <strong>Questions or concerns?</strong> Reading this Privacy Notice will help you understand your
-          privacy rights and choices. We are responsible for making decisions about how your personal
-          information is processed. If you do not agree with our policies and practices, please do not use our
-          Services. If you have questions or concerns, please contact us at{' '}
-          <a href="mailto:thehilberts25@gmail.com" className="text-blue-600 underline">
-            thehilberts25@gmail.com
-          </a>.
-        </p>
-      </section>
-
-      {/* Summary */}
-      <section className="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
-        <h2 className="text-lg font-bold text-gray-900 mb-3">Summary of Key Points</h2>
-        <p className="italic text-sm mb-4">
-          This summary provides key points from our Privacy Notice. You can find more details about any of
-          these topics by using the table of contents below.
-        </p>
-        <div className="space-y-3 text-sm">
-          <p><strong>What personal information do we process?</strong> When you visit, use, or navigate our Services, we may process personal information depending on how you interact with us and the Services, the choices you make, and the products and features you use.</p>
-          <p><strong>Do we process any sensitive personal information?</strong> We do not process sensitive personal information.</p>
-          <p><strong>Do we collect any information from third parties?</strong> We do not collect any information from third parties.</p>
-          <p><strong>How do we process your information?</strong> We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to comply with law. We may also process your information for other purposes with your consent.</p>
-        </div>
-      </section>
-
-      {/* Table of Contents */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">Table of Contents</h2>
-        <ol className="list-decimal list-inside space-y-1 text-sm text-gray-700">
-          <li>What Information Do We Collect?</li>
-          <li>How Do We Process Your Information?</li>
-          <li>When and With Whom Do We Share Your Personal Information?</li>
-          <li>Do We Use Cookies and Other Tracking Technologies?</li>
-          <li>Do We Offer Artificial Intelligence-Based Products?</li>
-          <li>How Long Do We Keep Your Information?</li>
-          <li>How Do We Keep Your Information Safe?</li>
-          <li>Do We Collect Information From Minors?</li>
-          <li>What Are Your Privacy Rights?</li>
-          <li>Controls for Do-Not-Track Features</li>
-          <li>Do United States Residents Have Specific Privacy Rights?</li>
-          <li>Do We Make Updates to This Notice?</li>
-          <li>How Can You Contact Us About This Notice?</li>
-          <li>How Can You Review, Update, or Delete the Data We Collect From You?</li>
-        </ol>
-      </section>
-
-      {/* Section 1 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">1. What Information Do We Collect?</h2>
-        <h3 className="font-semibold mb-2">Personal information you disclose to us</h3>
-        <p className="italic text-sm mb-3">In Short: We collect personal information that you provide to us.</p>
-        <p className="mb-3">
-          We collect personal information that you voluntarily provide to us when you express an interest in
-          obtaining information about us or our products and Services, when you participate in activities on
-          the Services, or otherwise when you contact us.
+          We are <strong>Hilbert Entertainment, LLC</strong>, doing business as <strong>Prompt Forge</strong>
+          (&quot;Company,&quot; &quot;we,&quot; &quot;us,&quot; &quot;our&quot;), a company registered in North Carolina,
+          United States, at 204 Birch Creek Road, McLeansville, NC 27301.
         </p>
         <p className="mb-3">
-          <strong>Personal Information Provided by You.</strong> The personal information that we collect
-          depends on the context of your interactions with us and the Services, the choices you make, and the
-          products and features you use. The personal information we collect may include:
-        </p>
-        <ul className="list-disc list-inside ml-4 mb-3">
-          <li>Email addresses</li>
-        </ul>
-        <p className="mb-3">
-          <strong>Sensitive Information.</strong> We do not process sensitive information.
+          We operate the web application <strong>Prompt Forge</strong>, as well as any other related products
+          and services that refer or link to these legal terms (collectively, the &quot;Services&quot;).
         </p>
         <p className="mb-3">
-          All personal information that you provide to us must be true, complete, and accurate, and you must
-          notify us of any changes to such personal information.
-        </p>
-        <h3 className="font-semibold mb-2">Google API</h3>
-        <p>
-          Our use of information received from Google APIs will adhere to the{' '}
-          <a
-            href="https://developers.google.com/terms/api-services-user-data-policy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 underline"
-          >
-            Google API Services User Data Policy
-          </a>
-          , including the Limited Use requirements.
-        </p>
-      </section>
-
-      {/* Section 2 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">2. How Do We Process Your Information?</h2>
-        <p className="italic text-sm mb-3">
-          In Short: We process your information to provide, improve, and administer our Services,
-          communicate with you, for security and fraud prevention, and to comply with law. We may also
-          process your information for other purposes with your consent.
+          Prompt Forge is a web-based SaaS application that allows users to generate deployment-ready AI agent
+          system prompts using a library of templates across multiple industries. The platform offers a free
+          tier (limited to 5 generations) and a paid Pro subscription at $12 per month, billed monthly and
+          processed through Stripe. The generated prompts are powered by the Anthropic Claude API and are
+          intended for use in third-party AI applications. Prompt Forge does not guarantee specific outcomes
+          from the use of generated prompts.
         </p>
         <p className="mb-3">
-          We process your personal information for a variety of reasons, depending on how you interact with
-          our Services, including:
-        </p>
-        <ul className="list-disc list-inside ml-4">
-          <li>
-            <strong>To fulfill and manage your orders.</strong> We may process your information to fulfill
-            and manage your orders, payments, returns, and exchanges made through the Services.
-          </li>
-        </ul>
-      </section>
-
-      {/* Section 3 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          3. When and With Whom Do We Share Your Personal Information?
-        </h2>
-        <p className="italic text-sm mb-3">
-          In Short: We may share information in specific situations described in this section and/or with the
-          following third parties.
-        </p>
-        <p className="mb-3">We may need to share your personal information in the following situations:</p>
-        <ul className="list-disc list-inside ml-4">
-          <li>
-            <strong>Business Transfers.</strong> We may share or transfer your information in connection
-            with, or during negotiations of, any merger, sale of company assets, financing, or acquisition
-            of all or a portion of our business to another company.
-          </li>
-        </ul>
-      </section>
-
-      {/* Section 4 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          4. Do We Use Cookies and Other Tracking Technologies?
-        </h2>
-        <p className="italic text-sm mb-3">
-          In Short: We may use cookies and other tracking technologies to collect and store your information.
-        </p>
-        <p className="mb-3">
-          We may use cookies and similar tracking technologies (like web beacons and pixels) to gather
-          information when you interact with our Services. Some online tracking technologies help us maintain
-          the security of our Services, prevent crashes, fix bugs, save your preferences, and assist with
-          basic site functions.
-        </p>
-        <p className="mb-3">
-          We also permit third parties and service providers to use online tracking technologies on our
-          Services for analytics and advertising purposes. To the extent these technologies are deemed a
-          &quot;sale&quot; or &quot;sharing&quot; under applicable US state laws, you can opt out by submitting a request as
-          described in Section 11 below.
-        </p>
-        <p>
-          Specific information about how we use such technologies and how you can refuse certain cookies is
-          set out in our Cookie Notice.
-        </p>
-      </section>
-
-      {/* Section 5 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          5. Do We Offer Artificial Intelligence-Based Products?
-        </h2>
-        <p className="italic text-sm mb-3">
-          In Short: We offer products, features, or tools powered by artificial intelligence, machine
-          learning, or similar technologies.
-        </p>
-        <p className="mb-3">
-          As part of our Services, we offer products, features, or tools powered by artificial intelligence,
-          machine learning, or similar technologies (collectively, &quot;AI Products&quot;). These tools are designed
-          to enhance your experience and provide you with innovative solutions. The terms in this Privacy
-          Notice govern your use of the AI Products within our Services.
-        </p>
-        <h3 className="font-semibold mb-2">Use of AI Technologies</h3>
-        <p className="mb-3">
-          We provide the AI Products through third-party service providers (&quot;AI Service Providers&quot;),
-          including Anthropic. Your input, output, and personal information will be shared with and processed
-          by these AI Service Providers to enable your use of our AI Products. You must not use the AI
-          Products in any way that violates the terms or policies of any AI Service Provider.
-        </p>
-        <h3 className="font-semibold mb-2">Our AI Products</h3>
-        <p className="mb-3">Our AI Products are designed for the following functions:</p>
-        <ul className="list-disc list-inside ml-4 mb-3">
-          <li>Natural language processing</li>
-        </ul>
-        <h3 className="font-semibold mb-2">How We Process Your Data Using AI</h3>
-        <p>
-          All personal information processed using our AI Products is handled in line with our Privacy Notice
-          and our agreement with third parties. This ensures high security and safeguards your personal
-          information throughout the process.
-        </p>
-      </section>
-
-      {/* Section 6 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          6. How Long Do We Keep Your Information?
-        </h2>
-        <p className="italic text-sm mb-3">
-          In Short: We keep your information for as long as necessary to fulfill the purposes outlined in
-          this Privacy Notice unless otherwise required by law.
-        </p>
-        <p className="mb-3">
-          We will only keep your personal information for as long as it is necessary for the purposes set out
-          in this Privacy Notice, unless a longer retention period is required or permitted by law (such as
-          tax, accounting, or other legal requirements).
-        </p>
-        <p>
-          When we have no ongoing legitimate business need to process your personal information, we will
-          either delete or anonymize such information, or, if this is not possible (for example, because your
-          personal information has been stored in backup archives), then we will securely store your personal
-          information and isolate it from any further processing until deletion is possible.
-        </p>
-      </section>
-
-      {/* Section 7 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          7. How Do We Keep Your Information Safe?
-        </h2>
-        <p className="italic text-sm mb-3">
-          In Short: We aim to protect your personal information through a system of organizational and
-          technical security measures.
-        </p>
-        <p>
-          We have implemented appropriate and reasonable technical and organizational security measures
-          designed to protect the security of any personal information we process. However, despite our
-          safeguards and efforts to secure your information, no electronic transmission over the Internet or
-          information storage technology can be guaranteed to be 100% secure, so we cannot promise or
-          guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to
-          defeat our security and improperly collect, access, steal, or modify your information. Although we
-          will do our best to protect your personal information, transmission of personal information to and
-          from our Services is at your own risk. You should only access the Services within a secure
-          environment.
-        </p>
-      </section>
-
-      {/* Section 8 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          8. Do We Collect Information From Minors?
-        </h2>
-        <p className="italic text-sm mb-3">
-          In Short: We do not knowingly collect data from or market to children under 18 years of age.
-        </p>
-        <p>
-          We do not knowingly collect, solicit data from, or market to children under 18 years of age, nor do
-          we knowingly sell such personal information. By using the Services, you represent that you are at
-          least 18 or that you are the parent or guardian of such a minor and consent to such minor
-          dependent&apos;s use of the Services. If we learn that personal information from users less than 18 years
-          of age has been collected, we will deactivate the account and take reasonable measures to promptly
-          delete such data from our records. If you become aware of any data we may have collected from
-          children under age 18, please contact us at{' '}
-          <a href="mailto:thehilberts25@gmail.com" className="text-blue-600 underline">
-            thehilberts25@gmail.com
-          </a>.
-        </p>
-      </section>
-
-      {/* Section 9 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">9. What Are Your Privacy Rights?</h2>
-        <p className="italic text-sm mb-3">
-          In Short: You may review, change, or terminate your account at any time, depending on your country,
-          province, or state of residence.
-        </p>
-        <p className="mb-3">
-          <strong className="underline">Withdrawing your consent:</strong> If we are relying on your consent
-          to process your personal information, you have the right to withdraw your consent at any time. You
-          can withdraw your consent by contacting us using the contact details provided in Section 13 below.
-          Please note that this will not affect the lawfulness of the processing before its withdrawal.
-        </p>
-        <p className="mb-3">
-          <strong className="underline">Cookies and similar technologies:</strong> Most web browsers are set
-          to accept cookies by default. If you prefer, you can usually choose to set your browser to remove
-          cookies and to reject cookies. If you choose to remove or reject cookies, this could affect certain
-          features or services of our Services.
-        </p>
-        <p>
-          If you have questions or comments about your privacy rights, you may email us at{' '}
-          <a href="mailto:thehilberts25@gmail.com" className="text-blue-600 underline">
-            thehilberts25@gmail.com
-          </a>.
-        </p>
-      </section>
-
-      {/* Section 10 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          10. Controls for Do-Not-Track Features
-        </h2>
-        <p className="mb-3">
-          Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track
-          (&quot;DNT&quot;) feature or setting you can activate to signal your privacy preference not to have data about
-          your online browsing activities monitored and collected. At this stage, no uniform technology
-          standard for recognizing and implementing DNT signals has been finalized. As such, we do not
-          currently respond to DNT browser signals or any other mechanism that automatically communicates
-          your choice not to be tracked online. If a standard for online tracking is adopted in the future,
-          we will inform you about that practice in a revised version of this Privacy Notice.
-        </p>
-        <p>
-          California law requires us to let you know how we respond to web browser DNT signals. Because there
-          currently is not an industry or legal standard for recognizing or honoring DNT signals, we do not
-          respond to them at this time.
-        </p>
-      </section>
-
-      {/* Section 11 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          11. Do United States Residents Have Specific Privacy Rights?
-        </h2>
-        <p className="italic text-sm mb-3">
-          In Short: If you are a resident of California, Colorado, Connecticut, Delaware, Florida, Indiana,
-          Iowa, Kentucky, Maryland, Minnesota, Montana, Nebraska, New Hampshire, New Jersey, Oregon, Rhode
-          Island, Tennessee, Texas, Utah, or Virginia, you may have specific rights regarding your personal
-          information.
-        </p>
-
-        <h3 className="font-semibold mb-2">Categories of Personal Information We Collect</h3>
-        <p className="mb-3">
-          The table below shows the categories of personal information we have collected in the past twelve
-          (12) months.
-        </p>
-        <div className="overflow-x-auto mb-4">
-          <table className="w-full text-sm border border-gray-300">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="border border-gray-300 px-3 py-2 text-left">Category</th>
-                <th className="border border-gray-300 px-3 py-2 text-left">Examples</th>
-                <th className="border border-gray-300 px-3 py-2 text-center">Collected</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ['A. Identifiers', 'Contact details such as real name, alias, postal address, telephone number, unique personal identifier, online identifier, IP address, email address, and account name', 'YES'],
-                ['B. Personal information as defined in the California Customer Records statute', 'Name, contact information, education, employment, employment history, and financial information', 'NO'],
-                ['C. Protected classification characteristics under state or federal law', 'Gender, age, date of birth, race and ethnicity, national origin, marital status, and other demographic data', 'NO'],
-                ['D. Commercial information', 'Transaction information, purchase history, financial details, and payment information', 'YES'],
-                ['E. Biometric information', 'Fingerprints and voiceprints', 'NO'],
-                ['F. Internet or other similar network activity', 'Browsing history, search history, online behavior, interest data, and interactions with our and other websites', 'NO'],
-                ['G. Geolocation data', 'Device location', 'NO'],
-                ['H. Audio, electronic, sensory, or similar information', 'Images and audio, video or call recordings created in connection with our business activities', 'NO'],
-                ['I. Professional or employment-related information', 'Business contact details, job title, work history, and professional qualifications', 'NO'],
-                ['J. Education information', 'Student records and directory information', 'NO'],
-                ['K. Inferences drawn from collected personal information', 'Inferences drawn from any of the collected personal information to create a profile about an individual\'s preferences and characteristics', 'YES'],
-                ['L. Sensitive personal information', '', 'NO'],
-              ].map(([cat, examples, collected]) => (
-                <tr key={cat}>
-                  <td className="border border-gray-300 px-3 py-2">{cat}</td>
-                  <td className="border border-gray-300 px-3 py-2">{examples}</td>
-                  <td className="border border-gray-300 px-3 py-2 text-center font-semibold">{collected}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <p className="mb-3">
-          We may also collect other personal information outside of these categories through instances where
-          you interact with us in person, online, or by phone or mail, including through customer support
-          channels, customer surveys or contests, and facilitation in the delivery of our Services.
-        </p>
-        <p className="mb-3">We will use and retain the collected personal information as needed to provide the Services or for:</p>
-        <ul className="list-disc list-inside ml-4 mb-4">
-          <li>Category A – As long as the user has an account with us</li>
-          <li>Category D – As long as the user has an account with us</li>
-          <li>Category K – As long as the user has an account with us</li>
-        </ul>
-
-        <h3 className="font-semibold mb-2">Sources of Personal Information</h3>
-        <p className="mb-4">Learn more about the sources of personal information we collect in Section 1 above.</p>
-
-        <h3 className="font-semibold mb-2">How We Use and Share Personal Information</h3>
-        <p className="mb-3">Learn more about how we use your personal information in Section 2 above.</p>
-        <p className="mb-3">
-          <strong>Will your information be shared with anyone else?</strong> We may disclose your personal
-          information with our service providers pursuant to a written contract between us and each service
-          provider. We may use your personal information for our own business purposes, such as for
-          undertaking internal research for technological development and demonstration. This is not
-          considered to be &quot;selling&quot; of your personal information.
-        </p>
-        <p className="mb-4">
-          We have not disclosed, sold, or shared any personal information to third parties for a business or
-          commercial purpose in the preceding twelve (12) months. We will not sell or share personal
-          information belonging to website visitors, users, and other consumers.
-        </p>
-
-        <h3 className="font-semibold mb-2">Your Rights</h3>
-        <p className="mb-3">
-          You have rights under certain US state data protection laws. These rights include:
-        </p>
-        <ul className="list-disc list-inside ml-4 space-y-1 mb-4">
-          <li><strong>Right to know</strong> whether or not we are processing your personal data</li>
-          <li><strong>Right to access</strong> your personal data</li>
-          <li><strong>Right to correct</strong> inaccuracies in your personal data</li>
-          <li><strong>Right to request</strong> the deletion of your personal data</li>
-          <li><strong>Right to obtain a copy</strong> of the personal data you previously shared with us</li>
-          <li><strong>Right to non-discrimination</strong> for exercising your rights</li>
-          <li><strong>Right to opt out</strong> of the processing of your personal data for targeted advertising, sale of personal data, or profiling</li>
-        </ul>
-        <p className="mb-4">Depending upon the state where you live, you may also have the following rights:</p>
-        <ul className="list-disc list-inside ml-4 space-y-1 mb-4 text-sm">
-          <li>Right to access the categories of personal data being processed (as permitted by applicable law, including Minnesota)</li>
-          <li>Right to obtain a list of categories of third parties to which we have disclosed personal data (California, Delaware, and Maryland)</li>
-          <li>Right to obtain a list of specific third parties to which we have disclosed personal data (Minnesota and Oregon)</li>
-          <li>Right to obtain a list of third parties to which we have sold personal data (Connecticut)</li>
-          <li>Right to review, understand, question, and correct how personal data has been profiled (Connecticut and Minnesota)</li>
-          <li>Right to limit use and disclosure of sensitive personal data (California)</li>
-          <li>Right to opt out of the collection of sensitive data through a voice or facial recognition feature (Florida)</li>
-        </ul>
-
-        <h3 className="font-semibold mb-2">How to Exercise Your Rights</h3>
-        <p className="mb-3">
-          To exercise these rights, you can contact us by emailing us at{' '}
+          You can contact us by email at{' '}
           <a href="mailto:thehilberts25@gmail.com" className="text-blue-600 underline">
             thehilberts25@gmail.com
           </a>{' '}
-          or by referring to the contact details at the bottom of this document.
+          or by mail at 204 Birch Creek Road, McLeansville, NC 27301, United States.
         </p>
         <p className="mb-3">
-          Under certain US state data protection laws, you can designate an authorized agent to make a
-          request on your behalf. We may deny a request from an authorized agent that does not submit proof
-          that they have been validly authorized to act on your behalf.
+          These Legal Terms constitute a legally binding agreement between you and Hilbert Entertainment, LLC.
+          By accessing the Services, you confirm you have read, understood, and agreed to be bound by all of
+          these Legal Terms. <strong>IF YOU DO NOT AGREE, YOU MUST DISCONTINUE USE IMMEDIATELY.</strong>
         </p>
-
-        <h3 className="font-semibold mb-2">Request Verification</h3>
         <p className="mb-3">
-          Upon receiving your request, we will need to verify your identity to determine you are the same
-          person about whom we have the information in our system. We will only use personal information
-          provided in your request to verify your identity or authority to make the request.
+          We reserve the right to make changes to these Legal Terms at any time. We will update the
+          &quot;Last updated&quot; date when changes are made. Your continued use of the Services after any
+          update constitutes your acceptance of the revised terms.
         </p>
         <p>
-          If you submit the request through an authorized agent, we may need to collect additional
-          information to verify your identity before processing the request, and the agent will need to
-          provide a written and signed permission from you to submit such request on your behalf.
+          The Services are intended for users who are at least 18 years old. Persons under 18 are not
+          permitted to use the Services.
         </p>
       </section>
 
-      {/* Section 12 */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">12. Do We Make Updates to This Notice?</h2>
-        <p className="italic text-sm mb-3">
-          In Short: Yes, we will update this notice as necessary to stay compliant with relevant laws.
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">Table of Contents</h2>
+        <ol className="list-decimal list-inside space-y-1 text-blue-600 text-sm">
+          {[
+            'Our Services', 'Intellectual Property Rights', 'User Representations',
+            'User Registration', 'Purchases and Payment', 'Subscriptions',
+            'Prohibited Activities', 'User Generated Contributions', 'Contribution License',
+            'Mobile Application License', 'Advertisers', 'Services Management',
+            'Privacy Policy', 'Term and Termination', 'Modifications and Interruptions',
+            'Governing Law', 'Dispute Resolution', 'Corrections', 'Disclaimer',
+            'Limitations of Liability', 'Indemnification', 'User Data',
+            'Electronic Communications, Transactions, and Signatures',
+            'California Users and Residents', 'Miscellaneous', 'Contact Us',
+          ].map((item, i) => (
+            <li key={i} className="text-gray-700">{item}</li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">1. Our Services</h2>
+        <p className="mb-3">
+          The information provided when using the Services is not intended for distribution to or use by any
+          person or entity in any jurisdiction where such distribution would be contrary to law or regulation.
+          Those who access the Services from other locations do so on their own initiative and are solely
+          responsible for compliance with local laws.
         </p>
         <p>
-          We may update this Privacy Notice from time to time. The updated version will be indicated by an
-          updated &quot;Last updated&quot; date at the top of this Privacy Notice. If we make material changes to this
-          Privacy Notice, we may notify you either by prominently posting a notice of such changes or by
-          directly sending you a notification. We encourage you to review this Privacy Notice frequently to be
-          informed of how we are protecting your information.
+          The Services are not tailored to comply with industry-specific regulations (HIPAA, FISMA, etc.). If
+          your interactions would be subject to such laws, you may not use the Services.
         </p>
       </section>
 
-      {/* Section 13 */}
       <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          13. How Can You Contact Us About This Notice?
-        </h2>
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">2. Intellectual Property Rights</h2>
         <p className="mb-3">
-          If you have questions or comments about this notice, you may contact us at:
+          We own or are the licensee of all intellectual property rights in our Services, including all source
+          code, databases, functionality, software, website designs, text, and graphics (the &quot;Content&quot;),
+          as well as the trademarks, service marks, and logos (the &quot;Marks&quot;).
         </p>
+        <p className="mb-3">
+          Subject to these Legal Terms, we grant you a non-exclusive, non-transferable, revocable license to
+          access the Services solely for your personal, non-commercial use or internal business purpose.
+        </p>
+        <p className="mb-3">
+          No part of the Services, Content, or Marks may be copied, reproduced, republished, sold, or
+          otherwise exploited for any commercial purpose without our express prior written permission. Requests
+          may be sent to{' '}
+          <a href="mailto:thehilberts25@gmail.com" className="text-blue-600 underline">
+            thehilberts25@gmail.com
+          </a>.
+        </p>
+        <p>
+          Any breach of these Intellectual Property Rights will constitute a material breach of these Legal
+          Terms and your right to use the Services will terminate immediately.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">3. User Representations</h2>
+        <p className="mb-3">By using the Services, you represent and warrant that:</p>
+        <ul className="list-disc list-inside space-y-1 ml-4">
+          <li>All registration information you submit will be true, accurate, current, and complete.</li>
+          <li>You will maintain the accuracy of such information.</li>
+          <li>You have the legal capacity to agree to these Legal Terms.</li>
+          <li>You are not a minor in the jurisdiction in which you reside.</li>
+          <li>You will not access the Services through automated or non-human means.</li>
+          <li>You will not use the Services for any illegal or unauthorized purpose.</li>
+          <li>Your use of the Services will not violate any applicable law or regulation.</li>
+        </ul>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">4. User Registration</h2>
+        <p>
+          You may be required to register to use the Services. You agree to keep your password confidential
+          and are responsible for all use of your account. We reserve the right to remove or change a username
+          we determine to be inappropriate or objectionable.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">5. Purchases and Payment</h2>
+        <p className="mb-3">We accept payment via Stripe.</p>
+        <p className="mb-3">
+          You agree to provide current, complete, and accurate purchase and account information for all
+          purchases. You authorize us to charge your chosen payment provider for any amounts due. All payments
+          are in US dollars. We may change prices at any time and reserve the right to refuse any order.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">6. Subscriptions</h2>
+        <h3 className="font-semibold mb-2">Billing and Renewal</h3>
+        <p className="mb-3">
+          Your subscription will continue and automatically renew unless canceled. Billing cycles are monthly.
+        </p>
+        <h3 className="font-semibold mb-2">Free Tier</h3>
+        <p className="mb-3">
+          We offer a free tier limited to 5 prompt generations. The account will not be charged unless
+          upgraded to a paid plan.
+        </p>
+        <h3 className="font-semibold mb-2">Cancellation</h3>
+        <p className="mb-3">
+          You can cancel your subscription at any time by logging into your account. Cancellation takes effect
+          at the end of the current paid term. For questions, email{' '}
+          <a href="mailto:thehilberts25@gmail.com" className="text-blue-600 underline">
+            thehilberts25@gmail.com
+          </a>.
+        </p>
+        <h3 className="font-semibold mb-2">Fee Changes</h3>
+        <p>We may change subscription fees from time to time and will communicate changes in accordance with applicable law.</p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">7. Prohibited Activities</h2>
+        <p className="mb-3">You may not use the Services for any purpose other than that for which we make them available. As a user, you agree not to:</p>
+        <ul className="list-disc list-inside space-y-1 ml-4 text-sm">
+          <li>Systematically retrieve data to create databases or directories without permission.</li>
+          <li>Trick, defraud, or mislead us or other users.</li>
+          <li>Circumvent or interfere with security features of the Services.</li>
+          <li>Disparage or harm us or the Services.</li>
+          <li>Harass, abuse, or harm another person using information from the Services.</li>
+          <li>Make improper use of support services or submit false reports.</li>
+          <li>Use the Services in violation of any applicable laws or regulations.</li>
+          <li>Engage in unauthorized framing of or linking to the Services.</li>
+          <li>Upload viruses, Trojan horses, or other disruptive material.</li>
+          <li>Use automated scripts, bots, scrapers, or data mining tools.</li>
+          <li>Delete copyright or proprietary rights notices from any Content.</li>
+          <li>Impersonate another user or person.</li>
+          <li>Interfere with or create an undue burden on the Services.</li>
+          <li>Harass or threaten our employees or agents.</li>
+          <li>Attempt to bypass any access restrictions on the Services.</li>
+          <li>Copy or adapt the Services&apos; software or source code.</li>
+          <li>Reverse engineer or decompile any part of the Services.</li>
+          <li>Use the Services to compete with us or for unauthorized commercial purposes.</li>
+          <li>Use the Services to advertise or offer to sell goods and services.</li>
+          <li>Sell or otherwise transfer your account or profile.</li>
+          <li>Submit sexually explicit prompts.</li>
+        </ul>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">8. User Generated Contributions</h2>
+        <p className="mb-3">
+          The Services do not currently offer users the ability to submit or post public content. If we
+          provide such opportunities in the future, any contributions must not infringe third-party rights,
+          must be original, must not be false or misleading, and must comply with all applicable laws.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">9. Contribution License</h2>
+        <p className="mb-3">
+          You and Prompt Forge agree that we may access, store, process, and use any information and personal
+          data that you provide.
+        </p>
+        <p className="mb-3">
+          By submitting suggestions or feedback regarding the Services, you agree that we can use and share
+          such feedback for any purpose without compensation to you.
+        </p>
+        <p>
+          We do not assert ownership over your contributions. You retain full ownership of all your
+          contributions and any associated intellectual property rights.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">10. Mobile Application License</h2>
+        <p className="mb-3">
+          If you access the Services via a mobile app, we grant you a revocable, non-exclusive,
+          non-transferable, limited right to install and use the app on devices you own or control, strictly
+          in accordance with these Legal Terms.
+        </p>
+        <p>
+          You shall not decompile, reverse engineer, or modify the app; use it for revenue-generating
+          purposes beyond its intended use; or make it available over a network for simultaneous multi-user
+          access.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">11. Advertisers</h2>
+        <p>
+          We may allow advertisers to display advertisements in certain areas of the Services. We simply
+          provide the space for such advertisements and have no other relationship with advertisers.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">12. Services Management</h2>
+        <p>
+          We reserve the right to monitor the Services for violations of these Legal Terms; take appropriate
+          legal action against violators; restrict or disable access to contributions; remove content that is
+          excessive or burdensome to our systems; and otherwise manage the Services to protect our rights and
+          ensure proper functioning.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">13. Privacy Policy</h2>
+        <p>
+          We care about data privacy and security. By using the Services, you agree to be bound by our{' '}
+          <a href="/privacy-policy" className="text-blue-600 underline">
+            Privacy Policy
+          </a>
+          , which is incorporated into these Legal Terms. The Services are hosted in the United States. If you
+          access the Services from another region, you consent to the transfer and processing of your data in
+          the United States.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">14. Term and Termination</h2>
+        <p className="mb-3">
+          These Legal Terms remain in full force and effect while you use the Services. We reserve the right
+          to deny access, terminate your account, or delete your content at any time and for any reason,
+          without notice or liability.
+        </p>
+        <p>
+          If your account is terminated, you are prohibited from creating a new account without our
+          permission. We reserve the right to pursue appropriate legal action.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">15. Modifications and Interruptions</h2>
+        <p className="mb-3">
+          We reserve the right to change, modify, or remove the contents of the Services at any time without
+          notice. We are not liable for any modification, price change, suspension, or discontinuance.
+        </p>
+        <p>
+          We cannot guarantee the Services will be available at all times and are not liable for any loss or
+          inconvenience caused by downtime or service interruptions.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">16. Governing Law</h2>
+        <p>
+          These Legal Terms are governed by the laws of the State of North Carolina, without regard to its
+          conflict of law principles.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">17. Dispute Resolution</h2>
+        <h3 className="font-semibold mb-2">Binding Arbitration</h3>
+        <p className="mb-3">
+          If the parties are unable to resolve a dispute through informal negotiations, the dispute will be
+          finally and exclusively resolved by binding arbitration under the Commercial Arbitration Rules of
+          the American Arbitration Association (AAA). Arbitration will take place in Guilford, North Carolina.
+          YOU UNDERSTAND THAT WITHOUT THIS PROVISION, YOU WOULD HAVE THE RIGHT TO SUE IN COURT AND HAVE A
+          JURY TRIAL.
+        </p>
+        <h3 className="font-semibold mb-2">Restrictions</h3>
+        <p className="mb-3">
+          All arbitration shall be limited to the individual dispute between the parties. No class action or
+          representative proceeding is permitted.
+        </p>
+        <h3 className="font-semibold mb-2">Exceptions to Arbitration</h3>
+        <p>
+          The following disputes are not subject to arbitration: (a) disputes involving intellectual property
+          rights; (b) claims related to theft, piracy, or invasion of privacy; and (c) claims for injunctive
+          relief.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">18. Corrections</h2>
+        <p>
+          There may be information on the Services that contains typographical errors, inaccuracies, or
+          omissions. We reserve the right to correct any errors and update information at any time without
+          prior notice.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">19. Disclaimer</h2>
+        <p className="uppercase text-sm">
+          THE SERVICES ARE PROVIDED ON AN AS-IS AND AS-AVAILABLE BASIS. TO THE FULLEST EXTENT PERMITTED BY
+          LAW, WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY,
+          FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE ARE NOT LIABLE FOR ERRORS, PERSONAL
+          INJURY, UNAUTHORIZED ACCESS TO SERVERS, INTERRUPTIONS, BUGS, OR OMISSIONS IN CONTENT.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">20. Limitations of Liability</h2>
+        <p className="uppercase text-sm">
+          IN NO EVENT WILL WE OR OUR DIRECTORS, EMPLOYEES, OR AGENTS BE LIABLE FOR ANY DIRECT, INDIRECT,
+          CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE
+          SERVICES. OUR LIABILITY WILL AT ALL TIMES BE LIMITED TO THE AMOUNT PAID BY YOU TO US DURING THE SIX
+          (6) MONTH PERIOD PRIOR TO ANY CAUSE OF ACTION ARISING.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">21. Indemnification</h2>
+        <p>
+          You agree to defend, indemnify, and hold us harmless from any loss, damage, liability, or claim
+          arising from: (1) your use of the Services; (2) breach of these Legal Terms; (3) any breach of your
+          representations and warranties; (4) violation of a third party&apos;s rights; or (5) any harmful act
+          toward other users.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">22. User Data</h2>
+        <p>
+          We maintain certain data you transmit for the purpose of managing the Services. You are solely
+          responsible for all data you transmit. We have no liability for any loss or corruption of such data.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">23. Electronic Communications, Transactions, and Signatures</h2>
+        <p>
+          Visiting the Services, sending emails, and completing online forms constitute electronic
+          communications. You consent to receive electronic communications and agree that all agreements,
+          notices, and disclosures provided electronically satisfy any legal writing requirement.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">24. California Users and Residents</h2>
+        <p>
+          If any complaint with us is not satisfactorily resolved, you may contact the Complaint Assistance
+          Unit of the Division of Consumer Services of the California Department of Consumer Affairs at 1625
+          North Market Blvd., Suite N 112, Sacramento, California 95834, or by telephone at (800) 952-5210.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">25. Miscellaneous</h2>
+        <p>
+          These Legal Terms constitute the entire agreement between you and us. Our failure to enforce any
+          right or provision is not a waiver. If any provision is determined to be unlawful or unenforceable,
+          it will be severed from these Legal Terms without affecting the remaining provisions. There is no
+          joint venture, partnership, employment, or agency relationship created between you and us.
+        </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="text-xl font-semibold text-gray-900 mb-3">26. Contact Us</h2>
+        <p className="mb-2">To resolve a complaint or receive information about the Services, contact us at:</p>
         <address className="not-italic text-sm leading-7">
           <strong>Hilbert Entertainment, LLC</strong><br />
           204 Birch Creek Road<br />
@@ -496,24 +408,8 @@ export default function PrivacyPolicyPage() {
         </address>
       </section>
 
-      {/* Section 14 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-3">
-          14. How Can You Review, Update, or Delete the Data We Collect From You?
-        </h2>
-        <p>
-          Based on the applicable laws of your country or state of residence in the US, you may have the
-          right to request access to the personal information we collect from you, details about how we have
-          processed it, correct inaccuracies, or delete your personal information. To request to review,
-          update, or delete your personal information, please email us at{' '}
-          <a href="mailto:thehilberts25@gmail.com" className="text-blue-600 underline">
-            thehilberts25@gmail.com
-          </a>.
-        </p>
-      </section>
-
       <p className="text-xs text-gray-400 mt-12 border-t pt-4">
-        This Privacy Policy was generated with the assistance of Termly.
+        These Terms and Conditions were generated with the assistance of Termly.
       </p>
     </main>
   );
