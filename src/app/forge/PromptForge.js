@@ -376,6 +376,27 @@ export default function PromptForge() {
     }
   }, [])
 
+  const saveToLib = () => {
+    if (!prompt || saved) return
+    const entry = {
+      id: Date.now(),
+      agentName: selected?.name || 'Custom',
+      prompt,
+      savedAt: Date.now(),
+    }
+    const updated = [entry, ...library]
+    setLibrary(updated)
+    setSaved(true)
+    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
+  }
+
+  const deleteFromLib = (id) => {
+    const updated = library.filter(item => item.id !== id)
+    setLibrary(updated)
+    if (modal?.id === id) setModal(null)
+    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
+  }
+
   const generate = async (agent) => {
     if (atLimit) { setModal('upgrade'); return }
     setSelected(agent)
