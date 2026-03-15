@@ -10,6 +10,10 @@ export async function POST(req) {
     const body = await req.json()
     const userId = body.userId || 'anonymous'
 
+    const host = req.headers.get('host')
+    const proto = req.headers.get('x-forwarded-proto') || 'https'
+    const appUrl = `${proto}://${host}`
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'subscription',
@@ -19,8 +23,8 @@ export async function POST(req) {
           quantity: 1,
         },
       ],
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/forge?upgraded=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/forge?cancelled=true`,
+      success_url: `${appUrl}/forge?upgraded=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/forge?cancelled=true`,
       metadata: { userId },
     })
 
