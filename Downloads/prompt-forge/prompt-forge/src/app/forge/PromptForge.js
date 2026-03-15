@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-const FREE_LIMIT = 3
+const FREE_LIMIT = 5
 const LS_USAGE = 'pf_usage'
 const LS_PRO = 'pf_pro'
 const LS_LIB = 'pf_library'
@@ -18,7 +18,29 @@ const WALKTHROUGH = [
 
 // ─── Industry Agent Data ──────────────────────────────────────────────────────
 const INDUSTRIES = {
-  General: [
+  General: [{ id: 'sop_gen', icon: '📋', name: 'SOP Generator', desc: 'Upload any file → get a full Standard Operating Procedure', color: '#f5c518', isNew: true, fixedPrompt: `You are a Technical Writer and Process Consultant. Your goal is to create a comprehensive Standard Operating Procedure (SOP) for how to generate an uploaded file from scratch.
+
+Follow these instructions strictly:
+
+ANALYZE: Review the uploaded file to understand its structure, data points, and formatting.
+
+INQUIRY PHASE: Do NOT write the SOP yet. Instead, ask me one question at a time to determine the manual or automated steps, software used, data sources, and approvals required to create this file.
+
+ITERATE: Wait for my answer before asking the next question. Continue until you have enough information to map the entire end-to-end process.
+
+DRAFTING PHASE: Once you have covered the process, tell me you are ready to generate the SOP.
+
+The final SOP must include:
+1. Title & Version Control
+2. Objective: The purpose of the process
+3. Scope: Who performs this and what systems are involved
+4. Prerequisites: Access levels, software, or baseline data needed
+5. Step-by-Step Instructions: Clear, numbered actions (including pro-tips for accuracy)
+6. Troubleshooting/Exceptions: How to handle common errors or discrepancies
+7. Review & Approval: Who signs off on the final output
+
+## ACTIVATION PHRASE
+"I am uploading a file. Please analyze it and begin the SOP inquiry process."` },
     { id: 'treasury',    icon: '◈', name: 'FX Treasury Analyst',    desc: 'Hedging, derivatives, currency risk',       color: '#e8913a' },
     { id: 'cyber',       icon: '⬡', name: 'Cyber Investigator',     desc: 'Threat hunting, forensics, OSINT',          color: '#4db8c8' },
     { id: 'code_review', icon: '⟨⟩',name: 'Code Reviewer',          desc: 'Security, performance, best practices',     color: '#9b7fd4' },
@@ -67,7 +89,14 @@ const INDUSTRIES = {
     { id: 'micro_invest',icon: '🌱', name: 'Micro-Investing Agent', desc: 'Goal-based portfolio rebalancing',          color: '#4d8cd4' },
     { id: 'fraud_watch', icon: '🛡', name: 'Fraud Watchdog',        desc: 'Credit monitoring, identity protection',    color: '#c44d4d' },
   ],
-  'Retail & Ops': [
+  Parenting: [
+    { id: 'homework',    icon: '📚', name: 'Homework Helper',         desc: 'Subject tutoring, step-by-step explanations',  color: '#60a5fa' },
+    { id: 'scheduler',   icon: '📅', name: 'Family Scheduler',        desc: 'Activity coordination, calendar management',    color: '#34d399' },
+    { id: 'development', icon: '🌱', name: 'Child Development Tracker',desc: 'Milestone tracking, age-appropriate guidance',  color: '#a78bfa' },
+    { id: 'stories',     icon: '🌙', name: 'Bedtime Story Agent',     desc: 'Custom stories, reading level adaptation',      color: '#fb923c' },
+    { id: 'coach',       icon: '🤝', name: 'Parent Coach',            desc: 'Behavior strategies, emotional regulation',     color: '#f472b6' },
+  ],
+   'Retail & Ops': [
     { id: 'inventory',   icon: '📦', name: 'Inventory Optimizer',   desc: 'Demand forecasting, returns logistics',     color: '#d4a84d' },
     { id: 'commerce',    icon: '🛒', name: 'Agentic Commerce',      desc: 'Instant checkout, autonomous buying',       color: '#e8913a' },
     { id: 'supply_chain',icon: '⛓', name: 'Supply Chain Agent',    desc: 'Bottleneck detection, re-routing',          color: '#4daed4' },
@@ -134,200 +163,132 @@ Specific, professional, immediately deployable. No fluff.`
 
 // ─── CSS ──────────────────────────────────────────────────────────────────────
 const CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Cinzel:wght@600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: #0e0a06; }
-  ::-webkit-scrollbar-thumb { background: #3a2a1a; border-radius: 3px; }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #1a1d2e; }
+  ::-webkit-scrollbar-thumb { background: #2e3248; border-radius: 3px; }
 
-  /* Forge fire glow on body */
-  body {
-    background: radial-gradient(ellipse at 50% 100%, #1a0e04 0%, #0a0704 60%, #080604 100%);
-    min-height: 100vh;
-  }
+  body { background: #13151f; min-height: 100vh; }
 
-  /* Agent cards */
   .agent-card {
-    background: linear-gradient(145deg, #131008, #0e0c07);
-    border: 1px solid #2a1f0e;
-    border-radius: 4px;
-    padding: 20px 18px 40px;
+    background: #1c1f30;
+    border: 1px solid #2a2d42;
+    border-radius: 10px;
+    padding: 20px 18px 42px;
     cursor: pointer;
     position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.18s ease;
     overflow: hidden;
   }
-  .agent-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--ac), transparent);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
   .agent-card::after {
-    content: 'FORGE →';
-    position: absolute; bottom: 13px; right: 14px;
-    font-size: 8.5px; letter-spacing: 0.14em; color: #2a1f0e;
-    font-family: 'DM Mono', monospace; transition: color 0.2s;
+    content: 'Generate →';
+    position: absolute; bottom: 14px; right: 14px;
+    font-size: 10px; color: #3a3d52; font-family: 'Inter', sans-serif;
+    font-weight: 500; transition: color 0.18s;
   }
   .agent-card:hover {
     border-color: var(--ac);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 32px color-mix(in srgb, var(--ac) 15%, transparent), 0 0 0 1px color-mix(in srgb, var(--ac) 10%, transparent);
-    background: linear-gradient(145deg, #1a1408, #131008);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--ac)22;
+    background: #1f2236;
   }
-  .agent-card:hover::before { opacity: 1; }
   .agent-card:hover::after { color: var(--ac); }
-  .agent-card:active { transform: translateY(-1px); }
-  .agent-card.locked { opacity: 0.3; cursor: not-allowed; }
-  .agent-card.locked:hover { transform: none; box-shadow: none; border-color: #2a1f0e; background: linear-gradient(145deg, #131008, #0e0c07); }
-  .agent-card.locked::after { content: '🔒 PRO'; color: #2a2010; }
-
-  /* Buttons */
-  .btn {
-    background: none;
-    border: 1px solid #2a1f0e;
-    color: #5a4a30;
-    padding: 7px 14px;
-    font-family: 'DM Mono', monospace;
-    font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-    cursor: pointer; border-radius: 3px; transition: all 0.14s; white-space: nowrap;
+  .agent-card:active { transform: translateY(-2px); }
+  .agent-card.locked { opacity: 0.35; cursor: not-allowed; }
+  .agent-card.locked:hover { transform: none; box-shadow: none; border-color: #2a2d42; background: #1c1f30; }
+  .agent-card.locked::after { content: '🔒 Pro Only'; color: #3a3d52; }
+.agent-new-badge {
+    position: absolute; top: 10px; right: 10px;
+    background: #f5c518; color: #13151f;
+    font-size: 8px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 2px 7px; border-radius: 4px;
   }
-  .btn:hover { border-color: #4a3520; color: #8a7050; }
-  .btn.fire { border-color: rgba(232,145,58,0.4); color: #e8913a; }
-  .btn.fire:hover { background: #e8913a; color: #0a0704; border-color: #e8913a; }
-  .btn.ember { border-color: rgba(212,168,77,0.4); color: #d4a84d; }
-  .btn.ember:hover { background: #d4a84d; color: #0a0704; border-color: #d4a84d; }
-  .btn.iron { border-color: rgba(77,184,140,0.3); color: #4db88c; }
-  .btn.iron:hover { background: #4db88c; color: #0a0704; }
-  .btn.steel { border-color: rgba(196,77,77,0.3); color: #c44d4d; }
-  .btn.steel:hover { background: #c44d4d; color: #fff; }
-  .btn.coal { border-color: rgba(77,140,212,0.3); color: #4d8cd4; }
-  .btn.coal:hover { background: #4d8cd4; color: #0a0704; }
-  .btn:disabled { opacity: 0.2; cursor: not-allowed; pointer-events: none; }
+  .btn {
+    background: none; border: 1px solid #2e3248; color: #6b7280;
+    padding: 8px 16px; font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    border-radius: 8px; transition: all 0.14s; white-space: nowrap;
+  }
+  .btn:hover { border-color: #4a4d62; color: #9ca3af; background: #1c1f30; }
+  .btn.primary { background: #f5c518; border-color: #f5c518; color: #13151f; font-weight: 600; }
+  .btn.primary:hover { background: #ffd740; border-color: #ffd740; color: #13151f; }
+  .btn.success { background: #10b981; border-color: #10b981; color: #fff; }
+  .btn.danger { border-color: rgba(239,68,68,0.4); color: #ef4444; }
+  .btn.danger:hover { background: #ef4444; border-color: #ef4444; color: #fff; }
+  .btn.accent { border-color: rgba(245,197,24,0.4); color: #f5c518; }
+  .btn.accent:hover { background: #f5c518; border-color: #f5c518; color: #13151f; }
+  .btn:disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
 
-  /* Industry nav tabs */
   .ind-tab {
     background: none; border: none; border-bottom: 2px solid transparent;
-    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; cursor: pointer; padding: 8px 14px;
-    color: #3a2a14; transition: all 0.14s; white-space: nowrap;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+    cursor: pointer; padding: 10px 16px; color: #4b5563;
+    transition: all 0.14s; white-space: nowrap;
   }
-  .ind-tab:hover { color: #6a4a24; }
-  .ind-tab.on { color: #e8913a; border-bottom-color: #e8913a; }
+  .ind-tab:hover { color: #9ca3af; }
+  .ind-tab.on { color: #f5c518; border-bottom-color: #f5c518; }
 
-  /* Main nav tabs */
   .nav-tab {
     background: none; border: none; border-bottom: 2px solid transparent;
-    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
-    text-transform: uppercase; cursor: pointer; padding: 8px 16px;
-    color: #3a2a14; transition: all 0.14s;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+    cursor: pointer; padding: 10px 18px; color: #4b5563; transition: all 0.14s;
   }
-  .nav-tab:hover { color: #6a4a24; }
-  .nav-tab.on { color: #e8913a; border-bottom-color: #e8913a; }
+  .nav-tab:hover { color: #9ca3af; }
+  .nav-tab.on { color: #f5c518; border-bottom-color: #f5c518; }
 
-  /* Filter pills */
   .pill {
-    background: none; border: 1px solid #2a1f0e; color: #3a2a14;
-    padding: 4px 12px; font-family: 'DM Mono', monospace; font-size: 9px;
-    letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
-    border-radius: 20px; transition: all 0.14s;
+    background: none; border: 1px solid #2e3248; color: #6b7280;
+    padding: 5px 14px; font-family: 'Inter', sans-serif; font-size: 12px;
+    font-weight: 500; cursor: pointer; border-radius: 20px; transition: all 0.14s;
   }
-  .pill:hover { border-color: #4a3520; color: #6a4a24; }
-  .pill.on { border-color: rgba(232,145,58,0.5); color: #e8913a; background: rgba(232,145,58,0.06); }
+  .pill:hover { border-color: #4a4d62; color: #9ca3af; }
+  .pill.on { border-color: #f5c518; color: #f5c518; background: rgba(245,197,24,0.08); }
 
-  /* Inputs */
   .finput {
-    background: #0c0904; border: 1px solid #2a1f0e; color: #c8a870;
-    padding: 9px 13px; font-family: 'DM Mono', monospace; font-size: 12px;
-    border-radius: 3px; outline: none; width: 100%; transition: border-color 0.14s;
+    background: #1c1f30; border: 1px solid #2e3248; color: #e5e7eb;
+    padding: 10px 14px; font-family: 'Inter', sans-serif; font-size: 13px;
+    border-radius: 8px; outline: none; width: 100%; transition: border-color 0.14s;
   }
-  .finput:focus { border-color: #4a3520; }
-  .finput::placeholder { color: #2a1f0e; }
-  textarea.finput { resize: vertical; min-height: 72px; line-height: 1.6; }
+  .finput:focus { border-color: #f5c518; }
+  .finput::placeholder { color: #374151; }
+  textarea.finput { resize: vertical; min-height: 80px; line-height: 1.6; }
 
-  /* Library cards */
   .lib-card {
-    background: linear-gradient(145deg, #111008, #0e0c07);
-    border: 1px solid #2a1f0e; border-radius: 4px;
-    padding: 16px 18px; cursor: pointer; transition: border-color 0.14s;
+    background: #1c1f30; border: 1px solid #2a2d42; border-radius: 10px;
+    padding: 18px 20px; cursor: pointer; transition: all 0.14s;
   }
-  .lib-card:hover { border-color: #4a3520; }
+  .lib-card:hover { border-color: #4a4d62; background: #1f2236; }
 
-  /* Prompt output formatting */
   .pout h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 10px; font-weight: 600;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: #e8913a;
-    margin: 28px 0 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #2a1a08;
+    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: #f5c518;
+    margin: 24px 0 10px; padding-bottom: 8px; border-bottom: 1px solid #2a2d42;
   }
   .pout h2:first-child { margin-top: 0; }
   .pout p {
-    font-family: 'Crimson Pro', serif;
-    color: #a08050;
-    line-height: 1.85;
-    font-size: 15px;
-    margin-bottom: 4px;
+    font-family: 'Inter', sans-serif; color: #d1d5db;
+    line-height: 1.8; font-size: 14px; margin-bottom: 4px;
   }
 
-  /* Animations */
   @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes flicker {
-    0%, 100% { opacity: 1; }
-    92% { opacity: 1; }
-    93% { opacity: 0.85; }
-    94% { opacity: 1; }
-    96% { opacity: 0.9; }
-    97% { opacity: 1; }
-  }
-  .fu { animation: fadeUp 0.28s ease forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  .fu { animation: fadeUp 0.24s ease forwards; }
 
-  /* Forge fire ember particles (CSS only) */
-  .forge-glow {
-    position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 100%; height: 300px; pointer-events: none; z-index: 0;
-    background: radial-gradient(ellipse at 50% 100%, rgba(232,145,58,0.06) 0%, transparent 70%);
-  }
-
-  /* Scanlines */
-  .scanline {
-    position: fixed; inset: 0; pointer-events: none; z-index: 9999;
-    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.025) 3px, rgba(0,0,0,0.025) 4px);
-  }
-
-  /* Overlays / Modals */
   .overlay {
-    position: fixed; inset: 0; background: rgba(5,3,1,0.92);
+    position: fixed; inset: 0; background: rgba(13,15,25,0.85);
     display: flex; align-items: center; justify-content: center;
-    z-index: 500; backdrop-filter: blur(8px);
-    animation: fadeUp 0.18s ease;
+    z-index: 500; backdrop-filter: blur(12px); animation: fadeUp 0.18s ease;
   }
   .modal {
-    background: linear-gradient(145deg, #131008, #0e0c07);
-    border: 1px solid #3a2a10; border-radius: 6px;
-    padding: 32px; position: relative;
-    box-shadow: 0 0 60px rgba(232,145,58,0.08);
+    background: #1c1f30; border: 1px solid #2e3248; border-radius: 14px;
+    padding: 32px; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
 
-  /* Dividers */
-  .forge-divider {
-    border: none;
-    border-top: 1px solid #1a1208;
-    margin: 0;
-  }
-
-  /* Horizontal scroll for industry tabs */
   .ind-nav {
     display: flex; overflow-x: auto; gap: 0;
-    border-bottom: 1px solid #1a1208;
-    scrollbar-width: none;
+    border-bottom: 1px solid #2a2d42; scrollbar-width: none;
   }
   .ind-nav::-webkit-scrollbar { display: none; }
 `
@@ -370,9 +331,34 @@ export default function PromptForge() {
     setMounted(true)
     try {
       setUsage(parseInt(localStorage.getItem(LS_USAGE) || '0'))
-      setIsPro(localStorage.getItem(LS_PRO) === 'true')
       setLibrary(JSON.parse(localStorage.getItem(LS_LIB) || '[]'))
       if (!localStorage.getItem(LS_SEEN)) setShowWalkthrough(true)
+
+      // Verify Pro status with Stripe on every load
+      const customerId = localStorage.getItem('pf_customer_id')
+      if (customerId) {
+        fetch('/api/verify-subscription', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ customerId }),
+        })
+          .then(r => r.json())
+          .then(data => {
+            setIsPro(data.isPro)
+            localStorage.setItem(LS_PRO, String(data.isPro))
+            if (!data.isPro) {
+              localStorage.removeItem('pf_customer_id')
+            }
+          })
+          .catch(() => {
+            // Fall back to localStorage if Stripe check fails
+            setIsPro(localStorage.getItem(LS_PRO) === 'true')
+          })
+      } else {
+        // No customer ID — not Pro
+        setIsPro(false)
+        localStorage.removeItem(LS_PRO)
+      }
     } catch {}
   }, [])
 
@@ -390,44 +376,6 @@ export default function PromptForge() {
     try { localStorage.setItem(LS_SEEN, 'true') } catch {}
   }
 
-  const generate = async (name, desc, agentObj) => {
-    if (atLimit) { setModal('upgrade'); return }
-    const agent = agentObj || { id: 'custom', name, desc, color: '#4d8cd4', icon: '✦' }
-    setSelected(agent); setPrompt(''); setLoading(true); setCopied(false); setSaved(false)
-    const newUsage = usage + 1
-    setUsage(newUsage)
-    try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
-    try {
-      const res = await fetch('/api/generate', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ agentName: name, agentDesc: desc }),
-      })
-      const data = await res.json()
-      setPrompt(data.text || data.error || 'Error generating.')
-    } catch { setPrompt('Connection error. Try again.') }
-    finally { setLoading(false) }
-  }
-
-  const saveToLib = () => {
-    const item = {
-      id: `${selected.id}_${Date.now()}`,
-      agentName: selected.name, agentDesc: selected.desc,
-      agentColor: selected.color, agentIcon: selected.icon,
-      prompt, savedAt: Date.now(),
-    }
-    const updated = [item, ...library]
-    setLibrary(updated)
-    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
-    setSaved(true)
-  }
-
-  const deleteFromLib = (id) => {
-    const updated = library.filter(i => i.id !== id)
-    setLibrary(updated)
-    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
-    if (modal?.id === id) setModal(null)
-  }
-
   const activatePro = async () => {
     try {
       setModal(null)
@@ -437,15 +385,12 @@ export default function PromptForge() {
         body: JSON.stringify({ userId: 'user_' + Date.now() }),
       })
       const data = await res.json()
-      if (data.url) {
-        window.location.href = data.url
-      }
+      if (data.url) window.location.href = data.url
     } catch (err) {
       console.error('Checkout error:', err)
     }
   }
 
-  // Grant pro on return from Stripe success
   useEffect(() => {
     if (typeof window === 'undefined') return
     const params = new URLSearchParams(window.location.search)
@@ -453,6 +398,96 @@ export default function PromptForge() {
       setIsPro(true)
       try { localStorage.setItem(LS_PRO, 'true') } catch {}
       window.history.replaceState({}, '', '/forge')
+    }
+  }, [])
+
+  const saveToLib = () => {
+    if (!prompt || saved) return
+    const entry = {
+      id: Date.now(),
+      agentName: selected?.name || 'Custom',
+      prompt,
+      savedAt: Date.now(),
+    }
+    const updated = [entry, ...library]
+    setLibrary(updated)
+    setSaved(true)
+    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
+  }
+
+  const deleteFromLib = (id) => {
+    const updated = library.filter(item => item.id !== id)
+    setLibrary(updated)
+    if (modal?.id === id) setModal(null)
+    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
+  }
+
+  const generate = async (agent) => {
+    if (atLimit) { setModal('upgrade'); return }
+    setSelected(agent)
+    setPrompt('')
+    setSaved(false)
+    setCopied(false)
+
+    // Fixed prompts skip the API
+    if (agent.fixedPrompt) {
+      const newUsage = usage + 1
+      setUsage(newUsage)
+      try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
+      setPrompt(agent.fixedPrompt)
+      return
+    }
+
+    setLoading(true)
+    try {
+      const res = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ agentName: agent.name, agentDesc: agent.desc }),
+      })
+      const data = await res.json()
+      const newUsage = usage + 1
+      setUsage(newUsage)
+      try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
+      setPrompt(data.text || '')
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Grant pro on return from Stripe success — verify with Stripe first
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('upgraded') === 'true') {
+      const sessionId = params.get('session_id')
+      window.history.replaceState({}, '', '/forge')
+      if (sessionId) {
+        fetch('/api/verify-subscription', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sessionId }),
+        })
+          .then(r => r.json())
+          .then(data => {
+            if (data.isPro) {
+              setIsPro(true)
+              try {
+                localStorage.setItem(LS_PRO, 'true')
+                if (data.customerId) {
+                  localStorage.setItem('pf_customer_id', data.customerId)
+                }
+              } catch {}
+            }
+          })
+          .catch(() => {
+            // Fallback — trust the redirect if Stripe check fails
+            setIsPro(true)
+            try { localStorage.setItem(LS_PRO, 'true') } catch {}
+          })
+      }
     }
   }, [])
 
@@ -470,22 +505,21 @@ export default function PromptForge() {
   if (!mounted) return null
 
   return (
-    <div style={{ minHeight: '100vh', background: 'transparent', color: '#a08050', fontFamily: "'DM Mono', monospace", position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: '#13151f', color: '#d1d5db', fontFamily: "'Inter', sans-serif", position: 'relative' }}>
       <style>{CSS}</style>
-      <div className="forge-glow" />
-      <div className="scanline" />
+
 
       {/* ? Button */}
       <button onClick={() => { setWStep(0); setShowWalkthrough(true) }} style={{
         position: 'fixed', bottom: 24, right: 24, zIndex: 400,
         width: 34, height: 34, borderRadius: '50%',
-        background: '#0e0c07', border: '1px solid #2a1f0e',
-        color: '#3a2a14', fontFamily: "'Cinzel', serif",
-        fontSize: 13, cursor: 'pointer', transition: 'all 0.14s',
+        background: '#1c1f30', border: '1px solid #2e3248',
+        color: '#6b7280', fontFamily: "'Inter', sans-serif",
+        fontSize: 14, fontWeight: 600, cursor: 'pointer', transition: 'all 0.14s',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
-        onMouseEnter={e => { e.currentTarget.style.borderColor = '#e8913a'; e.currentTarget.style.color = '#e8913a' }}
-        onMouseLeave={e => { e.currentTarget.style.borderColor = '#2a1f0e'; e.currentTarget.style.color = '#3a2a14' }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = '#f5c518'; e.currentTarget.style.color = '#f5c518' }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = '#2e3248'; e.currentTarget.style.color = '#6b7280' }}
       >?</button>
 
       {/* Walkthrough Modal */}
@@ -494,24 +528,24 @@ export default function PromptForge() {
           <div className="modal" style={{ maxWidth: 480, width: '92%' }} onClick={e => e.stopPropagation()}>
             <div style={{ display: 'flex', gap: 6, marginBottom: 28 }}>
               {WALKTHROUGH.map((_, i) => (
-                <div key={i} style={{ height: 2, flex: 1, borderRadius: 2, background: i <= wStep ? '#e8913a' : '#1e1408', transition: 'background 0.2s' }} />
+                <div key={i} style={{ height: 2, flex: 1, borderRadius: 2, background: i <= wStep ? '#f5c518' : '#2e3248', transition: 'background 0.2s' }} />
               ))}
             </div>
             <div style={{ fontSize: 32, marginBottom: 14 }}>{WALKTHROUGH[wStep].icon}</div>
-            <div style={{ fontSize: 9, color: '#3a2a14', letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 8 }}>
+            <div style={{ fontSize: 10, color: '#6b7280', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>
               Step {WALKTHROUGH[wStep].step} of {WALKTHROUGH.length}
             </div>
-            <h2 style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: 22, color: '#d4a84d', marginBottom: 12, letterSpacing: '0.02em' }}>
+            <h2 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 22, color: '#f0f2ff', marginBottom: 12 }}>
               {WALKTHROUGH[wStep].title}
             </h2>
-            <p style={{ fontFamily: "'Crimson Pro', serif", color: '#7a5a30', fontSize: 15, lineHeight: 1.8, marginBottom: 28 }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", color: '#9ca3af', fontSize: 14, lineHeight: 1.8, marginBottom: 28 }}>
               {WALKTHROUGH[wStep].body}
             </p>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <button className="btn" style={{ visibility: wStep === 0 ? 'hidden' : 'visible' }} onClick={() => setWStep(s => s - 1)}>← Back</button>
               {wStep < WALKTHROUGH.length - 1
-                ? <button className="btn fire" onClick={() => setWStep(s => s + 1)}>Next →</button>
-                : <button className="btn fire" onClick={closeWalkthrough}>Enter the Forge →</button>
+                ? <button className="btn primary" onClick={() => setWStep(s => s + 1)}>Next →</button>
+                : <button className="btn primary" onClick={closeWalkthrough}>Start Generating →</button>
               }
             </div>
           </div>
@@ -522,28 +556,28 @@ export default function PromptForge() {
       {modal === 'upgrade' && (
         <div className="overlay" onClick={() => setModal(null)}>
           <div className="modal" style={{ maxWidth: 460, width: '90%' }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontSize: 9, color: '#e8913a', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 10, fontFamily: "'Cinzel', serif" }}>The forge demands tribute</div>
-            <h2 style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: 26, color: '#d4a84d', marginBottom: 10, letterSpacing: '0.02em' }}>
+            <div style={{ fontSize: 11, color: '#f5c518', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>Upgrade to unlock</div>
+            <h2 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 26, color: '#f0f2ff', marginBottom: 10 }}>
               Upgrade to Pro
             </h2>
-            <p style={{ fontFamily: "'Crimson Pro', serif", color: '#6a4a24', fontSize: 14, lineHeight: 1.7, marginBottom: 22 }}>
-              You've used your {FREE_LIMIT} free forges. Unlock unlimited access to the full smithy.
+            <p style={{ color: '#9ca3af', fontSize: 14, lineHeight: 1.7, marginBottom: 22 }}>
+              You've used your {FREE_LIMIT} free generates. Unlock unlimited access.
             </p>
-            <div style={{ background: '#0a0804', border: '1px solid #1e1408', borderRadius: 4, padding: 18, marginBottom: 24 }}>
+            <div style={{ background: '#13151f', border: '1px solid #2e3248', borderRadius: 10, padding: 18, marginBottom: 24 }}>
               {['Unlimited prompt generation', 'Unlimited library saves', 'Custom agent builder', 'All industry archetypes', 'Team sharing (coming soon)'].map(f => (
-                <div key={f} style={{ display: 'flex', gap: 10, marginBottom: 8, fontSize: 12, color: '#5a4020', alignItems: 'center', fontFamily: "'Crimson Pro', serif" }}>
-                  <span style={{ color: '#4db88c', flexShrink: 0 }}>✓</span>{f}
+                <div key={f} style={{ display: 'flex', gap: 10, marginBottom: 8, fontSize: 13, color: '#9ca3af', alignItems: 'center' }}>
+                  <span style={{ color: '#10b981', flexShrink: 0 }}>✓</span>{f}
                 </div>
               ))}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: 30, color: '#d4a84d' }}>$12</span>
-                <span style={{ color: '#3a2a14', fontSize: 12 }}> /mo</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: 32, color: '#f0f2ff' }}>$12</span>
+                <span style={{ color: '#6b7280', fontSize: 13 }}> /mo</span>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button className="btn" onClick={() => setModal(null)}>Cancel</button>
-                <button className="btn fire" onClick={activatePro}>Upgrade Now →</button>
+                <button className="btn primary" onClick={activatePro}>Upgrade Now →</button>
               </div>
             </div>
           </div>
@@ -554,30 +588,30 @@ export default function PromptForge() {
       {modal === 'custom' && (
         <div className="overlay" onClick={() => setModal(null)}>
           <div className="modal" style={{ maxWidth: 440, width: '90%' }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontSize: 9, color: '#4d8cd4', letterSpacing: '0.18em', textTransform: 'uppercase', marginBottom: 10, fontFamily: "'Cinzel', serif" }}>Custom Archetype</div>
+            <div style={{ fontSize: 11, color: '#60a5fa', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>Custom Archetype</div>
             <h2 style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: 22, color: '#d4a84d', marginBottom: 20, letterSpacing: '0.02em' }}>
               Forge Your Own Agent
             </h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 14, marginBottom: 24 }}>
               <div>
-                <label style={{ fontSize: 9, color: '#3a2a14', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Agent Name</label>
+                <label style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500, display: 'block', marginBottom: 6 }}>Agent Name</label>
                 <input className="finput" placeholder="e.g. Compliance Officer" value={custName} onChange={e => setCustName(e.target.value)} />
               </div>
               <div>
-                <label style={{ fontSize: 9, color: '#3a2a14', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Specialty</label>
+                <label style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500, display: 'block', marginBottom: 6 }}>Specialty</label>
                 <textarea className="finput" placeholder="e.g. Regulatory compliance, policy interpretation, audit prep..." value={custDesc} onChange={e => setCustDesc(e.target.value)} />
               </div>
             </div>
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}>
               <button className="btn" onClick={() => setModal(null)}>Cancel</button>
-              <button className="btn coal" disabled={!custName.trim() || !custDesc.trim()}
+              <button className="btn primary" disabled={!custName.trim() || !custDesc.trim()}
                 onClick={() => {
                   const n = custName.trim(), d = custDesc.trim()
                   setModal(null); setView('forge')
                   generate(n, d, { id: 'custom', name: n, desc: d, color: '#4d8cd4', icon: '✦' })
                   setCustName(''); setCustDesc('')
                 }}
-              >Strike the Forge →</button>
+              >Generate Prompt →</button>
             </div>
           </div>
         </div>
@@ -590,11 +624,11 @@ export default function PromptForge() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 22, flexWrap: 'wrap', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={{ color: modal.agentColor, fontSize: 18 }}>{modal.agentIcon}</span>
-                <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 600, fontSize: 14, color: '#d4a84d' }}>{modal.agentName}</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 14, color: '#f0f2ff' }}>{modal.agentName}</span>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
-                <button className="btn fire" onClick={() => copy(modal.prompt)}>{copied ? '✓ Copied' : 'Copy'}</button>
-                <button className="btn steel" onClick={() => deleteFromLib(modal.id)}>Delete</button>
+                <button className="btn primary" onClick={() => copy(modal.prompt)}>{copied ? '✓ Copied' : 'Copy'}</button>
+                <button className="btn danger" onClick={() => deleteFromLib(modal.id)}>Delete</button>
                 <button className="btn" onClick={() => setModal(null)}>✕</button>
               </div>
             </div>
@@ -604,7 +638,7 @@ export default function PromptForge() {
       )}
 
       {/* ── Main Layout ── */}
-      <div style={{ maxWidth: 1000, margin: '0 auto', padding: '40px 22px', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 1040, margin: '0 auto', padding: '48px 24px', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
@@ -615,9 +649,8 @@ export default function PromptForge() {
             <h1 style={{
               fontFamily: "'Cinzel', serif", fontWeight: 900,
               fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '0.06em', lineHeight: 0.95,
-              background: 'linear-gradient(135deg, #8a5a1a 0%, #e8913a 35%, #d4a84d 55%, #e8913a 75%, #6a3a0a 100%)',
-              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-              marginBottom: 8, textShadow: 'none',
+              color: '#f0f2ff',
+              marginBottom: 8,
             }}>PROMPT FORGE</h1>
             <p style={{ fontSize: 10, color: '#2a1a0a', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: "'DM Mono', monospace" }}>
               One strike · Fully forged agent prompt · Ready to deploy
@@ -625,32 +658,32 @@ export default function PromptForge() {
           </div>
 
           {/* Usage widget */}
-          <div style={{ background: 'linear-gradient(145deg, #0e0c07, #0a0804)', border: '1px solid #2a1f0e', borderRadius: 4, padding: '14px 16px', minWidth: 170 }}>
+          <div style={{ background: '#1c1f30', border: '1px solid #2e3248', borderRadius: 12, padding: '14px 18px', minWidth: 180 }}>
             {isPro ? (
               <div>
-                <div style={{ fontSize: 9, color: '#3a2a14', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 6, fontFamily: "'DM Mono', monospace" }}>Rank</div>
+                <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500, marginBottom: 6 }}>Plan</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                  <span style={{ color: '#e8913a', fontSize: 14 }}>⚒</span>
-                  <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 700, fontSize: 13, color: '#d4a84d' }}>Master Smith</span>
+                  <span style={{ color: '#f5c518', fontSize: 14 }}>★</span>
+                  <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 13, color: '#f0f2ff' }}>Pro</span>
                 </div>
               </div>
             ) : (
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <span style={{ fontSize: 9, color: '#3a2a14', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Apprentice</span>
-                  <span style={{ fontSize: 9, color: remaining > 0 ? '#e8913a' : '#c44d4d' }}>{remaining}/{FREE_LIMIT} forges</span>
+                  <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Free Plan</span>
+                  <span style={{ fontSize: 12, color: remaining > 0 ? '#f5c518' : '#ef4444', fontWeight: 600 }}>{remaining}/{FREE_LIMIT} left</span>
                 </div>
-                <div style={{ background: '#141008', borderRadius: 2, height: 3, marginBottom: 10, overflow: 'hidden' }}>
+                <div style={{ background: '#2e3248', borderRadius: 3, height: 4, marginBottom: 12, overflow: 'hidden' }}>
                   <div style={{
                     height: '100%', borderRadius: 2,
                     width: `${Math.min(100, (usage / FREE_LIMIT) * 100)}%`,
-                    background: remaining > 0 ? 'linear-gradient(90deg, #8a4a10, #e8913a)' : '#c44d4d',
+                    background: remaining > 0 ? '#f5c518' : '#ef4444',
                     transition: 'width 0.4s ease',
-                    boxShadow: remaining > 0 ? '0 0 8px rgba(232,145,58,0.4)' : 'none',
+                    boxShadow: 'none',
                   }} />
                 </div>
-                <button className="btn fire" style={{ width: '100%', padding: '6px 0', fontSize: 9 }} onClick={() => setModal('upgrade')}>
-                  Upgrade · $12/mo
+                <button className="btn primary" style={{ width: '100%', padding: '7px 0', fontSize: 12 }} onClick={() => setModal('upgrade')}>
+                  Upgrade to Pro · $12/mo
                 </button>
               </div>
             )}
@@ -658,7 +691,7 @@ export default function PromptForge() {
         </div>
 
         {/* Main Nav */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #1a1208', marginBottom: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #2a2d42', marginBottom: 0 }}>
           <div style={{ display: 'flex' }}>
             <button className={`nav-tab ${view === 'forge' ? 'on' : ''}`} onClick={() => { setView('forge'); reset() }}>Forge</button>
             <button className={`nav-tab ${view === 'library' ? 'on' : ''}`} onClick={() => setView('library')}>
@@ -666,7 +699,7 @@ export default function PromptForge() {
             </button>
             <button className={`nav-tab ${view === 'starter' ? 'on' : ''}`} onClick={() => setView('starter')}>Starter</button>
           </div>
-          <button className="btn coal" style={{ fontSize: 9 }} onClick={() => atLimit ? setModal('upgrade') : setModal('custom')}>
+          <button className="btn accent" style={{ fontSize: 12 }} onClick={() => atLimit ? setModal('upgrade') : setModal('custom')}>
             + Custom Agent
           </button>
         </div>
@@ -675,7 +708,7 @@ export default function PromptForge() {
         {view === 'forge' && !selected && (
           <div className="fu">
             {/* Industry tabs */}
-            <div className="ind-nav" style={{ marginBottom: 24, marginTop: 0 }}>
+            <div className="ind-nav" style={{ marginBottom: 28, marginTop: 0 }}>
               {INDUSTRY_TABS.map(ind => (
                 <button key={ind} className={`ind-tab ${industry === ind ? 'on' : ''}`} onClick={() => setIndustry(ind)}>
                   {ind}
@@ -689,11 +722,12 @@ export default function PromptForge() {
                 return (
                   <div key={agent.id} className={`agent-card ${locked ? 'locked' : ''}`}
                     style={{ '--ac': agent.color }}
-                    onClick={() => !locked && generate(agent.name, agent.desc, agent)}
+                    onClick={() => !locked && generate(agent)}
                   >
+                    {agent.isNew && <span className="agent-new-badge">NEW</span>}
                     <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
-                    <div style={{ fontFamily: "'Cinzel', serif", fontWeight: 600, fontSize: 11.5, color: '#c8a060', marginBottom: 6, letterSpacing: '0.04em', lineHeight: 1.4 }}>{agent.name}</div>
-                    <div style={{ fontSize: 9.5, color: '#2e2010', letterSpacing: '0.06em', textTransform: 'uppercase', lineHeight: 1.6 }}>{agent.desc}</div>
+                    <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', marginBottom: 6, lineHeight: 1.4 }}>{agent.name}</div>
+                    <div style={{ fontSize: 11, color: '#6b7280', lineHeight: 1.6 }}>{agent.desc}</div>
                   </div>
                 )
               })}
@@ -707,18 +741,18 @@ export default function PromptForge() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <button className="btn" onClick={reset}>← Back</button>
-                <span style={{ color: selected.color, fontFamily: "'Cinzel', serif", fontWeight: 600, fontSize: 13, letterSpacing: '0.04em' }}>
+                <span style={{ color: selected.color, fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 14 }}>
                   {selected.icon} {selected.name}
                 </span>
               </div>
               {!loading && prompt && (
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button className="btn" onClick={() => generate(selected.name, selected.desc, selected)}>↺ Reforge</button>
+                  <button className="btn" onClick={() => generate(selected)}>↺ Reforge</button>
                   {!saved
-                    ? <button className="btn coal" onClick={saveToLib}>+ Save to Library</button>
+                    ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
                     : <button className="btn iron" disabled>✓ Saved</button>
                   }
-                  <button className={`btn ${copied ? 'iron' : 'fire'}`} onClick={() => copy(prompt)}>
+                  <button className={`btn ${copied ? 'success' : 'primary'}`} onClick={() => copy(prompt)}>
                     {copied ? '✓ Copied!' : 'Copy Prompt'}
                   </button>
                 </div>
@@ -726,26 +760,25 @@ export default function PromptForge() {
             </div>
 
             <div style={{
-              background: 'linear-gradient(160deg, #0e0b06, #0a0804)',
-              border: `1px solid ${loading ? selected.color + '33' : '#1e1608'}`,
-              borderRadius: 4, padding: 32, minHeight: 360,
+              background: '#1c1f30',
+              border: `1px solid ${loading ? selected.color + '44' : '#2a2d42'}`,
+              borderRadius: 12, padding: 32, minHeight: 360,
               transition: 'border-color 0.3s',
-              boxShadow: loading ? `0 0 30px ${selected.color}10` : 'none',
             }}>
               {loading ? (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 300, gap: 20 }}>
                   <div style={{
                     width: 40, height: 40,
-                    border: '2px solid #1e1408',
+                    border: '2px solid #2e3248',
                     borderTop: `2px solid ${selected.color}`,
                     borderRadius: '50%', animation: 'spin 0.75s linear infinite',
                     boxShadow: `0 0 12px ${selected.color}40`,
                   }} />
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ color: selected.color, fontSize: 10, letterSpacing: '0.16em', textTransform: 'uppercase', marginBottom: 4, fontFamily: "'Cinzel', serif" }}>
+                    <div style={{ color: selected.color, fontSize: 12, fontWeight: 500, marginBottom: 4 }}>
                       Striking the forge{dots}
                     </div>
-                    <div style={{ color: '#2a1a08', fontSize: 10 }}>Forging {selected.name} prompt</div>
+                    <div style={{ color: '#6b7280', fontSize: 12 }}>Generating {selected.name} prompt...</div>
                   </div>
                 </div>
               ) : prompt ? (
@@ -754,9 +787,9 @@ export default function PromptForge() {
             </div>
 
             {!loading && prompt && (
-              <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', fontSize: 9.5, color: '#2a1a08' }}>
+              <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#4b5563' }}>
                 <span>{prompt.length.toLocaleString()} chars · {prompt.split(/\s+/).filter(Boolean).length} words</span>
-                <span style={{ color: '#1e2a14' }}>⚒ READY TO DEPLOY</span>
+                <span style={{ color: '#10b981', fontWeight: 500 }}>✓ READY TO DEPLOY</span>
               </div>
             )}
           </div>
@@ -768,18 +801,18 @@ export default function PromptForge() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
               <input className="finput" placeholder="Search library..." value={libSearch}
                 onChange={e => setLibSearch(e.target.value)} style={{ maxWidth: 280 }} />
-              <span style={{ fontSize: 10, color: '#2a1a08', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: 12, color: '#6b7280', whiteSpace: 'nowrap' }}>
                 {visibleLib.length} prompt{visibleLib.length !== 1 ? 's' : ''}
               </span>
             </div>
 
             {visibleLib.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '56px 20px' }}>
-                <div style={{ fontSize: 28, marginBottom: 14, opacity: 0.15 }}>⚒</div>
-                <div style={{ fontFamily: "'Crimson Pro', serif", color: '#2a1a08', fontSize: 14, marginBottom: 18 }}>
+                <div style={{ fontSize: 32, marginBottom: 14, opacity: 0.2 }}>📚</div>
+                <div style={{ color: '#4b5563', fontSize: 14, marginBottom: 18 }}>
                   {libSearch ? 'No prompts match your search' : 'Your library awaits its first forging'}
                 </div>
-                <button className="btn fire" onClick={() => { setView('forge'); reset() }}>Enter the Forge →</button>
+                <button className="btn primary" onClick={() => { setView('forge'); reset() }}>Start Generating →</button>
               </div>
             ) : (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(270px, 1fr))', gap: 9 }}>
@@ -788,17 +821,17 @@ export default function PromptForge() {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 9 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span style={{ color: item.agentColor, fontSize: 15 }}>{item.agentIcon}</span>
-                        <span style={{ fontFamily: "'Cinzel', serif", fontWeight: 600, fontSize: 12, color: '#c8a060' }}>{item.agentName}</span>
+                        <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb' }}>{item.agentName}</span>
                       </div>
                       <button className="btn steel" style={{ padding: '2px 7px', fontSize: 9 }}
                         onClick={e => { e.stopPropagation(); deleteFromLib(item.id) }}>✕</button>
                     </div>
-                    <div style={{ fontFamily: "'Crimson Pro', serif", fontSize: 12, color: '#2e1e0a', letterSpacing: '0.02em', marginBottom: 10, lineHeight: 1.5 }}>
+                    <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 10, lineHeight: 1.5 }}>
                       {item.agentDesc}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                      <span style={{ fontSize: 9.5, color: '#201408' }}>{fmtDate(item.savedAt)}</span>
-                      <span style={{ fontSize: 9.5, color: '#201408' }}>{item.prompt.split(/\s+/).filter(Boolean).length} words</span>
+                      <span style={{ fontSize: 11, color: '#4b5563' }}>{fmtDate(item.savedAt)}</span>
+                      <span style={{ fontSize: 11, color: '#4b5563' }}>{item.prompt.split(/\s+/).filter(Boolean).length} words</span>
                     </div>
                   </div>
                 ))}
@@ -811,7 +844,7 @@ export default function PromptForge() {
         {view === 'starter' && (
           <div className="fu" style={{ marginTop: 24 }}>
             <div style={{ marginBottom: 20 }}>
-              <p style={{ fontFamily: "'Crimson Pro', serif", fontSize: 14, color: '#4a3020', lineHeight: 1.8, marginBottom: 16 }}>
+              <p style={{ fontSize: 14, color: '#9ca3af', lineHeight: 1.8, marginBottom: 16 }}>
                 New to AI? These are ready-to-use prompts for everyday tasks. Copy, paste into any AI tool, and fill in the brackets.
               </p>
               <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
@@ -823,20 +856,20 @@ export default function PromptForge() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 9 }}>
               {visibleStarter.map(item => (
                 <div key={item.id} style={{
-                  background: 'linear-gradient(145deg, #111008, #0e0c07)',
-                  border: '1px solid #2a1f0e', borderRadius: 4,
+                  background: '#1c1f30',
+                  border: '1px solid #2a2d42', borderRadius: 10,
                   padding: '18px 18px 16px', position: 'relative', transition: 'border-color 0.16s',
                 }}
-                  onMouseEnter={e => e.currentTarget.style.borderColor = item.color + '55'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = '#2a1f0e'}
+                  onMouseEnter={e => e.currentTarget.style.borderColor = item.color + '88'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = '#2a2d42'}
                 >
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 8, gap: 10 }}>
                     <div>
-                      <div style={{ fontSize: 8, color: item.color, letterSpacing: '0.14em', textTransform: 'uppercase', marginBottom: 5, fontFamily: "'DM Mono', monospace" }}>{item.category}</div>
-                      <div style={{ fontFamily: "'Cinzel', serif", fontWeight: 600, fontSize: 12, color: '#c8a060', lineHeight: 1.4 }}>{item.title}</div>
+                      <div style={{ fontSize: 10, color: item.color, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 5 }}>{item.category}</div>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', lineHeight: 1.4 }}>{item.title}</div>
                     </div>
                     <button
-                      className={`btn ${starterCopied === item.id ? 'iron' : 'fire'}`}
+                      className={`btn ${starterCopied === item.id ? 'success' : 'accent'}`}
                       style={{ padding: '4px 10px', fontSize: 9, flexShrink: 0 }}
                       onClick={() => {
                         navigator.clipboard.writeText(item.prompt)
@@ -845,11 +878,11 @@ export default function PromptForge() {
                       }}
                     >{starterCopied === item.id ? '✓' : 'Copy'}</button>
                   </div>
-                  <div style={{ fontFamily: "'Crimson Pro', serif", fontSize: 12, color: '#3a2a14', lineHeight: 1.6, marginBottom: 12 }}>{item.desc}</div>
+                  <div style={{ fontSize: 12, color: '#6b7280', lineHeight: 1.6, marginBottom: 12 }}>{item.desc}</div>
                   <div style={{
-                    background: '#0a0804', border: '1px solid #1a1208', borderRadius: 3,
-                    padding: '9px 11px', fontSize: 10.5, color: '#2e2010', lineHeight: 1.7,
-                    fontFamily: "'DM Mono', monospace", whiteSpace: 'pre-wrap',
+                    background: '#13151f', border: '1px solid #2a2d42', borderRadius: 6,
+                    padding: '10px 12px', fontSize: 11, color: '#4b5563', lineHeight: 1.7,
+                    fontFamily: "'JetBrains Mono', monospace", whiteSpace: 'pre-wrap',
                     maxHeight: 72, overflow: 'hidden',
                   }}>
                     {item.prompt.slice(0, 110)}{item.prompt.length > 110 ? '...' : ''}
@@ -861,9 +894,9 @@ export default function PromptForge() {
         )}
 
         {/* Footer */}
-        <div style={{ marginTop: 60, paddingTop: 18, borderTop: '1px solid #0e0c07', display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 8.5, color: '#1e1408', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: "'DM Mono', monospace" }}>Prompt Forge v3.0</span>
-          <span style={{ fontSize: 8.5, color: '#1e1408' }}>Forged with Claude</span>
+        <div style={{ marginTop: 60, paddingTop: 18, borderTop: '1px solid #2a2d42', display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 11, color: '#374151' }}>Prompt Forge</span>
+          <span style={{ fontSize: 11, color: '#374151' }}>Powered by Claude</span>
         </div>
       </div>
     </div>
