@@ -103,6 +103,13 @@ The final SOP must include:
     { id: 'prop_val',    icon: '🏠', name: 'Property Valuator',     desc: 'Real-time appraisal, market data',          color: '#4db88c' },
     { id: 'contract_rev',icon: '📜', name: 'Contract Reviewer',     desc: 'Unfavorable clause detection for SMBs',     color: '#9b7fd4' },
   ],
+  'Legal & Compliance': [
+    { id: 'contract_analyze', icon: '📑', name: 'Contract Analyzer',        desc: 'Clause review, risk flagging, plain-language summaries', color: '#d4834d', isNew: true },
+    { id: 'compliance_mon',   icon: '🔔', name: 'Compliance Monitor',       desc: 'Regulatory tracking, audit prep, policy gaps',           color: '#c44d4d', isNew: true },
+    { id: 'policy_writer',    icon: '📝', name: 'Policy Writer',            desc: 'Handbooks, privacy policies, internal procedures',       color: '#9b7fd4', isNew: true },
+    { id: 'reg_nav',          icon: '🧭', name: 'Regulatory Navigator',     desc: 'Licensing, filing deadlines, industry regulations',      color: '#4d8cd4', isNew: true },
+    { id: 'dispute_res',      icon: '⚖', name: 'Dispute Resolution Agent', desc: 'Demand letters, mediation prep, escalation paths',       color: '#d4a84d', isNew: true },
+  ],
 }
 
 const INDUSTRY_TABS = Object.keys(INDUSTRIES)

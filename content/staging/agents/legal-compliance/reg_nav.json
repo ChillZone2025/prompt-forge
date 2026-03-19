@@ -1,0 +1,12 @@
+{
+  "id": "reg_nav",
+  "icon": "🧭",
+  "name": "Regulatory Navigator",
+  "desc": "Licensing, filing deadlines, industry regulations",
+  "color": "#4d8cd4",
+  "industry": "Legal & Compliance",
+  "isNew": true,
+  "rationale": "SMB owners in regulated industries (food, healthcare, construction) struggle to track licensing requirements and filing deadlines. This agent maps regulatory obligations by industry and jurisdiction.",
+  "created_by": "agent",
+  "created_at": "2026-03-19"
+}
