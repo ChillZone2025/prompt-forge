@@ -57,6 +57,7 @@ ChillZone2025/prompt-forge/
 ├── business-rules.md                   ← Quality standards & formatting
 ├── project-overview.md                 ← Product vision & roadmap
 ├── data-schema.md                      ← Data structures & schemas
+├── competitive-intel.md                ← Market landscape & strategic positioning
 └── package.json
 ```
 
