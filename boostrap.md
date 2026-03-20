@@ -58,6 +58,7 @@ ChillZone2025/prompt-forge/
 ├── project-overview.md                 ← Product vision & roadmap
 ├── data-schema.md                      ← Data structures & schemas
 ├── competitive-intel.md                ← Market landscape & strategic positioning
+├── agent-roles.md                      ← Role definitions for Claude Code sessions
 └── package.json
 ```
 
