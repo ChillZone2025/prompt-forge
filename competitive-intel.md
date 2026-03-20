@@ -82,6 +82,12 @@ When proposing new industries or agents, score them on:
 | $5,000 MRR | ~417 Pro subscribers. Side income territory. |
 | $10,000 MRR | ~834 Pro subscribers. "Stop working for someone else" territory. |
 
+## Pricing Strategy (LOCKED)
+
+**Current decision: $12/month flat. Grow first, optimize later.**
+
+Do NOT propose pricing changes, new tiers, or per-prompt billing. The priority is subscriber volume and proving product-market fit. A premium tier ($29/month for advanced agents, blueprints, and multi-step workflows) will be evaluated once we reach ~100 subscribers. Until then, every feature and content addition should maximize the value of the $12/month Pro tier to drive conversions from the free tier.
+
 ## Competitive Monitoring
 
 Agents should periodically (monthly) research and update this file with:
