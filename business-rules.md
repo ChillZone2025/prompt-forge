@@ -202,13 +202,68 @@ Beyond agents and starters, Prompt Forge can expand into adjacent AI service con
 - Example: "Fine-tuning the Financial Modeler agent for SaaS metrics"
 - Format: Before/after prompt comparisons with explanations
 
+## Quality Gate — Mandatory Before Integration
+
+No agent goes live without passing the quality gate. The Forger runs these tests on every staged agent BEFORE integrating into PromptForge.js. Failed agents go back to the Prompt Agent with revision notes.
+
+### Tier 1 — Structural Gate (ALL agents)
+- Generate the prompt once using buildPrompt v2
+- Automated checks:
+  - All 8 sections present (Agent Identity, Core Capabilities, Behavioral Guidelines, Domain Knowledge, Interaction Protocol, Output Format, Constraints & Safety, First Message)
+  - Word count between 600-900 words
+  - References at least 3 real tools, frameworks, or methodologies by name
+  - First Message includes at least 1 clarifying question
+- **Pass threshold:** All checks pass. Any failure = reject with notes.
+- **Cost:** ~$0.02 per agent
+
+### Tier 2 — Conversation Test (ALL agents)
+- Generate prompt, deploy as system prompt in a real Claude conversation
+- Send 3 messages:
+  1. Let the agent deliver its First Message
+  2. A realistic professional request for this role
+  3. An out-of-scope request to test constraints
+- Evaluate:
+  - Agent stays in character throughout
+  - Response to realistic request is actionable and domain-specific
+  - Edge case handled appropriately (flags uncertainty, recommends human review, stays in scope)
+- **Pass threshold:** 7.0/10 minimum across all criteria
+- **Cost:** ~$0.08 per agent
+
+### Tier 3 — Full Simulation (ALL agents)
+- Generate prompt with userContext, deploy as system prompt
+- Run 5-message scenario with escalating complexity
+- If mock data exists (in simulations/ directory), feed it to the agent
+- If no mock data exists, use a generic professional scenario appropriate to the industry
+- Evaluate against domain-specific criteria
+- **Pass threshold:** 8.0/10 minimum
+- **Cost:** ~$0.12 per agent
+
+### Quality Gate Results
+- Results stored in `simulations/{industry}/results/{agent_id}_gate.md`
+- Agents that pass all 3 tiers: approved for integration
+- Agents that fail any tier: returned to staging with `TASK_QUEUE.md` status set to `blocked` and specific failure notes
+- The Forger MUST NOT integrate any agent that hasn't passed all 3 tiers
+- Quality gate results are committed to the repo as proof of testing
+
+### Running the Quality Gate
+```bash
+# Test a single staged agent
+node scripts/quality-gate.js --agent credit_risk --industry Finance
+
+# Test all staged agents
+node scripts/quality-gate.js --staged
+
+# Re-run gate on all live agents (backlog audit)
+node scripts/quality-gate.js --all
+```
+
 ## Approval Workflow
 
 | Content Type | Approval Level |
 |-------------|---------------|
-| New agents in existing industries | Auto-publish if all quality checks pass |
+| New agents in existing industries | Must pass all 3 quality gate tiers, then auto-publish |
 | New starter prompts | Auto-publish if all quality checks pass |
-| New industries (5+ agents) | Stage for Rob's review |
+| New industries (5+ agents) | All agents must pass quality gate + Rob's review |
 | Service expansion proposals | Stage for Rob's review |
 | Any change to payment/auth logic | BLOCKED — never modify without explicit approval |
 | CSS or layout changes | Stage for Rob's review |
