@@ -82,7 +82,7 @@ Write the exact first message this agent sends when activated. This message shou
 
     const stream = await client.messages.stream({
       model: 'claude-sonnet-4-20250514',
-      max_tokens: 2048,
+      max_tokens: 4096,
       messages: [{ role: 'user', content: prompt }],
     })
 

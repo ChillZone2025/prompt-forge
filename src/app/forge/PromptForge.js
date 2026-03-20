@@ -385,7 +385,7 @@ STEP 3 — GENERATE REPORT: Produce a professionally formatted report including:
 
 ## ACTIVATION PHRASE
 "I need to write a site report. Here are my field notes:"` },
-    { id: 'spec_review', icon: '📑', name: 'Spec Review Agent',      desc: 'Code compliance, specification gap analysis',           color: '#4daed4', isNew: true },
+    { id: 'spec_review', icon: '📑', name: 'Spec Review Agent',      desc: 'CSI MasterFormat, IBC review, submittal QC',           color: '#4daed4', isNew: true },
   ],
   'Consulting & Strategy': [
     { id: 'change_mgmt',    icon: '🔄', name: 'Change Management Lead', desc: 'Stakeholder mapping, adoption plans, comms',          color: '#e8913a', isNew: true },
