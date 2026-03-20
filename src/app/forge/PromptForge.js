@@ -41,11 +41,11 @@ The final SOP must include:
 
 ## ACTIVATION PHRASE
 "I am uploading a file. Please analyze it and begin the SOP inquiry process."` },
-    { id: 'treasury',    icon: '◈', name: 'FX Treasury Analyst',    desc: 'Hedging, derivatives, currency risk',       color: '#e8913a' },
+    { id: 'email_draft', icon: '✉', name: 'Email Draft Agent',       desc: 'Professional emails, cold outreach, follow-ups', color: '#e8913a', isNew: true },
     { id: 'cyber',       icon: '⬡', name: 'Cybersecurity Advisor',   desc: 'Threat assessment, security policies, incident response',          color: '#4db8c8' },
     { id: 'code_review', icon: '⟨⟩',name: 'Code Reviewer',          desc: 'Security, performance, best practices',     color: '#9b7fd4' },
     { id: 'data',        icon: '∿', name: 'Data Analyst',           desc: 'SQL, Python, insight generation',           color: '#4db88c' },
-    { id: 'legal',       icon: '⚖', name: 'Legal Researcher',       desc: 'Case law, contracts, compliance',           color: '#d4834d' },
+    { id: 'meeting_prep',icon: '🗣', name: 'Meeting Prep Agent',     desc: 'Agenda drafting, talking points, follow-up summaries', color: '#d4834d', isNew: true },
     { id: 'pm',          icon: '◎', name: 'Project Manager',        desc: 'Agile, risk, stakeholder comms',            color: '#c46896' },
     { id: 'security',    icon: '⬛', name: 'Security Assessor',       desc: 'Risk analysis, vulnerability scans, security policies',     color: '#c44d4d' },
     { id: 'finance',     icon: '∑', name: 'Financial Modeler',      desc: 'Valuation, forecasting, scenario analysis, projections',            color: '#d4a84d' },
@@ -91,17 +91,17 @@ The final SOP must include:
   ],
   Parenting: [
     { id: 'homework',    icon: '📚', name: 'Homework Helper',         desc: 'Subject tutoring, step-by-step explanations',  color: '#60a5fa' },
-    { id: 'scheduler',   icon: '📅', name: 'Family Scheduler',        desc: 'Activity coordination, calendar management',    color: '#34d399' },
+    { id: 'meal_plan',   icon: '🍽', name: 'Family Meal Planner',     desc: 'Weekly menus, grocery lists, dietary needs',     color: '#34d399', isNew: true },
     { id: 'development', icon: '🌱', name: 'Child Development Tracker',desc: 'Milestone tracking, age-appropriate guidance',  color: '#a78bfa' },
     { id: 'stories',     icon: '🌙', name: 'Bedtime Story Agent',     desc: 'Custom stories, reading level adaptation',      color: '#fb923c' },
     { id: 'coach',       icon: '🤝', name: 'Parent Coach',            desc: 'Behavior strategies, emotional regulation',     color: '#f472b6' },
   ],
    'Retail & Ops': [
     { id: 'inventory',   icon: '📦', name: 'Inventory Optimizer',   desc: 'Demand forecasting, returns logistics',     color: '#d4a84d' },
-    { id: 'commerce',    icon: '🛒', name: 'Agentic Commerce',      desc: 'Instant checkout, autonomous buying',       color: '#e8913a' },
+    { id: 'pricing_strat',icon: '💲', name: 'Pricing Strategist',    desc: 'Competitive pricing, margin analysis, discount modeling', color: '#e8913a', isNew: true },
     { id: 'supply_chain',icon: '⛓', name: 'Supply Chain Agent',    desc: 'Bottleneck detection, re-routing',          color: '#4daed4' },
-    { id: 'prop_val',    icon: '🏠', name: 'Property Valuator',     desc: 'Real-time appraisal, market data',          color: '#4db88c' },
-    { id: 'contract_rev',icon: '📜', name: 'Contract Reviewer',     desc: 'Unfavorable clause detection for SMBs',     color: '#9b7fd4' },
+    { id: 'returns_agent',icon: '🔄', name: 'Returns & Refund Agent',desc: 'Return policies, customer resolution, loss prevention', color: '#4db88c', isNew: true },
+    { id: 'vendor_nego', icon: '🤝', name: 'Vendor Negotiator',      desc: 'Supplier terms, bulk pricing, contract leverage', color: '#9b7fd4', isNew: true },
   ],
   'Legal & Compliance': [
     { id: 'contract_analyze', icon: '📑', name: 'Contract Analyzer',        desc: 'Clause review, risk flagging, plain-language summaries', color: '#d4834d', isNew: true },
