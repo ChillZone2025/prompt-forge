@@ -4,8 +4,8 @@
 
 ## Live Platform Stats
 
-- **Total agents:** 119
-- **Total industries:** 19
+- **Total agents:** 219
+- **Total industries:** 39
 - **Total starter prompts:** 24
 - **Starter categories:** 4 (Work, Writing, Learning, Life)
 - **Agents with fixedPrompt:** 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer)
@@ -36,6 +36,26 @@
 | Executive & Leadership | 5 | Live |
 | Hospitality & Events | 5 | Live |
 | Logistics & Supply Chain | 5 | Live |
+| Agriculture & Farming | 5 | Live |
+| Automotive | 5 | Live |
+| Aviation & Aerospace | 5 | Live |
+| Banking & Lending | 5 | Live |
+| Construction & Trades | 5 | Live |
+| Cybersecurity | 5 | Live |
+| Dental & Optometry | 5 | Live |
+| E-commerce & DTC | 5 | Live |
+| Energy & Utilities | 5 | Live |
+| Fitness & Wellness | 5 | Live |
+| Freelancers & Solopreneurs | 5 | Live |
+| Manufacturing | 5 | Live |
+| Media & Publishing | 5 | Live |
+| Nonprofit & Government | 5 | Live |
+| Pharma & Biotech | 5 | Live |
+| Property Management | 5 | Live |
+| Recruitment & Staffing | 5 | Live |
+| SaaS & Product | 5 | Live |
+| Sports & Athletics | 5 | Live |
+| Veterinary | 5 | Live |
 
 ## What's Currently Staged (content/staging/)
 
@@ -60,3 +80,6 @@ Nothing — all staging cleared as of 2026-03-19.
 - 2026-03-19 — Add streaming output, regenerate button, generation metadata — `87d66f4`
 - 2026-03-19 — Add Negotiation Strategist from staging — `41b2c19`
 - 2026-03-19 — Add userContext input UI — `f7df7b7`
+- 2026-03-19 — Add Negotiation Strategist from staging — `41b2c19`
+- 2026-03-19 — Post-integration cleanup V1 — `6774c11`
+- 2026-03-19 — Integrate 20 new industries (100 agents) from Prompt Agent staging — `ff49885`

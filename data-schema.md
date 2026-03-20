@@ -305,8 +305,8 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 
 | Category | Count |
 |----------|-------|
-| Industries | 19 |
-| Total agents | 119 |
+| Industries | 39 |
+| Total agents | 219 |
 | Agents with fixedPrompt | 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Resume Screener, Listing Generator, Site Report Generator, Proposal & SOW Writer) |
 | Starter prompts | 24 |
 | Starter categories | 4 (Work, Writing, Learning, Life) |
@@ -316,6 +316,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 When creating new content, use these conventions:
 - Agent IDs: descriptive snake_case (e.g., `resume_screen`, `bid_est`)
 - Starter IDs: `s` + next sequential number (next available: `s25`)
+- **Note:** With 39 industries, ID uniqueness checks are critical. Always grep the full list below.
 - Industry names: title case, 1-3 words, ampersand OK (e.g., `Comms & Sales`)
 
 ## ID Uniqueness Check
@@ -343,7 +344,27 @@ renewal_spec, cost_est, proj_coord, rfi_drafter, site_report, spec_review,
 change_mgmt, due_diligence, market_sizing, proposal_writer, strat_deck,
 exec_brief, board_prep, decision_frame, exec_comms, okr_agent,
 event_plan, guest_exp, menu_eng, rev_mgmt, staff_sched,
-route_opt, warehouse_ops, carrier_nego, customs_comp, demand_plan
+route_opt, warehouse_ops, carrier_nego, customs_comp, demand_plan,
+ag_compliance, crop_plan, farm_finance, livestock_mgmt, precision_ag,
+dealer_crm, parts_mgmt, service_advisor, vehicle_appr, warranty_agent,
+aero_cert, flight_ops, ground_ops, mro_agent, safety_mgmt,
+branch_ops, comm_lender, kyc_agent, loan_orig, portfolio_mgr,
+bid_est, inspect_agent, material_calc, safety_comp, sched_opt,
+incident_resp, pentest_plan, soc_analyst, threat_model, vuln_mgmt,
+dental_treatment, ins_verify, optical_sales, patient_comms, practice_mgmt,
+abandon_cart, listing_opt, pricing_intel, product_desc, review_mgmt,
+energy_audit, field_service, grid_ops, renew_dev, util_reg,
+class_sched, client_progress, nutrition_plan, program_design, wellness_coach,
+client_onboard, freelance_pitch, portfolio_build, rate_calc, scope_guard,
+lean_agent, maint_plan, proc_agent, prod_sched, quality_ctrl,
+audience_dev, content_cal, copy_editor, editorial_agent, rights_mgmt,
+constituent_svc, grant_writer, impact_report, policy_analyst, volunteer_coord,
+clin_trial, drug_safety, med_affairs, pharma_qc, reg_submit,
+lease_mgmt, maint_coord, prop_financials, tenant_comms, tenant_screen,
+employer_brand, job_desc, offer_letter, recruit_pipe, source_agent,
+churn_analyst, feature_prior, prd_writer, release_notes, user_research,
+athlete_perf, fan_engage, game_plan, scout_analyst, sports_ops,
+pet_comms, practice_growth, vet_billing, vet_records, vet_triage
 ```
 
 ## Staging Schema for New Content
