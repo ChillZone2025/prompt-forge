@@ -202,7 +202,7 @@ coach, inventory, commerce, supply_chain, prop_val, contract_rev
 
 ## Staging Schema for New Content
 
-When agents draft new content, stage it as JSON files in `/content/staging/`:
+When agents draft new content, stage it as JSON files in `/content/staging/`. Every new agent and industry proposal must include a `rationale` field that references the Revenue Optimization Framework scores from `competitive-intel.md`.
 
 ### New Agent Staging Format
 File: `/content/staging/agents/{industry_name}/{agent_id}.json`
@@ -217,6 +217,14 @@ File: `/content/staging/agents/{industry_name}/{agent_id}.json`
   "industry": "HR & People Ops",
   "isNew": true,
   "rationale": "High demand from HR teams automating initial resume review. Complements existing hiring workflow gaps.",
+  "revenue_score": {
+    "willingness_to_pay": 8,
+    "frequency_of_use": 7,
+    "pain_of_alternatives": 9,
+    "market_size": 7,
+    "seo_opportunity": 6,
+    "weighted_total": 7.6
+  },
   "created_by": "agent",
   "created_at": "2026-03-19"
 }
