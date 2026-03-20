@@ -874,11 +874,41 @@ const CSS = `
     padding: 36px; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
 
-  .ind-nav {
-    display: flex; overflow-x: auto; gap: 0;
-    border-bottom: 1px solid #1e2030; scrollbar-width: none;
+  .ind-dropdown-btn {
+    background: #161822; border: 1px solid #1e2030; border-radius: 8px;
+    padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 13px;
+    font-weight: 500; color: #e5e7eb; cursor: pointer; transition: all 0.14s;
+    display: flex; align-items: center; justify-content: space-between; gap: 8;
+    min-width: 220px; width: 100%;
   }
-  .ind-nav::-webkit-scrollbar { display: none; }
+  .ind-dropdown-btn:hover { border-color: rgba(245,197,24,0.3); }
+
+  .ind-dropdown-panel {
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 100;
+    background: #161822; border: 1px solid #1e2030; border-radius: 10px;
+    margin-top: 4px; max-height: 320px; overflow-y: auto;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    scrollbar-width: thin; scrollbar-color: #1e2030 transparent;
+  }
+  .ind-dropdown-panel::-webkit-scrollbar { width: 4px; }
+  .ind-dropdown-panel::-webkit-scrollbar-thumb { background: #1e2030; border-radius: 2px; }
+
+  .ind-dropdown-item {
+    padding: 10px 16px; font-size: 13px; color: #6b7280;
+    cursor: pointer; transition: all 0.1s; display: flex;
+    align-items: center; justify-content: space-between;
+    border: none; background: none; width: 100%; text-align: left;
+    font-family: 'Inter', sans-serif;
+  }
+  .ind-dropdown-item:hover { background: rgba(245,197,24,0.04); color: #e5e7eb; }
+  .ind-dropdown-item.on { color: #f5c518; font-weight: 600; }
+
+  .ind-tag {
+    display: inline-block; font-size: 9px; font-weight: 500; color: #374151;
+    background: rgba(255,255,255,0.04); border: 1px solid #1e2030;
+    padding: 1px 6px; border-radius: 3px; margin-top: 6px;
+    letter-spacing: 0.02em;
+  }
 
   .agent-card.pro-locked { position: relative; cursor: pointer; }
   .agent-card.pro-locked .card-content { filter: blur(6px); pointer-events: none; user-select: none; }
@@ -943,6 +973,9 @@ export default function PromptForge() {
   const [mounted, setMounted]     = useState(false)
   const [contextAgent, setContextAgent] = useState(null)
   const [userContext, setUserContext]   = useState('')
+  const [agentSearch, setAgentSearch]   = useState('')
+  const [agentFilter, setAgentFilter]  = useState('All')
+  const [indDropOpen, setIndDropOpen]   = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -1094,7 +1127,34 @@ export default function PromptForge() {
 
   const reset = () => { setSelected(null); setPrompt(''); setSaved(false) }
 
-  const currentAgents = INDUSTRIES[industry] || []
+  const totalAgents = Object.values(INDUSTRIES).flat().length
+  const totalIndustries = INDUSTRY_TABS.length
+  const isSearching = agentSearch.trim().length > 0
+  const searchLower = agentSearch.trim().toLowerCase()
+
+  // Build filtered agent list (search + industry + filter)
+  const getVisibleAgents = () => {
+    let agents = []
+    if (isSearching) {
+      // Search across all industries
+      for (const [ind, list] of Object.entries(INDUSTRIES)) {
+        list.forEach(a => {
+          if (a.name.toLowerCase().includes(searchLower) || a.desc.toLowerCase().includes(searchLower)) {
+            agents.push({ ...a, _industry: ind })
+          }
+        })
+      }
+    } else {
+      agents = (INDUSTRIES[industry] || []).map(a => ({ ...a, _industry: industry }))
+    }
+    // Apply filter
+    if (agentFilter === 'Free') agents = agents.filter(a => !PRO_INDUSTRIES.includes(a._industry))
+    if (agentFilter === 'Pro Only') agents = agents.filter(a => PRO_INDUSTRIES.includes(a._industry))
+    if (agentFilter === 'New') agents = agents.filter(a => a.isNew)
+    return agents
+  }
+  const visibleAgents = getVisibleAgents()
+
   const visibleLib = library.filter(i => !libSearch || i.agentName.toLowerCase().includes(libSearch.toLowerCase()))
   const visibleStarter = STARTER_PROMPTS.filter(p => starterCat === 'All' || p.category === starterCat)
 
@@ -1300,21 +1360,57 @@ export default function PromptForge() {
         {/* ══ FORGE VIEW ══ */}
         {view === 'forge' && !selected && (
           <div className="fu">
-            {/* Industry tabs */}
-            <div className="ind-nav" style={{ marginBottom: 28, marginTop: 0 }}>
-              {INDUSTRY_TABS.map(ind => (
-                <button key={ind} className={`ind-tab ${industry === ind ? 'on' : ''}`} onClick={() => setIndustry(ind)}>
-                  {ind}{PRO_INDUSTRIES.includes(ind) && <span className="pro-tab-badge">PRO</span>}
-                </button>
-              ))}
+            {/* Search bar */}
+            <div style={{ position: 'relative', marginBottom: 12, marginTop: 8 }}>
+              <span style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#374151', fontSize: 14, pointerEvents: 'none' }}>🔍</span>
+              <input
+                className="finput"
+                style={{ paddingLeft: 38 }}
+                placeholder={`Search ${totalAgents} agents across ${totalIndustries} industries...`}
+                value={agentSearch}
+                onChange={e => setAgentSearch(e.target.value)}
+              />
             </div>
 
+            {/* Filter pills + Industry dropdown row */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24, flexWrap: 'wrap' }}>
+              {/* Filter pills */}
+              <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                {['All', 'Free', 'Pro Only', 'New'].map(f => (
+                  <button key={f} className={`pill ${agentFilter === f ? 'on' : ''}`} onClick={() => setAgentFilter(f)}>{f}</button>
+                ))}
+              </div>
+
+              {/* Industry dropdown */}
+              {!isSearching && (
+                <div style={{ position: 'relative', marginLeft: 'auto' }}>
+                  <button className="ind-dropdown-btn" onClick={() => setIndDropOpen(!indDropOpen)}>
+                    <span>{industry}{PRO_INDUSTRIES.includes(industry) && <span className="pro-tab-badge">PRO</span>}</span>
+                    <span style={{ fontSize: 10, color: '#374151' }}>{indDropOpen ? '▲' : '▼'}</span>
+                  </button>
+                  {indDropOpen && (
+                    <div className="ind-dropdown-panel">
+                      {INDUSTRY_TABS.slice().sort().map(ind => (
+                        <button key={ind} className={`ind-dropdown-item ${industry === ind ? 'on' : ''}`}
+                          onClick={() => { setIndustry(ind); setIndDropOpen(false) }}>
+                          <span>{ind}</span>
+                          {PRO_INDUSTRIES.includes(ind) && <span className="pro-tab-badge">PRO</span>}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Agent grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
-              {currentAgents.map((agent, i) => {
-                const locked = !isPro && i >= FREE_LIMIT && atLimit
-                const proLocked = !isPro && PRO_INDUSTRIES.includes(industry)
+              {visibleAgents.map((agent, i) => {
+                const agentIndustry = agent._industry
+                const locked = !isPro && i >= FREE_LIMIT && atLimit && !isSearching
+                const proLocked = !isPro && PRO_INDUSTRIES.includes(agentIndustry)
                 return (
-                  <div key={agent.id}
+                  <div key={agent.id + '-' + agentIndustry}
                     className={`agent-card ${locked ? 'locked' : ''} ${proLocked ? 'pro-locked' : ''}`}
                     style={{ '--ac': agent.color }}
                     onClick={() => proLocked ? setModal('upgrade') : !locked && handleAgentClick(agent)}
@@ -1330,10 +1426,16 @@ export default function PromptForge() {
                       <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
                       <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', marginBottom: 6, lineHeight: 1.4 }}>{agent.name}</div>
                       <div style={{ fontSize: 11, color: '#6b7280', lineHeight: 1.6 }}>{agent.desc}</div>
+                      {isSearching && <div className="ind-tag">{agentIndustry}</div>}
                     </div>
                   </div>
                 )
               })}
+              {visibleAgents.length === 0 && (
+                <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: 48, color: '#374151', fontSize: 13 }}>
+                  No agents match your search{agentFilter !== 'All' ? ' and filter' : ''}.
+                </div>
+              )}
             </div>
           </div>
         )}
