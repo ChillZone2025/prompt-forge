@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react'
 
-const FREE_LIMIT = 5
+const FREE_LIMIT = 3
 const LS_USAGE = 'pf_usage'
 const LS_PRO = 'pf_pro'
 const LS_LIB = 'pf_library'
 const LS_SEEN = 'pf_seen'
 
-const PRO_INDUSTRIES = ['AI Agent Development']
+const PRO_INDUSTRIES = ['AI Agent Development', 'Cybersecurity', 'Consulting & Strategy', 'Architecture & Engineering', 'SaaS & Product', 'Banking & Lending', 'Pharma & Biotech', 'Aviation & Aerospace', 'Executive & Leadership']
 
 // ─── Walkthrough ─────────────────────────────────────────────────────────────
 const WALKTHROUGH = [
@@ -1021,8 +1021,13 @@ export default function PromptForge() {
       generate(agent)
       return
     }
-    setContextAgent(agent)
-    setUserContext('')
+    // Only Pro users get the context personalization modal
+    if (isPro) {
+      setContextAgent(agent)
+      setUserContext('')
+    } else {
+      generate(agent)
+    }
   }
 
   const generate = async (agent, context) => {
@@ -1287,8 +1292,8 @@ export default function PromptForge() {
             </button>
             <button className={`nav-tab ${view === 'starter' ? 'on' : ''}`} onClick={() => setView('starter')}>Starter</button>
           </div>
-          <button className="btn accent" style={{ fontSize: 12 }} onClick={() => atLimit ? setModal('upgrade') : setModal('custom')}>
-            + Custom Agent
+          <button className="btn accent" style={{ fontSize: 12 }} onClick={() => isPro ? setModal('custom') : setModal('upgrade')}>
+            + Custom Agent <span className="pro-tab-badge" style={{ marginLeft: 4 }}>PRO</span>
           </button>
         </div>
 
@@ -1393,9 +1398,11 @@ export default function PromptForge() {
               {!loading && prompt && (
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button className="btn accent" onClick={() => generate(selected, userContext || undefined)}>Regenerate ↻</button>
-                  {!saved
-                    ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
-                    : <button className="btn iron" disabled>✓ Saved</button>
+                  {!isPro
+                    ? <button className="btn" onClick={() => setModal('upgrade')}>🔒 Save to Library — Pro</button>
+                    : !saved
+                      ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
+                      : <button className="btn iron" disabled>✓ Saved</button>
                   }
                   <button className={`btn ${copied ? 'success' : 'primary'}`} onClick={() => copy(prompt)}>
                     {copied ? '✓ Copied!' : 'Copy Prompt'}
@@ -1434,9 +1441,16 @@ export default function PromptForge() {
             </div>
 
             {!loading && prompt && (
-              <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#4b5563', flexWrap: 'wrap', gap: 4 }}>
-                <span>Generated fresh by Claude · {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} · {prompt.split(/\s+/).filter(Boolean).length} words · Every prompt is unique</span>
-                <span style={{ color: '#10b981', fontWeight: 500 }}>✓ READY TO DEPLOY</span>
+              <div style={{ marginTop: 10 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#4b5563', flexWrap: 'wrap', gap: 4 }}>
+                  <span>Generated fresh by Claude · {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} · {prompt.split(/\s+/).filter(Boolean).length} words · Every prompt is unique</span>
+                  <span style={{ color: '#10b981', fontWeight: 500 }}>✓ READY TO DEPLOY</span>
+                </div>
+                {!isPro && (
+                  <div style={{ marginTop: 8, fontSize: 11, color: '#374151' }}>
+                    ✨ Pro users get personalized prompts tailored to their specific role and situation
+                  </div>
+                )}
               </div>
             )}
           </div>
