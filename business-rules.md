@@ -129,7 +129,7 @@ New industries require:
 - Industry name should be 1-3 words, title case
 
 ### Proposed Industries for Expansion
-These are high-value targets based on AI adoption trends:
+These are high-value targets based on AI adoption trends. Before committing to any new industry, score it against the **Revenue Optimization Framework** in `competitive-intel.md`. Industries that don't score well on willingness-to-pay and frequency-of-use should be deprioritized regardless of how "interesting" they are.
 
 | Industry | Target Audience | Example Agents |
 |----------|----------------|----------------|
