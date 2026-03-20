@@ -80,14 +80,31 @@ Write the exact first message this agent sends when activated. This message shou
 - Total length: 600-900 words. Dense with value, no padding.
 </quality_criteria>`
 
-    const message = await client.messages.create({
+    const stream = await client.messages.stream({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1024,
       messages: [{ role: 'user', content: prompt }],
     })
 
-    const text = message.content.map(b => b.text || '').join('')
-    return Response.json({ text })
+    const encoder = new TextEncoder()
+    const readable = new ReadableStream({
+      async start(controller) {
+        try {
+          for await (const event of stream) {
+            if (event.type === 'content_block_delta' && event.delta?.text) {
+              controller.enqueue(encoder.encode(event.delta.text))
+            }
+          }
+          controller.close()
+        } catch (err) {
+          controller.error(err)
+        }
+      }
+    })
+
+    return new Response(readable, {
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'Transfer-Encoding': 'chunked' },
+    })
 
   } catch (err) {
     console.error('Generate error:', err)

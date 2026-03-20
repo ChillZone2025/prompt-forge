@@ -826,11 +826,19 @@ export default function PromptForge() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ agentName: agent.name, agentDesc: agent.desc }),
       })
-      const data = await res.json()
       const newUsage = usage + 1
       setUsage(newUsage)
       try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
-      setPrompt(data.text || '')
+      const reader = res.body.getReader()
+      const decoder = new TextDecoder()
+      let result = ''
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        result += decoder.decode(value, { stream: true })
+        setPrompt(result)
+      }
+      setPrompt(result)
     } catch (err) {
       console.error(err)
     } finally {
@@ -1105,7 +1113,7 @@ export default function PromptForge() {
               </div>
               {!loading && prompt && (
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button className="btn" onClick={() => generate(selected)}>↺ Reforge</button>
+                  <button className="btn accent" onClick={() => generate(selected)}>Regenerate ↻</button>
                   {!saved
                     ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
                     : <button className="btn iron" disabled>✓ Saved</button>
@@ -1123,7 +1131,7 @@ export default function PromptForge() {
               borderRadius: 12, padding: 32, minHeight: 360,
               transition: 'border-color 0.3s',
             }}>
-              {loading ? (
+              {loading && !prompt ? (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 300, gap: 20 }}>
                   <div style={{
                     width: 40, height: 40,
@@ -1140,13 +1148,26 @@ export default function PromptForge() {
                   </div>
                 </div>
               ) : prompt ? (
-                <div className="pout fu">{parsePrompt(prompt)}</div>
+                <div>
+                  <div className="pout fu">{parsePrompt(prompt)}</div>
+                  {loading && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12 }}>
+                      <div style={{
+                        width: 14, height: 14,
+                        border: '2px solid #2e3248',
+                        borderTop: `2px solid ${selected.color}`,
+                        borderRadius: '50%', animation: 'spin 0.75s linear infinite',
+                      }} />
+                      <span style={{ color: selected.color, fontSize: 11, fontWeight: 500 }}>Generating{dots}</span>
+                    </div>
+                  )}
+                </div>
               ) : null}
             </div>
 
             {!loading && prompt && (
-              <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#4b5563' }}>
-                <span>{prompt.length.toLocaleString()} chars · {prompt.split(/\s+/).filter(Boolean).length} words</span>
+              <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', fontSize: 11, color: '#4b5563', flexWrap: 'wrap', gap: 4 }}>
+                <span>Generated fresh by Claude · {new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} · {prompt.split(/\s+/).filter(Boolean).length} words · Every prompt is unique</span>
                 <span style={{ color: '#10b981', fontWeight: 500 }}>✓ READY TO DEPLOY</span>
               </div>
             )}
