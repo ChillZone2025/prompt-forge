@@ -8,7 +8,7 @@ const LS_PRO = 'pf_pro'
 const LS_LIB = 'pf_library'
 const LS_SEEN = 'pf_seen'
 
-const PRO_INDUSTRIES = ['AI Agent Development', 'Cybersecurity', 'Consulting & Strategy', 'Architecture & Engineering', 'SaaS & Product', 'Banking & Lending', 'Pharma & Biotech', 'Aviation & Aerospace', 'Executive & Leadership']
+const PRO_INDUSTRIES = ['AI Agent Development', 'Cyber Intelligence', 'Cybersecurity', 'Consulting & Strategy', 'Architecture & Engineering', 'SaaS & Product', 'Banking & Lending', 'Pharma & Biotech', 'Aviation & Aerospace', 'Executive & Leadership']
 
 // ─── Walkthrough ─────────────────────────────────────────────────────────────
 const WALKTHROUGH = [
@@ -614,6 +614,18 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'openclaw_deploy', icon: '🦞', name: 'OpenClaw Deployment Agent',   desc: 'SOUL.md, AGENTS.md, Gateway config, channel setup',    color: '#c44d4d', isNew: true },
     { id: 'agent_sec',       icon: '🔒', name: 'Agent Security Auditor',      desc: 'Prompt injection, data exfiltration, permissions',     color: '#e8913a', isNew: true },
     { id: 'agent_test',      icon: '🧪', name: 'Agent Testing Strategist',    desc: 'Scenario coverage, edge cases, regression testing',    color: '#4d8cd4', isNew: true },
+  ],
+  'Cyber Intelligence': [
+    { id: 'osint_planner',   icon: '🗺', name: 'OSINT Investigation Planner',  desc: 'Investigation workflows, OPSEC, evidence chain',       color: '#d4834d', isNew: true },
+    { id: 'digi_footprint',  icon: '🌐', name: 'Digital Footprint Analyst',    desc: 'OSINT mapping, Maltego, Shodan, public records',       color: '#4db8c8', isNew: true },
+    { id: 'threat_intel',    icon: '🎯', name: 'Threat Intelligence Analyst',  desc: 'MITRE ATT&CK, Diamond Model, Kill Chain, TTPs',       color: '#4db88c', isNew: true },
+    { id: 'cred_exposure',   icon: '🔑', name: 'Credential Exposure Monitor',  desc: 'Breach scanning, API key leaks, GitHub dorking',       color: '#e8913a', isNew: true },
+    { id: 'domain_recon',    icon: '🔗', name: 'Domain & Infrastructure Recon', desc: 'DNS recon, subdomain enumeration, SSL analysis',       color: '#4daed4', isNew: true },
+    { id: 'darkweb_mon',     icon: '🕸', name: 'Dark Web Monitor',             desc: 'Threat actor tracking, leak monitoring, MISP',         color: '#c44d4d', isNew: true },
+    { id: 'socmedia_intel',  icon: '📱', name: 'Social Media Intelligence',    desc: 'SOCMINT, sentiment analysis, network mapping',         color: '#4d8cd4', isNew: true },
+    { id: 'corp_dd',         icon: '🏢', name: 'Corporate Due Diligence Agent',desc: 'EDGAR filings, UBO registries, court records',         color: '#d4a84d', isNew: true },
+    { id: 'disinfo_analyst', icon: '🔍', name: 'Disinformation Analyst',       desc: 'Bot detection, deepfake analysis, IO tracking',        color: '#9b7fd4', isNew: true },
+    { id: 'geoloc_intel',    icon: '📍', name: 'Geolocation Intelligence',     desc: 'GEOINT, EXIF analysis, satellite imagery, SunCalc',    color: '#34d399', isNew: true },
   ],
 }
 
