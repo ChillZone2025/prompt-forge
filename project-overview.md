@@ -89,7 +89,7 @@ Goal: Move beyond prompts into adjacent AI services
 - Agent blueprints (multi-agent architecture designs)
 - API integration tutorials
 - Fine-tuning guides
-- Potential new pricing tiers for premium content
+- Potential new pricing tiers — DEFERRED until 100+ subscribers (see pricing lock in `competitive-intel.md`)
 
 ### Phase 4 — Platform Maturation
 Goal: Build real infrastructure for scale
@@ -99,7 +99,7 @@ Goal: Build real infrastructure for scale
 - Admin dashboard for content management
 - Usage analytics per agent/industry
 - A/B testing on prompt templates
-- Potential team/enterprise tier
+- Potential team/enterprise tier — DEFERRED until 100+ subscribers (see pricing lock in `competitive-intel.md`)
 
 ## Competitive Positioning
 
@@ -128,7 +128,9 @@ Prompt Forge IS:
 
 ## Content Strategy for Agents
 
-When creating new content autonomously, prioritize based on this framework:
+When creating new content autonomously, use the **Revenue Optimization Framework** in `competitive-intel.md` as the primary scoring tool. Every proposed agent or industry must be scored on: willingness to pay (30%), frequency of use (25%), pain of alternatives (20%), market size (15%), and SEO opportunity (10%).
+
+General prioritization principles:
 
 1. **High search volume + low competition** — Industries where people are actively searching for AI solutions but few purpose-built tools exist
 2. **High willingness to pay** — Professional roles where $12/month is trivial compared to the value delivered
