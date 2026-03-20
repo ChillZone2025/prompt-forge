@@ -179,7 +179,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | Category | Count |
 |----------|-------|
 | Industries | 41 (10 Pro-only) |
-| Total agents | 239 |
+| Total agents | 251 |
 | Agents with fixedPrompt | 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer) |
 | Starter prompts | 24 |
 | Starter categories | 4 (Work, Writing, Learning, Life) |
@@ -240,7 +240,10 @@ vet_billing, vet_records, vet_triage, agent_arch, tool_builder,
 eval_agent, multi_orch, soul_writer, memory_arch, skill_builder,
 openclaw_deploy, agent_sec, agent_test, osint_planner, digi_footprint,
 threat_intel, cred_exposure, domain_recon, darkweb_mon, socmedia_intel,
-corp_dd, disinfo_analyst, geoloc_intel
+corp_dd, disinfo_analyst, geoloc_intel, fpa_analyst, ip_reviewer,
+employee_rel, onboard_flow, deposit_ops, grc_analyst, workshop_facil,
+contingent_mgmt, ecomm_email, ehs_agent, freight_audit, renew_finance,
+ngo_grant_writer
 ```
 
 ## Staging Schema for New Content

@@ -2,12 +2,12 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
-  description: 'Generate deployment-ready AI agent system prompts in one click. 239 professional archetypes across 41 industries. Free to start.',
+  description: 'Generate deployment-ready AI agent system prompts in one click. 251 professional archetypes across 41 industries. Free to start.',
 }
 
 export default function Home() {
   // UPDATE THESE AFTER EVERY MAJOR INTEGRATION
-  const TOTAL_AGENTS = 239
+  const TOTAL_AGENTS = 251
   const TOTAL_INDUSTRIES = 41
   const FREE_INDUSTRIES = 31
   const PRO_INDUSTRIES = 10

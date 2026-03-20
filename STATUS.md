@@ -4,7 +4,7 @@
 
 ## Live Platform Stats
 
-- **Total agents:** 239
+- **Total agents:** 251
 - **Total industries:** 41 (10 Pro-only)
 - **Total starter prompts:** 24
 - **Starter categories:** 4 (Work, Writing, Learning, Life)
@@ -31,32 +31,32 @@
 | Marketing & Growth | 6 | Live |
 | Accounting & Tax | 6 | Live |
 | Insurance | 6 | Live |
-| Finance | 5 | Live |
-| Legal & Compliance | 5 | Live |
-| HR & People Ops | 5 | Live |
+| Finance | 6 | Live |
+| Legal & Compliance | 6 | Live |
+| HR & People Ops | 6 | Live |
 | Architecture & Engineering | 5 | Live (Pro-only) |
-| Consulting & Strategy | 5 | Live (Pro-only) |
+| Consulting & Strategy | 6 | Live (Pro-only) |
 | Executive & Leadership | 5 | Live (Pro-only) |
 | Hospitality & Events | 5 | Live |
-| Logistics & Supply Chain | 5 | Live |
+| Logistics & Supply Chain | 6 | Live |
 | Agriculture & Farming | 5 | Live |
 | Automotive | 5 | Live |
 | Aviation & Aerospace | 5 | Live (Pro-only) |
-| Banking & Lending | 5 | Live (Pro-only) |
+| Banking & Lending | 6 | Live (Pro-only) |
 | Construction & Trades | 5 | Live |
-| Cybersecurity | 5 | Live (Pro-only) |
+| Cybersecurity | 6 | Live (Pro-only) |
 | Dental & Optometry | 5 | Live |
-| E-commerce & DTC | 5 | Live |
-| Energy & Utilities | 5 | Live |
+| E-commerce & DTC | 6 | Live |
+| Energy & Utilities | 6 | Live |
 | Fitness & Wellness | 5 | Live |
 | Freelancers & Solopreneurs | 5 | Live |
-| Manufacturing | 5 | Live |
+| Manufacturing | 6 | Live |
 | Media & Publishing | 5 | Live |
 | Nonprofit & Government | 5 | Live |
 | Pharma & Biotech | 5 | Live (Pro-only) |
 | Property Management | 5 | Live |
-| Recruitment & Staffing | 5 | Live |
-| SaaS & Product | 5 | Live (Pro-only) |
+| Recruitment & Staffing | 6 | Live |
+| SaaS & Product | 6 | Live (Pro-only) |
 | Sports & Athletics | 5 | Live |
 | Veterinary | 5 | Live |
 | AI Agent Development | 10 | Live (Pro-only) |
@@ -64,7 +64,7 @@
 
 ## What's Currently Staged (content/staging/)
 
-Nothing — all staging cleared as of 2026-03-20.
+12 gap-fill agents in `content/staging/agents/` — integrated, pending staging cleanup.
 
 ## What's In the Proposal Queue (content/proposals/)
 

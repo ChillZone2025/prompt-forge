@@ -44,6 +44,14 @@ No active tasks.
 - **Completed:** 2026-03-20
 - **Notes:** 10 agents integrated into PromptForge.js as first Pro-only industry (expanded from 7 staged to 10 live). Targets Claude Code, CrewAI, LangGraph users. Industry weighted score: 9.25.
 
+### TASK-004: 12 gap-fill agents (push total to 251)
+- **Status:** deployed
+- **Assigned:** Prompt Agent (staged) / Forger (integrated)
+- **Priority:** high
+- **Created:** 2026-03-20
+- **Completed:** 2026-03-20
+- **Notes:** 12 agents integrated into PromptForge.js, one per industry — filling 12 industries from 5 to 6 agents each. Also fixed pre-existing `grant_writer` duplicate ID (Nonprofit copy renamed to `ngo_grant_writer`). All IDs verified unique. Avg weighted score: 8.00.
+
 ### TASK-001: 20 new industries (100 agents)
 - **Status:** deployed
 - **Assigned:** Prompt Agent (staged) / Forger (integrated)

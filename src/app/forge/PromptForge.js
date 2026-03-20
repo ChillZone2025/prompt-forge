@@ -72,6 +72,7 @@ The final SOP must include:
     { id: 'audit_comp',  icon: '🔍', name: 'Audit & Compliance',    desc: 'Fraud monitoring, regulatory drift',        color: '#c44d4d' },
     { id: 'credit_risk', icon: '📈', name: 'Credit Risk Underwriter',desc: 'Automated scoring, loan analysis',          color: '#4db88c' },
     { id: 'tax_agent',   icon: '🧾', name: 'Tax Strategy Agent',    desc: 'Real-time tax tracking, automated filing',  color: '#d4834d' },
+    { id: 'fpa_analyst', icon: '📉', name: 'FP&A Analyst',          desc: 'Budget variance, rolling forecasts, board decks', color: '#4daed4', isNew: true },
   ],
   'Comms & Sales': [
     { id: 'sdr',         icon: '📣', name: 'Autonomous SDR',        desc: 'Prospecting, outreach, lead qualification', color: '#e8913a' },
@@ -203,6 +204,7 @@ STEP 5 — SUMMARY: End with a brief recap of the key concept and one study tip 
     { id: 'policy_writer',    icon: '📝', name: 'Policy Writer',            desc: 'Handbooks, privacy policies, internal procedures',       color: '#9b7fd4', isNew: true },
     { id: 'reg_nav',          icon: '🧭', name: 'Regulatory Navigator',     desc: 'Licensing, filing deadlines, industry regulations',      color: '#4d8cd4', isNew: true },
     { id: 'dispute_res',      icon: '⚖', name: 'Dispute Resolution Agent', desc: 'Demand letters, mediation prep, escalation paths',       color: '#d4a84d', isNew: true },
+    { id: 'ip_reviewer',     icon: '🔏', name: 'IP Review Agent',           desc: 'Patent search, trademark filings, infringement',       color: '#9b7fd4', isNew: true },
   ],
   'Real Estate': [
     { id: 'listing_gen',  icon: '🏡', name: 'Listing Generator',    desc: 'Property descriptions, MLS optimization, photo captions',  color: '#e8913a', isNew: true, fixedPrompt: `You are a Real Estate Listing Copy Specialist. Your goal is to generate MLS-ready property descriptions that attract qualified buyers, rank well in search, and accurately represent the property.
@@ -302,6 +304,7 @@ IMPORTANT: Focus on evidence-based evaluation. Flag any area where unconscious b
     { id: 'onboard_agent',  icon: '🚀', name: 'Onboarding Agent',     desc: 'New hire workflows, checklist generation, 30-60-90 plans',color: '#4daed4', isNew: true },
     { id: 'comp_analyst',   icon: '💰', name: 'Compensation Analyst', desc: 'Salary benchmarking, equity modeling, offer structuring',  color: '#d4a84d', isNew: true },
     { id: 'perf_mgmt',      icon: '📋', name: 'Performance Manager',  desc: 'Review cycles, goal tracking, feedback frameworks',       color: '#c46896', isNew: true },
+    { id: 'employee_rel',   icon: '🤲', name: 'Employee Relations Agent', desc: 'Investigations, grievance docs, PIP drafting',          color: '#d4834d', isNew: true },
   ],
   'Accounting & Tax': [
     { id: 'bookkeeper',    icon: '📒', name: 'AI Bookkeeper',      desc: 'Transaction categorization, reconciliation, cleanup',  color: '#4db88c', isNew: true },
@@ -441,6 +444,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
 ## ACTIVATION PHRASE
 "I need to write a proposal for a consulting engagement. Let's start."` },
     { id: 'strat_deck',     icon: '📊', name: 'Strategy Deck Builder',  desc: 'Frameworks, slide structure, executive narratives',   color: '#9b7fd4', isNew: true },
+    { id: 'workshop_facil', icon: '🎯', name: 'Workshop Facilitator',  desc: 'Agenda design, breakout exercises, Miro boards',    color: '#4db88c', isNew: true },
   ],
   'Executive & Leadership': [
     { id: 'exec_brief',    icon: '⚡', name: 'Executive Briefing Agent', desc: 'One-pagers, situation summaries, talking points',    color: '#d4a84d', isNew: true },
@@ -462,6 +466,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'carrier_nego',  icon: '🤝', name: 'Carrier Negotiation Agent', desc: 'Rate benchmarking, contract terms, lane analysis',   color: '#e8913a', isNew: true },
     { id: 'customs_comp',  icon: '🌐', name: 'Customs & Trade Agent',     desc: 'HS codes, tariff classification, trade docs',        color: '#c44d4d', isNew: true },
     { id: 'demand_plan',   icon: '🔮', name: 'Demand Planning Agent',     desc: 'Forecast modeling, seasonality, SKU analysis',       color: '#4d8cd4', isNew: true },
+    { id: 'freight_audit', icon: '🧾', name: 'Freight Audit Agent',      desc: 'Rate verification, invoice reconciliation, claims', color: '#d4834d', isNew: true },
   ],
   'Agriculture & Farming': [
     { id: 'ag_compliance', icon: '📋', name: 'Ag Compliance Agent', desc: 'USDA reporting, organic certification, GAP audits', color: '#d4834d', isNew: true },
@@ -490,6 +495,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'kyc_agent', icon: '🔐', name: 'KYC/AML Agent', desc: 'Identity verification, risk profiling, SAR draf', color: '#c44d4d', isNew: true },
     { id: 'loan_orig', icon: '🏦', name: 'Loan Origination Agent', desc: 'Application review, DTI analysis, disclosure prep', color: '#4db88c', isNew: true },
     { id: 'portfolio_mgr', icon: '📈', name: 'Portfolio Manager Agent', desc: 'Asset allocation, rebalancing, performance attr', color: '#4d8cd4', isNew: true },
+    { id: 'deposit_ops',  icon: '🏧', name: 'Deposit Operations Agent', desc: 'Reg CC holds, exception processing, account QC', color: '#9b7fd4', isNew: true },
   ],
   'Construction & Trades': [
     { id: 'bid_est', icon: '🏗', name: 'Bid Estimator', desc: 'Material takeoffs, labor costing, markup strategy', color: '#d4a84d', isNew: true },
@@ -504,6 +510,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'soc_analyst', icon: '📡', name: 'SOC Analyst Agent', desc: 'SIEM triage, alert correlation, MITRE ATT&CK', color: '#4d8cd4', isNew: true },
     { id: 'threat_model', icon: '🎯', name: 'Threat Modeling Agent', desc: 'STRIDE analysis, attack surfaces, risk scoring', color: '#c44d4d', isNew: true },
     { id: 'vuln_mgmt', icon: '🔓', name: 'Vulnerability Manager', desc: 'CVE prioritization, CVSS scoring, patch cycles', color: '#4daed4', isNew: true },
+    { id: 'grc_analyst', icon: '📋', name: 'GRC Analyst',          desc: 'Risk registers, NIST CSF mapping, audit evidence', color: '#d4834d', isNew: true },
   ],
   'Dental & Optometry': [
     { id: 'dental_treatment', icon: '🦷', name: 'Treatment Plan Agent', desc: 'Procedure sequencing, insurance coding, patient', color: '#4db88c', isNew: true },
@@ -518,6 +525,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'pricing_intel', icon: '💲', name: 'Pricing Intelligence Agent', desc: 'Competitor monitoring, margin analysis, dynamic', color: '#d4a84d', isNew: true },
     { id: 'product_desc', icon: '✏', name: 'Product Description Agent', desc: 'Feature-benefit copy, brand voice, A/B variants', color: '#9b7fd4', isNew: true },
     { id: 'review_mgmt', icon: '⭐', name: 'Review Management Agent', desc: 'Response templates, sentiment analysis, UGC str', color: '#4db88c', isNew: true },
+    { id: 'ecomm_email', icon: '📧', name: 'Email Marketing Agent',      desc: 'Klaviyo flows, segmentation, lifecycle campaigns', color: '#d4834d', isNew: true },
   ],
   'Energy & Utilities': [
     { id: 'energy_audit', icon: '🔋', name: 'Energy Audit Agent', desc: 'Consumption analysis, retrofit ROI, ASHRAE stan', color: '#4db88c', isNew: true },
@@ -525,6 +533,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'grid_ops', icon: '⚡', name: 'Grid Operations Agent', desc: 'Load forecasting, outage management, SCADA moni', color: '#4daed4', isNew: true },
     { id: 'renew_dev', icon: '🌱', name: 'Renewable Development Agent', desc: 'PPA negotiation, interconnection apps, site ass', color: '#d4a84d', isNew: true },
     { id: 'util_reg', icon: '📜', name: 'Utility Regulatory Agent', desc: 'Rate case filings, FERC compliance, tariff anal', color: '#d4834d', isNew: true },
+    { id: 'renew_finance', icon: '💹', name: 'Renewable Finance Agent', desc: 'PPA modeling, ITC/PTC analysis, project finance', color: '#4d8cd4', isNew: true },
   ],
   'Fitness & Wellness': [
     { id: 'class_sched', icon: '📅', name: 'Class Schedule Agent', desc: 'Time slot optimization, instructor allocation', color: '#e8913a', isNew: true },
@@ -546,6 +555,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'proc_agent', icon: '📦', name: 'Procurement Agent', desc: 'RFQ drafting, vendor scoring, contract negotiation', color: '#e8913a', isNew: true },
     { id: 'prod_sched', icon: '🏭', name: 'Production Scheduler', desc: 'MRP planning, capacity balancing, downtime sche', color: '#4daed4', isNew: true },
     { id: 'quality_ctrl', icon: '🔧', name: 'Quality Control Agent', desc: 'Six Sigma, SPC charts, defect root cause analysis', color: '#c44d4d', isNew: true },
+    { id: 'ehs_agent',   icon: '🦺', name: 'EHS Compliance Agent',     desc: 'ISO 14001, OSHA recordkeeping, incident reports',  color: '#d4834d', isNew: true },
   ],
   'Media & Publishing': [
     { id: 'audience_dev', icon: '📊', name: 'Audience Development Agent', desc: 'Growth tactics, newsletter optimization, paywal', color: '#4db88c', isNew: true },
@@ -556,7 +566,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
   ],
   'Nonprofit & Government': [
     { id: 'constituent_svc', icon: '📬', name: 'Constituent Service Agent', desc: 'Case management, response templates, escalation', color: '#4d8cd4', isNew: true },
-    { id: 'grant_writer', icon: '✍', name: 'Grant Writer Agent', desc: 'LOI drafting, narrative structure, budget justi', color: '#9b7fd4', isNew: true },
+    { id: 'ngo_grant_writer', icon: '✍', name: 'Grant Writer Agent', desc: 'LOI drafting, narrative structure, budget justi', color: '#9b7fd4', isNew: true },
     { id: 'impact_report', icon: '📊', name: 'Impact Report Generator', desc: 'Logic models, outcome metrics, donor storytelling', color: '#4db88c', isNew: true },
     { id: 'policy_analyst', icon: '📜', name: 'Policy Analyst Agent', desc: 'Legislative tracking, regulatory impact, public', color: '#d4834d', isNew: true },
     { id: 'volunteer_coord', icon: '👥', name: 'Volunteer Coordinator', desc: 'Shift scheduling, onboarding, recognition programs', color: '#e8913a', isNew: true },
@@ -580,7 +590,8 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'job_desc', icon: '📄', name: 'Job Description Writer', desc: 'Role scoping, inclusive language, SEO-optimized', color: '#4d8cd4', isNew: true },
     { id: 'offer_letter', icon: '✉', name: 'Offer Letter Agent', desc: 'Comp packaging, equity terms, closing language', color: '#d4a84d', isNew: true },
     { id: 'recruit_pipe', icon: '📈', name: 'Recruiting Pipeline Agent', desc: 'Pipeline metrics, candidate scoring, SLA tracking', color: '#4db88c', isNew: true },
-    { id: 'source_agent', icon: '🎣', name: 'Sourcing Agent', desc: 'Boolean search, talent mapping, outreach sequences', color: '#e8913a', isNew: true },
+    { id: 'source_agent',    icon: '🎣', name: 'Sourcing Agent',            desc: 'Boolean search, talent mapping, outreach sequences', color: '#e8913a', isNew: true },
+    { id: 'contingent_mgmt', icon: '📑', name: 'Contingent Workforce Agent', desc: 'Contractor compliance, rate cards, SOW drafting',    color: '#d4834d', isNew: true },
   ],
   'SaaS & Product': [
     { id: 'churn_analyst', icon: '📉', name: 'Churn Analyst', desc: 'Cohort analysis, retention modeling, win-back f', color: '#c44d4d', isNew: true },
@@ -588,6 +599,7 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'prd_writer', icon: '📋', name: 'PRD Writer', desc: 'User stories, acceptance criteria, spec drafting', color: '#4d8cd4', isNew: true },
     { id: 'release_notes', icon: '📝', name: 'Release Notes Writer', desc: 'Changelogs, feature announcements, migration gu', color: '#4db88c', isNew: true },
     { id: 'user_research', icon: '🔬', name: 'User Research Agent', desc: 'Interview scripts, survey design, insight synth', color: '#e8913a', isNew: true },
+    { id: 'onboard_flow', icon: '🚦', name: 'Onboarding Flow Designer', desc: 'Activation metrics, user journeys, tooltip copy', color: '#d4a84d', isNew: true },
   ],
   'Sports & Athletics': [
     { id: 'athlete_perf', icon: '📊', name: 'Athlete Performance Agent', desc: 'Training load, recovery protocols, biomechanics', color: '#4db88c', isNew: true },
