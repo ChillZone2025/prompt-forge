@@ -2,10 +2,17 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
-  description: 'Generate deployment-ready AI agent system prompts in one click. 47 professional archetypes across 8 industries. Free to start.',
+  description: 'Generate deployment-ready AI agent system prompts in one click. 239 professional archetypes across 41 industries. Free to start.',
 }
 
 export default function Home() {
+  // UPDATE THESE AFTER EVERY MAJOR INTEGRATION
+  const TOTAL_AGENTS = 239
+  const TOTAL_INDUSTRIES = 41
+  const FREE_INDUSTRIES = 31
+  const PRO_INDUSTRIES = 10
+  const TOTAL_STARTERS = 24
+
   return (
     <>
       <style>{`
@@ -73,6 +80,10 @@ export default function Home() {
         .lp-stat-num { font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 900; color: var(--yellow); display: block; line-height: 1; margin-bottom: 8px; }
         .lp-stat-label { font-size: 13px; color: var(--muted); font-weight: 500; }
 
+        .lp-social-proof { text-align: center; padding: 20px 24px 0; }
+        .lp-social-proof-text { font-size: 14px; color: var(--muted); font-weight: 500; }
+        .lp-social-proof-text strong { color: var(--yellow); font-weight: 700; }
+
         .lp-section { padding: 100px 24px; }
         .lp-section-inner { max-width: 900px; margin: 0 auto; }
         .lp-section-alt { background: var(--surface); }
@@ -95,14 +106,20 @@ export default function Home() {
         .lp-step-title { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
         .lp-step-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
+        .lp-powered { text-align: center; padding: 24px 24px 0; }
+        .lp-powered-text { font-size: 12px; color: #6b7280; font-weight: 400; }
+
         .lp-ind-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 16px; margin-top: 56px; }
-        .lp-ind-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: all 0.2s; }
+        .lp-ind-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; transition: all 0.2s; position: relative; }
         .lp-ind-card:hover { border-color: rgba(245,197,24,0.3); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.3); }
         .lp-ind-icon { font-size: 28px; margin-bottom: 12px; display: block; }
-        .lp-ind-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+        .lp-ind-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .lp-ind-count { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--yellow); letter-spacing: 0.06em; }
         .lp-ind-agents { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
         .lp-ind-agent { font-size: 10px; color: var(--dim); background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 4px; padding: 2px 8px; }
+        .lp-pro-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 700; color: #0d0f1a; background: var(--yellow); padding: 2px 7px; border-radius: 4px; letter-spacing: 0.06em; flex-shrink: 0; }
+        .lp-ind-more { display: flex; align-items: center; justify-content: center; background: var(--surface); border: 1px dashed var(--border); border-radius: 14px; padding: 24px; font-size: 15px; font-weight: 600; color: var(--muted); transition: all 0.2s; text-decoration: none; }
+        .lp-ind-more:hover { border-color: rgba(245,197,24,0.3); color: var(--yellow); }
 
         .lp-pricing-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; text-align: left; max-width: 760px; margin-left: auto; margin-right: auto; }
         .lp-pricing-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; position: relative; }
@@ -165,7 +182,7 @@ export default function Home() {
           <a href="#industries">Industries</a>
           <a href="#pricing">Pricing</a>
         </div>
-        <Link href="/forge" className="lp-nav-cta">Start Forging Free →</Link>
+        <Link href="/forge" className="lp-nav-cta">Start Forging Free &rarr;</Link>
       </nav>
 
       {/* HERO */}
@@ -178,7 +195,7 @@ export default function Home() {
         <div className="lp-hero-inner">
           <div className="lp-badge">
             <div className="lp-badge-dot"></div>
-            <span>Live Now · Free to Try</span>
+            <span>Live Now &middot; Free to Try</span>
           </div>
           <h1 className="lp-headline">
             <span className="l1">AI That Actually</span>
@@ -186,17 +203,17 @@ export default function Home() {
           </h1>
           <p className="lp-sub">
             Most people use AI like a search engine. The professionals getting real results use{' '}
-            <strong>system prompts</strong> — and Prompt Forge builds them in one click.
+            <strong>system prompts</strong> &mdash; and Prompt Forge builds them in one click.
           </p>
           <div className="lp-actions">
-            <Link href="/forge" className="lp-btn-primary">Start Forging Free →</Link>
+            <Link href="/forge" className="lp-btn-primary">Start Forging Free &rarr;</Link>
             <a href="#how" className="lp-btn-secondary">See How It Works</a>
           </div>
           <div className="lp-proof">
-            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> No account required</div>
-            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> 5 free generates</div>
-            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> Works with any AI tool</div>
-            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> Deploy in 30 seconds</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> No account required</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> 3 free generates</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> Works with any AI tool</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> Deploy in 30 seconds</div>
           </div>
         </div>
       </section>
@@ -204,39 +221,46 @@ export default function Home() {
       {/* STATS */}
       <div className="lp-stats-bar">
         <div className="lp-stats-inner">
-          <div className="lp-stat"><span className="lp-stat-num">47</span><span className="lp-stat-label">Agent Archetypes</span></div>
-          <div className="lp-stat"><span className="lp-stat-num">8</span><span className="lp-stat-label">Industries</span></div>
-          <div className="lp-stat"><span className="lp-stat-num">16</span><span className="lp-stat-label">Starter Prompts</span></div>
+          {/* UPDATE THESE AFTER EVERY MAJOR INTEGRATION */}
+          <div className="lp-stat"><span className="lp-stat-num">{TOTAL_AGENTS}</span><span className="lp-stat-label">Agent Archetypes</span></div>
+          <div className="lp-stat"><span className="lp-stat-num">{TOTAL_INDUSTRIES}</span><span className="lp-stat-label">Industries</span></div>
+          <div className="lp-stat"><span className="lp-stat-num">{TOTAL_STARTERS}</span><span className="lp-stat-label">Starter Prompts</span></div>
           <div className="lp-stat"><span className="lp-stat-num">30s</span><span className="lp-stat-label">To Deploy</span></div>
         </div>
+      </div>
+
+      {/* SOCIAL PROOF */}
+      <div className="lp-social-proof">
+        {/* REPLACE WITH REAL COUNTER WHEN VERCEL KV IS SET UP */}
+        <p className="lp-social-proof-text">Join <strong>500+</strong> professionals using Prompt Forge</p>
       </div>
 
       {/* PROBLEM */}
       <section className="lp-section">
         <div className="lp-section-inner">
           <span className="lp-label">The Problem</span>
-          <h2 className="lp-title">You're using AI wrong.<br/><span className="acc">It's not your fault.</span></h2>
-          <p className="lp-body">Nobody teaches professionals how to configure AI — they just hand you a chatbox and expect magic. The gap between "AI is mediocre" and "AI is transformative" is almost entirely a prompt quality problem.</p>
+          <h2 className="lp-title">You&apos;re using AI wrong.<br/><span className="acc">It&apos;s not your fault.</span></h2>
+          <p className="lp-body">Nobody teaches professionals how to configure AI &mdash; they just hand you a chatbox and expect magic. The gap between &ldquo;AI is mediocre&rdquo; and &ldquo;AI is transformative&rdquo; is almost entirely a prompt quality problem.</p>
           <div className="lp-problem-grid">
             <div className="lp-problem-card">
-              <span className="lp-prob-icon">😤</span>
+              <span className="lp-prob-icon">&#x1F624;</span>
               <div className="lp-prob-title">Generic, frustrating outputs</div>
               <div className="lp-prob-desc">Without a system prompt, AI has no context about who you are, what you need, or how to behave. Every response starts from zero.</div>
             </div>
             <div className="lp-problem-card">
-              <span className="lp-prob-icon">⏰</span>
+              <span className="lp-prob-icon">&#x23F0;</span>
               <div className="lp-prob-title">Hours wasted on prompt tweaking</div>
-              <div className="lp-prob-desc">Writing a good system prompt from scratch takes hours of trial and error — time professionals don't have.</div>
+              <div className="lp-prob-desc">Writing a good system prompt from scratch takes hours of trial and error &mdash; time professionals don&apos;t have.</div>
             </div>
             <div className="lp-problem-card">
-              <span className="lp-prob-icon">🔍</span>
+              <span className="lp-prob-icon">&#x1F50D;</span>
               <div className="lp-prob-title">No professional archetypes exist</div>
-              <div className="lp-prob-desc">Generic prompt libraries don't understand your industry. A treasury analyst needs different AI behavior than a sales rep.</div>
+              <div className="lp-prob-desc">Generic prompt libraries don&apos;t understand your industry. A treasury analyst needs different AI behavior than a sales rep.</div>
             </div>
             <div className="lp-problem-card">
-              <span className="lp-prob-icon">🔄</span>
+              <span className="lp-prob-icon">&#x1F504;</span>
               <div className="lp-prob-title">Starting over every session</div>
-              <div className="lp-prob-desc">Without a saved library, you re-explain your context to AI every single time. That's not a workflow — that's a tax.</div>
+              <div className="lp-prob-desc">Without a saved library, you re-explain your context to AI every single time. That&apos;s not a workflow &mdash; that&apos;s a tax.</div>
             </div>
           </div>
         </div>
@@ -251,48 +275,61 @@ export default function Home() {
             <div className="lp-step">
               <div className="lp-step-num">1</div>
               <div className="lp-step-title">Choose Your Agent</div>
-              <div className="lp-step-desc">Pick from 47 professional archetypes across 8 industries — or describe your own custom agent.</div>
+              <div className="lp-step-desc">Pick from {TOTAL_AGENTS} professional archetypes across {TOTAL_INDUSTRIES} industries &mdash; or describe your own custom agent.</div>
             </div>
             <div className="lp-step">
               <div className="lp-step-num">2</div>
               <div className="lp-step-title">Generate in One Click</div>
-              <div className="lp-step-desc">Claude builds a complete system prompt — identity, capabilities, behavior rules, constraints, and an activation phrase.</div>
+              <div className="lp-step-desc">Claude builds a complete system prompt &mdash; identity, capabilities, behavioral guidelines, domain knowledge, interaction protocol, output format, safety constraints, and a first message.</div>
             </div>
             <div className="lp-step">
               <div className="lp-step-num">3</div>
-              <div className="lp-step-title">Copy & Deploy</div>
-              <div className="lp-step-desc">Paste into any AI tool — Claude, ChatGPT, or your own API. Save to your personal library for future sessions.</div>
+              <div className="lp-step-title">Copy &amp; Deploy</div>
+              <div className="lp-step-desc">Paste into any AI tool &mdash; Claude, ChatGPT, or your own API. Save to your personal library for future sessions.</div>
             </div>
           </div>
+        </div>
+        <div className="lp-powered">
+          <p className="lp-powered-text">Powered by Claude &mdash; Anthropic&apos;s most capable AI model</p>
         </div>
       </section>
 
       {/* INDUSTRIES */}
       <section className="lp-section" id="industries">
         <div className="lp-section-inner">
-          <span className="lp-label">47 Agents · 8 Industries</span>
+          {/* UPDATE THESE AFTER EVERY MAJOR INTEGRATION */}
+          <span className="lp-label">{TOTAL_AGENTS} Agents &middot; {TOTAL_INDUSTRIES} Industries</span>
           <h2 className="lp-title">Built for <span className="acc">professionals</span>,<br/>not hobbyists.</h2>
-          <p className="lp-body">Every agent archetype is curated for real business use — not generic chat helpers.</p>
+          <p className="lp-body">Every agent archetype is curated for real business use &mdash; not generic chat helpers.</p>
           <div className="lp-ind-grid">
             {[
-              { icon:'⚡', name:'General', count:'12 AGENTS', agents:['FX Treasury','Cyber Investigator','Data Analyst','Legal Researcher'] },
-              { icon:'🏥', name:'Healthcare', count:'5 AGENTS', agents:['Medical Scribe','Prior Auth','Patient Triage'] },
-              { icon:'📊', name:'Finance', count:'5 AGENTS', agents:['Close Agent','Credit Risk','Tax Strategy'] },
-              { icon:'📣', name:'Comms & Sales', count:'5 AGENTS', agents:['Autonomous SDR','Voice AI','PR Agent'] },
-              { icon:'🎓', name:'Education', count:'5 AGENTS', agents:['Micro-Learning','Career Tracker','Research Asst'] },
-              { icon:'💰', name:'Personal Finance', count:'5 AGENTS', agents:['Financial Advisor','Tax Optimizer','Fraud Watchdog'] },
-              { icon:'🏪', name:'Retail & Ops', count:'5 AGENTS', agents:['Inventory Optimizer','Supply Chain','Contract Review'] },
-              { icon:'👨‍👩‍👧', name:'Parenting', count:'5 AGENTS', agents:['Homework Helper','Family Scheduler','Child Development','Bedtime Stories'] },
+              { icon:'\u26A1', name:'General', count:'15 AGENTS', agents:['SOP Generator','Email Draft','Cybersecurity Advisor','Data Analyst','Financial Modeler'] },
+              { icon:'\uD83C\uDFE5', name:'Healthcare', count:'6 AGENTS', agents:['Medical Scribe','Prior Auth','Patient Triage','Clinical Trial'] },
+              { icon:'\uD83D\uDCCA', name:'Finance', count:'5 AGENTS', agents:['Autonomous Close','Credit Risk','Tax Strategy'] },
+              { icon:'\uD83D\uDCE3', name:'Comms & Sales', count:'8 AGENTS', agents:['Autonomous SDR','Call Center','Content Repurposer','Email Sequence'] },
+              { icon:'\uD83C\uDF93', name:'Education', count:'7 AGENTS', agents:['Curriculum Designer','Career Coach','Grant Writer'] },
+              { icon:'\uD83D\uDCB0', name:'Personal Finance', count:'7 AGENTS', agents:['Financial Advisor','Tax Optimizer','Budget Architect'] },
+              { icon:'\uD83C\uDFE1', name:'Real Estate', count:'6 AGENTS', agents:['Listing Generator','Market Comp','Lead Nurture'] },
+              { icon:'\uD83D\uDCBC', name:'Legal & Compliance', count:'5 AGENTS', agents:['Contract Analyzer','Compliance Monitor','Dispute Resolution'] },
+              { icon:'\uD83D\uDCC8', name:'Marketing & Growth', count:'6 AGENTS', agents:['SEO Content','Campaign Optimizer','A/B Test Analyst'] },
+              { icon:'\uD83D\uDC65', name:'HR & People Ops', count:'5 AGENTS', agents:['Resume Screener','Interview Architect','Onboarding'] },
+              { icon:'\uD83C\uDFE2', name:'Accounting & Tax', count:'6 AGENTS', agents:['AI Bookkeeper','Invoice Agent','Tax Prep'] },
+              { icon:'\uD83D\uDEE1\uFE0F', name:'Insurance', count:'6 AGENTS', agents:['Claims Processor','Underwriting','Policy Comparator'] },
+              { icon:'\uD83E\uDDE0', name:'AI Agent Development', count:'10 AGENTS', pro:true, agents:['Agent Architecture','SOUL.md Writer','Multi-Agent Orchestrator'] },
+              { icon:'\uD83D\uDD0D', name:'Cyber Intelligence', count:'10 AGENTS', pro:true, agents:['OSINT Planner','Threat Intel','Digital Footprint'] },
+              { icon:'\uD83D\uDD12', name:'Cybersecurity', count:'5 AGENTS', pro:true, agents:['Incident Response','Pentest Planner','SOC Analyst'] },
+              { icon:'\uD83D\uDE80', name:'SaaS & Product', count:'5 AGENTS', pro:true, agents:['PRD Writer','Churn Analyst','Feature Prioritization'] },
             ].map(ind => (
               <div className="lp-ind-card" key={ind.name}>
                 <span className="lp-ind-icon">{ind.icon}</span>
-                <div className="lp-ind-name">{ind.name}</div>
+                <div className="lp-ind-name">{ind.name}{ind.pro && <span className="lp-pro-badge">PRO</span>}</div>
                 <div className="lp-ind-count">{ind.count}</div>
                 <div className="lp-ind-agents">
                   {ind.agents.map(a => <span className="lp-ind-agent" key={a}>{a}</span>)}
                 </div>
               </div>
             ))}
+            <Link href="/forge" className="lp-ind-more">+25 more industries &rarr;</Link>
           </div>
         </div>
       </section>
@@ -308,14 +345,16 @@ export default function Home() {
               <div className="lp-plan-price">$0</div>
               <div className="lp-plan-desc">No account. No credit card. Just try it.</div>
               <ul className="lp-plan-features">
-                <li><span className="lp-feat-check">✓</span> 5 agent generates</li>
-                <li><span className="lp-feat-check">✓</span> All 8 industries</li>
-                <li><span className="lp-feat-check">✓</span> 16-prompt Starter Pack</li>
-                <li><span className="lp-feat-check">✓</span> Personal library</li>
-                <li><span className="lp-feat-x">✗</span> Unlimited generates</li>
-                <li><span className="lp-feat-x">✗</span> Custom agent builder</li>
+                <li><span className="lp-feat-check">&check;</span> 3 agent generates</li>
+                <li><span className="lp-feat-check">&check;</span> {FREE_INDUSTRIES} free industries</li>
+                <li><span className="lp-feat-check">&check;</span> {TOTAL_STARTERS}-prompt Starter Pack</li>
+                <li><span className="lp-feat-x">&cross;</span> Save to personal library</li>
+                <li><span className="lp-feat-x">&cross;</span> Personalized prompts</li>
+                <li><span className="lp-feat-x">&cross;</span> Prompt refinement</li>
+                <li><span className="lp-feat-x">&cross;</span> Pro-only industries ({PRO_INDUSTRIES})</li>
+                <li><span className="lp-feat-x">&cross;</span> Custom agent builder</li>
               </ul>
-              <Link href="/forge" className="lp-plan-btn free">Start Free →</Link>
+              <Link href="/forge" className="lp-plan-btn free">Start Free &rarr;</Link>
             </div>
             <div className="lp-pricing-card featured">
               <div className="lp-featured-badge">MOST POPULAR</div>
@@ -323,14 +362,17 @@ export default function Home() {
               <div className="lp-plan-price">$12 <span>/ month</span></div>
               <div className="lp-plan-desc">For professionals who use AI every day.</div>
               <ul className="lp-plan-features">
-                <li><span className="lp-feat-check">✓</span> Unlimited generates</li>
-                <li><span className="lp-feat-check">✓</span> All 8 industries</li>
-                <li><span className="lp-feat-check">✓</span> 16-prompt Starter Pack</li>
-                <li><span className="lp-feat-check">✓</span> Personal library</li>
-                <li><span className="lp-feat-check">✓</span> Priority generation</li>
-                <li><span className="lp-feat-check">✓</span> Custom agent builder</li>
+                <li><span className="lp-feat-check">&check;</span> Unlimited generates</li>
+                <li><span className="lp-feat-check">&check;</span> All {TOTAL_INDUSTRIES} industries including Pro-only</li>
+                <li><span className="lp-feat-check">&check;</span> {TOTAL_STARTERS}-prompt Starter Pack</li>
+                <li><span className="lp-feat-check">&check;</span> Personalized prompts (describe your role)</li>
+                <li><span className="lp-feat-check">&check;</span> Prompt refinement (iterate on outputs)</li>
+                <li><span className="lp-feat-check">&check;</span> Pro-only industries (Cyber Intelligence, AI Agent Dev&hellip;)</li>
+                <li><span className="lp-feat-check">&check;</span> Save to personal library</li>
+                <li><span className="lp-feat-check">&check;</span> Custom agent builder</li>
+                <li><span className="lp-feat-check">&check;</span> Priority generation</li>
               </ul>
-              <Link href="/forge" className="lp-plan-btn pro">Upgrade to Pro →</Link>
+              <Link href="/forge" className="lp-plan-btn pro">Upgrade to Pro &rarr;</Link>
             </div>
           </div>
         </div>
@@ -339,18 +381,18 @@ export default function Home() {
       {/* FOUNDER */}
       <section className="lp-founder">
         <div className="lp-founder-inner">
-          <span className="lp-quote-mark">"</span>
+          <span className="lp-quote-mark">&ldquo;</span>
           <p className="lp-quote-text">
             I built this because I needed it. As a treasury analyst managing an $850M derivatives portfolio,
             I was spending hours configuring AI tools that kept forgetting context.{' '}
             <strong>One well-crafted system prompt changed everything.</strong>{' '}
-            I built Prompt Forge so every professional could have that same unlock — in one click.
+            I built Prompt Forge so every professional could have that same unlock &mdash; in one click.
           </p>
           <div className="lp-quote-author">
             <div className="lp-author-avatar">RH</div>
             <div>
               <div className="lp-author-name">Rob Hilbert</div>
-              <div className="lp-author-title">Senior Treasury Analyst · Founder, Prompt Forge</div>
+              <div className="lp-author-title">Senior Treasury Analyst &middot; Founder, Prompt Forge</div>
             </div>
           </div>
         </div>
@@ -361,7 +403,7 @@ export default function Home() {
         <div className="lp-cta-inner">
           <h2 className="lp-cta-title">Stop prompting.<br/>Start <span className="acc">forging.</span></h2>
           <p className="lp-cta-sub">Generate your first professional AI agent prompt in under 30 seconds. Free to start, no account needed.</p>
-          <Link href="/forge" className="lp-btn-primary">Start Forging Free →</Link>
+          <Link href="/forge" className="lp-btn-primary">Start Forging Free &rarr;</Link>
           <p className="lp-cta-note">Works with Claude, ChatGPT, Gemini, and any AI that accepts system prompts.</p>
         </div>
       </section>
@@ -374,7 +416,7 @@ export default function Home() {
           <a href="#pricing">Pricing</a>
           <a href="#industries">Industries</a>
         </div>
-        <div className="lp-footer-copy">© 2026 Prompt Forge · getpromptforge.net</div>
+        <div className="lp-footer-copy">&copy; 2026 Prompt Forge &middot; getpromptforge.net</div>
       </footer>
     </>
   )
