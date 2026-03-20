@@ -70,7 +70,7 @@ Agents operate within guardrails and can publish content that meets quality stan
 - Modify payment logic, Stripe integration, or subscription verification
 - Change the `/api/checkout`, `/api/webhook`, or `/api/verify-subscription` routes
 - Alter CSS class names or layout structure without explicit approval
-- Remove or rename existing agents (only add)
+- Remove or rename existing agents without a strategic audit justification scored against the Revenue Optimization Framework in `competitive-intel.md`
 - Push breaking changes that affect the live site
 - Store secrets, API keys, or credentials in any file
 
