@@ -8,6 +8,8 @@ const LS_PRO = 'pf_pro'
 const LS_LIB = 'pf_library'
 const LS_SEEN = 'pf_seen'
 
+const PRO_INDUSTRIES = ['AI Agent Development']
+
 // ─── Walkthrough ─────────────────────────────────────────────────────────────
 const WALKTHROUGH = [
   { step: 1, icon: '⚒', title: 'Choose Your Industry', body: 'Select an industry from the top nav — General, Healthcare, Finance, and more. Each contains high-demand agent archetypes curated for that sector.' },
@@ -601,6 +603,18 @@ STEP 4 — REVIEW: After generating the draft, ask:
     { id: 'vet_records', icon: '🐾', name: 'Veterinary Records Agent', desc: 'SOAP notes, treatment plans, vaccination schedules', color: '#4db88c', isNew: true },
     { id: 'vet_triage', icon: '🚑', name: 'Veterinary Triage Agent', desc: 'Symptom assessment, urgency classification, ref', color: '#c44d4d', isNew: true },
   ],
+  'AI Agent Development': [
+    { id: 'agent_arch',      icon: '🧠', name: 'Agent Architecture Designer', desc: 'Multi-agent systems, tool use, orchestration',          color: '#9b7fd4', isNew: true },
+    { id: 'tool_builder',    icon: '🔧', name: 'Tool Use Designer',           desc: 'Function calling, MCP servers, tool schemas',          color: '#4daed4', isNew: true },
+    { id: 'eval_agent',      icon: '📊', name: 'Prompt Evaluation Agent',     desc: 'Eval frameworks, benchmarks, quality scoring',         color: '#4db88c', isNew: true },
+    { id: 'multi_orch',      icon: '🔀', name: 'Multi-Agent Orchestrator',    desc: 'Task queues, handoff protocols, shared state',         color: '#4daed4', isNew: true },
+    { id: 'soul_writer',     icon: '✨', name: 'SOUL.md Writer',              desc: 'Personality design, behavioral boundaries, tone',      color: '#f5c518', isNew: true },
+    { id: 'memory_arch',     icon: '💾', name: 'Agent Memory Architect',      desc: 'Context management, compaction, MEMORY.md design',     color: '#9b7fd4', isNew: true },
+    { id: 'skill_builder',   icon: '🛠', name: 'AgentSkill Builder',          desc: 'SKILL.md creation, frontmatter, tool integration',     color: '#4db88c', isNew: true },
+    { id: 'openclaw_deploy', icon: '🦞', name: 'OpenClaw Deployment Agent',   desc: 'SOUL.md, AGENTS.md, Gateway config, channel setup',    color: '#c44d4d', isNew: true },
+    { id: 'agent_sec',       icon: '🔒', name: 'Agent Security Auditor',      desc: 'Prompt injection, data exfiltration, permissions',     color: '#e8913a', isNew: true },
+    { id: 'agent_test',      icon: '🧪', name: 'Agent Testing Strategist',    desc: 'Scenario coverage, edge cases, regression testing',    color: '#4d8cd4', isNew: true },
+  ],
 }
 
 const INDUSTRY_TABS = Object.keys(INDUSTRIES)
@@ -865,6 +879,25 @@ const CSS = `
     border-bottom: 1px solid #1e2030; scrollbar-width: none;
   }
   .ind-nav::-webkit-scrollbar { display: none; }
+
+  .agent-card.pro-locked { position: relative; cursor: pointer; }
+  .agent-card.pro-locked .card-content { filter: blur(6px); pointer-events: none; user-select: none; }
+  .agent-card.pro-locked::after { display: none; }
+  .agent-card.pro-locked:hover { transform: none; border-color: rgba(245,197,24,0.15); }
+  .pro-overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: rgba(15,17,23,0.5); border-radius: 12px;
+    cursor: pointer; z-index: 2; transition: background 0.14s;
+  }
+  .pro-overlay:hover { background: rgba(15,17,23,0.4); }
+
+  .pro-tab-badge {
+    display: inline-block; background: #f5c518; color: #0f1117;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 1px 6px; border-radius: 3px;
+    margin-left: 6px; vertical-align: middle;
+  }
 
   @media (max-width: 640px) {
     .agent-card { padding: 20px 18px 42px; }
@@ -1266,7 +1299,7 @@ export default function PromptForge() {
             <div className="ind-nav" style={{ marginBottom: 28, marginTop: 0 }}>
               {INDUSTRY_TABS.map(ind => (
                 <button key={ind} className={`ind-tab ${industry === ind ? 'on' : ''}`} onClick={() => setIndustry(ind)}>
-                  {ind}
+                  {ind}{PRO_INDUSTRIES.includes(ind) && <span className="pro-tab-badge">PRO</span>}
                 </button>
               ))}
             </div>
@@ -1274,15 +1307,25 @@ export default function PromptForge() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
               {currentAgents.map((agent, i) => {
                 const locked = !isPro && i >= FREE_LIMIT && atLimit
+                const proLocked = !isPro && PRO_INDUSTRIES.includes(industry)
                 return (
-                  <div key={agent.id} className={`agent-card ${locked ? 'locked' : ''}`}
+                  <div key={agent.id}
+                    className={`agent-card ${locked ? 'locked' : ''} ${proLocked ? 'pro-locked' : ''}`}
                     style={{ '--ac': agent.color }}
-                    onClick={() => !locked && handleAgentClick(agent)}
+                    onClick={() => proLocked ? setModal('upgrade') : !locked && handleAgentClick(agent)}
                   >
-                    {agent.isNew && <span className="agent-new-badge">NEW</span>}
-                    <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
-                    <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', marginBottom: 6, lineHeight: 1.4 }}>{agent.name}</div>
-                    <div style={{ fontSize: 11, color: '#6b7280', lineHeight: 1.6 }}>{agent.desc}</div>
+                    {proLocked && (
+                      <div className="pro-overlay">
+                        <div style={{ fontSize: 24, marginBottom: 8 }}>🔒</div>
+                        <div style={{ fontSize: 12, fontWeight: 600, color: '#f5c518', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Pro Only</div>
+                      </div>
+                    )}
+                    <div className={proLocked ? 'card-content' : undefined}>
+                      {agent.isNew && <span className="agent-new-badge">NEW</span>}
+                      <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', marginBottom: 6, lineHeight: 1.4 }}>{agent.name}</div>
+                      <div style={{ fontSize: 11, color: '#6b7280', lineHeight: 1.6 }}>{agent.desc}</div>
+                    </div>
                   </div>
                 )
               })}
