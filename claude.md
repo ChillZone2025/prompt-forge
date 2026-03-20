@@ -21,6 +21,8 @@
 | `data-schema.md` | Current data structures, agent definitions, content schema for new additions |
 | `competitive-intel.md` | Market landscape, competitor analysis, strategic positioning, revenue targets |
 | `agent-roles.md` | Role definitions for Forger and Prompt Agent sessions |
+| `TASK_QUEUE.md` | Shared task board — agents claim, track, and complete tasks here |
+| `STATUS.md` | Live platform snapshot — agent counts, deployment log, staged content |
 
 ## Agent Mission
 
