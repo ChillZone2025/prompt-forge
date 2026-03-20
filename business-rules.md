@@ -148,6 +148,24 @@ New industries require:
 - Agent names that reflect real professional roles in that industry
 - Industry name should be 1-3 words, title case
 
+### Pro-Only Industries
+Some industries are restricted to Pro subscribers. These are high-value, specialized categories that serve as premium conversion drivers.
+
+**How Pro-only works for free users:**
+- The industry tab IS visible (free users can see it exists)
+- Agent cards appear **blurred** — names and descriptions barely visible
+- Clicking any blurred card triggers the upgrade modal
+- This creates maximum FOMO and drives conversions
+
+**When to make an industry Pro-only:**
+- The target audience is technical/professional and highly willing to pay
+- The agents serve a specialized niche where the value is immediately obvious
+- The content would be a strong reason to upgrade on its own
+
+**Current Pro-only industries:** `AI Agent Development`
+
+**Implementation:** Pro-only industries are listed in the `PRO_INDUSTRIES` constant in PromptForge.js. The Forger manages this list. Adding a new Pro-only industry requires Rob's approval.
+
 ### Proposed Industries for Expansion
 These are high-value targets based on AI adoption trends. Before committing to any new industry, score it against the **Revenue Optimization Framework** in `competitive-intel.md`. Industries that don't score well on willingness-to-pay and frequency-of-use should be deprioritized regardless of how "interesting" they are.
 
