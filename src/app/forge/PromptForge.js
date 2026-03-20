@@ -733,6 +733,8 @@ export default function PromptForge() {
   const [showWalkthrough, setShowWalkthrough] = useState(false)
   const [wStep, setWStep]         = useState(0)
   const [mounted, setMounted]     = useState(false)
+  const [contextAgent, setContextAgent] = useState(null)
+  const [userContext, setUserContext]   = useState('')
 
   useEffect(() => {
     setMounted(true)
@@ -804,8 +806,20 @@ export default function PromptForge() {
     try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
   }
 
-  const generate = async (agent) => {
+  const handleAgentClick = (agent) => {
     if (atLimit) { setModal('upgrade'); return }
+    // Fixed prompts skip context step entirely
+    if (agent.fixedPrompt) {
+      generate(agent)
+      return
+    }
+    setContextAgent(agent)
+    setUserContext('')
+  }
+
+  const generate = async (agent, context) => {
+    if (atLimit) { setModal('upgrade'); return }
+    setContextAgent(null)
     setSelected(agent)
     setPrompt('')
     setSaved(false)
@@ -822,10 +836,12 @@ export default function PromptForge() {
 
     setLoading(true)
     try {
+      const body = { agentName: agent.name, agentDesc: agent.desc }
+      if (context) body.userContext = context
       const res = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ agentName: agent.name, agentDesc: agent.desc }),
+        body: JSON.stringify(body),
       })
       const newUsage = usage + 1
       setUsage(newUsage)
@@ -1089,7 +1105,7 @@ export default function PromptForge() {
                 return (
                   <div key={agent.id} className={`agent-card ${locked ? 'locked' : ''}`}
                     style={{ '--ac': agent.color }}
-                    onClick={() => !locked && generate(agent)}
+                    onClick={() => !locked && handleAgentClick(agent)}
                   >
                     {agent.isNew && <span className="agent-new-badge">NEW</span>}
                     <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
@@ -1098,6 +1114,53 @@ export default function PromptForge() {
                   </div>
                 )
               })}
+            </div>
+          </div>
+        )}
+
+        {/* ══ CONTEXT PANEL ══ */}
+        {contextAgent && (
+          <div style={{
+            position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+            background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            zIndex: 1000, padding: 20,
+          }} onClick={e => { if (e.target === e.currentTarget) setContextAgent(null) }}
+             onKeyDown={e => { if (e.key === 'Escape') setContextAgent(null) }}>
+            <div style={{
+              background: '#1c1f30', border: '1px solid #2a2d42', borderRadius: 14,
+              padding: 28, maxWidth: 480, width: '100%',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
+                <span style={{ fontSize: 22 }}>{contextAgent.icon}</span>
+                <div>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 15, color: '#f0f2ff' }}>{contextAgent.name}</div>
+                  <div style={{ fontSize: 12, color: '#6b7280' }}>{contextAgent.desc}</div>
+                </div>
+              </div>
+              <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#9ca3af', marginBottom: 6 }}>
+                Describe your situation (optional)
+              </label>
+              <textarea
+                className="finput"
+                rows={3}
+                placeholder="e.g., I'm a solo compliance officer at a 50-person fintech startup"
+                value={userContext}
+                onChange={e => setUserContext(e.target.value)}
+                autoFocus
+                style={{ width: '100%', resize: 'vertical', marginBottom: 16, minHeight: 72 }}
+              />
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+                <button className="btn primary" style={{ flex: 1 }}
+                  onClick={() => generate(contextAgent, userContext.trim() || undefined)}>
+                  Generate →
+                </button>
+                <button className="btn" style={{ flex: 1 }}
+                  onClick={() => generate(contextAgent)}>
+                  Skip — Generate without context
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -1114,7 +1177,7 @@ export default function PromptForge() {
               </div>
               {!loading && prompt && (
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button className="btn accent" onClick={() => generate(selected)}>Regenerate ↻</button>
+                  <button className="btn accent" onClick={() => generate(selected, userContext || undefined)}>Regenerate ↻</button>
                   {!saved
                     ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
                     : <button className="btn iron" disabled>✓ Saved</button>
