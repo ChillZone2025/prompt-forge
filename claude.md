@@ -20,6 +20,7 @@
 | `project-overview.md` | Product vision, revenue model, roadmap, expansion strategy |
 | `data-schema.md` | Current data structures, agent definitions, content schema for new additions |
 | `competitive-intel.md` | Market landscape, competitor analysis, strategic positioning, revenue targets |
+| `agent-roles.md` | Role definitions for Forger and Prompt Agent sessions |
 
 ## Agent Mission
 
