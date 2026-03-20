@@ -265,6 +265,41 @@ IMPORTANT: Focus on evidence-based evaluation. Flag any area where unconscious b
     { id: 'ins_compliance', icon: '📜', name: 'Insurance Compliance', desc: 'Regulatory filings, license tracking, audit readiness',   color: '#d4834d', isNew: true },
     { id: 'client_intake',  icon: '🤝', name: 'Client Intake Agent',  desc: 'Needs assessment, quote generation, onboarding',         color: '#e8913a', isNew: true },
   ],
+  'Architecture & Engineering': [
+    { id: 'cost_est',    icon: '💲', name: 'Cost Estimator',         desc: 'Quantity takeoffs, unit pricing, budget tracking',       color: '#4db88c', isNew: true },
+    { id: 'proj_coord',  icon: '📌', name: 'Project Coordinator',    desc: 'Schedules, RFIs, submittals, stakeholder logs',         color: '#9b7fd4', isNew: true },
+    { id: 'rfi_drafter', icon: '📨', name: 'RFI/RFP Drafter',        desc: 'Submittals, clarifications, bid responses',             color: '#e8913a', isNew: true },
+    { id: 'site_report', icon: '🏗', name: 'Site Report Generator',  desc: 'Inspection notes, punch lists, field reports',          color: '#d4a84d', isNew: true },
+    { id: 'spec_review', icon: '📑', name: 'Spec Review Agent',      desc: 'Code compliance, specification gap analysis',           color: '#4daed4', isNew: true },
+  ],
+  'Consulting & Strategy': [
+    { id: 'change_mgmt',    icon: '🔄', name: 'Change Management Lead', desc: 'Stakeholder mapping, adoption plans, comms',          color: '#e8913a', isNew: true },
+    { id: 'due_diligence',  icon: '🔎', name: 'Due Diligence Agent',    desc: 'CDD, VDD, risk flagging, deal memos',                color: '#c44d4d', isNew: true },
+    { id: 'market_sizing',  icon: '📐', name: 'Market Sizing Analyst',  desc: 'TAM/SAM/SOM, bottoms-up modeling',                   color: '#4d8cd4', isNew: true },
+    { id: 'proposal_writer',icon: '📝', name: 'Proposal & SOW Writer',  desc: 'Scope, deliverables, pricing structure',             color: '#4db88c', isNew: true },
+    { id: 'strat_deck',     icon: '📊', name: 'Strategy Deck Builder',  desc: 'Frameworks, slide structure, executive narratives',   color: '#9b7fd4', isNew: true },
+  ],
+  'Executive & Leadership': [
+    { id: 'exec_brief',    icon: '⚡', name: 'Executive Briefing Agent', desc: 'One-pagers, situation summaries, talking points',    color: '#d4a84d', isNew: true },
+    { id: 'board_prep',    icon: '🏛', name: 'Board Prep Agent',         desc: 'Board decks, KPI narratives, governance docs',      color: '#9b7fd4', isNew: true },
+    { id: 'decision_frame',icon: '🎯', name: 'Decision Framework Agent', desc: 'Options analysis, risk matrices, go/no-go recs',    color: '#4d8cd4', isNew: true },
+    { id: 'exec_comms',    icon: '🎙', name: 'Executive Comms Writer',   desc: 'All-hands scripts, investor updates, memos',        color: '#e8913a', isNew: true },
+    { id: 'okr_agent',     icon: '📈', name: 'OKR & Goals Architect',    desc: 'Objective cascading, alignment scoring, reviews',    color: '#4db88c', isNew: true },
+  ],
+  'Hospitality & Events': [
+    { id: 'event_plan',  icon: '🎪', name: 'Event Planning Agent',     desc: 'Timelines, vendor coordination, run-of-show docs',    color: '#9b7fd4', isNew: true },
+    { id: 'guest_exp',   icon: '🛎', name: 'Guest Experience Agent',   desc: 'Service scripts, complaint resolution, upselling',    color: '#f5c518', isNew: true },
+    { id: 'menu_eng',    icon: '🍽', name: 'Menu Engineering Agent',   desc: 'Pricing strategy, food cost analysis, descriptions',  color: '#4db88c', isNew: true },
+    { id: 'rev_mgmt',    icon: '💹', name: 'Revenue Management Agent', desc: 'Dynamic pricing, occupancy optimization, comp sets',  color: '#e8913a', isNew: true },
+    { id: 'staff_sched', icon: '🗓', name: 'Staff Scheduling Agent',   desc: 'Shift coverage, labor cost forecasting, compliance',  color: '#4daed4', isNew: true },
+  ],
+  'Logistics & Supply Chain': [
+    { id: 'route_opt',     icon: '🛣', name: 'Route Optimization Agent',  desc: 'Fleet routing, delivery windows, fuel efficiency',    color: '#4daed4', isNew: true },
+    { id: 'warehouse_ops', icon: '🏭', name: 'Warehouse Ops Agent',       desc: 'Layout optimization, pick/pack, labor',              color: '#d4a84d', isNew: true },
+    { id: 'carrier_nego',  icon: '🤝', name: 'Carrier Negotiation Agent', desc: 'Rate benchmarking, contract terms, lane analysis',   color: '#e8913a', isNew: true },
+    { id: 'customs_comp',  icon: '🌐', name: 'Customs & Trade Agent',     desc: 'HS codes, tariff classification, trade docs',        color: '#c44d4d', isNew: true },
+    { id: 'demand_plan',   icon: '🔮', name: 'Demand Planning Agent',     desc: 'Forecast modeling, seasonality, SKU analysis',       color: '#4d8cd4', isNew: true },
+  ],
 }
 
 const INDUSTRY_TABS = Object.keys(INDUSTRIES)
