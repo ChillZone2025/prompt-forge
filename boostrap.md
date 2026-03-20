@@ -59,6 +59,8 @@ ChillZone2025/prompt-forge/
 ├── data-schema.md                      ← Data structures & schemas
 ├── competitive-intel.md                ← Market landscape & strategic positioning
 ├── agent-roles.md                      ← Role definitions for Claude Code sessions
+├── TASK_QUEUE.md                       ← Shared task board for agent coordination
+├── STATUS.md                           ← Live platform state snapshot
 └── package.json
 ```
 
