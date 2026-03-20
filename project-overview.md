@@ -100,6 +100,7 @@ Goal: Build real infrastructure for scale
 - Usage analytics per agent/industry
 - A/B testing on prompt templates
 - Potential team/enterprise tier — DEFERRED until 100+ subscribers (see pricing lock in `competitive-intel.md`)
+- Native App Store and Google Play listings — DEFERRED until ~500 subscribers. PWA handles mobile until then. Apple takes 30% of in-app revenue, so only pursue when app stores become a customer acquisition channel worth the cut.
 
 ## Competitive Positioning
 
