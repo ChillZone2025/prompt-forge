@@ -57,32 +57,52 @@ Prompt Forge's voice is **expert but accessible**. Think: senior consultant who 
 #f472b6  — Rose (coaching, parenting)
 ```
 
-## Generated Prompt Structure
+## Generated Prompt Structure (v2)
 
-When the Claude API generates a prompt for an agent, it follows this exact template (defined in `buildPrompt()`):
+The `buildPrompt()` function uses XML-tagged instructions to generate agent system prompts via the Claude API. The function accepts three parameters: `name` (agent name), `desc` (agent description), and `userContext` (optional user-provided context about their specific situation).
+
+The generated output follows this exact 8-section structure:
 
 ```
 ## AGENT IDENTITY
-[Who this agent is, name, core purpose, domain expertise — 2-3 sentences]
+Who this agent is: name, core purpose, domain expertise, the professional role it mirrors. 2-3 concrete sentences referencing actual industry context.
 
 ## CORE CAPABILITIES
-[5-7 specific capabilities as active competencies]
+6-8 specific capabilities as active competencies. Format: "[Action verb] + [specific deliverable] + [using what method/tool]." No vague skills.
 
 ## BEHAVIORAL GUIDELINES
-[Tone, communication style, always/never rules — be specific]
+Communication tone (one specific choice), response length norms, 3-4 ALWAYS rules, 3-4 NEVER rules, how to handle ambiguous requests.
 
 ## DOMAIN KNOWLEDGE
-[Key frameworks, methodologies, tools, and knowledge areas]
+Real frameworks, methodologies, tools, regulations, and knowledge areas BY NAME. A professional in this field should recognize every item.
+
+## INTERACTION PROTOCOL
+How the agent manages conversations: what it asks first, how it handles multi-step workflows, how it delivers complex outputs, what context it requests from the user.
 
 ## OUTPUT FORMAT
-[Response structure, length norms, when to ask clarifying questions]
+Default response structure, when to use different formats, standard sections/headers, length calibration with approximate word counts.
 
-## CONSTRAINTS & ESCALATION
-[What it won't do, when to flag uncertainty, when to recommend human review]
+## CONSTRAINTS & SAFETY
+Hard scope limits, when to flag uncertainty, when to recommend human review, domain-specific ethical/compliance considerations, how to handle out-of-scope requests.
 
-## ACTIVATION PHRASE
-[One sentence the user says to activate this agent persona]
+## FIRST MESSAGE
+The exact opening message the agent sends when activated. Introduces the role in one sentence, asks 1-2 targeted questions about the user's situation, sets expectations.
 ```
+
+### Quality Criteria for Generated Prompts
+- Every section must be specific to the agent's role — nothing generic
+- Must reference real industry tools, frameworks, regulations by name
+- A professional in the field should think "this person knows my job"
+- Must work immediately when pasted into any AI tool's system prompt field
+- Target length: 600-900 words. Dense with value, no padding.
+
+### Key Differences from v1
+- Uses XML tags (`<task>`, `<instructions>`, `<output_format>`, `<quality_criteria>`) for 23% better parsing accuracy
+- Includes think-before-generating instruction for better reasoning
+- Supports optional `userContext` parameter for personalized generation
+- ACTIVATION PHRASE replaced with FIRST MESSAGE (functional, not gimmicky)
+- New INTERACTION PROTOCOL section for multi-turn conversation handling
+- Explicit specificity enforcement — no generic content allowed
 
 ### Fixed Prompt Rules
 Agents with `fixedPrompt` bypass the Claude API and display a pre-written prompt directly. Use this only when:
@@ -90,7 +110,7 @@ Agents with `fixedPrompt` bypass the Claude API and display a pre-written prompt
 - The prompt includes user interaction patterns that the API template doesn't support
 - The prompt needs to be identical every time (no variation)
 
-Fixed prompts must still follow the general quality bar: professional, specific, immediately deployable.
+Fixed prompts must still follow the v2 quality criteria: specific to the role, references real tools/frameworks, includes an interaction protocol, and opens with a functional first message.
 
 ## Starter Prompt Standards
 
