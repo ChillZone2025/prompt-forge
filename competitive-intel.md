@@ -53,8 +53,8 @@ The market research is clear: generic prompt categories (email writing, social m
 ### 3. Depth Over Breadth in Each Industry
 Having 5 excellent, highly-specific agents per industry beats having 20 generic ones. Each agent should represent a real job function that a real person in that industry does daily. Think "Credit Risk Underwriter" not "Finance Helper."
 
-### 4. Make the Free Tier Irresistible
-The 5 free generates and unlimited starter prompts should be good enough that people tell their colleagues about it. Word of mouth from the free tier drives Pro conversions. Every new starter prompt is a top-of-funnel asset.
+### 4. Make the Free Tier a Taste, Not a Meal
+3 free generates prove the product works but aren't enough to cover all your needs. Unlimited starter prompts remain free as a top-of-funnel asset. The gap between "this is amazing" (free) and "I need more" (Pro) should be exactly 3 clicks wide. Pro workspace features (refinement, version history, saved contexts, export) make the upgrade sticky — people stay because it's their prompt workspace, not just a generator.
 
 ### 5. Build Toward "First of Its Kind" Status
 No one else generates deployment-ready agent system prompts organized by industry. Prompt Forge should own this category. Content expansion, SEO, and LinkedIn presence should all reinforce this positioning. When someone searches "AI agent prompts for [industry]," Prompt Forge should be the answer.
