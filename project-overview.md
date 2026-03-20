@@ -19,8 +19,16 @@ The core value proposition: **Skip the prompt engineering learning curve. Get a 
 
 | Tier | Price | What You Get |
 |------|-------|-------------|
-| **Free (Apprentice)** | $0 | 5 prompt generations. Full access to Starter Prompts. No account required. |
-| **Pro** | $12/month | Unlimited generations. All agents across all industries. Prompt library with save/search. |
+| **Free (Apprentice)** | $0 | 3 prompt generations. Full access to Starter Prompts. No account required. |
+| **Pro** | $12/month | Unlimited generations. All agents including Pro-only industries. Prompt library with save/search. Prompt refinement (iterate on generated prompts). Regenerate with version history. Saved userContext templates. Export (markdown, .txt). |
+
+### Pro Workspace Features (Build Priority)
+1. **Prompt refinement** (Phase 1 — build now) — After generation, user can type modifiers like "make it more aggressive" or "add HIPAA compliance" and get an iterated version. This is a second Claude API call using the original prompt + modifier.
+2. **Regenerate with version history** (Phase 2) — Track all versions of a prompt, compare side-by-side.
+3. **Saved userContext templates** (Phase 2) — Save your situation description once, apply across agents with one click.
+4. **Export** (Phase 2) — Copy as markdown, download as .txt file.
+
+These workspace features make Pro a tool people return to daily, not a one-time generation counter.
 
 ### How Payment Works
 - No user accounts — free tier works immediately with no signup
