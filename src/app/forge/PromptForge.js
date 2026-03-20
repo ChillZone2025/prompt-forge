@@ -95,6 +95,8 @@ Label each output clearly by platform. Include posting tips (best time, hashtags
     { id: 'voice_ai',    icon: '📞', name: 'Call Center Agent',     desc: 'Call scripts, objection handling, appointment booking',     color: '#4db88c' },
     { id: 'market_intel',icon: '🧠', name: 'Market Intelligence',   desc: 'Competitor pricing, strategic alerts',      color: '#4d8cd4' },
     { id: 'pr_agent',    icon: '📰', name: 'PR & Media Agent',      desc: 'Journalist targeting, pitch drafting',      color: '#c46896' },
+    { id: 'proposal_gen',icon: '📝', name: 'Proposal Generator',   desc: 'Client proposals, scope docs, pricing sections', color: '#d4a84d', isNew: true },
+    { id: 'email_seq',   icon: '📧', name: 'Email Sequence Writer', desc: 'Drip campaigns, nurture flows, follow-up cadences', color: '#4daed4', isNew: true },
   ],
   Education: [
     { id: 'micro_learn', icon: '🎯', name: 'Curriculum Designer',   desc: 'Lesson plans, learning paths, assessment design',          color: '#4daed4' },
@@ -102,6 +104,8 @@ Label each output clearly by platform. Include posting tips (best time, hashtags
     { id: 'career_track',icon: '🗺', name: 'Career Coach Agent',    desc: 'Skills gap analysis, certification paths, job market intel', color: '#d4a84d' },
     { id: 'admissions',  icon: '🎓', name: 'Admissions Agent',      desc: 'Inquiry to enrollment pipeline mgmt',       color: '#9b7fd4' },
     { id: 'research_asst',icon:'🔭', name: 'Research Assistant',    desc: 'Academic paper synthesis, doctoral support', color: '#d4834d' },
+    { id: 'parent_comm', icon: '💬', name: 'Parent Communicator',   desc: 'Progress reports, behavior updates, conference prep', color: '#c46896', isNew: true },
+    { id: 'grant_writer',icon: '💰', name: 'Grant Writer',          desc: 'Education grants, funding applications, budget narratives', color: '#e8913a', isNew: true },
   ],
   'Personal Finance': [
     { id: 'fin_advisor', icon: '🧭', name: 'Financial Advisor',     desc: 'Full-context accounts, taxes, investments', color: '#4db88c' },
@@ -140,6 +144,8 @@ STEP 4 — SAVINGS SUMMARY: Present a clear table showing:
     { id: 'tax_opt',     icon: '🔖', name: 'Tax Optimizer',         desc: 'Year-round deduction scanning',             color: '#d4a84d' },
     { id: 'micro_invest',icon: '🌱', name: 'Investment Advisor',    desc: 'Portfolio strategy, goal-based planning, risk allocation',          color: '#4d8cd4' },
     { id: 'fraud_watch', icon: '🛡', name: 'Identity Shield Agent', desc: 'Fraud detection, credit alerts, identity protection',    color: '#c44d4d' },
+    { id: 'budget_arch', icon: '📊', name: 'Budget Architect',      desc: 'Monthly budgets, expense tracking, savings goals',       color: '#9b7fd4', isNew: true },
+    { id: 'debt_payoff', icon: '📉', name: 'Debt Payoff Strategist',desc: 'Payoff plans, refinance analysis, snowball vs avalanche',color: '#4daed4', isNew: true },
   ],
   Parenting: [
     { id: 'homework',    icon: '📚', name: 'Homework Helper',         desc: 'Subject tutoring, step-by-step explanations',  color: '#60a5fa', fixedPrompt: `You are a Patient, Encouraging Tutor. Your goal is to help students understand their homework — not just give them answers. You adapt your explanations to the student's grade level and learning style.
@@ -175,6 +181,7 @@ STEP 5 — SUMMARY: End with a brief recap of the key concept and one study tip 
     { id: 'development', icon: '🌱', name: 'Child Development Tracker',desc: 'Milestone tracking, age-appropriate guidance',  color: '#a78bfa' },
     { id: 'stories',     icon: '🌙', name: 'Bedtime Story Agent',     desc: 'Custom stories, reading level adaptation',      color: '#fb923c' },
     { id: 'coach',       icon: '🤝', name: 'Parent Coach',            desc: 'Behavior strategies, emotional regulation',     color: '#f472b6' },
+    { id: 'iep_advocate',icon: '📋', name: 'IEP Advocate',            desc: 'Special education plans, accommodation requests, meeting prep', color: '#d4834d', isNew: true },
   ],
    'Retail & Ops': [
     { id: 'inventory',   icon: '📦', name: 'Inventory Optimizer',   desc: 'Demand forecasting, returns logistics',     color: '#d4a84d' },
@@ -182,6 +189,7 @@ STEP 5 — SUMMARY: End with a brief recap of the key concept and one study tip 
     { id: 'supply_chain',icon: '⛓', name: 'Supply Chain Agent',    desc: 'Bottleneck detection, re-routing',          color: '#4daed4' },
     { id: 'returns_agent',icon: '🔄', name: 'Returns & Refund Agent',desc: 'Return policies, customer resolution, loss prevention', color: '#4db88c', isNew: true },
     { id: 'vendor_nego', icon: '🤝', name: 'Vendor Negotiator',      desc: 'Supplier terms, bulk pricing, contract leverage', color: '#9b7fd4', isNew: true },
+    { id: 'store_ops',   icon: '🏪', name: 'Store Operations Agent', desc: 'Staff scheduling, daily workflows, opening/closing checklists', color: '#c46896', isNew: true },
   ],
   'Legal & Compliance': [
     { id: 'contract_analyze', icon: '📑', name: 'Contract Analyzer',        desc: 'Clause review, risk flagging, plain-language summaries', color: '#d4834d', isNew: true },
