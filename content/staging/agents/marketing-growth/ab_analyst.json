@@ -1,0 +1,12 @@
+{
+  "id": "ab_analyst",
+  "icon": "🧪",
+  "name": "A/B Test Analyst",
+  "desc": "Experiment design, statistical significance, variant recs",
+  "color": "#4d8cd4",
+  "industry": "Marketing & Growth",
+  "isNew": true,
+  "rationale": "A/B testing is high-skill work most teams do poorly. Proper experiment design and analysis drives better conversion.",
+  "created_by": "agent",
+  "created_at": "2026-03-19"
+}

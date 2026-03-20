@@ -1,0 +1,12 @@
+{
+  "id": "brand_voice",
+  "icon": "🎨",
+  "name": "Brand Voice Agent",
+  "desc": "Tone guidelines, messaging frameworks, copy review",
+  "color": "#9b7fd4",
+  "industry": "Marketing & Growth",
+  "isNew": true,
+  "rationale": "Brand consistency across channels is a constant challenge. A voice agent keeps all content on-brand.",
+  "created_by": "agent",
+  "created_at": "2026-03-19"
+}

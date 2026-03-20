@@ -110,6 +110,41 @@ The final SOP must include:
     { id: 'reg_nav',          icon: '🧭', name: 'Regulatory Navigator',     desc: 'Licensing, filing deadlines, industry regulations',      color: '#4d8cd4', isNew: true },
     { id: 'dispute_res',      icon: '⚖', name: 'Dispute Resolution Agent', desc: 'Demand letters, mediation prep, escalation paths',       color: '#d4a84d', isNew: true },
   ],
+  'Real Estate': [
+    { id: 'listing_gen',  icon: '🏡', name: 'Listing Generator',    desc: 'Property descriptions, MLS optimization, photo captions',  color: '#e8913a', isNew: true },
+    { id: 'market_comp',  icon: '📊', name: 'Market Comp Analyzer', desc: 'Comparable sales, pricing strategy, market trends',        color: '#4d8cd4', isNew: true },
+    { id: 'lease_review', icon: '📄', name: 'Lease Review Agent',   desc: 'Clause analysis, tenant screening, renewal terms',         color: '#d4834d', isNew: true },
+    { id: 'lead_nurture', icon: '🤝', name: 'Lead Nurture Agent',   desc: 'Follow-up sequences, client segmentation, drip campaigns', color: '#4db88c', isNew: true },
+    { id: 'showing_sched',icon: '🗓', name: 'Showing Scheduler',    desc: 'Appointment coordination, route planning, availability',   color: '#34d399', isNew: true },
+  ],
+  'Marketing & Growth': [
+    { id: 'seo_content',    icon: '🔍', name: 'SEO Content Agent',    desc: 'Keyword strategy, content briefs, SERP analysis',           color: '#4db88c', isNew: true },
+    { id: 'campaign_opt',   icon: '📈', name: 'Campaign Optimizer',   desc: 'Ad spend allocation, channel ROI, budget pacing',           color: '#e8913a', isNew: true },
+    { id: 'ab_analyst',     icon: '🧪', name: 'A/B Test Analyst',     desc: 'Experiment design, statistical significance, variant recs', color: '#4d8cd4', isNew: true },
+    { id: 'brand_voice',    icon: '🎨', name: 'Brand Voice Agent',    desc: 'Tone guidelines, messaging frameworks, copy review',        color: '#9b7fd4', isNew: true },
+    { id: 'attrib_analyst', icon: '🎯', name: 'Attribution Analyst',  desc: 'Multi-touch attribution, funnel analysis, conversion paths',color: '#d4a84d', isNew: true },
+  ],
+  'HR & People Ops': [
+    { id: 'resume_screen',  icon: '📄', name: 'Resume Screener',      desc: 'ATS filtering, candidate ranking, bias reduction',       color: '#4db88c', isNew: true },
+    { id: 'interview_arch', icon: '🎙', name: 'Interview Architect',  desc: 'Role-specific questions, scoring rubrics, panel prep',    color: '#9b7fd4', isNew: true },
+    { id: 'onboard_agent',  icon: '🚀', name: 'Onboarding Agent',     desc: 'New hire workflows, checklist generation, 30-60-90 plans',color: '#4daed4', isNew: true },
+    { id: 'comp_analyst',   icon: '💰', name: 'Compensation Analyst', desc: 'Salary benchmarking, equity modeling, offer structuring',  color: '#d4a84d', isNew: true },
+    { id: 'perf_mgmt',      icon: '📋', name: 'Performance Manager',  desc: 'Review cycles, goal tracking, feedback frameworks',       color: '#c46896', isNew: true },
+  ],
+  'Accounting & Tax': [
+    { id: 'bookkeeper',    icon: '📒', name: 'AI Bookkeeper',      desc: 'Transaction categorization, reconciliation, cleanup',  color: '#4db88c', isNew: true },
+    { id: 'invoice_agent', icon: '🧾', name: 'Invoice Agent',      desc: 'Invoice generation, payment tracking, aging reports',  color: '#e8913a', isNew: true },
+    { id: 'audit_prep',    icon: '🔎', name: 'Audit Prep Agent',   desc: 'Document assembly, compliance checks, gap analysis',   color: '#c44d4d', isNew: true },
+    { id: 'tax_prep',      icon: '📑', name: 'Tax Prep Agent',     desc: 'Deduction identification, filing checklists, deadlines',color: '#d4834d', isNew: true },
+    { id: 'fin_reporter',  icon: '📊', name: 'Financial Reporter', desc: 'P&L statements, cash flow analysis, board reporting',   color: '#4d8cd4', isNew: true },
+  ],
+  Insurance: [
+    { id: 'claims_agent',   icon: '📋', name: 'Claims Processor',     desc: 'Claim intake, documentation review, status tracking',    color: '#4daed4', isNew: true },
+    { id: 'underwrite',     icon: '🛡', name: 'Underwriting Agent',   desc: 'Risk assessment, policy pricing, coverage analysis',     color: '#c44d4d', isNew: true },
+    { id: 'policy_comp',    icon: '⚖', name: 'Policy Comparator',    desc: 'Coverage comparison, gap identification, renewal analysis',color: '#4d8cd4', isNew: true },
+    { id: 'ins_compliance', icon: '📜', name: 'Insurance Compliance', desc: 'Regulatory filings, license tracking, audit readiness',   color: '#d4834d', isNew: true },
+    { id: 'client_intake',  icon: '🤝', name: 'Client Intake Agent',  desc: 'Needs assessment, quote generation, onboarding',         color: '#e8913a', isNew: true },
+  ],
 }
 
 const INDUSTRY_TABS = Object.keys(INDUSTRIES)

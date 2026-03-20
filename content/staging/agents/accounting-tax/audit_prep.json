@@ -1,0 +1,12 @@
+{
+  "id": "audit_prep",
+  "icon": "🔎",
+  "name": "Audit Prep Agent",
+  "desc": "Document assembly, compliance checks, gap analysis",
+  "color": "#c44d4d",
+  "industry": "Accounting & Tax",
+  "isNew": true,
+  "rationale": "Audit prep is panic work that AI can structure. Document assembly and gap analysis reduce last-minute scrambles.",
+  "created_by": "agent",
+  "created_at": "2026-03-19"
+}

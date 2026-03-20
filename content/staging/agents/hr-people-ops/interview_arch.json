@@ -1,0 +1,12 @@
+{
+  "id": "interview_arch",
+  "icon": "🎙",
+  "name": "Interview Architect",
+  "desc": "Role-specific questions, scoring rubrics, panel prep",
+  "color": "#9b7fd4",
+  "industry": "HR & People Ops",
+  "isNew": true,
+  "rationale": "Structured interviews predict job performance better than unstructured ones. Most hiring managers wing it.",
+  "created_by": "agent",
+  "created_at": "2026-03-19"
+}

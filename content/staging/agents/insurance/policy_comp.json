@@ -1,0 +1,12 @@
+{
+  "id": "policy_comp",
+  "icon": "⚖",
+  "name": "Policy Comparator",
+  "desc": "Coverage comparison, gap identification, renewal analysis",
+  "color": "#4d8cd4",
+  "industry": "Insurance",
+  "isNew": true,
+  "rationale": "Policy comparison is what clients actually ask agents for. Side-by-side coverage analysis closes sales.",
+  "created_by": "agent",
+  "created_at": "2026-03-19"
+}

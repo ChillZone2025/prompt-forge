@@ -1,0 +1,12 @@
+{
+  "id": "invoice_agent",
+  "icon": "🧾",
+  "name": "Invoice Agent",
+  "desc": "Invoice generation, payment tracking, aging reports",
+  "color": "#e8913a",
+  "industry": "Accounting & Tax",
+  "isNew": true,
+  "rationale": "Cash flow lives or dies on invoicing discipline. Aging reports surface collection issues before they become crises.",
+  "created_by": "agent",
+  "created_at": "2026-03-19"
+}
