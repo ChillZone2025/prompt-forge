@@ -4,8 +4,8 @@
 
 ## Live Platform Stats
 
-- **Total agents:** 219
-- **Total industries:** 39
+- **Total agents:** 229
+- **Total industries:** 40 (1 Pro-only: AI Agent Development)
 - **Total starter prompts:** 24
 - **Starter categories:** 4 (Work, Writing, Learning, Life)
 - **Agents with fixedPrompt:** 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer)
@@ -56,6 +56,7 @@
 | SaaS & Product | 5 | Live |
 | Sports & Athletics | 5 | Live |
 | Veterinary | 5 | Live |
+| AI Agent Development | 10 | Live (Pro-only) |
 
 ## What's Currently Staged (content/staging/)
 
@@ -83,3 +84,5 @@ Nothing — all staging cleared as of 2026-03-19.
 - 2026-03-19 — Add Negotiation Strategist from staging — `41b2c19`
 - 2026-03-19 — Post-integration cleanup V1 — `6774c11`
 - 2026-03-19 — Integrate 20 new industries (100 agents) from Prompt Agent staging — `ff49885`
+- 2026-03-19 — Premium UI redesign (Linear/Stripe-tier) + Pro-only blur system — `290052d`
+- 2026-03-19 — Add AI Agent Development (10 agents, Pro-only) — `2618c22`
