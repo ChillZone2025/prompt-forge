@@ -54,6 +54,7 @@ The final SOP must include:
     { id: 'content',     icon: '✦', name: 'Content Strategist',     desc: 'SEO, brand voice, editorial calendar',      color: '#a04dc8' },
     { id: 'devops',      icon: '∞', name: 'DevOps Engineer',        desc: 'CI/CD, infra, incident response',           color: '#4daed4' },
     { id: 'pres_builder',icon: '🖥', name: 'Presentation Builder',  desc: 'Slide outlines, speaker notes, deck structure', color: '#f5c518', isNew: true },
+    { id: 'nego_strat',  icon: '♟', name: 'Negotiation Strategist',desc: 'BATNA analysis, counter-offers, leverage tactics', color: '#d4a84d', isNew: true },
   ],
   Healthcare: [
     { id: 'med_scribe',  icon: '✍', name: 'Medical Scribe',         desc: 'Clinical notes, EMR integration',           color: '#4db88c' },
