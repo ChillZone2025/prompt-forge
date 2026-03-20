@@ -6,9 +6,11 @@
 
 - **Total agents:** 119
 - **Total industries:** 19
-- **Total starter prompts:** 16
+- **Total starter prompts:** 24
 - **Starter categories:** 4 (Work, Writing, Learning, Life)
+- **Agents with fixedPrompt:** 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer)
 - **Prompt engine version:** v2 (XML-tagged, 8-section output, userContext support)
+- **UI features:** Streaming output, Regenerate button, Generation metadata, userContext input
 - **Pricing:** $12/month Pro (LOCKED — see competitive-intel.md)
 
 ## Industries & Agent Counts
@@ -37,14 +39,24 @@
 
 ## What's Currently Staged (content/staging/)
 
-<!-- The Forger updates this after reviewing staged content -->
-<!-- Format: industry/agent_id — status (approved/needs-revision/rejected) -->
+Nothing — all staging cleared as of 2026-03-19.
 
 ## What's In the Proposal Queue (content/proposals/)
 
-<!-- List active proposals here -->
+- `strategic-audit.md` — V2 full library audit (119 agents). All recommendations executed.
 
 ## Recent Deployments
 
-<!-- The Forger logs each deployment here -->
-<!-- Format: YYYY-MM-DD — description — commit hash -->
+- 2026-03-19 — Add 6 new industries (Legal, RE, Marketing, HR, Accounting, Insurance) — `4354387`
+- 2026-03-19 — Rename 8 agents for broader appeal + strategic audit — `3eab2e6`
+- 2026-03-19 — Swap 6 low-value agents for higher-revenue alternatives — `4f8c3b9`
+- 2026-03-19 — Overhaul starter prompts for higher Pro conversion — `41c0645`
+- 2026-03-19 — Upgrade 4 agents to interactive fixedPrompt workflows — `4dc240d`
+- 2026-03-19 — Add 8 gap-fill agents across 5 industries — `79dc81d`
+- 2026-03-19 — Add 5 staged industries (Architecture, Consulting, Executive, Hospitality, Logistics) — `610a414`
+- 2026-03-19 — Upgrade buildPrompt to v2 (XML tags, 8-section output, userContext) — `8665de5`
+- 2026-03-19 — Execute audit V2 (renames, fixedPrompt, starters, gap-fills) — `9a8e5c6`
+- 2026-03-19 — Upgrade listing_gen and site_report to fixedPrompt — `dfcb0e3`
+- 2026-03-19 — Add streaming output, regenerate button, generation metadata — `87d66f4`
+- 2026-03-19 — Add Negotiation Strategist from staging — `41b2c19`
+- 2026-03-19 — Add userContext input UI — `f7df7b7`

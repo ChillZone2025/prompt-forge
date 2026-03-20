@@ -58,7 +58,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 
 ## Complete Agent Registry
 
-### General (13 agents)
+### General (15 agents)
 
 | ID | Icon | Name | Description | Color | Notes |
 |----|------|------|-------------|-------|-------|
@@ -75,16 +75,19 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `support` | ◷ | Customer Support | De-escalation, resolution, empathy | #4dc87a | |
 | `content` | ✦ | Content Strategist | SEO, brand voice, editorial calendar | #a04dc8 | |
 | `devops` | ∞ | DevOps Engineer | CI/CD, infra, incident response | #4daed4 | |
+| `pres_builder` | 🖥 | Presentation Builder | Slide outlines, speaker notes, deck structure | #f5c518 | isNew |
+| `nego_strat` | ♟ | Negotiation Strategist | BATNA analysis, counter-offers, leverage tactics | #d4a84d | isNew |
 
-### Healthcare (5 agents)
+### Healthcare (6 agents)
 
-| ID | Icon | Name | Description | Color |
-|----|------|------|-------------|-------|
-| `med_scribe` | ✍ | Medical Scribe | Clinical notes, EMR integration | #4db88c |
-| `prior_auth` | 📋 | Prior Auth Agent | Payer workflows, claim denial reduction | #4d8cd4 |
-| `rcm` | 💰 | RCM Specialist | Billing, coding, A/R follow-ups | #d4a84d |
-| `triage` | 🏥 | Patient Triage Agent | Symptom checking, care routing | #c44d4d |
-| `diagnostics` | 🔬 | Diagnostics Assistant | Radiology & dermatology flagging | #9b7fd4 |
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `med_scribe` | ✍ | Medical Scribe | Clinical notes, EMR integration | #4db88c | |
+| `prior_auth` | 📋 | Prior Auth Agent | Payer workflows, claim denial reduction | #4d8cd4 | |
+| `rcm` | 💰 | RCM Specialist | Billing, coding, A/R follow-ups | #d4a84d | |
+| `triage` | 🏥 | Patient Triage Agent | Symptom checking, care routing | #c44d4d | |
+| `diagnostics` | 🔬 | Diagnostics Assistant | Radiology & dermatology flagging | #9b7fd4 | |
+| `clinical_trial` | 🧬 | Clinical Trial Coordinator | Protocol summaries, consent forms, site reports | #4daed4 | isNew |
 
 ### Finance (5 agents)
 
@@ -96,7 +99,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `credit_risk` | 📈 | Credit Risk Underwriter | Automated scoring, loan analysis | #4db88c |
 | `tax_agent` | 🧾 | Tax Strategy Agent | Real-time tax tracking, automated filing | #d4834d |
 
-### Comms & Sales (7 agents)
+### Comms & Sales (8 agents)
 
 | ID | Icon | Name | Description | Color | Notes |
 |----|------|------|-------------|-------|-------|
@@ -107,6 +110,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `pr_agent` | 📰 | PR & Media Agent | Journalist targeting, pitch drafting | #c46896 | |
 | `proposal_gen` | 📝 | Proposal Generator | Client proposals, scope docs, pricing sections | #d4a84d | isNew |
 | `email_seq` | 📧 | Email Sequence Writer | Drip campaigns, nurture flows, follow-up cadences | #4daed4 | isNew |
+| `cust_success` | 🎯 | Customer Success Agent | Onboarding playbooks, churn prevention, QBR prep | #4db88c | isNew |
 
 ### Education (7 agents)
 
@@ -164,7 +168,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `reg_nav` | 🧭 | Regulatory Navigator | Licensing, filing deadlines, industry regulations | #4d8cd4 | isNew |
 | `dispute_res` | ⚖ | Dispute Resolution Agent | Demand letters, mediation prep, escalation paths | #d4a84d | isNew |
 
-### Real Estate (5 agents)
+### Real Estate (6 agents)
 
 | ID | Icon | Name | Description | Color | Notes |
 |----|------|------|-------------|-------|-------|
@@ -173,8 +177,9 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `lease_review` | 📄 | Lease Review Agent | Clause analysis, tenant screening, renewal terms | #d4834d | isNew |
 | `lead_nurture` | 🤝 | Lead Nurture Agent | Follow-up sequences, client segmentation, drip campaigns | #4db88c | isNew |
 | `showing_sched` | 🗓 | Showing Scheduler | Appointment coordination, route planning, availability | #34d399 | isNew |
+| `open_house` | 🏠 | Open House Agent | Marketing flyers, follow-up scripts, social posts | #9b7fd4 | isNew |
 
-### Marketing & Growth (5 agents)
+### Marketing & Growth (6 agents)
 
 | ID | Icon | Name | Description | Color | Notes |
 |----|------|------|-------------|-------|-------|
@@ -183,6 +188,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `ab_analyst` | 🧪 | A/B Test Analyst | Experiment design, statistical significance, variant recs | #4d8cd4 | isNew |
 | `brand_voice` | 🎨 | Brand Voice Agent | Tone guidelines, messaging frameworks, copy review | #9b7fd4 | isNew |
 | `attrib_analyst` | 🎯 | Attribution Analyst | Multi-touch attribution, funnel analysis, conversion paths | #d4a84d | isNew |
+| `social_mgr` | 📱 | Social Media Manager | Content calendars, platform strategy, analytics reports | #c46896 | isNew |
 
 ### HR & People Ops (5 agents)
 
@@ -194,7 +200,7 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `comp_analyst` | 💰 | Compensation Analyst | Salary benchmarking, equity modeling, offer structuring | #d4a84d | isNew |
 | `perf_mgmt` | 📋 | Performance Manager | Review cycles, goal tracking, feedback frameworks | #c46896 | isNew |
 
-### Accounting & Tax (5 agents)
+### Accounting & Tax (6 agents)
 
 | ID | Icon | Name | Description | Color | Notes |
 |----|------|------|-------------|-------|-------|
@@ -203,8 +209,9 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `audit_prep` | 🔎 | Audit Prep Agent | Document assembly, compliance checks, gap analysis | #c44d4d | isNew |
 | `tax_prep` | 📑 | Tax Prep Agent | Deduction identification, filing checklists, deadlines | #d4834d | isNew |
 | `fin_reporter` | 📊 | Financial Reporter | P&L statements, cash flow analysis, board reporting | #4d8cd4 | isNew |
+| `payroll_spec` | 💵 | Payroll Specialist | Payroll compliance, deduction calculations, reporting | #d4a84d | isNew |
 
-### Insurance (5 agents)
+### Insurance (6 agents)
 
 | ID | Icon | Name | Description | Color | Notes |
 |----|------|------|-------------|-------|-------|
@@ -213,6 +220,57 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `policy_comp` | ⚖ | Policy Comparator | Coverage comparison, gap identification, renewal analysis | #4d8cd4 | isNew |
 | `ins_compliance` | 📜 | Insurance Compliance | Regulatory filings, license tracking, audit readiness | #d4834d | isNew |
 | `client_intake` | 🤝 | Client Intake Agent | Needs assessment, quote generation, onboarding | #e8913a | isNew |
+| `renewal_spec` | 🔁 | Renewal Specialist | Renewal analysis, retention scripts, coverage updates | #9b7fd4 | isNew |
+
+### Architecture & Engineering (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `cost_est` | 💲 | Cost Estimator | Quantity takeoffs, unit pricing, budget tracking | #4db88c | isNew |
+| `proj_coord` | 📌 | Project Coordinator | Schedules, RFIs, submittals, stakeholder logs | #9b7fd4 | isNew |
+| `rfi_drafter` | 📨 | RFI/RFP Drafter | Submittals, clarifications, bid responses | #e8913a | isNew |
+| `site_report` | 🏗 | Site Report Generator | Inspection notes, punch lists, field reports | #d4a84d | isNew, fixedPrompt |
+| `spec_review` | 📑 | Spec Review Agent | Code compliance, specification gap analysis | #4daed4 | isNew |
+
+### Consulting & Strategy (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `change_mgmt` | 🔄 | Change Management Lead | Stakeholder mapping, adoption plans, comms | #e8913a | isNew |
+| `due_diligence` | 🔎 | Due Diligence Agent | Risk assessment, deal analysis, investment memos | #c44d4d | isNew |
+| `market_sizing` | 📐 | Market Sizing Analyst | TAM/SAM/SOM, bottoms-up modeling | #4d8cd4 | isNew |
+| `proposal_writer` | 📝 | Proposal & SOW Writer | Scope, deliverables, pricing structure | #4db88c | isNew, fixedPrompt |
+| `strat_deck` | 📊 | Strategy Deck Builder | Frameworks, slide structure, executive narratives | #9b7fd4 | isNew |
+
+### Executive & Leadership (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `exec_brief` | ⚡ | Executive Briefing Agent | One-pagers, situation summaries, talking points | #d4a84d | isNew |
+| `board_prep` | 🏛 | Board Prep Agent | Board decks, KPI narratives, governance docs | #9b7fd4 | isNew |
+| `decision_frame` | 🎯 | Decision Framework Agent | Options analysis, risk matrices, go/no-go recs | #4d8cd4 | isNew |
+| `exec_comms` | 🎙 | Executive Comms Writer | All-hands scripts, investor updates, memos | #e8913a | isNew |
+| `okr_agent` | 📈 | OKR & Goals Architect | Objective cascading, alignment scoring, reviews | #4db88c | isNew |
+
+### Hospitality & Events (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `event_plan` | 🎪 | Event Planning Agent | Timelines, vendor coordination, run-of-show docs | #9b7fd4 | isNew |
+| `guest_exp` | 🛎 | Guest Experience Agent | Service scripts, complaint resolution, upselling | #f5c518 | isNew |
+| `menu_eng` | 🍽 | Menu Design Agent | Pricing strategy, food cost analysis, descriptions | #4db88c | isNew |
+| `rev_mgmt` | 💹 | Revenue Management Agent | Dynamic pricing, occupancy optimization, comp sets | #e8913a | isNew |
+| `staff_sched` | 🗓 | Staff Scheduling Agent | Shift coverage, labor cost forecasting, compliance | #4daed4 | isNew |
+
+### Logistics & Supply Chain (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `route_opt` | 🛣 | Route Optimization Agent | Fleet routing, delivery windows, fuel efficiency | #4daed4 | isNew |
+| `warehouse_ops` | 🏭 | Warehouse Ops Agent | Layout optimization, pick/pack, labor | #d4a84d | isNew |
+| `carrier_nego` | 🤝 | Carrier Negotiation Agent | Rate benchmarking, contract terms, lane analysis | #e8913a | isNew |
+| `customs_comp` | 🌐 | Customs & Trade Agent | HS codes, tariff classification, trade docs | #c44d4d | isNew |
+| `demand_plan` | 🔮 | Demand Planning Agent | Forecast modeling, seasonality, SKU analysis | #4d8cd4 | isNew |
 
 ## Complete Starter Prompt Registry
 
@@ -234,22 +292,30 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `s14` | Life | Plan My Week | #4d8cd4 |
 | `s15` | Life | Generate My Professional Bio | #4d8cd4 |
 | `s16` | Work | Write a Client Proposal Intro | #e8913a |
+| `s17` | Work | Write a Status Report | #e8913a |
+| `s18` | Work | Create Interview Questions | #e8913a |
+| `s19` | Writing | Rewrite for Tone | #9b7fd4 |
+| `s20` | Learning | Explain This Code | #4db88c |
+| `s21` | Life | Write a Thank You Note | #4d8cd4 |
+| `s22` | Life | Prep for a Tough Conversation | #4d8cd4 |
+| `s23` | Work | Summarize a Document | #e8913a |
+| `s24` | Learning | Learn From My Mistakes | #4db88c |
 
 ## Summary Counts
 
 | Category | Count |
 |----------|-------|
-| Industries | 14 |
-| Total agents | 85 |
-| Agents with fixedPrompt | 5 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Resume Screener) |
-| Starter prompts | 16 |
+| Industries | 19 |
+| Total agents | 119 |
+| Agents with fixedPrompt | 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Resume Screener, Listing Generator, Site Report Generator, Proposal & SOW Writer) |
+| Starter prompts | 24 |
 | Starter categories | 4 (Work, Writing, Learning, Life) |
 
 ## Reserved ID Prefixes
 
 When creating new content, use these conventions:
 - Agent IDs: descriptive snake_case (e.g., `resume_screen`, `bid_est`)
-- Starter IDs: `s` + next sequential number (next available: `s17`)
+- Starter IDs: `s` + next sequential number (next available: `s25`)
 - Industry names: title case, 1-3 words, ampersand OK (e.g., `Comms & Sales`)
 
 ## ID Uniqueness Check
@@ -258,20 +324,26 @@ Before adding any new agent, verify the ID doesn't exist in this complete list:
 
 ```
 sop_gen, email_draft, cyber, code_review, data, meeting_prep, pm, security,
-finance, market, support, content, devops, med_scribe, prior_auth, rcm,
-triage, diagnostics, close_agent, treasury_liq, audit_comp, credit_risk,
-tax_agent, sdr, repurpose, voice_ai, market_intel, pr_agent, proposal_gen,
-email_seq, micro_learn, grading, career_track, admissions, research_asst,
+finance, market, support, content, devops, pres_builder, nego_strat,
+med_scribe, prior_auth, rcm, triage, diagnostics, clinical_trial,
+close_agent, treasury_liq, audit_comp, credit_risk, tax_agent,
+sdr, repurpose, voice_ai, market_intel, pr_agent, proposal_gen, email_seq,
+cust_success, micro_learn, grading, career_track, admissions, research_asst,
 parent_comm, grant_writer, fin_advisor, sub_nego, tax_opt, micro_invest,
 fraud_watch, budget_arch, debt_payoff, homework, meal_plan, development,
 stories, coach, iep_advocate, inventory, pricing_strat, supply_chain,
 returns_agent, vendor_nego, store_ops, contract_analyze, compliance_mon,
 policy_writer, reg_nav, dispute_res, listing_gen, market_comp, lease_review,
-lead_nurture, showing_sched, seo_content, campaign_opt, ab_analyst,
-brand_voice, attrib_analyst, resume_screen, interview_arch, onboard_agent,
-comp_analyst, perf_mgmt, bookkeeper, invoice_agent, audit_prep, tax_prep,
-fin_reporter, claims_agent, underwrite, policy_comp, ins_compliance,
-client_intake, store_ops
+lead_nurture, showing_sched, open_house, seo_content, campaign_opt,
+ab_analyst, brand_voice, attrib_analyst, social_mgr, resume_screen,
+interview_arch, onboard_agent, comp_analyst, perf_mgmt, bookkeeper,
+invoice_agent, audit_prep, tax_prep, fin_reporter, payroll_spec,
+claims_agent, underwrite, policy_comp, ins_compliance, client_intake,
+renewal_spec, cost_est, proj_coord, rfi_drafter, site_report, spec_review,
+change_mgmt, due_diligence, market_sizing, proposal_writer, strat_deck,
+exec_brief, board_prep, decision_frame, exec_comms, okr_agent,
+event_plan, guest_exp, menu_eng, rev_mgmt, staff_sched,
+route_opt, warehouse_ops, carrier_nego, customs_comp, demand_plan
 ```
 
 ## Staging Schema for New Content
