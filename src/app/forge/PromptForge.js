@@ -713,17 +713,18 @@ const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #1a1d2e; }
-  ::-webkit-scrollbar-thumb { background: #2e3248; border-radius: 3px; }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #1e2030; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #2a2d42; }
 
-  body { background: #13151f; min-height: 100vh; }
+  body { background: #0f1117; min-height: 100vh; }
 
   .agent-card {
-    background: #1c1f30;
-    border: 1px solid #2a2d42;
-    border-radius: 10px;
-    padding: 20px 18px 42px;
+    background: #161822;
+    border: 1px solid #1e2030;
+    border-radius: 12px;
+    padding: 24px 22px 46px;
     cursor: pointer;
     position: relative;
     transition: all 0.18s ease;
@@ -731,113 +732,147 @@ const CSS = `
   }
   .agent-card::after {
     content: 'Generate →';
-    position: absolute; bottom: 14px; right: 14px;
-    font-size: 10px; color: #3a3d52; font-family: 'Inter', sans-serif;
-    font-weight: 500; transition: color 0.18s;
+    position: absolute; bottom: 16px; right: 16px;
+    font-size: 10px; color: #2a2d42; font-family: 'Inter', sans-serif;
+    font-weight: 500; letter-spacing: 0.02em; transition: all 0.18s;
   }
   .agent-card:hover {
-    border-color: var(--ac);
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--ac)22;
-    background: #1f2236;
+    border-color: rgba(245,197,24,0.25);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    background: #1a1d2a;
   }
   .agent-card:hover::after { color: var(--ac); }
-  .agent-card:active { transform: translateY(-2px); }
-  .agent-card.locked { opacity: 0.35; cursor: not-allowed; }
-  .agent-card.locked:hover { transform: none; box-shadow: none; border-color: #2a2d42; background: #1c1f30; }
-  .agent-card.locked::after { content: '🔒 Pro Only'; color: #3a3d52; }
-.agent-new-badge {
-    position: absolute; top: 10px; right: 10px;
-    background: #f5c518; color: #13151f;
-    font-size: 8px; font-weight: 800; letter-spacing: 0.1em;
-    text-transform: uppercase; padding: 2px 7px; border-radius: 4px;
+  .agent-card:active { transform: translateY(-1px); transition-duration: 0.06s; }
+  .agent-card.locked { opacity: 0.3; cursor: not-allowed; }
+  .agent-card.locked:hover { transform: none; box-shadow: none; border-color: #1e2030; background: #161822; }
+  .agent-card.locked::after { content: '🔒 Pro'; color: #2a2d42; }
+  .agent-new-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: #f5c518; color: #0f1117;
+    font-size: 8px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
   }
+
   .btn {
-    background: none; border: 1px solid #2e3248; color: #6b7280;
-    padding: 8px 16px; font-family: 'Inter', sans-serif;
+    background: none; border: 1px solid #1e2030; color: #6b7280;
+    padding: 10px 20px; font-family: 'Inter', sans-serif;
     font-size: 12px; font-weight: 500; cursor: pointer;
     border-radius: 8px; transition: all 0.14s; white-space: nowrap;
   }
-  .btn:hover { border-color: #4a4d62; color: #9ca3af; background: #1c1f30; }
-  .btn.primary { background: #f5c518; border-color: #f5c518; color: #13151f; font-weight: 600; }
-  .btn.primary:hover { background: #ffd740; border-color: #ffd740; color: #13151f; }
+  .btn:hover { border-color: #2e3248; color: #9ca3af; background: rgba(255,255,255,0.02); }
+  .btn:active { transform: scale(0.98); transition-duration: 0.06s; }
+  .btn.primary { background: #f5c518; border-color: #f5c518; color: #0f1117; font-weight: 600; }
+  .btn.primary:hover { background: #f7cc33; border-color: #f7cc33; }
+  .btn.primary:active { background: #e5b616; }
   .btn.success { background: #10b981; border-color: #10b981; color: #fff; }
-  .btn.danger { border-color: rgba(239,68,68,0.4); color: #ef4444; }
-  .btn.danger:hover { background: #ef4444; border-color: #ef4444; color: #fff; }
-  .btn.accent { border-color: rgba(245,197,24,0.4); color: #f5c518; }
-  .btn.accent:hover { background: #f5c518; border-color: #f5c518; color: #13151f; }
-  .btn:disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+  .btn.danger { border-color: rgba(239,68,68,0.3); color: #ef4444; }
+  .btn.danger:hover { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.5); }
+  .btn.accent { border-color: rgba(245,197,24,0.3); color: #f5c518; }
+  .btn.accent:hover { background: rgba(245,197,24,0.08); border-color: rgba(245,197,24,0.5); }
+  .btn.iron { border-color: #1e2030; color: #374151; }
+  .btn:disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; }
 
   .ind-tab {
     background: none; border: none; border-bottom: 2px solid transparent;
-    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
-    cursor: pointer; padding: 10px 16px; color: #4b5563;
-    transition: all 0.14s; white-space: nowrap;
+    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
+    cursor: pointer; padding: 12px 16px; color: #374151;
+    transition: all 0.14s; white-space: nowrap; position: relative;
   }
-  .ind-tab:hover { color: #9ca3af; }
+  .ind-tab:hover { color: #6b7280; }
   .ind-tab.on { color: #f5c518; border-bottom-color: #f5c518; }
+  .ind-tab.on::after {
+    content: ''; position: absolute; bottom: -1px; left: 25%; right: 25%;
+    height: 4px; background: #f5c518; border-radius: 2px 2px 0 0;
+    filter: blur(6px); opacity: 0.5;
+  }
 
   .nav-tab {
     background: none; border: none; border-bottom: 2px solid transparent;
     font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
-    cursor: pointer; padding: 10px 18px; color: #4b5563; transition: all 0.14s;
+    cursor: pointer; padding: 12px 20px; color: #374151; transition: all 0.14s;
+    letter-spacing: 0.01em;
   }
-  .nav-tab:hover { color: #9ca3af; }
-  .nav-tab.on { color: #f5c518; border-bottom-color: #f5c518; }
+  .nav-tab:hover { color: #6b7280; }
+  .nav-tab.on { color: #e5e7eb; border-bottom-color: #f5c518; font-weight: 600; }
 
   .pill {
-    background: none; border: 1px solid #2e3248; color: #6b7280;
-    padding: 5px 14px; font-family: 'Inter', sans-serif; font-size: 12px;
+    background: none; border: 1px solid #1e2030; color: #6b7280;
+    padding: 6px 16px; font-family: 'Inter', sans-serif; font-size: 12px;
     font-weight: 500; cursor: pointer; border-radius: 20px; transition: all 0.14s;
   }
-  .pill:hover { border-color: #4a4d62; color: #9ca3af; }
-  .pill.on { border-color: #f5c518; color: #f5c518; background: rgba(245,197,24,0.08); }
+  .pill:hover { border-color: #2e3248; color: #9ca3af; }
+  .pill.on { border-color: rgba(245,197,24,0.4); color: #f5c518; background: rgba(245,197,24,0.06); }
 
   .finput {
-    background: #1c1f30; border: 1px solid #2e3248; color: #e5e7eb;
-    padding: 10px 14px; font-family: 'Inter', sans-serif; font-size: 13px;
+    background: #12141c; border: 1px solid #1e2030; color: #e5e7eb;
+    padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 13px;
     border-radius: 8px; outline: none; width: 100%; transition: border-color 0.14s;
+    line-height: 1.6;
   }
-  .finput:focus { border-color: #f5c518; }
-  .finput::placeholder { color: #374151; }
-  textarea.finput { resize: vertical; min-height: 80px; line-height: 1.6; }
+  .finput:focus { border-color: rgba(245,197,24,0.5); box-shadow: 0 0 0 3px rgba(245,197,24,0.06); }
+  .finput::placeholder { color: #2a2d42; }
+  textarea.finput { resize: vertical; min-height: 80px; }
 
   .lib-card {
-    background: #1c1f30; border: 1px solid #2a2d42; border-radius: 10px;
-    padding: 18px 20px; cursor: pointer; transition: all 0.14s;
+    background: #161822; border: 1px solid #1e2030; border-radius: 12px;
+    padding: 20px 22px; cursor: pointer; transition: all 0.14s;
   }
-  .lib-card:hover { border-color: #4a4d62; background: #1f2236; }
+  .lib-card:hover { border-color: rgba(245,197,24,0.15); background: #1a1d2a; }
 
+  .pout {
+    border-left: 2px solid #f5c518;
+    padding-left: 24px;
+  }
   .pout h2 {
-    font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600;
+    font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
     letter-spacing: 0.1em; text-transform: uppercase; color: #f5c518;
-    margin: 24px 0 10px; padding-bottom: 8px; border-bottom: 1px solid #2a2d42;
+    margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #1e2030;
   }
   .pout h2:first-child { margin-top: 0; }
   .pout p {
-    font-family: 'Inter', sans-serif; color: #d1d5db;
-    line-height: 1.8; font-size: 14px; margin-bottom: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace; color: #c9cdd6;
+    line-height: 1.8; font-size: 13px; margin-bottom: 4px;
   }
 
   @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  .fu { animation: fadeUp 0.24s ease forwards; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: 200px 0; }
+  }
+  .fu { animation: fadeUp 0.2s ease forwards; }
+
+  .stream-bar {
+    height: 2px; border-radius: 1px; margin-top: 16px;
+    background: linear-gradient(90deg, transparent, #f5c518, transparent);
+    background-size: 200px 100%;
+    animation: shimmer 1.2s ease-in-out infinite;
+  }
 
   .overlay {
-    position: fixed; inset: 0; background: rgba(13,15,25,0.85);
+    position: fixed; inset: 0; background: rgba(8,9,14,0.8);
     display: flex; align-items: center; justify-content: center;
-    z-index: 500; backdrop-filter: blur(12px); animation: fadeUp 0.18s ease;
+    z-index: 500; backdrop-filter: blur(16px); animation: fadeUp 0.18s ease;
   }
   .modal {
-    background: #1c1f30; border: 1px solid #2e3248; border-radius: 14px;
-    padding: 32px; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    background: #161822; border: 1px solid #1e2030; border-radius: 14px;
+    padding: 36px; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
   }
 
   .ind-nav {
     display: flex; overflow-x: auto; gap: 0;
-    border-bottom: 1px solid #2a2d42; scrollbar-width: none;
+    border-bottom: 1px solid #1e2030; scrollbar-width: none;
   }
   .ind-nav::-webkit-scrollbar { display: none; }
+
+  @media (max-width: 640px) {
+    .agent-card { padding: 20px 18px 42px; }
+    .modal { padding: 24px; }
+    .btn { padding: 10px 16px; }
+    .ind-tab { padding: 10px 12px; font-size: 11px; min-height: 44px; }
+    .nav-tab { padding: 10px 14px; min-height: 44px; }
+  }
 `
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -1028,7 +1063,7 @@ export default function PromptForge() {
   if (!mounted) return null
 
   return (
-    <div style={{ minHeight: '100vh', background: '#13151f', color: '#d1d5db', fontFamily: "'Inter', sans-serif", position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: '#0f1117', color: '#c9cdd6', fontFamily: "'Inter', sans-serif", position: 'relative' }}>
       <style>{CSS}</style>
 
 
@@ -1036,7 +1071,7 @@ export default function PromptForge() {
       <button onClick={() => { setWStep(0); setShowWalkthrough(true) }} style={{
         position: 'fixed', bottom: 24, right: 24, zIndex: 400,
         width: 34, height: 34, borderRadius: '50%',
-        background: '#1c1f30', border: '1px solid #2e3248',
+        background: '#161822', border: '1px solid #1e2030',
         color: '#6b7280', fontFamily: "'Inter', sans-serif",
         fontSize: 14, fontWeight: 600, cursor: 'pointer', transition: 'all 0.14s',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -1086,7 +1121,7 @@ export default function PromptForge() {
             <p style={{ color: '#9ca3af', fontSize: 14, lineHeight: 1.7, marginBottom: 22 }}>
               You've used your {FREE_LIMIT} free generates. Unlock unlimited access.
             </p>
-            <div style={{ background: '#13151f', border: '1px solid #2e3248', borderRadius: 10, padding: 18, marginBottom: 24 }}>
+            <div style={{ background: '#0f1117', border: '1px solid #1e2030', borderRadius: 10, padding: 18, marginBottom: 24 }}>
               {['Unlimited prompt generation', 'Unlimited library saves', 'Custom agent builder', 'All industry archetypes', 'Team sharing (coming soon)'].map(f => (
                 <div key={f} style={{ display: 'flex', gap: 10, marginBottom: 8, fontSize: 13, color: '#9ca3af', alignItems: 'center' }}>
                   <span style={{ color: '#10b981', flexShrink: 0 }}>✓</span>{f}
@@ -1161,27 +1196,24 @@ export default function PromptForge() {
       )}
 
       {/* ── Main Layout ── */}
-      <div style={{ maxWidth: 1040, margin: '0 auto', padding: '48px 24px', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 1040, margin: '0 auto', padding: '56px 24px', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 48, flexWrap: 'wrap', gap: 20 }}>
           <div>
-            <div style={{ fontSize: 9, color: '#3a2a14', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 8, fontFamily: "'DM Mono', monospace" }}>
-              ⚒ &nbsp; The Smithy of Minds
-            </div>
             <h1 style={{
-              fontFamily: "'Cinzel', serif", fontWeight: 900,
-              fontSize: 'clamp(28px, 5vw, 52px)', letterSpacing: '0.06em', lineHeight: 0.95,
-              color: '#f0f2ff',
-              marginBottom: 8,
-            }}>PROMPT FORGE</h1>
-            <p style={{ fontSize: 10, color: '#2a1a0a', letterSpacing: '0.14em', textTransform: 'uppercase', fontFamily: "'DM Mono', monospace" }}>
-              One strike · Fully forged agent prompt · Ready to deploy
+              fontFamily: "'Inter', sans-serif", fontWeight: 800,
+              fontSize: 'clamp(28px, 5vw, 36px)', letterSpacing: '-0.02em', lineHeight: 1,
+              color: '#e5e7eb',
+              marginBottom: 10,
+            }}>PROMPT <span style={{ color: '#f5c518' }}>FORGE</span></h1>
+            <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.6, maxWidth: 420 }}>
+              Generate deployment-ready AI agent prompts in one click. Pick an industry, pick a role, deploy.
             </p>
           </div>
 
           {/* Usage widget */}
-          <div style={{ background: '#1c1f30', border: '1px solid #2e3248', borderRadius: 12, padding: '14px 18px', minWidth: 180 }}>
+          <div style={{ background: '#161822', border: '1px solid #1e2030', borderRadius: 12, padding: '16px 20px', minWidth: 180 }}>
             {isPro ? (
               <div>
                 <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500, marginBottom: 6 }}>Plan</div>
@@ -1196,7 +1228,7 @@ export default function PromptForge() {
                   <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Free Plan</span>
                   <span style={{ fontSize: 12, color: remaining > 0 ? '#f5c518' : '#ef4444', fontWeight: 600 }}>{remaining}/{FREE_LIMIT} left</span>
                 </div>
-                <div style={{ background: '#2e3248', borderRadius: 3, height: 4, marginBottom: 12, overflow: 'hidden' }}>
+                <div style={{ background: '#1e2030', borderRadius: 3, height: 3, marginBottom: 12, overflow: 'hidden' }}>
                   <div style={{
                     height: '100%', borderRadius: 2,
                     width: `${Math.min(100, (usage / FREE_LIMIT) * 100)}%`,
@@ -1214,11 +1246,11 @@ export default function PromptForge() {
         </div>
 
         {/* Main Nav */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #2a2d42', marginBottom: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #1e2030', marginBottom: 0 }}>
           <div style={{ display: 'flex' }}>
             <button className={`nav-tab ${view === 'forge' ? 'on' : ''}`} onClick={() => { setView('forge'); reset() }}>Forge</button>
             <button className={`nav-tab ${view === 'library' ? 'on' : ''}`} onClick={() => setView('library')}>
-              Library {library.length > 0 && <span style={{ color: '#2a1a08', marginLeft: 3 }}>({library.length})</span>}
+              Library {library.length > 0 && <span style={{ color: '#374151', marginLeft: 3 }}>({library.length})</span>}
             </button>
             <button className={`nav-tab ${view === 'starter' ? 'on' : ''}`} onClick={() => setView('starter')}>Starter</button>
           </div>
@@ -1239,7 +1271,7 @@ export default function PromptForge() {
               ))}
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(185px, 1fr))', gap: 9 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12 }}>
               {currentAgents.map((agent, i) => {
                 const locked = !isPro && i >= FREE_LIMIT && atLimit
                 return (
@@ -1262,15 +1294,15 @@ export default function PromptForge() {
         {contextAgent && (
           <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)',
+            background: 'rgba(8,9,14,0.8)', backdropFilter: 'blur(16px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             zIndex: 1000, padding: 20,
           }} onClick={e => { if (e.target === e.currentTarget) setContextAgent(null) }}
              onKeyDown={e => { if (e.key === 'Escape') setContextAgent(null) }}>
             <div style={{
-              background: '#1c1f30', border: '1px solid #2a2d42', borderRadius: 14,
-              padding: 28, maxWidth: 480, width: '100%',
-              boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+              background: '#161822', border: '1px solid #1e2030', borderRadius: 14,
+              padding: 36, maxWidth: 480, width: '100%',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.5)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
                 <span style={{ fontSize: 22 }}>{contextAgent.icon}</span>
@@ -1330,41 +1362,30 @@ export default function PromptForge() {
             </div>
 
             <div style={{
-              background: '#1c1f30',
-              border: `1px solid ${loading ? selected.color + '44' : '#2a2d42'}`,
-              borderRadius: 12, padding: 32, minHeight: 360,
-              transition: 'border-color 0.3s',
+              background: '#161822',
+              border: `1px solid ${loading ? 'rgba(245,197,24,0.15)' : '#1e2030'}`,
+              borderRadius: 12, padding: 36, minHeight: 360,
+              transition: 'border-color 0.18s',
             }}>
               {loading && !prompt ? (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 300, gap: 20 }}>
                   <div style={{
-                    width: 40, height: 40,
-                    border: '2px solid #2e3248',
-                    borderTop: `2px solid ${selected.color}`,
+                    width: 32, height: 32,
+                    border: '2px solid #1e2030',
+                    borderTop: '2px solid #f5c518',
                     borderRadius: '50%', animation: 'spin 0.75s linear infinite',
-                    boxShadow: `0 0 12px ${selected.color}40`,
                   }} />
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ color: selected.color, fontSize: 12, fontWeight: 500, marginBottom: 4 }}>
-                      Striking the forge{dots}
+                    <div style={{ color: '#e5e7eb', fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
+                      Generating{dots}
                     </div>
-                    <div style={{ color: '#6b7280', fontSize: 12 }}>Generating {selected.name} prompt...</div>
+                    <div style={{ color: '#374151', fontSize: 12 }}>{selected.name}</div>
                   </div>
                 </div>
               ) : prompt ? (
                 <div>
                   <div className="pout fu">{parsePrompt(prompt)}</div>
-                  {loading && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 12 }}>
-                      <div style={{
-                        width: 14, height: 14,
-                        border: '2px solid #2e3248',
-                        borderTop: `2px solid ${selected.color}`,
-                        borderRadius: '50%', animation: 'spin 0.75s linear infinite',
-                      }} />
-                      <span style={{ color: selected.color, fontSize: 11, fontWeight: 500 }}>Generating{dots}</span>
-                    </div>
-                  )}
+                  {loading && <div className="stream-bar" />}
                 </div>
               ) : null}
             </div>
