@@ -178,17 +178,17 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 
 | Category | Count |
 |----------|-------|
-| Industries | 8 |
-| Total agents | 47 (12 General + 5×7 others) |
-| Agents with fixedPrompt | 1 (SOP Generator) |
-| Starter prompts | 16 |
+| Industries | 41 (10 Pro-only) |
+| Total agents | 239 |
+| Agents with fixedPrompt | 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer) |
+| Starter prompts | 24 |
 | Starter categories | 4 (Work, Writing, Learning, Life) |
 
 ## Reserved ID Prefixes
 
 When creating new content, use these conventions:
 - Agent IDs: descriptive snake_case (e.g., `resume_screen`, `bid_est`)
-- Starter IDs: `s` + next sequential number (next available: `s17`)
+- Starter IDs: `s` + next sequential number (next available: `s25`)
 - Industry names: title case, 1-3 words, ampersand OK (e.g., `Comms & Sales`)
 
 ## ID Uniqueness Check
@@ -196,13 +196,51 @@ When creating new content, use these conventions:
 Before adding any new agent, verify the ID doesn't exist in this complete list:
 
 ```
-sop_gen, treasury, cyber, code_review, data, legal, pm, security, finance,
-market, support, content, devops, med_scribe, prior_auth, rcm, triage,
-diagnostics, close_agent, treasury_liq, audit_comp, credit_risk, tax_agent,
-sdr, repurpose, voice_ai, market_intel, pr_agent, micro_learn, grading,
-career_track, admissions, research_asst, fin_advisor, sub_nego, tax_opt,
-micro_invest, fraud_watch, homework, scheduler, development, stories,
-coach, inventory, commerce, supply_chain, prop_val, contract_rev
+sop_gen, email_draft, cyber, code_review, data, meeting_prep, pm, security,
+finance, market, support, content, devops, pres_builder, nego_strat,
+med_scribe, prior_auth, rcm, triage, diagnostics, clinical_trial,
+close_agent, treasury_liq, audit_comp, credit_risk, tax_agent,
+sdr, repurpose, voice_ai, market_intel, pr_agent, proposal_gen, email_seq,
+cust_success, micro_learn, grading, career_track, admissions, research_asst,
+parent_comm, grant_writer, fin_advisor, sub_nego, tax_opt, micro_invest,
+fraud_watch, budget_arch, debt_payoff, homework, meal_plan, development,
+stories, coach, iep_advocate, inventory, pricing_strat, supply_chain,
+returns_agent, vendor_nego, store_ops, contract_analyze, compliance_mon,
+policy_writer, reg_nav, dispute_res, listing_gen, market_comp, lease_review,
+lead_nurture, showing_sched, open_house, seo_content, campaign_opt,
+ab_analyst, brand_voice, attrib_analyst, social_mgr, resume_screen,
+interview_arch, onboard_agent, comp_analyst, perf_mgmt, bookkeeper,
+invoice_agent, audit_prep, tax_prep, fin_reporter, payroll_spec,
+claims_agent, underwrite, policy_comp, ins_compliance, client_intake,
+renewal_spec, cost_est, proj_coord, rfi_drafter, site_report, spec_review,
+change_mgmt, due_diligence, market_sizing, proposal_writer, strat_deck,
+exec_brief, board_prep, decision_frame, exec_comms, okr_agent, event_plan,
+guest_exp, menu_eng, rev_mgmt, staff_sched, route_opt, warehouse_ops,
+carrier_nego, customs_comp, demand_plan, ag_compliance, crop_plan,
+farm_finance, livestock_mgmt, precision_ag, dealer_crm, parts_mgmt,
+service_advisor, vehicle_appr, warranty_agent, aero_cert, flight_ops,
+ground_ops, mro_agent, safety_mgmt, branch_ops, comm_lender, kyc_agent,
+loan_orig, portfolio_mgr, bid_est, inspect_agent, material_calc,
+safety_comp, sched_opt, incident_resp, pentest_plan, soc_analyst,
+threat_model, vuln_mgmt, dental_treatment, ins_verify, optical_sales,
+patient_comms, practice_mgmt, abandon_cart, listing_opt, pricing_intel,
+product_desc, review_mgmt, energy_audit, field_service, grid_ops,
+renew_dev, util_reg, class_sched, client_progress, nutrition_plan,
+program_design, wellness_coach, client_onboard, freelance_pitch,
+portfolio_build, rate_calc, scope_guard, lean_agent, maint_plan,
+proc_agent, prod_sched, quality_ctrl, audience_dev, content_cal,
+copy_editor, editorial_agent, rights_mgmt, constituent_svc, grant_writer,
+impact_report, policy_analyst, volunteer_coord, clin_trial, drug_safety,
+med_affairs, pharma_qc, reg_submit, lease_mgmt, maint_coord,
+prop_financials, tenant_comms, tenant_screen, employer_brand, job_desc,
+offer_letter, recruit_pipe, source_agent, churn_analyst, feature_prior,
+prd_writer, release_notes, user_research, athlete_perf, fan_engage,
+game_plan, scout_analyst, sports_ops, pet_comms, practice_growth,
+vet_billing, vet_records, vet_triage, agent_arch, tool_builder,
+eval_agent, multi_orch, soul_writer, memory_arch, skill_builder,
+openclaw_deploy, agent_sec, agent_test, osint_planner, digi_footprint,
+threat_intel, cred_exposure, domain_recon, darkweb_mon, socmedia_intel,
+corp_dd, disinfo_analyst, geoloc_intel
 ```
 
 ## Staging Schema for New Content

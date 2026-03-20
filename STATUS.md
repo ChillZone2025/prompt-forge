@@ -60,6 +60,7 @@
 | Sports & Athletics | 5 | Live |
 | Veterinary | 5 | Live |
 | AI Agent Development | 10 | Live (Pro-only) |
+| Cyber Intelligence | 10 | Live (Pro-only) |
 
 ## What's Currently Staged (content/staging/)
 

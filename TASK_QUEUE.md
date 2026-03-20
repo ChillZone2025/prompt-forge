@@ -24,15 +24,30 @@ Inspired by production agent orchestration patterns (OpenClaw, CrewAI, LangGraph
 
 ## Active Tasks
 
-<!-- Agents: add new tasks here. Format:
-### TASK-[number]: [description]
-- **Status:** open
-- **Assigned:** unassigned
-- **Priority:** high/medium/low
-- **Created:** YYYY-MM-DD
-- **Notes:** (any context)
--->
+No active tasks.
 
 ## Completed Tasks
 
-<!-- Move completed tasks here with a completion date -->
+### TASK-003: Cyber Intelligence industry (10 agents, Pro-only flagship)
+- **Status:** deployed
+- **Assigned:** Prompt Agent (staged) / Forger (integrated)
+- **Priority:** high
+- **Created:** 2026-03-20
+- **Completed:** 2026-03-20
+- **Notes:** 10 agents integrated into PromptForge.js as Pro-only industry. Flagship premium industry targeting OSINT professionals, threat hunters, fraud investigators, corporate intel teams, and journalists. All agents reference real OSINT tools and frameworks by name. Industry weighted score: 9.05 avg.
+
+### TASK-002: AI Agent Development industry (10 agents, Pro-only)
+- **Status:** deployed
+- **Assigned:** Prompt Agent (staged) / Forger (integrated)
+- **Priority:** high
+- **Created:** 2026-03-19
+- **Completed:** 2026-03-20
+- **Notes:** 10 agents integrated into PromptForge.js as first Pro-only industry (expanded from 7 staged to 10 live). Targets Claude Code, CrewAI, LangGraph users. Industry weighted score: 9.25.
+
+### TASK-001: 20 new industries (100 agents)
+- **Status:** deployed
+- **Assigned:** Prompt Agent (staged) / Forger (integrated)
+- **Priority:** high
+- **Created:** 2026-03-19
+- **Completed:** 2026-03-20
+- **Notes:** 100 agents across 20 new industries integrated into PromptForge.js. All scored against Revenue Optimization Framework. All IDs verified unique. All descs under 50 chars with real frameworks/tools.
