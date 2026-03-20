@@ -75,8 +75,8 @@ Prompt Forge has **no backend database**. All data storage is client-side:
 ### Prompt Generation Flow
 1. User clicks an agent card → `generate()` function fires
 2. If agent has `fixedPrompt` property → display it directly (no API call)
-3. Otherwise → POST to `/api/generate` with `{ agentName, agentDesc }`
-4. `/api/generate` calls Claude API using the `buildPrompt()` template
+3. Otherwise → POST to `/api/generate` with `{ agentName, agentDesc, userContext (optional) }`
+4. `/api/generate` calls Claude API using the `buildPrompt()` v2 template (XML-tagged, 8-section output)
 5. Response streamed back and displayed in the prompt output panel
 6. Usage counter incremented in localStorage
 
