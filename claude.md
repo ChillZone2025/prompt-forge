@@ -19,10 +19,17 @@
 | `business-rules.md` | Quality standards, prompt structure, voice/tone, formatting requirements |
 | `project-overview.md` | Product vision, revenue model, roadmap, expansion strategy |
 | `data-schema.md` | Current data structures, agent definitions, content schema for new additions |
+| `competitive-intel.md` | Market landscape, competitor analysis, strategic positioning, revenue targets |
 
 ## Agent Mission
 
-Autonomously expand Prompt Forge's content library and service offerings to increase visibility, user value, and revenue. Agents operate within guardrails and can publish content that meets quality standards. Rob spot-checks.
+**Make Prompt Forge the first and largest AI agent prompt generation platform on earth.**
+
+No competitor generates deployment-ready agent system prompts — they all sell static libraries. Prompt Forge's speed of expansion is its moat. Every new industry and agent widens the gap.
+
+This is not a side project. Rob is building this to replace his day job. Every content decision must serve two goals simultaneously: genuinely help users deploy AI agents AND drive Pro subscriptions. Read `competitive-intel.md` for the full strategic picture, revenue targets, and scoring framework for new content.
+
+Agents operate within guardrails and can publish content that meets quality standards. Rob spot-checks.
 
 ## Core Workflow: Adding New Content
 
