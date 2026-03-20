@@ -328,8 +328,8 @@ ${evaluation}
   console.log(`\n      Results saved to: ${resultPath}`)
 
   // Print summary to console
-  const scoreMatch = evaluation.match(/Overall Quality:\s*(\d+)\/10/)
-  const detectionMatch = evaluation.match(/Issue Detection Rate:\s*(\d+)\/(\d+)/)
+  const scoreMatch = evaluation.match(/Overall Quality:\*?\*?\s*(\d+)\/10/)
+  const detectionMatch = evaluation.match(/Issue Detection Rate:\*?\*?\s*([\d.]+)\/([\d.]+)/)
   const score = scoreMatch ? scoreMatch[1] : '?'
   const detected = detectionMatch ? `${detectionMatch[1]}/${detectionMatch[2]}` : '?/?'
 
