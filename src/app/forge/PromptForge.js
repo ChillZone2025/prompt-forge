@@ -53,6 +53,7 @@ The final SOP must include:
     { id: 'support',     icon: '◷', name: 'Customer Support',       desc: 'De-escalation, resolution, empathy',       color: '#4dc87a' },
     { id: 'content',     icon: '✦', name: 'Content Strategist',     desc: 'SEO, brand voice, editorial calendar',      color: '#a04dc8' },
     { id: 'devops',      icon: '∞', name: 'DevOps Engineer',        desc: 'CI/CD, infra, incident response',           color: '#4daed4' },
+    { id: 'pres_builder',icon: '🖥', name: 'Presentation Builder',  desc: 'Slide outlines, speaker notes, deck structure', color: '#f5c518', isNew: true },
   ],
   Healthcare: [
     { id: 'med_scribe',  icon: '✍', name: 'Medical Scribe',         desc: 'Clinical notes, EMR integration',           color: '#4db88c' },
@@ -60,6 +61,7 @@ The final SOP must include:
     { id: 'rcm',         icon: '💰', name: 'RCM Specialist',        desc: 'Billing, coding, A/R follow-ups',           color: '#d4a84d' },
     { id: 'triage',      icon: '🏥', name: 'Patient Triage Agent',  desc: 'Symptom checking, care routing',            color: '#c44d4d' },
     { id: 'diagnostics', icon: '🔬', name: 'Diagnostics Assistant', desc: 'Radiology & dermatology flagging',          color: '#9b7fd4' },
+    { id: 'clinical_trial',icon: '🧬', name: 'Clinical Trial Coordinator', desc: 'Protocol summaries, consent forms, site reports', color: '#4daed4', isNew: true },
   ],
   Finance: [
     { id: 'close_agent', icon: '📊', name: 'Autonomous Close Agent', desc: 'Financial close, multi-entity consolidation', color: '#d4a84d' },
@@ -97,6 +99,7 @@ Label each output clearly by platform. Include posting tips (best time, hashtags
     { id: 'pr_agent',    icon: '📰', name: 'PR & Media Agent',      desc: 'Journalist targeting, pitch drafting',      color: '#c46896' },
     { id: 'proposal_gen',icon: '📝', name: 'Proposal Generator',   desc: 'Client proposals, scope docs, pricing sections', color: '#d4a84d', isNew: true },
     { id: 'email_seq',   icon: '📧', name: 'Email Sequence Writer', desc: 'Drip campaigns, nurture flows, follow-up cadences', color: '#4daed4', isNew: true },
+    { id: 'cust_success',icon: '🎯', name: 'Customer Success Agent', desc: 'Onboarding playbooks, churn prevention, QBR prep', color: '#4db88c', isNew: true },
   ],
   Education: [
     { id: 'micro_learn', icon: '🎯', name: 'Curriculum Designer',   desc: 'Lesson plans, learning paths, assessment design',          color: '#4daed4' },
@@ -204,6 +207,7 @@ STEP 5 — SUMMARY: End with a brief recap of the key concept and one study tip 
     { id: 'lease_review', icon: '📄', name: 'Lease Review Agent',   desc: 'Clause analysis, tenant screening, renewal terms',         color: '#d4834d', isNew: true },
     { id: 'lead_nurture', icon: '🤝', name: 'Lead Nurture Agent',   desc: 'Follow-up sequences, client segmentation, drip campaigns', color: '#4db88c', isNew: true },
     { id: 'showing_sched',icon: '🗓', name: 'Showing Scheduler',    desc: 'Appointment coordination, route planning, availability',   color: '#34d399', isNew: true },
+    { id: 'open_house',  icon: '🏠', name: 'Open House Agent',     desc: 'Marketing flyers, follow-up scripts, social posts',        color: '#9b7fd4', isNew: true },
   ],
   'Marketing & Growth': [
     { id: 'seo_content',    icon: '🔍', name: 'SEO Content Agent',    desc: 'Keyword strategy, content briefs, SERP analysis',           color: '#4db88c', isNew: true },
@@ -211,6 +215,7 @@ STEP 5 — SUMMARY: End with a brief recap of the key concept and one study tip 
     { id: 'ab_analyst',     icon: '🧪', name: 'A/B Test Analyst',     desc: 'Experiment design, statistical significance, variant recs', color: '#4d8cd4', isNew: true },
     { id: 'brand_voice',    icon: '🎨', name: 'Brand Voice Agent',    desc: 'Tone guidelines, messaging frameworks, copy review',        color: '#9b7fd4', isNew: true },
     { id: 'attrib_analyst', icon: '🎯', name: 'Attribution Analyst',  desc: 'Multi-touch attribution, funnel analysis, conversion paths',color: '#d4a84d', isNew: true },
+    { id: 'social_mgr',   icon: '📱', name: 'Social Media Manager', desc: 'Content calendars, platform strategy, analytics reports',   color: '#c46896', isNew: true },
   ],
   'HR & People Ops': [
     { id: 'resume_screen',  icon: '📄', name: 'Resume Screener',      desc: 'ATS filtering, candidate ranking, bias reduction',       color: '#4db88c', isNew: true, fixedPrompt: `You are a Senior Recruiting Operations Specialist. Your goal is to systematically evaluate resumes against a job description, providing structured, bias-aware scoring that helps hiring managers make faster, better decisions.
@@ -257,6 +262,7 @@ IMPORTANT: Focus on evidence-based evaluation. Flag any area where unconscious b
     { id: 'audit_prep',    icon: '🔎', name: 'Audit Prep Agent',   desc: 'Document assembly, compliance checks, gap analysis',   color: '#c44d4d', isNew: true },
     { id: 'tax_prep',      icon: '📑', name: 'Tax Prep Agent',     desc: 'Deduction identification, filing checklists, deadlines',color: '#d4834d', isNew: true },
     { id: 'fin_reporter',  icon: '📊', name: 'Financial Reporter', desc: 'P&L statements, cash flow analysis, board reporting',   color: '#4d8cd4', isNew: true },
+    { id: 'payroll_spec', icon: '💵', name: 'Payroll Specialist',  desc: 'Payroll compliance, deduction calculations, reporting',  color: '#d4a84d', isNew: true },
   ],
   Insurance: [
     { id: 'claims_agent',   icon: '📋', name: 'Claims Processor',     desc: 'Claim intake, documentation review, status tracking',    color: '#4daed4', isNew: true },
@@ -264,6 +270,7 @@ IMPORTANT: Focus on evidence-based evaluation. Flag any area where unconscious b
     { id: 'policy_comp',    icon: '⚖', name: 'Policy Comparator',    desc: 'Coverage comparison, gap identification, renewal analysis',color: '#4d8cd4', isNew: true },
     { id: 'ins_compliance', icon: '📜', name: 'Insurance Compliance', desc: 'Regulatory filings, license tracking, audit readiness',   color: '#d4834d', isNew: true },
     { id: 'client_intake',  icon: '🤝', name: 'Client Intake Agent',  desc: 'Needs assessment, quote generation, onboarding',         color: '#e8913a', isNew: true },
+    { id: 'renewal_spec',  icon: '🔁', name: 'Renewal Specialist',   desc: 'Renewal analysis, retention scripts, coverage updates',  color: '#9b7fd4', isNew: true },
   ],
   'Architecture & Engineering': [
     { id: 'cost_est',    icon: '💲', name: 'Cost Estimator',         desc: 'Quantity takeoffs, unit pricing, budget tracking',       color: '#4db88c', isNew: true },
@@ -274,9 +281,57 @@ IMPORTANT: Focus on evidence-based evaluation. Flag any area where unconscious b
   ],
   'Consulting & Strategy': [
     { id: 'change_mgmt',    icon: '🔄', name: 'Change Management Lead', desc: 'Stakeholder mapping, adoption plans, comms',          color: '#e8913a', isNew: true },
-    { id: 'due_diligence',  icon: '🔎', name: 'Due Diligence Agent',    desc: 'CDD, VDD, risk flagging, deal memos',                color: '#c44d4d', isNew: true },
+    { id: 'due_diligence',  icon: '🔎', name: 'Due Diligence Agent',    desc: 'Risk assessment, deal analysis, investment memos',                color: '#c44d4d', isNew: true },
     { id: 'market_sizing',  icon: '📐', name: 'Market Sizing Analyst',  desc: 'TAM/SAM/SOM, bottoms-up modeling',                   color: '#4d8cd4', isNew: true },
-    { id: 'proposal_writer',icon: '📝', name: 'Proposal & SOW Writer',  desc: 'Scope, deliverables, pricing structure',             color: '#4db88c', isNew: true },
+    { id: 'proposal_writer',icon: '📝', name: 'Proposal & SOW Writer',  desc: 'Scope, deliverables, pricing structure',             color: '#4db88c', isNew: true, fixedPrompt: `You are a Senior Consulting Proposal Specialist. Your goal is to help consultants and professional services firms draft complete, client-ready proposals and Statements of Work (SOWs) through a structured discovery process.
+
+Follow these instructions strictly:
+
+STEP 1 — ENGAGEMENT TYPE: Ask the user which type of document they need:
+A. Full proposal (includes problem framing, approach, team, timeline, pricing)
+B. Statement of Work only (scope, deliverables, timeline, pricing)
+C. Proposal refresh (update an existing proposal for a new client or scope)
+
+Wait for their answer.
+
+STEP 2 — DISCOVERY: Ask these questions one at a time. Wait for each answer before asking the next:
+1. Who is the client? (Company name, industry, size)
+2. What problem are you solving for them?
+3. What is your proposed approach or methodology?
+4. What are the key deliverables?
+5. What is the estimated timeline?
+6. What is your pricing model? (Fixed fee, T&M, retainer, milestone-based)
+7. Who is on your delivery team? (Roles and seniority levels)
+
+STEP 3 — DRAFT: Generate the complete document with these sections:
+
+**For Full Proposals:**
+1. Executive Summary — 3-4 sentences framing the client's challenge and your solution
+2. Understanding of the Problem — Demonstrate you understand their situation
+3. Proposed Approach — Methodology, phases, and key activities
+4. Scope & Deliverables — Numbered list with clear descriptions
+5. Timeline & Milestones — Phase-by-phase with dates/durations
+6. Team & Qualifications — Who will do the work and why they're qualified
+7. Investment — Pricing breakdown by phase or deliverable
+8. Terms & Assumptions — Key assumptions, exclusions, change order process
+9. Next Steps — Clear CTA with specific action items
+
+**For SOWs:**
+1. Project Overview — One paragraph
+2. Scope of Work — Detailed numbered deliverables
+3. Out of Scope — Explicit exclusions
+4. Timeline & Milestones — With acceptance criteria per milestone
+5. Pricing & Payment Schedule — Tied to milestones
+6. Assumptions & Dependencies — What the client must provide
+7. Change Order Process — How scope changes are handled
+8. Acceptance Criteria — How deliverables are approved
+
+STEP 4 — REVIEW: After generating the draft, ask:
+- "Want me to adjust the tone, expand any section, or modify the pricing structure?"
+- Offer to generate a one-page executive summary version for initial client outreach
+
+## ACTIVATION PHRASE
+"I need to write a proposal for a consulting engagement. Let's start."` },
     { id: 'strat_deck',     icon: '📊', name: 'Strategy Deck Builder',  desc: 'Frameworks, slide structure, executive narratives',   color: '#9b7fd4', isNew: true },
   ],
   'Executive & Leadership': [
@@ -289,7 +344,7 @@ IMPORTANT: Focus on evidence-based evaluation. Flag any area where unconscious b
   'Hospitality & Events': [
     { id: 'event_plan',  icon: '🎪', name: 'Event Planning Agent',     desc: 'Timelines, vendor coordination, run-of-show docs',    color: '#9b7fd4', isNew: true },
     { id: 'guest_exp',   icon: '🛎', name: 'Guest Experience Agent',   desc: 'Service scripts, complaint resolution, upselling',    color: '#f5c518', isNew: true },
-    { id: 'menu_eng',    icon: '🍽', name: 'Menu Engineering Agent',   desc: 'Pricing strategy, food cost analysis, descriptions',  color: '#4db88c', isNew: true },
+    { id: 'menu_eng',    icon: '🍽', name: 'Menu Design Agent',        desc: 'Pricing strategy, food cost analysis, descriptions',  color: '#4db88c', isNew: true },
     { id: 'rev_mgmt',    icon: '💹', name: 'Revenue Management Agent', desc: 'Dynamic pricing, occupancy optimization, comp sets',  color: '#e8913a', isNew: true },
     { id: 'staff_sched', icon: '🗓', name: 'Staff Scheduling Agent',   desc: 'Shift coverage, labor cost forecasting, compliance',  color: '#4daed4', isNew: true },
   ],
@@ -322,6 +377,14 @@ const STARTER_PROMPTS = [
   { id: 's14', category: 'Life',     color: '#4d8cd4', title: 'Plan My Week',               desc: 'Turn your task list into a realistic schedule.',           prompt: 'Help me plan my week. Organize these into a Mon-Fri schedule. Flag anything overloaded.\n\nTasks:\n[LIST TASKS AND MEETINGS]' },
   { id: 's15', category: 'Life',     color: '#4d8cd4', title: 'Generate My Professional Bio',desc: 'LinkedIn, speaker, or company bio in 30 seconds.',         prompt: 'Write a professional third-person bio under 100 words. Warm but credible.\n\nName: [NAME]\nRole: [ROLE]\nBackground: [KEY FACTS]\nWhere this will be used: [LINKEDIN / SPEAKER PAGE / COMPANY SITE]' },
   { id: 's16', category: 'Work',     color: '#e8913a', title: 'Write a Client Proposal Intro',desc: 'Turn service details into a compelling opening.',         prompt: "Write a compelling opening paragraph for a client proposal. Professional, confident, focused on their problem. Under 100 words.\n\nClient: [COMPANY/PERSON]\nTheir problem: [WHAT THEY NEED]\nMy solution: [WHAT I OFFER]\nKey differentiator: [WHY ME]" },
+  { id: 's17', category: 'Work',     color: '#e8913a', title: 'Write a Status Report',       desc: 'Turn project updates into a structured report.',          prompt: 'Turn these project updates into a clear status report. Include: summary, completed items, in progress, blockers, and next steps.\n\nUpdates:\n[PASTE YOUR UPDATES HERE]' },
+  { id: 's18', category: 'Work',     color: '#e8913a', title: 'Create Interview Questions',  desc: 'Role-specific questions from a job description.',         prompt: 'Generate 10 interview questions for this role. Mix behavioral, technical, and situational. Include what a strong answer looks like for each.\n\nJob description:\n[PASTE JOB DESCRIPTION]' },
+  { id: 's19', category: 'Writing',  color: '#9b7fd4', title: 'Rewrite for Tone',            desc: 'Adjust any text to a different tone instantly.',          prompt: 'Rewrite this text in a [TONE] tone. Keep the same meaning and key points. Show the rewritten version only.\n\nTone: [FORMAL / CASUAL / FRIENDLY / AUTHORITATIVE / EMPATHETIC]\n\nText:\n[PASTE TEXT HERE]' },
+  { id: 's20', category: 'Learning', color: '#4db88c', title: 'Explain This Code',           desc: 'Plain-English explanation of any code snippet.',          prompt: 'Explain this code in plain English. What does it do, how does it work, and what are the key parts? Assume I understand basic programming but not this specific code.\n\nCode:\n[PASTE CODE HERE]' },
+  { id: 's21', category: 'Life',     color: '#4d8cd4', title: 'Write a Thank You Note',      desc: 'Professional or personal gratitude in 60 seconds.',       prompt: 'Write a sincere thank you note. Warm but professional. Under 100 words.\n\nWho: [RECIPIENT]\nWhat for: [REASON]\nTone: [PROFESSIONAL / PERSONAL / HEARTFELT]' },
+  { id: 's22', category: 'Life',     color: '#4d8cd4', title: 'Prep for a Tough Conversation',desc: 'Get talking points for any difficult discussion.',        prompt: 'Help me prepare for a difficult conversation. Give me: (1) how to open, (2) key points to make calmly, (3) how to handle defensiveness, (4) how to close constructively.\n\nSituation: [DESCRIBE THE SITUATION]\nMy goal: [WHAT OUTCOME I WANT]' },
+  { id: 's23', category: 'Work',     color: '#e8913a', title: 'Summarize a Document',        desc: 'Extract key points from any long document.',              prompt: 'Summarize this document. Give me: (1) one-sentence overview, (2) 5 key points, (3) action items or decisions needed.\n\nDocument:\n[PASTE DOCUMENT HERE]' },
+  { id: 's24', category: 'Learning', color: '#4db88c', title: 'Learn From My Mistakes',      desc: 'Analyze what went wrong and how to improve.',             prompt: 'I made a mistake and want to learn from it. Help me analyze: (1) what happened, (2) root cause, (3) what I should do differently next time, (4) one specific action I can take this week to improve.\n\nWhat happened:\n[DESCRIBE THE SITUATION]' },
 ]
 
 const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
