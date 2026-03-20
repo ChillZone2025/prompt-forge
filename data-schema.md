@@ -58,25 +58,23 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 
 ## Complete Agent Registry
 
-### General (12 agents)
+### General (13 agents)
 
-| ID | Icon | Name | Description | Color |
-|----|------|------|-------------|-------|
-| `sop_gen` | 📋 | SOP Generator | Upload any file → get a full Standard Operating Procedure | #f5c518 |
-| `treasury` | ◈ | FX Treasury Analyst | Hedging, derivatives, currency risk | #e8913a |
-| `cyber` | ⬡ | Cyber Investigator | Threat hunting, forensics, OSINT | #4db8c8 |
-| `code_review` | ⟨⟩ | Code Reviewer | Security, performance, best practices | #9b7fd4 |
-| `data` | ∿ | Data Analyst | SQL, Python, insight generation | #4db88c |
-| `legal` | ⚖ | Legal Researcher | Case law, contracts, compliance | #d4834d |
-| `pm` | ◎ | Project Manager | Agile, risk, stakeholder comms | #c46896 |
-| `security` | ⬛ | Security Auditor | Pen testing, vulnerability assessment | #c44d4d |
-| `finance` | ∑ | Financial Modeler | DCF, LBO, valuation, scenarios | #d4a84d |
-| `market` | ◉ | Market Researcher | Competitive intel, trend analysis | #4d8cd4 |
-| `support` | ◷ | Customer Support | De-escalation, resolution, empathy | #4dc87a |
-| `content` | ✦ | Content Strategist | SEO, brand voice, editorial calendar | #a04dc8 |
-| `devops` | ∞ | DevOps Engineer | CI/CD, infra, incident response | #4daed4 |
-
-> Note: `sop_gen` has `isNew: true` and a `fixedPrompt` (skips Claude API).
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `sop_gen` | 📋 | SOP Generator | Upload any file → get a full Standard Operating Procedure | #f5c518 | fixedPrompt, isNew |
+| `email_draft` | ✉ | Email Draft Agent | Professional emails, cold outreach, follow-ups | #e8913a | isNew |
+| `cyber` | ⬡ | Cybersecurity Advisor | Threat assessment, security policies, incident response | #4db8c8 | |
+| `code_review` | ⟨⟩ | Code Reviewer | Security, performance, best practices | #9b7fd4 | |
+| `data` | ∿ | Data Analyst | SQL, Python, insight generation | #4db88c | |
+| `meeting_prep` | 🗣 | Meeting Prep Agent | Agenda drafting, talking points, follow-up summaries | #d4834d | isNew |
+| `pm` | ◎ | Project Manager | Agile, risk, stakeholder comms | #c46896 | |
+| `security` | ⬛ | Security Assessor | Risk analysis, vulnerability scans, security policies | #c44d4d | |
+| `finance` | ∑ | Financial Modeler | Valuation, forecasting, scenario analysis, projections | #d4a84d | |
+| `market` | ◉ | Market Researcher | Competitive intel, trend analysis | #4d8cd4 | |
+| `support` | ◷ | Customer Support | De-escalation, resolution, empathy | #4dc87a | |
+| `content` | ✦ | Content Strategist | SEO, brand voice, editorial calendar | #a04dc8 | |
+| `devops` | ∞ | DevOps Engineer | CI/CD, infra, incident response | #4daed4 | |
 
 ### Healthcare (5 agents)
 
@@ -98,55 +96,123 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `credit_risk` | 📈 | Credit Risk Underwriter | Automated scoring, loan analysis | #4db88c |
 | `tax_agent` | 🧾 | Tax Strategy Agent | Real-time tax tracking, automated filing | #d4834d |
 
-### Comms & Sales (5 agents)
+### Comms & Sales (7 agents)
 
-| ID | Icon | Name | Description | Color |
-|----|------|------|-------------|-------|
-| `sdr` | 📣 | Autonomous SDR | Prospecting, outreach, lead qualification | #e8913a |
-| `repurpose` | ♻ | Content Repurposer | One asset → 50+ social posts | #9b7fd4 |
-| `voice_ai` | 📞 | Voice AI Agent | 24/7 call center, appointment booking | #4db88c |
-| `market_intel` | 🧠 | Market Intelligence | Competitor pricing, strategic alerts | #4d8cd4 |
-| `pr_agent` | 📰 | PR & Media Agent | Journalist targeting, pitch drafting | #c46896 |
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `sdr` | 📣 | Autonomous SDR | Prospecting, outreach, lead qualification | #e8913a | |
+| `repurpose` | ♻ | Content Repurposer | One asset → 50+ social posts | #9b7fd4 | fixedPrompt |
+| `voice_ai` | 📞 | Call Center Agent | Call scripts, objection handling, appointment booking | #4db88c | |
+| `market_intel` | 🧠 | Market Intelligence | Competitor pricing, strategic alerts | #4d8cd4 | |
+| `pr_agent` | 📰 | PR & Media Agent | Journalist targeting, pitch drafting | #c46896 | |
+| `proposal_gen` | 📝 | Proposal Generator | Client proposals, scope docs, pricing sections | #d4a84d | isNew |
+| `email_seq` | 📧 | Email Sequence Writer | Drip campaigns, nurture flows, follow-up cadences | #4daed4 | isNew |
 
-### Education (5 agents)
+### Education (7 agents)
 
-| ID | Icon | Name | Description | Color |
-|----|------|------|-------------|-------|
-| `micro_learn` | 🎯 | Micro-Learning Agent | Custom curricula, progress-based | #4daed4 |
-| `grading` | ✅ | Grading & Feedback | Essays, coding critiques, instant feedback | #4db88c |
-| `career_track` | 🗺 | Career Growth Tracker | Skills vs job market, certification paths | #d4a84d |
-| `admissions` | 🎓 | Admissions Agent | Inquiry to enrollment pipeline mgmt | #9b7fd4 |
-| `research_asst` | 🔭 | Research Assistant | Academic paper synthesis, doctoral support | #d4834d |
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `micro_learn` | 🎯 | Curriculum Designer | Lesson plans, learning paths, assessment design | #4daed4 | |
+| `grading` | ✅ | Grading & Feedback | Essays, coding critiques, instant feedback | #4db88c | |
+| `career_track` | 🗺 | Career Coach Agent | Skills gap analysis, certification paths, job market intel | #d4a84d | |
+| `admissions` | 🎓 | Admissions Agent | Inquiry to enrollment pipeline mgmt | #9b7fd4 | |
+| `research_asst` | 🔭 | Research Assistant | Academic paper synthesis, doctoral support | #d4834d | |
+| `parent_comm` | 💬 | Parent Communicator | Progress reports, behavior updates, conference prep | #c46896 | isNew |
+| `grant_writer` | 💰 | Grant Writer | Education grants, funding applications, budget narratives | #e8913a | isNew |
 
-### Personal Finance (5 agents)
+### Personal Finance (7 agents)
 
-| ID | Icon | Name | Description | Color |
-|----|------|------|-------------|-------|
-| `fin_advisor` | 🧭 | Financial Advisor | Full-context accounts, taxes, investments | #4db88c |
-| `sub_nego` | ✂ | Subscription Negotiator | Find, cancel, renegotiate bills | #e8913a |
-| `tax_opt` | 🔖 | Tax Optimizer | Year-round deduction scanning | #d4a84d |
-| `micro_invest` | 🌱 | Micro-Investing Agent | Goal-based portfolio rebalancing | #4d8cd4 |
-| `fraud_watch` | 🛡 | Fraud Watchdog | Credit monitoring, identity protection | #c44d4d |
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `fin_advisor` | 🧭 | Financial Advisor | Full-context accounts, taxes, investments | #4db88c | |
+| `sub_nego` | ✂ | Subscription Negotiator | Find, cancel, renegotiate bills | #e8913a | fixedPrompt |
+| `tax_opt` | 🔖 | Tax Optimizer | Year-round deduction scanning | #d4a84d | |
+| `micro_invest` | 🌱 | Investment Advisor | Portfolio strategy, goal-based planning, risk allocation | #4d8cd4 | |
+| `fraud_watch` | 🛡 | Identity Shield Agent | Fraud detection, credit alerts, identity protection | #c44d4d | |
+| `budget_arch` | 📊 | Budget Architect | Monthly budgets, expense tracking, savings goals | #9b7fd4 | isNew |
+| `debt_payoff` | 📉 | Debt Payoff Strategist | Payoff plans, refinance analysis, snowball vs avalanche | #4daed4 | isNew |
 
-### Parenting (5 agents)
+### Parenting (6 agents)
 
-| ID | Icon | Name | Description | Color |
-|----|------|------|-------------|-------|
-| `homework` | 📚 | Homework Helper | Subject tutoring, step-by-step explanations | #60a5fa |
-| `scheduler` | 📅 | Family Scheduler | Activity coordination, calendar management | #34d399 |
-| `development` | 🌱 | Child Development Tracker | Milestone tracking, age-appropriate guidance | #a78bfa |
-| `stories` | 🌙 | Bedtime Story Agent | Custom stories, reading level adaptation | #fb923c |
-| `coach` | 🤝 | Parent Coach | Behavior strategies, emotional regulation | #f472b6 |
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `homework` | 📚 | Homework Helper | Subject tutoring, step-by-step explanations | #60a5fa | fixedPrompt |
+| `meal_plan` | 🍽 | Family Meal Planner | Weekly menus, grocery lists, dietary needs | #34d399 | isNew |
+| `development` | 🌱 | Child Development Tracker | Milestone tracking, age-appropriate guidance | #a78bfa | |
+| `stories` | 🌙 | Bedtime Story Agent | Custom stories, reading level adaptation | #fb923c | |
+| `coach` | 🤝 | Parent Coach | Behavior strategies, emotional regulation | #f472b6 | |
+| `iep_advocate` | 📋 | IEP Advocate | Special education plans, accommodation requests, meeting prep | #d4834d | isNew |
 
-### Retail & Ops (5 agents)
+### Retail & Ops (6 agents)
 
-| ID | Icon | Name | Description | Color |
-|----|------|------|-------------|-------|
-| `inventory` | 📦 | Inventory Optimizer | Demand forecasting, returns logistics | #d4a84d |
-| `commerce` | 🛒 | Agentic Commerce | Instant checkout, autonomous buying | #e8913a |
-| `supply_chain` | ⛓ | Supply Chain Agent | Bottleneck detection, re-routing | #4daed4 |
-| `prop_val` | 🏠 | Property Valuator | Real-time appraisal, market data | #4db88c |
-| `contract_rev` | 📜 | Contract Reviewer | Unfavorable clause detection for SMBs | #9b7fd4 |
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `inventory` | 📦 | Inventory Optimizer | Demand forecasting, returns logistics | #d4a84d | |
+| `pricing_strat` | 💲 | Pricing Strategist | Competitive pricing, margin analysis, discount modeling | #e8913a | isNew |
+| `supply_chain` | ⛓ | Supply Chain Agent | Bottleneck detection, re-routing | #4daed4 | |
+| `returns_agent` | 🔄 | Returns & Refund Agent | Return policies, customer resolution, loss prevention | #4db88c | isNew |
+| `vendor_nego` | 🤝 | Vendor Negotiator | Supplier terms, bulk pricing, contract leverage | #9b7fd4 | isNew |
+| `store_ops` | 🏪 | Store Operations Agent | Staff scheduling, daily workflows, opening/closing checklists | #c46896 | isNew |
+
+### Legal & Compliance (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `contract_analyze` | 📑 | Contract Analyzer | Clause review, risk flagging, plain-language summaries | #d4834d | isNew |
+| `compliance_mon` | 🔔 | Compliance Monitor | Regulatory tracking, audit prep, policy gaps | #c44d4d | isNew |
+| `policy_writer` | 📝 | Policy Writer | Handbooks, privacy policies, internal procedures | #9b7fd4 | isNew |
+| `reg_nav` | 🧭 | Regulatory Navigator | Licensing, filing deadlines, industry regulations | #4d8cd4 | isNew |
+| `dispute_res` | ⚖ | Dispute Resolution Agent | Demand letters, mediation prep, escalation paths | #d4a84d | isNew |
+
+### Real Estate (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `listing_gen` | 🏡 | Listing Generator | Property descriptions, MLS optimization, photo captions | #e8913a | isNew |
+| `market_comp` | 📊 | Market Comp Analyzer | Comparable sales, pricing strategy, market trends | #4d8cd4 | isNew |
+| `lease_review` | 📄 | Lease Review Agent | Clause analysis, tenant screening, renewal terms | #d4834d | isNew |
+| `lead_nurture` | 🤝 | Lead Nurture Agent | Follow-up sequences, client segmentation, drip campaigns | #4db88c | isNew |
+| `showing_sched` | 🗓 | Showing Scheduler | Appointment coordination, route planning, availability | #34d399 | isNew |
+
+### Marketing & Growth (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `seo_content` | 🔍 | SEO Content Agent | Keyword strategy, content briefs, SERP analysis | #4db88c | isNew |
+| `campaign_opt` | 📈 | Campaign Optimizer | Ad spend allocation, channel ROI, budget pacing | #e8913a | isNew |
+| `ab_analyst` | 🧪 | A/B Test Analyst | Experiment design, statistical significance, variant recs | #4d8cd4 | isNew |
+| `brand_voice` | 🎨 | Brand Voice Agent | Tone guidelines, messaging frameworks, copy review | #9b7fd4 | isNew |
+| `attrib_analyst` | 🎯 | Attribution Analyst | Multi-touch attribution, funnel analysis, conversion paths | #d4a84d | isNew |
+
+### HR & People Ops (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `resume_screen` | 📄 | Resume Screener | ATS filtering, candidate ranking, bias reduction | #4db88c | isNew, fixedPrompt |
+| `interview_arch` | 🎙 | Interview Architect | Role-specific questions, scoring rubrics, panel prep | #9b7fd4 | isNew |
+| `onboard_agent` | 🚀 | Onboarding Agent | New hire workflows, checklist generation, 30-60-90 plans | #4daed4 | isNew |
+| `comp_analyst` | 💰 | Compensation Analyst | Salary benchmarking, equity modeling, offer structuring | #d4a84d | isNew |
+| `perf_mgmt` | 📋 | Performance Manager | Review cycles, goal tracking, feedback frameworks | #c46896 | isNew |
+
+### Accounting & Tax (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `bookkeeper` | 📒 | AI Bookkeeper | Transaction categorization, reconciliation, cleanup | #4db88c | isNew |
+| `invoice_agent` | 🧾 | Invoice Agent | Invoice generation, payment tracking, aging reports | #e8913a | isNew |
+| `audit_prep` | 🔎 | Audit Prep Agent | Document assembly, compliance checks, gap analysis | #c44d4d | isNew |
+| `tax_prep` | 📑 | Tax Prep Agent | Deduction identification, filing checklists, deadlines | #d4834d | isNew |
+| `fin_reporter` | 📊 | Financial Reporter | P&L statements, cash flow analysis, board reporting | #4d8cd4 | isNew |
+
+### Insurance (5 agents)
+
+| ID | Icon | Name | Description | Color | Notes |
+|----|------|------|-------------|-------|-------|
+| `claims_agent` | 📋 | Claims Processor | Claim intake, documentation review, status tracking | #4daed4 | isNew |
+| `underwrite` | 🛡 | Underwriting Agent | Risk assessment, policy pricing, coverage analysis | #c44d4d | isNew |
+| `policy_comp` | ⚖ | Policy Comparator | Coverage comparison, gap identification, renewal analysis | #4d8cd4 | isNew |
+| `ins_compliance` | 📜 | Insurance Compliance | Regulatory filings, license tracking, audit readiness | #d4834d | isNew |
+| `client_intake` | 🤝 | Client Intake Agent | Needs assessment, quote generation, onboarding | #e8913a | isNew |
 
 ## Complete Starter Prompt Registry
 
@@ -156,26 +222,26 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 | `s2` | Work | Write a Performance Review | #e8913a |
 | `s3` | Work | Notes → Action Items | #e8913a |
 | `s4` | Work | Reply to Difficult Email | #e8913a |
-| `s5` | Writing | Explain Like I'm 5 | #9b7fd4 |
+| `s5` | Writing | Break Down Any Concept | #9b7fd4 |
 | `s6` | Writing | Improve My Writing | #9b7fd4 |
 | `s7` | Writing | Write a LinkedIn Post | #9b7fd4 |
-| `s8` | Writing | Proofread & Fix Grammar | #9b7fd4 |
-| `s9` | Learning | Teach Me Anything | #4db88c |
-| `s10` | Learning | Make a Study Plan | #4db88c |
+| `s8` | Work | Write a Cold Email | #e8913a |
+| `s9` | Work | Prep for a Meeting | #e8913a |
+| `s10` | Work | Write a Project Brief | #e8913a |
 | `s11` | Learning | Summarize an Article | #4db88c |
-| `s12` | Learning | Quiz Me on This Topic | #4db88c |
-| `s13` | Life | Help Me Make a Decision | #4d8cd4 |
+| `s12` | Work | Draft a Slack Update | #e8913a |
+| `s13` | Life | Negotiate My Salary | #4d8cd4 |
 | `s14` | Life | Plan My Week | #4d8cd4 |
-| `s15` | Life | Write My Bio | #4d8cd4 |
-| `s16` | Life | Give Me Honest Feedback | #4d8cd4 |
+| `s15` | Life | Generate My Professional Bio | #4d8cd4 |
+| `s16` | Work | Write a Client Proposal Intro | #e8913a |
 
 ## Summary Counts
 
 | Category | Count |
 |----------|-------|
-| Industries | 8 |
-| Total agents | 47 (12 General + 5×7 others) |
-| Agents with fixedPrompt | 1 (SOP Generator) |
+| Industries | 14 |
+| Total agents | 85 |
+| Agents with fixedPrompt | 5 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Resume Screener) |
 | Starter prompts | 16 |
 | Starter categories | 4 (Work, Writing, Learning, Life) |
 
@@ -191,13 +257,21 @@ When creating new content, use these conventions:
 Before adding any new agent, verify the ID doesn't exist in this complete list:
 
 ```
-sop_gen, treasury, cyber, code_review, data, legal, pm, security, finance,
-market, support, content, devops, med_scribe, prior_auth, rcm, triage,
-diagnostics, close_agent, treasury_liq, audit_comp, credit_risk, tax_agent,
-sdr, repurpose, voice_ai, market_intel, pr_agent, micro_learn, grading,
-career_track, admissions, research_asst, fin_advisor, sub_nego, tax_opt,
-micro_invest, fraud_watch, homework, scheduler, development, stories,
-coach, inventory, commerce, supply_chain, prop_val, contract_rev
+sop_gen, email_draft, cyber, code_review, data, meeting_prep, pm, security,
+finance, market, support, content, devops, med_scribe, prior_auth, rcm,
+triage, diagnostics, close_agent, treasury_liq, audit_comp, credit_risk,
+tax_agent, sdr, repurpose, voice_ai, market_intel, pr_agent, proposal_gen,
+email_seq, micro_learn, grading, career_track, admissions, research_asst,
+parent_comm, grant_writer, fin_advisor, sub_nego, tax_opt, micro_invest,
+fraud_watch, budget_arch, debt_payoff, homework, meal_plan, development,
+stories, coach, iep_advocate, inventory, pricing_strat, supply_chain,
+returns_agent, vendor_nego, store_ops, contract_analyze, compliance_mon,
+policy_writer, reg_nav, dispute_res, listing_gen, market_comp, lease_review,
+lead_nurture, showing_sched, seo_content, campaign_opt, ab_analyst,
+brand_voice, attrib_analyst, resume_screen, interview_arch, onboard_agent,
+comp_analyst, perf_mgmt, bookkeeper, invoice_agent, audit_prep, tax_prep,
+fin_reporter, claims_agent, underwrite, policy_comp, ins_compliance,
+client_intake, store_ops
 ```
 
 ## Staging Schema for New Content
