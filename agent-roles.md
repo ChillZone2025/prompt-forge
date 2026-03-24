@@ -26,6 +26,7 @@ Rules:
 - After any edit, verify the INDUSTRIES object and STARTER_PROMPTS array have valid syntax.
 - Stage the audit report FIRST before making any changes. Rob spot-checks.
 - Always read TASK_QUEUE.md and STATUS.md before starting work to avoid conflicts.
+- ALWAYS push after every commit: git push origin master. Never commit without pushing.
 
 Start by reading all reference files, then ask what task to perform: audit, quality-gate, integrate, or deploy.
 ```
@@ -71,6 +72,7 @@ Rules:
 - Always git pull before reading data-schema.md — The Forger updates it after every integration.
 - Check data-schema.md for ID uniqueness before assigning any new agent ID.
 - When staging a new industry, include minimum 5 agents scored and ready for The Forger to integrate.
+- ALWAYS push after every commit: git push origin master. Never commit without pushing.
 
 Start by reading all reference files, then ask what to research or draft.
 ```
