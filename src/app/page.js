@@ -210,10 +210,10 @@ export default function Home() {
             <a href="#how" className="lp-btn-secondary">See How It Works</a>
           </div>
           <div className="lp-proof">
-            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> No account required</div>
-            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> 3 free generates</div>
-            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> Works with any AI tool</div>
-            <div className="lp-proof-item"><span className="lp-proof-icon">&check;</span> Deploy in 30 seconds</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> No account required</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> 3 free generates</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> Works with any AI tool</div>
+            <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> Deploy in 30 seconds</div>
           </div>
         </div>
       </section>
@@ -345,9 +345,9 @@ export default function Home() {
               <div className="lp-plan-price">$0</div>
               <div className="lp-plan-desc">No account. No credit card. Just try it.</div>
               <ul className="lp-plan-features">
-                <li><span className="lp-feat-check">&check;</span> 3 agent generates</li>
-                <li><span className="lp-feat-check">&check;</span> {FREE_INDUSTRIES} free industries</li>
-                <li><span className="lp-feat-check">&check;</span> {TOTAL_STARTERS}-prompt Starter Pack</li>
+                <li><span className="lp-feat-check">✓</span> 3 agent generates</li>
+                <li><span className="lp-feat-check">✓</span> {FREE_INDUSTRIES} free industries</li>
+                <li><span className="lp-feat-check">✓</span> {TOTAL_STARTERS}-prompt Starter Pack</li>
                 <li><span className="lp-feat-x">&cross;</span> Save to personal library</li>
                 <li><span className="lp-feat-x">&cross;</span> Personalized prompts</li>
                 <li><span className="lp-feat-x">&cross;</span> Prompt refinement</li>
@@ -362,15 +362,15 @@ export default function Home() {
               <div className="lp-plan-price">$12 <span>/ month</span></div>
               <div className="lp-plan-desc">For professionals who use AI every day.</div>
               <ul className="lp-plan-features">
-                <li><span className="lp-feat-check">&check;</span> Unlimited generates</li>
-                <li><span className="lp-feat-check">&check;</span> All {TOTAL_INDUSTRIES} industries including Pro-only</li>
-                <li><span className="lp-feat-check">&check;</span> {TOTAL_STARTERS}-prompt Starter Pack</li>
-                <li><span className="lp-feat-check">&check;</span> Personalized prompts (describe your role)</li>
-                <li><span className="lp-feat-check">&check;</span> Prompt refinement (iterate on outputs)</li>
-                <li><span className="lp-feat-check">&check;</span> Pro-only industries (Cyber Intelligence, AI Agent Dev&hellip;)</li>
-                <li><span className="lp-feat-check">&check;</span> Save to personal library</li>
-                <li><span className="lp-feat-check">&check;</span> Custom agent builder</li>
-                <li><span className="lp-feat-check">&check;</span> Priority generation</li>
+                <li><span className="lp-feat-check">✓</span> Unlimited generates</li>
+                <li><span className="lp-feat-check">✓</span> All {TOTAL_INDUSTRIES} industries including Pro-only</li>
+                <li><span className="lp-feat-check">✓</span> {TOTAL_STARTERS}-prompt Starter Pack</li>
+                <li><span className="lp-feat-check">✓</span> Personalized prompts (describe your role)</li>
+                <li><span className="lp-feat-check">✓</span> Prompt refinement (iterate on outputs)</li>
+                <li><span className="lp-feat-check">✓</span> Pro-only industries (Cyber Intelligence, AI Agent Dev&hellip;)</li>
+                <li><span className="lp-feat-check">✓</span> Save to personal library</li>
+                <li><span className="lp-feat-check">✓</span> Custom agent builder</li>
+                <li><span className="lp-feat-check">✓</span> Priority generation</li>
               </ul>
               <Link href="/forge" className="lp-plan-btn pro">Upgrade to Pro &rarr;</Link>
             </div>
