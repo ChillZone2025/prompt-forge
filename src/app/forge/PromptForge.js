@@ -675,13 +675,13 @@ const STARTER_CATS = ['All', 'Work', 'Writing', 'Learning', 'Life']
 
 // ─── Build system prompt ──────────────────────────────────────────────────────
 // ─── Build system prompt (v2 — world-class agentic template) ─────────────────
-const buildPrompt = (name, desc, userContext) =>
+const buildPrompt = (name, desc, userContext, industryCtx) =>
 `You are an elite AI systems architect who designs deployment-ready agent system prompts used in production environments.
 
 <task>
 Generate a complete, deployment-ready system prompt for an AI agent.
 Agent role: ${name}
-Agent specialty: ${desc}${userContext ? `\nUser context: ${userContext}` : ''}
+Agent specialty: ${desc}${industryCtx ? `\nIndustry context: ${industryCtx}` : ''}${userContext ? `\nUser context: ${userContext}` : ''}
 </task>
 
 <instructions>
@@ -1106,7 +1106,7 @@ export default function PromptForge() {
 
     setLoading(true)
     try {
-      const body = { agentName: agent.name, agentDesc: agent.desc }
+      const body = { agentName: agent.name, agentDesc: agent.desc, industry: agent._industry || industry }
       if (context) body.userContext = context
       const res = await fetch('/api/generate', {
         method: 'POST',

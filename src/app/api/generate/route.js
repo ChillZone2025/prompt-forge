@@ -4,7 +4,7 @@ const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
 export async function POST(request) {
   try {
-    const { agentName, agentDesc, userContext } = await request.json()
+    const { agentName, agentDesc, userContext, industry } = await request.json()
 
     if (!agentName || !agentDesc) {
       return Response.json({ error: 'Missing agentName or agentDesc' }, { status: 400 })
@@ -15,7 +15,7 @@ export async function POST(request) {
 <task>
 Generate a complete, deployment-ready system prompt for an AI agent.
 Agent role: ${agentName}
-Agent specialty: ${agentDesc}${userContext ? `\nUser context: ${userContext}` : ''}
+Agent specialty: ${agentDesc}${industry ? `\nIndustry context: ${industry}` : ''}${userContext ? `\nUser context: ${userContext}` : ''}
 </task>
 
 <instructions>

@@ -64,12 +64,13 @@
 
 ## What's Currently Staged (content/staging/)
 
-12 gap-fill agents in `content/staging/agents/` — integrated, pending staging cleanup.
+Empty — all staged content has been integrated and staging cleaned up.
 
 ## What's In the Proposal Queue (content/proposals/)
 
 - `strategic-audit.md` — V2 full library audit. All recommendations executed.
 - `pro-industry-scoring.md` — Revenue framework scoring for all 41 industries.
+- `quality-audit.md` — Full v2 engine audit (30 agents tested via live API, 38 total calls). Verdict: PASS (8.59 avg). Identified max_tokens truncation fix (already applied).
 - `quality-test-results.json` — Automated quality test (40 agents, v2 template validation).
 
 ## Recent Deployments
