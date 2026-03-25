@@ -1,0 +1,35 @@
+{
+  "passed": 130,
+  "failed": 4,
+  "failures": [
+    {
+      "id": "energy_audit",
+      "name": "Energy Audit Agent",
+      "reasons": [
+        "API error: Connection error."
+      ]
+    },
+    {
+      "id": "field_service",
+      "name": "Field Service Agent",
+      "reasons": [
+        "API error: Connection error."
+      ]
+    },
+    {
+      "id": "grid_ops",
+      "name": "Grid Operations Agent",
+      "reasons": [
+        "API error: Request timed out."
+      ]
+    },
+    {
+      "id": "maint_coord",
+      "name": "Maintenance Coordinator",
+      "reasons": [
+        "no question in first msg"
+      ]
+    }
+  ],
+  "total": 134
+}
