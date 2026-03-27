@@ -167,6 +167,7 @@ For builders who want to run this pipeline programmatically, below are implement
 ```python
 from crewai import Agent, Task, Crew, Process
 
+# Requires OPENAI_API_KEY env var, or pass llm=YourLLM() to each Agent
 # Define agents
 proposal_writer = Agent(
     role="Proposal & SOW Writer",
@@ -253,7 +254,7 @@ class PipelineState(TypedDict):
     content_strategy: str
 
 # Define node functions (each calls your LLM of choice with an appropriate prompt)
-def run_proposal_writer(state: PipelineState) -> PipelineState:
+def run_proposal_writer(state: PipelineState) -> dict:
     prompt = f"""
     You are a Proposal & SOW Writer. Given this client brief, produce a full project proposal
     and statement of work including deliverables, milestones, timeline, and out-of-scope clause.
@@ -261,11 +262,9 @@ def run_proposal_writer(state: PipelineState) -> PipelineState:
     Client Brief: {state['client_brief']}
     """
     # response = your_llm_call(prompt)
-    state["proposal"] = "[proposal output]"
-    state["sow"] = "[sow output]"
-    return state
+    return {"proposal": "[proposal output]", "sow": "[sow output]"}
 
-def run_project_manager(state: PipelineState) -> PipelineState:
+def run_project_manager(state: PipelineState) -> dict:
     prompt = f"""
     You are a Project Manager. Given this SOW, produce a full project plan with phases,
     milestones, task breakdown, resource assignments, and risk register.
@@ -273,10 +272,9 @@ def run_project_manager(state: PipelineState) -> PipelineState:
     SOW: {state['sow']}
     """
     # response = your_llm_call(prompt)
-    state["project_plan"] = "[project plan output]"
-    return state
+    return {"project_plan": "[project plan output]"}
 
-def run_data_analyst(state: PipelineState) -> PipelineState:
+def run_data_analyst(state: PipelineState) -> dict:
     prompt = f"""
     You are a Data Analyst. Given these project goals and plan, produce a research brief
     and KPI framework that will measure project success.
@@ -285,10 +283,9 @@ def run_data_analyst(state: PipelineState) -> PipelineState:
     SOW: {state['sow']}
     """
     # response = your_llm_call(prompt)
-    state["data_framework"] = "[data framework output]"
-    return state
+    return {"data_framework": "[data framework output]"}
 
-def run_content_strategist(state: PipelineState) -> PipelineState:
+def run_content_strategist(state: PipelineState) -> dict:
     prompt = f"""
     You are a Content Strategist. Given the project plan and data framework, produce the
     final content strategy with deliverable outline and KPI-to-content mapping.
@@ -298,8 +295,7 @@ def run_content_strategist(state: PipelineState) -> PipelineState:
     Data Framework: {state['data_framework']}
     """
     # response = your_llm_call(prompt)
-    state["content_strategy"] = "[content strategy output]"
-    return state
+    return {"content_strategy": "[content strategy output]"}
 
 # Build the graph
 graph = StateGraph(PipelineState)
@@ -318,14 +314,7 @@ graph.add_edge("content", END)
 app = graph.compile()
 
 # Run the pipeline
-result = app.invoke({
-    "client_brief": "Your client brief text here",
-    "proposal": "",
-    "sow": "",
-    "project_plan": "",
-    "data_framework": "",
-    "content_strategy": ""
-})
+result = app.invoke({"client_brief": "Your client brief text here"})
 
 print(result["content_strategy"])
 ```
