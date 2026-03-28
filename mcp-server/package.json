@@ -1,6 +1,6 @@
 {
   "name": "promptforge-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Prompt Forge MCP Server — generate deployment-ready AI agent system prompts from any MCP client",
   "license": "MIT",
   "author": "Hilbert Entertainment, LLC",
