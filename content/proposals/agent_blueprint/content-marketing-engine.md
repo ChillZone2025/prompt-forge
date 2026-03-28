@@ -240,6 +240,7 @@ task_strategy = Task(
 task_repurpose = Task(
     description="Repurpose the finished draft and distribution plan into a full social post library",
     agent=content_repurposer,
+    context=[task_draft, task_strategy],  # Ensure repurposer sees both the draft and the distribution strategy
     expected_output="50+ social posts: 5-10 LinkedIn posts, 3-5 X threads, 2-3 Instagram carousel scripts, 2-3 email snippets, 5-8 pull quotes, and scheduling recommendation"
 )
 

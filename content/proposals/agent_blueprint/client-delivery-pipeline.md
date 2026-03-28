@@ -219,6 +219,7 @@ task_data = Task(
 task_content = Task(
     description="Produce the final content strategy and deliverable outline using all prior context",
     agent=content_strategist,
+    context=[task_proposal, task_plan, task_data],  # Ensure strategist sees the SOW, project plan, and data framework — not just the immediately preceding task
     expected_output="Content strategy document with deliverable outline, messaging framework, channel plan, and KPI-to-content mapping"
 )
 
