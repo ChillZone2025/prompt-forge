@@ -343,7 +343,7 @@ result = app.invoke({"job_req": "Your job requisition here", "resumes": "Your re
 print(result["onboarding_plan"])
 ```
 
-> Note: To add human review checkpoints in LangGraph, use `interrupt_before` on the nodes that follow each checkpoint: `app = graph.compile(interrupt_before=["interview_arch", "onboard_agent"])`. This pauses execution and lets you inspect and edit state before the next node runs.
+> Note: To add human review checkpoints in LangGraph, use `interrupt_before` on the nodes that follow each checkpoint: `app = graph.compile(interrupt_before=["interview_arch", "offer_letter", "onboard_agent"])`. This pauses execution and lets you inspect and edit state before the next node runs.
 
 ---
 
