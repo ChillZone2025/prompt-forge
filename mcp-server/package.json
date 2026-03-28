@@ -1,0 +1,38 @@
+{
+  "name": "promptforge-mcp",
+  "version": "1.0.0",
+  "description": "Prompt Forge MCP Server — generate deployment-ready AI agent system prompts from any MCP client",
+  "license": "MIT",
+  "author": "Hilbert Entertainment, LLC",
+  "type": "module",
+  "bin": {
+    "promptforge-mcp": "./index.js"
+  },
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "agents.js",
+    "README.md"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-agents",
+    "prompt-generation",
+    "claude",
+    "system-prompts",
+    "promptforge"
+  ],
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChillZone2025/prompt-forge"
+  },
+  "homepage": "https://www.getpromptforge.net"
+}
