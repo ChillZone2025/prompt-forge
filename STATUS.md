@@ -72,6 +72,9 @@ Empty — all staged content has been integrated and staging cleaned up.
 - `pro-industry-scoring.md` — Revenue framework scoring for all 41 industries.
 - `quality-audit.md` — Full v2 engine audit (30 agents tested via live API, 38 total calls). Verdict: PASS (8.59 avg). Identified max_tokens truncation fix (already applied).
 - `quality-test-results.json` — Automated quality test (40 agents, v2 template validation).
+- `agent_blueprint/client-delivery-pipeline.md` — Pro-only blueprint: 4-agent consulting workflow (proposal → plan → analysis → deliverable)
+- `agent_blueprint/content-marketing-engine.md` — Pro-only blueprint: 4-agent content pipeline (SEO → draft → distribute → repurpose)
+- `agent_blueprint/hire-to-onboard-pipeline.md` — Pro-only blueprint: 4-agent hiring workflow (screen → interview → offer → onboard)
 
 ## Recent Deployments
 

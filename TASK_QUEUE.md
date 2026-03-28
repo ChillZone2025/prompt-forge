@@ -24,7 +24,12 @@ Inspired by production agent orchestration patterns (OpenClaw, CrewAI, LangGraph
 
 ## Active Tasks
 
-No active tasks.
+### TASK-005: Agent Blueprints — first 3 playbooks (service expansion)
+- **Status:** staged
+- **Assigned:** Prompt Agent (staged)
+- **Priority:** medium
+- **Created:** 2026-03-27
+- **Notes:** 3 Agent Blueprint documents staged in content/proposals/agent_blueprint/. Playbook format: business layer + technical appendix (CrewAI/LangGraph). Blueprints: Client Delivery Pipeline (8.05), Content Marketing Engine (8.15), Hire-to-Onboard Pipeline (7.55). All use existing agents. Pro-only content proposal awaiting Rob's review.
 
 ## Completed Tasks
 
