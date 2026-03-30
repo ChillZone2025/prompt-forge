@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
 
 export const metadata = {
@@ -38,7 +39,17 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body>
-        {children}
+        <ClerkProvider appearance={{
+          variables: {
+            colorPrimary: '#f5c518',
+            colorBackground: '#161822',
+            colorInputBackground: '#1e2030',
+            colorText: '#e5e7eb',
+            colorTextSecondary: '#9ca3af',
+          },
+        }}>
+          {children}
+        </ClerkProvider>
         <script dangerouslySetInnerHTML={{
           __html: `
             if ('serviceWorker' in navigator) {

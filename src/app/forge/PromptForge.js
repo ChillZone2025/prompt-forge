@@ -1,10 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useUser, useClerk, Show, SignInButton, UserButton } from '@clerk/nextjs'
 
-const FREE_LIMIT = 3
-const LS_USAGE = 'pf_usage'
-const LS_PRO = 'pf_pro'
 const LS_LIB = 'pf_library'
 const LS_SEEN = 'pf_seen'
 
@@ -975,6 +973,12 @@ const fmtDate = (ts) =>
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function PromptForge() {
+  const { user, isSignedIn, isLoaded } = useUser()
+  const { openSignIn } = useClerk()
+
+  const isPro = !!user?.publicMetadata?.isPro
+  const usage = user?.publicMetadata?.usage || 0
+
   const [view, setView]           = useState('forge')
   const [industry, setIndustry]   = useState('General')
   const [selected, setSelected]   = useState(null)
@@ -984,8 +988,6 @@ export default function PromptForge() {
   const [copied, setCopied]       = useState(false)
   const [saved, setSaved]         = useState(false)
   const [library, setLibrary]     = useState([])
-  const [usage, setUsage]         = useState(0)
-  const [isPro, setIsPro]         = useState(false)
   const [modal, setModal]         = useState(null)
   const [custName, setCustName]   = useState('')
   const [custDesc, setCustDesc]   = useState('')
@@ -1004,8 +1006,6 @@ export default function PromptForge() {
   useEffect(() => {
     setMounted(true)
     try {
-      setUsage(parseInt(localStorage.getItem(LS_USAGE) || '0'))
-      setIsPro(localStorage.getItem(LS_PRO) === 'true')
       setLibrary(JSON.parse(localStorage.getItem(LS_LIB) || '[]'))
       if (!localStorage.getItem(LS_SEEN)) setShowWalkthrough(true)
     } catch {}
@@ -1017,6 +1017,7 @@ export default function PromptForge() {
     return () => clearInterval(t)
   }, [loading])
 
+  const FREE_LIMIT = 3
   const atLimit = !isPro && usage >= FREE_LIMIT
   const remaining = Math.max(0, FREE_LIMIT - usage)
 
@@ -1026,12 +1027,13 @@ export default function PromptForge() {
   }
 
   const activatePro = async () => {
+    if (!isSignedIn) { openSignIn(); return }
     try {
       setModal(null)
       const res = await fetch('/api/checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: 'user_' + Date.now() }),
+        body: JSON.stringify({ userId: user.id }),
       })
       const data = await res.json()
       if (data.url) window.location.href = data.url
@@ -1039,16 +1041,6 @@ export default function PromptForge() {
       console.error('Checkout error:', err)
     }
   }
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('upgraded') === 'true') {
-      setIsPro(true)
-      try { localStorage.setItem(LS_PRO, 'true') } catch {}
-      window.history.replaceState({}, '', '/forge')
-    }
-  }, [])
 
   const saveToLib = () => {
     if (!prompt || saved) return
@@ -1072,6 +1064,8 @@ export default function PromptForge() {
   }
 
   const handleAgentClick = (agent) => {
+    // Require sign-in to generate
+    if (!isSignedIn) { openSignIn(); return }
     if (atLimit) { setModal('upgrade'); return }
     // Fixed prompts skip context step entirely
     if (agent.fixedPrompt) {
@@ -1088,6 +1082,7 @@ export default function PromptForge() {
   }
 
   const generate = async (agent, context) => {
+    if (!isSignedIn) { openSignIn(); return }
     if (atLimit) { setModal('upgrade'); return }
     setContextAgent(null)
     setSelected(agent)
@@ -1097,10 +1092,9 @@ export default function PromptForge() {
 
     // Fixed prompts skip the API
     if (agent.fixedPrompt) {
-      const newUsage = usage + 1
-      setUsage(newUsage)
-      try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
       setPrompt(agent.fixedPrompt)
+      // Track usage server-side
+      fetch('/api/track-usage', { method: 'POST' }).catch(() => {})
       return
     }
 
@@ -1113,9 +1107,8 @@ export default function PromptForge() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       })
-      const newUsage = usage + 1
-      setUsage(newUsage)
-      try { localStorage.setItem(LS_USAGE, String(newUsage)) } catch {}
+      // Track usage server-side
+      fetch('/api/track-usage', { method: 'POST' }).catch(() => {})
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
       let result = ''
@@ -1132,17 +1125,6 @@ export default function PromptForge() {
       setLoading(false)
     }
   }
-
-  // Grant pro on return from Stripe success
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('upgraded') === 'true') {
-      setIsPro(true)
-      try { localStorage.setItem(LS_PRO, 'true') } catch {}
-      window.history.replaceState({}, '', '/forge')
-    }
-  }, [])
 
   const copy = (text) => {
     navigator.clipboard.writeText(text)
@@ -1182,7 +1164,7 @@ export default function PromptForge() {
   const visibleLib = library.filter(i => !libSearch || i.agentName.toLowerCase().includes(libSearch.toLowerCase()))
   const visibleStarter = STARTER_PROMPTS.filter(p => starterCat === 'All' || p.category === starterCat)
 
-  if (!mounted) return null
+  if (!mounted || !isLoaded) return null
 
   return (
     <div style={{ minHeight: '100vh', background: '#0f1117', color: '#c9cdd6', fontFamily: "'Inter', sans-serif", position: 'relative' }}>
@@ -1241,7 +1223,7 @@ export default function PromptForge() {
               Upgrade to Pro
             </h2>
             <p style={{ color: '#9ca3af', fontSize: 14, lineHeight: 1.7, marginBottom: 22 }}>
-              You've used your {FREE_LIMIT} free generates. Unlock unlimited access.
+              {atLimit ? `You've used your ${FREE_LIMIT} free generates. ` : ''}Unlock unlimited access to all agents and features.
             </p>
             <div style={{ background: '#0f1117', border: '1px solid #1e2030', borderRadius: 10, padding: 18, marginBottom: 24 }}>
               {['Unlimited prompt generation', 'Unlimited library saves', 'Custom agent builder', 'All industry archetypes', 'Team sharing (coming soon)'].map(f => (
@@ -1334,36 +1316,56 @@ export default function PromptForge() {
             </p>
           </div>
 
-          {/* Usage widget */}
-          <div style={{ background: '#161822', border: '1px solid #1e2030', borderRadius: 12, padding: '16px 20px', minWidth: 180 }}>
-            {isPro ? (
-              <div>
-                <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500, marginBottom: 6 }}>Plan</div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                  <span style={{ color: '#f5c518', fontSize: 14 }}>★</span>
-                  <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 13, color: '#f0f2ff' }}>Pro</span>
+          {/* Auth + Usage widget */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{ background: '#161822', border: '1px solid #1e2030', borderRadius: 12, padding: '16px 20px', minWidth: 180 }}>
+              {!isSignedIn ? (
+                <div>
+                  <div style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500, marginBottom: 10 }}>Sign in to generate prompts</div>
+                  <SignInButton mode="redirect">
+                    <button className="btn primary" style={{ width: '100%', padding: '7px 0', fontSize: 12 }}>
+                      Sign In →
+                    </button>
+                  </SignInButton>
                 </div>
-              </div>
-            ) : (
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                  <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Free Plan</span>
-                  <span style={{ fontSize: 12, color: remaining > 0 ? '#f5c518' : '#ef4444', fontWeight: 600 }}>{remaining}/{FREE_LIMIT} left</span>
+              ) : isPro ? (
+                <div>
+                  <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500, marginBottom: 6 }}>Plan</div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                    <span style={{ color: '#f5c518', fontSize: 14 }}>★</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 13, color: '#f0f2ff' }}>Pro</span>
+                  </div>
                 </div>
-                <div style={{ background: '#1e2030', borderRadius: 3, height: 3, marginBottom: 12, overflow: 'hidden' }}>
-                  <div style={{
-                    height: '100%', borderRadius: 2,
-                    width: `${Math.min(100, (usage / FREE_LIMIT) * 100)}%`,
-                    background: remaining > 0 ? '#f5c518' : '#ef4444',
-                    transition: 'width 0.4s ease',
-                    boxShadow: 'none',
-                  }} />
+              ) : (
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                    <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Free Plan</span>
+                    <span style={{ fontSize: 12, color: remaining > 0 ? '#f5c518' : '#ef4444', fontWeight: 600 }}>{remaining}/{FREE_LIMIT} left</span>
+                  </div>
+                  <div style={{ background: '#1e2030', borderRadius: 3, height: 3, marginBottom: 12, overflow: 'hidden' }}>
+                    <div style={{
+                      height: '100%', borderRadius: 2,
+                      width: `${Math.min(100, (usage / FREE_LIMIT) * 100)}%`,
+                      background: remaining > 0 ? '#f5c518' : '#ef4444',
+                      transition: 'width 0.4s ease',
+                      boxShadow: 'none',
+                    }} />
+                  </div>
+                  <button className="btn primary" style={{ width: '100%', padding: '7px 0', fontSize: 12 }} onClick={() => setModal('upgrade')}>
+                    Upgrade to Pro · $12/mo
+                  </button>
                 </div>
-                <button className="btn primary" style={{ width: '100%', padding: '7px 0', fontSize: 12 }} onClick={() => setModal('upgrade')}>
-                  Upgrade to Pro · $12/mo
-                </button>
-              </div>
-            )}
+              )}
+            </div>
+            <Show when="signed-in">
+              <UserButton
+                appearance={{
+                  elements: {
+                    avatarBox: { width: 36, height: 36 },
+                  },
+                }}
+              />
+            </Show>
           </div>
         </div>
 
@@ -1376,7 +1378,10 @@ export default function PromptForge() {
             </button>
             <button className={`nav-tab ${view === 'starter' ? 'on' : ''}`} onClick={() => setView('starter')}>Starter</button>
           </div>
-          <button className="btn accent" style={{ fontSize: 12 }} onClick={() => isPro ? setModal('custom') : setModal('upgrade')}>
+          <button className="btn accent" style={{ fontSize: 12 }} onClick={() => {
+            if (!isSignedIn) { openSignIn(); return }
+            isPro ? setModal('custom') : setModal('upgrade')
+          }}>
             + Custom Agent <span className="pro-tab-badge" style={{ marginLeft: 4 }}>PRO</span>
           </button>
         </div>
@@ -1525,7 +1530,7 @@ export default function PromptForge() {
                 <div style={{ display: 'flex', gap: 8 }}>
                   <button className="btn accent" onClick={() => generate(selected, userContext || undefined)}>Regenerate ↻</button>
                   {!isPro
-                    ? <button className="btn" onClick={() => setModal('upgrade')}>🔒 Save to Library — Pro</button>
+                    ? <button className="btn" onClick={() => isSignedIn ? setModal('upgrade') : openSignIn()}>🔒 Save to Library — Pro</button>
                     : !saved
                       ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
                       : <button className="btn iron" disabled>✓ Saved</button>

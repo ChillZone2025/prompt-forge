@@ -1,14 +1,17 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
+import { auth } from '@clerk/nextjs/server'
 
 export async function POST(req) {
   try {
+    const { userId } = await auth()
+    if (!userId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
       apiVersion: '2023-10-16',
     })
-
-    const body = await req.json()
-    const userId = body.userId || 'anonymous'
 
     const host = req.headers.get('host')
     const proto = req.headers.get('x-forwarded-proto') || 'https'
@@ -25,7 +28,7 @@ export async function POST(req) {
       ],
       success_url: `${appUrl}/forge?upgraded=true`,
       cancel_url: `${appUrl}/forge?cancelled=true`,
-      metadata: { userId },
+      metadata: { clerkUserId: userId },
     })
 
     return NextResponse.json({ url: session.url })
