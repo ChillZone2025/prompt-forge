@@ -8,10 +8,9 @@ export async function POST() {
   }
 
   try {
-    const clerk = await clerkClient()
-    const user = await clerk.users.getUser(userId)
+    const user = await clerkClient.users.getUser(userId)
     const currentUsage = user.publicMetadata?.usage || 0
-    await clerk.users.updateUserMetadata(userId, {
+    await clerkClient.users.updateUserMetadata(userId, {
       publicMetadata: { usage: currentUsage + 1 },
     })
     return NextResponse.json({ usage: currentUsage + 1 })

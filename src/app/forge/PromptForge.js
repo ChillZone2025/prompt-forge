@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useUser, useClerk, Show, SignInButton, UserButton } from '@clerk/nextjs'
+import { useUser, useClerk, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 
 const LS_LIB = 'pf_library'
 const LS_SEEN = 'pf_seen'
@@ -1357,7 +1357,7 @@ export default function PromptForge() {
                 </div>
               )}
             </div>
-            <Show when="signed-in">
+            <SignedIn>
               <UserButton
                 appearance={{
                   elements: {
@@ -1365,7 +1365,7 @@ export default function PromptForge() {
                   },
                 }}
               />
-            </Show>
+            </SignedIn>
           </div>
         </div>
 

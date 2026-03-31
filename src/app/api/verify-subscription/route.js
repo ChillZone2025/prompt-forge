@@ -9,8 +9,7 @@ export async function POST() {
   }
 
   try {
-    const clerk = await clerkClient()
-    const user = await clerk.users.getUser(userId)
+    const user = await clerkClient.users.getUser(userId)
     const stripeCustomerId = user.publicMetadata?.stripeCustomerId
 
     if (!stripeCustomerId) {
@@ -31,7 +30,7 @@ export async function POST() {
 
     // Sync Clerk metadata if out of date
     if (isPro !== !!user.publicMetadata?.isPro) {
-      await clerk.users.updateUserMetadata(userId, {
+      await clerkClient.users.updateUserMetadata(userId, {
         publicMetadata: { isPro },
       })
     }
