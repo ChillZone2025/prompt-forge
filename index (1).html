@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Forge — AI Prompts That Actually Work</title>
+  <meta name="description" content="Prompt Forge gives you 47 professional AI prompt agents across 8 industries. Stop wrestling with ChatGPT. Start getting results." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0e0d;
+      --ink-soft: #4a4742;
+      --ink-muted: #8a877f;
+      --paper: #faf8f5;
+      --paper-warm: #f2ede5;
+      --paper-card: #ffffff;
+      --accent: #c8501a;
+      --accent-light: #f5ddd3;
+      --accent-dark: #8c3510;
+      --border: rgba(15,14,13,0.10);
+      --border-soft: rgba(15,14,13,0.06);
+      --radius: 12px;
+      --radius-sm: 6px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem; height: 60px;
+      background: rgba(250,248,245,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px; letter-spacing: -0.02em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--ink-soft); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-cta {
+      background: var(--ink); color: var(--paper);
+      border: none; border-radius: var(--radius-sm);
+      padding: 8px 18px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+      cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 2rem 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200,80,26,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(200,80,26,0.04) 0%, transparent 60%);
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-light); color: var(--accent-dark);
+      border: 1px solid rgba(200,80,26,0.2);
+      font-size: 13px; padding: 5px 14px; border-radius: 20px;
+      margin-bottom: 2rem; font-weight: 500;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      line-height: 1.08; letter-spacing: -0.03em;
+      color: var(--ink); max-width: 780px;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--ink-soft); max-width: 520px;
+      margin: 1.5rem auto 2.5rem;
+      font-weight: 300; line-height: 1.7;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-actions {
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary {
+      background: var(--accent); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      padding: 14px 28px; font-size: 15px; font-weight: 500;
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,80,26,0.25); }
+    .btn-ghost {
+      background: transparent; color: var(--ink);
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 14px 28px; font-size: 15px; font-weight: 400;
+      font-family: 'DM Sans', sans-serif; cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { background: var(--paper-warm); border-color: rgba(15,14,13,0.2); }
+    .hero-proof {
+      margin-top: 3.5rem; font-size: 13px; color: var(--ink-muted);
+      position: relative; z-index: 1;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .hero-proof strong { color: var(--ink-soft); font-weight: 500; }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      background: var(--ink); color: var(--paper);
+      padding: 2rem; display: flex; justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      text-align: center; padding: 0 3rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: #fff; display: block; }
+    .stat-lbl { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 80px 2rem; }
+    .container { max-width: 1060px; margin: 0 auto; }
+    .section-eyebrow {
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--accent); font-weight: 500; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.15; letter-spacing: -0.02em;
+      max-width: 600px;
+    }
+    .section-body { font-size: 1rem; color: var(--ink-soft); max-width: 520px; margin-top: 1rem; line-height: 1.75; font-weight: 300; }
+
+    /* ── INDUSTRIES ── */
+    #industries { background: var(--paper-warm); }
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px; margin-top: 2.5rem;
+    }
+    .industry-card {
+      background: var(--paper-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.25rem 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .industry-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(15,14,13,0.08); }
+    .industry-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+    .industry-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+    .industry-count { font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .step { position: relative; }
+    .step-num {
+      font-family: 'DM Serif Display', serif; font-size: 3rem;
+      color: var(--accent-light); line-height: 1; margin-bottom: 0.75rem;
+    }
+    .step h3 { font-size: 17px; font-weight: 500; margin-bottom: 0.5rem; }
+    .step p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; font-weight: 300; }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--paper-warm); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 2.5rem; }
+    .pricing-card {
+      background: var(--paper-card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem;
+    }
+    .pricing-card.featured {
+      border: 2px solid var(--accent);
+      position: relative; overflow: hidden;
+    }
+    .featured-badge {
+      position: absolute; top: 16px; right: -24px;
+      background: var(--accent); color: #fff;
+      font-size: 11px; font-weight: 500; padding: 4px 36px;
+      transform: rotate(35deg); transform-origin: center;
+      letter-spacing: 0.05em;
+    }
+    .plan-name { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-muted); font-weight: 500; }
+    .plan-price { font-family: 'DM Serif Display', serif; font-size: 2.8rem; margin: 0.5rem 0; letter-spacing: -0.02em; }
+    .plan-price span { font-family: 'DM Sans', sans-serif; font-size: 1rem; color: var(--ink-muted); font-weight: 300; }
+    .plan-desc { font-size: 14px; color: var(--ink-soft); margin-bottom: 1.5rem; font-weight: 300; }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+    .plan-features li { font-size: 14px; color: var(--ink-soft); display: flex; align-items: flex-start; gap: 8px; }
+    .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 500; flex-shrink: 0; margin-top: 1px; }
+    .btn-plan {
+      display: block; width: 100%; text-align: center;
+      padding: 12px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 500; font-family: 'DM Sans', sans-serif;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: all 0.2s;
+    }
+    .btn-plan-outline { background: transparent; border: 1px solid var(--border); color: var(--ink); }
+    .btn-plan-outline:hover { background: var(--paper-warm); }
+    .btn-plan-fill { background: var(--accent); color: #fff; }
+    .btn-plan-fill:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 1rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+    .tag { font-size: 12px; padding: 4px 12px; border-radius: 20px; background: var(--paper-warm); border: 1px solid var(--border); color: var(--ink-soft); }
+    .about-visual {
+      background: var(--paper-warm); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 2rem; font-size: 14px; color: var(--ink-soft);
+    }
+    .about-visual .big-name {
+      font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--ink);
+      letter-spacing: -0.02em; margin-bottom: 0.5rem;
+    }
+    .about-visual .title-line { font-size: 13px; color: var(--ink-muted); margin-bottom: 1.5rem; }
+    .about-stat { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border-soft); font-size: 13px; }
+    .about-stat:last-child { border-bottom: none; }
+    .about-stat-val { font-weight: 500; color: var(--ink); }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: var(--ink); color: #fff;
+      text-align: center; padding: 80px 2rem;
+    }
+    .cta-section h2 { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 4vw, 3rem); letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .cta-section p { font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto 2rem; font-weight: 300; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem; text-align: center;
+      font-size: 13px; color: var(--ink-muted);
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--ink-muted); text-decoration: none; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .stat-item { padding: 0 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .stats-strip { flex-wrap: wrap; gap: 1.5rem; }
+      .stat-item { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Prompt<span>Forge</span></a>
+    <ul class="nav-links">
+      <li><a href="#industries">Industries</a></li>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a class="nav-cta" href="https://getpromptforge.net" target="_blank">Try free →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-badge">Now live · 47 agents across 8 industries</div>
+    <h1>AI prompts that <em>actually</em> work for your industry</h1>
+    <p class="hero-sub">Stop tinkering with generic ChatGPT prompts. Prompt Forge gives you professional-grade AI agents built for real business workflows — ready in seconds.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="https://getpromptforge.net" target="_blank">Start for free</a>
+      <a class="btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="hero-proof">Free forever on the starter plan · <strong>Pro from $12/month</strong> · No credit card required</p>
+  </section>
+
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-num">47</span>
+      <span class="stat-lbl">Professional agents</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">8</span>
+      <span class="stat-lbl">Industries covered</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">$12</span>
+      <span class="stat-lbl">Pro / month</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">0</span>
+      <span class="stat-lbl">Setup required</span>
+    </div>
+  </div>
+
+  <!-- INDUSTRIES -->
+  <section id="industries">
+    <div class="container">
+      <p class="section-eyebrow">Coverage</p>
+      <h2 class="section-title">Built for the work you actually do</h2>
+      <p class="section-body">Every agent is purpose-built for a specific industry workflow — not a generic "write me an email" template. Real prompts for real professionals.</p>
+      <div class="industry-grid">
+        <div class="industry-card"><span class="industry-icon">📈</span><div class="industry-name">Finance & Treasury</div><div class="industry-count">Deep workflow coverage</div></div>
+        <div class="industry-card"><span class="industry-icon">⚖️</span><div class="industry-name">Legal & Compliance</div><div class="industry-count">Contracts, memos, review</div></div>
+        <div class="industry-card"><span class="industry-icon">🏥</span><div class="industry-name">Healthcare</div><div class="industry-count">Clinical & administrative</div></div>
+        <div class="industry-card"><span class="industry-icon">🏗️</span><div class="industry-name">Real Estate</div><div class="industry-count">Listings, analysis, outreach</div></div>
+        <div class="industry-card"><span class="industry-icon">📣</span><div class="industry-name">Marketing & Content</div><div class="industry-count">Copy, campaigns, SEO</div></div>
+        <div class="industry-card"><span class="industry-icon">💻</span><div class="industry-name">Technology</div><div class="industry-count">Dev, product, support</div></div>
+        <div class="industry-card"><span class="industry-icon">🎓</span><div class="industry-name">Education</div><div class="industry-count">Curriculum, comms, admin</div></div>
+        <div class="industry-card"><span class="industry-icon">🛒</span><div class="industry-name">E-Commerce & Retail</div><div class="industry-count">Product, CX, ops</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <p class="section-eyebrow">How it works</p>
+      <h2 class="section-title">From blank page to polished output in under a minute</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Pick your industry</h3>
+          <p>Choose from 8 professional industries. Prompt Forge filters to the agents most relevant to your work.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Select an agent</h3>
+          <p>Browse 47 purpose-built prompt agents. Each one is designed around a specific, real-world workflow — not a vague use case.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Fill in your context</h3>
+          <p>Answer a few focused questions. The agent structures everything into a professional prompt automatically.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Copy & use anywhere</h3>
+          <p>Take your prompt to ChatGPT, Claude, Gemini — wherever you work. No lock-in, no proprietary AI layer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="container">
+      <p class="section-eyebrow">Pricing</p>
+      <h2 class="section-title">Start free. Upgrade when you need more.</h2>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <p class="plan-name">Starter</p>
+          <p class="plan-price">$0 <span>/ forever</span></p>
+          <p class="plan-desc">Everything you need to get started with AI prompting.</p>
+          <ul class="plan-features">
+            <li>Access to core agents</li>
+            <li>All 8 industries</li>
+            <li>Copy-to-clipboard output</li>
+            <li>No credit card required</li>
+          </ul>
+          <a class="btn-plan btn-plan-outline" href="https://getpromptforge.net" target="_blank">Get started free</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="featured-badge">Popular</div>
+          <p class="plan-name">Pro</p>
+          <p class="plan-price">$12 <span>/ month</span></p>
+          <p class="plan-desc">Unlock the full agent library and advanced workflow features.</p>
+          <ul class="plan-features">
+            <li>All 47 agents unlocked</li>
+            <li>Priority access to new agents</li>
+            <li>Save & organize prompts</li>
+            <li>Early feature access</li>
+            <li>Cancel anytime</li>
+          </ul>
+          <a class="btn-plan btn-plan-fill" href="https://getpromptforge.net" target="_blank">Start Pro free trial</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-eyebrow">Behind the product</p>
+      <div class="about-grid">
+        <div>
+          <h2 class="section-title">Built by a practitioner, not a prompt hobbyist</h2>
+          <p class="section-body">Prompt Forge was built by Rob Hilbert — a Senior Treasury Analyst who manages a $200M+ FX hedging portfolio by day and builds AI tools by night. Every agent was designed around real professional frustration with vague, generic AI outputs.</p>
+          <p class="section-body" style="margin-top: 1rem;">The prompts in Prompt Forge aren't theoretical. They've been tested in actual workflows across finance, marketing, legal, and more.</p>
+          <div class="about-tags">
+            <span class="tag">Treasury & Finance</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">Supabase</span>
+            <span class="tag">Anthropic API</span>
+            <span class="tag">Stripe</span>
+            <span class="tag">N8N automation</span>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="big-name">Rob Hilbert</div>
+          <div class="title-line">Builder · Senior Treasury Analyst · McLeansville, NC</div>
+          <div class="about-stat"><span>Current role</span><span class="about-stat-val">Kontoor Brands (Wrangler, Lee)</span></div>
+          <div class="about-stat"><span>FX pairs managed</span><span class="about-stat-val">11 currencies</span></div>
+          <div class="about-stat"><span>Agents shipped</span><span class="about-stat-val">47 across 8 industries</span></div>
+          <div class="about-stat"><span>Stack</span><span class="about-stat-val">Next.js · Supabase · Anthropic</span></div>
+          <div class="about-stat"><span>Also building</span><span class="about-stat-val">Hilbert.AI · SIGNAL CYCLE</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Ready to stop wrestling with prompts?</h2>
+    <p>Join Prompt Forge free. No credit card, no setup, no fluff — just professional AI prompts that work.</p>
+    <a class="btn-primary" href="https://getpromptforge.net" target="_blank" style="font-size: 16px; padding: 16px 36px;">Start for free →</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Prompt Forge · Built by <a href="https://getpromptforge.net">Rob Hilbert</a> · <a href="https://getpromptforge.net">getpromptforge.net</a></p>
+  </footer>
+
+</body>
+</html>
