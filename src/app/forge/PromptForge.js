@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { useUser, useClerk, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { INDUSTRIES, PRO_INDUSTRIES, INDUSTRY_TABS } from '../data/industries'
 
@@ -347,6 +348,7 @@ const fmtDate = (ts) =>
 
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function PromptForge() {
+  const searchParams = useSearchParams()
   const { user, isSignedIn, isLoaded } = useUser()
   const { openSignIn } = useClerk()
 
@@ -354,7 +356,16 @@ export default function PromptForge() {
   const usage = user?.publicMetadata?.usage || 0
 
   const [view, setView]           = useState('forge')
-  const [industry, setIndustry]   = useState('General')
+  const [industry, setIndustry]   = useState(() => {
+    const param = searchParams.get('industry')
+    if (param) {
+      const match = INDUSTRY_TABS.find(
+        name => name.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') === param
+      )
+      if (match) return match
+    }
+    return 'General'
+  })
   const [selected, setSelected]   = useState(null)
   const [prompt, setPrompt]       = useState('')
   const [loading, setLoading]     = useState(false)
