@@ -11,7 +11,7 @@
 - **Agents with fixedPrompt:** 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer)
 - **Prompt engine version:** v2 (XML-tagged, 8-section output, userContext support, max_tokens: 4096)
 - **Free limit:** 3 generates
-- **UI features:** Streaming output, Regenerate button, Generation metadata, userContext input (Pro only), Global search, Industry dropdown, Filter pills, Pro-only blur/lock system
+- **UI features:** Streaming output, Regenerate button, Generation metadata, userContext input (Pro only), Global search, Industry dropdown, Filter pills, Pro-only blur/lock system, SEO landing pages (/industry/{slug}), URL deep-linking (/forge?industry=)
 - **Pro-only industries:** AI Agent Development, Cyber Intelligence, Cybersecurity, Consulting & Strategy, Architecture & Engineering, SaaS & Product, Banking & Lending, Pharma & Biotech, Aviation & Aerospace, Executive & Leadership
 - **Gated features:** userContext personalization, Save to Library, Custom Agent Builder
 - **Pricing:** $12/month Pro (LOCKED — see competitive-intel.md)
@@ -97,3 +97,8 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-03-19 — Global search, industry dropdown, filter pills — `5212e2e`
 - 2026-03-20 — Quality test (40 agents) + max_tokens fix (1024→4096) — `9f6589b`
 - 2026-03-20 — Add Cyber Intelligence (10 agents, Pro-only) — `2810fb6`
+- 2026-04-01 — Extract INDUSTRIES into shared data module — `0980966`
+- 2026-04-01 — Add URL param deep-linking for /forge — `e766053`
+- 2026-04-01 — Add SEO landing pages for all 41 industries (/industry/{slug}) — `4bf1aca`
+- 2026-04-01 — Add JSON-LD structured data to SEO pages — `a3ee1fc`
+- 2026-04-01 — Link homepage industry cards to SEO pages — `6fb97f2`
