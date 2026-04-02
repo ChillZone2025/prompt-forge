@@ -63,3 +63,12 @@ Agents activate based on real metrics, not calendar dates. Dormant agents exist 
 - NEVER commit without pushing
 - NEVER force push
 - Commit messages follow conventional format: `feat:`, `fix:`, `docs:`, `chore:`, `test:`
+
+## Memory Sync Protocol
+
+After completing any task, every agent MUST update STATUS.md with:
+1. What was completed (one line per item)
+2. What files were changed
+3. Current project state (what's live, what's next)
+
+This is non-negotiable. STATUS.md is the single source of truth that syncs between Claude Code agents and the planning layer in Claude chat. If STATUS.md isn't updated, the work didn't happen.
