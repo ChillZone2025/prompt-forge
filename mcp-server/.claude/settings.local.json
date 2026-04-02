@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__promptforge__list_industries",
+      "mcp__promptforge__generate_prompt"
+    ]
+  }
+}

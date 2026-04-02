@@ -1,0 +1,294 @@
+Total agents extracted: 251
+Already tested: 109
+Agents with fixedPrompt (skip): 8
+To test: 134
+---
+[1/134] Staff Scheduling Agent (staff_sched) — Hospitality & Events
+(node:19716) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+  ✓ PASS (866w, 13 tools)
+[2/134] Route Optimization Agent (route_opt) — Logistics & Supply Chain
+  ✓ PASS (742w, 31 tools)
+[3/134] Warehouse Ops Agent (warehouse_ops) — Logistics & Supply Chain
+  ✓ PASS (721w, 31 tools)
+[4/134] Carrier Negotiation Agent (carrier_nego) — Logistics & Supply Chain
+  ✓ PASS (789w, 22 tools)
+[5/134] Customs & Trade Agent (customs_comp) — Logistics & Supply Chain
+  ✓ PASS (834w, 30 tools)
+[6/134] Demand Planning Agent (demand_plan) — Logistics & Supply Chain
+  ✓ PASS (696w, 32 tools)
+[7/134] Freight Audit Agent (freight_audit) — Logistics & Supply Chain
+  ✓ PASS (758w, 29 tools)
+[8/134] Ag Compliance Agent (ag_compliance) — Agriculture & Farming
+  ✓ PASS (742w, 21 tools)
+[9/134] Crop Planning Agent (crop_plan) — Agriculture & Farming
+  ✓ PASS (831w, 19 tools)
+[10/134] Farm Financial Agent (farm_finance) — Agriculture & Farming
+  ✓ PASS (773w, 20 tools)
+[11/134] Livestock Manager (livestock_mgmt) — Agriculture & Farming
+  ✓ PASS (793w, 26 tools)
+[12/134] Precision Ag Agent (precision_ag) — Agriculture & Farming
+  ✓ PASS (857w, 22 tools)
+[13/134] Dealer CRM Agent (dealer_crm) — Automotive
+  ✓ PASS (785w, 21 tools)
+[14/134] Parts Inventory Agent (parts_mgmt) — Automotive
+  ✓ PASS (825w, 35 tools)
+[15/134] Service Advisor Agent (service_advisor) — Automotive
+  ✓ PASS (799w, 20 tools)
+[16/134] Vehicle Appraisal Agent (vehicle_appr) — Automotive
+  ✓ PASS (712w, 16 tools)
+[17/134] Warranty Claims Agent (warranty_agent) — Automotive
+  ✓ PASS (827w, 18 tools)
+[18/134] Certification Agent (aero_cert) — Aviation & Aerospace
+  ✓ PASS (785w, 44 tools)
+[19/134] Flight Operations Agent (flight_ops) — Aviation & Aerospace
+  ✓ PASS (733w, 28 tools)
+[20/134] Ground Operations Agent (ground_ops) — Aviation & Aerospace
+  ✓ PASS (762w, 30 tools)
+[21/134] MRO Planning Agent (mro_agent) — Aviation & Aerospace
+  ✓ PASS (796w, 27 tools)
+[22/134] Aviation Safety Agent (safety_mgmt) — Aviation & Aerospace
+  ✓ PASS (802w, 34 tools)
+[23/134] Branch Operations Agent (branch_ops) — Banking & Lending
+  ✓ PASS (786w, 21 tools)
+[24/134] Commercial Lending Agent (comm_lender) — Banking & Lending
+  ✓ PASS (783w, 21 tools)
+[25/134] KYC/AML Agent (kyc_agent) — Banking & Lending
+  ✓ PASS (720w, 31 tools)
+--- Batch 1 complete (25/134) ---
+[26/134] Loan Origination Agent (loan_orig) — Banking & Lending
+  ✓ PASS (744w, 28 tools)
+[27/134] Portfolio Manager Agent (portfolio_mgr) — Banking & Lending
+  ✓ PASS (812w, 21 tools)
+[28/134] Deposit Operations Agent (deposit_ops) — Banking & Lending
+  ✓ PASS (791w, 19 tools)
+[29/134] Bid Estimator (bid_est) — Construction & Trades
+  ✓ PASS (715w, 16 tools)
+[30/134] Inspection Agent (inspect_agent) — Construction & Trades
+  ✓ PASS (743w, 27 tools)
+[31/134] Material Calculator (material_calc) — Construction & Trades
+  ✓ PASS (725w, 24 tools)
+[32/134] Safety Compliance Agent (safety_comp) — Construction & Trades
+  ✓ PASS (738w, 30 tools)
+[33/134] Schedule Optimizer (sched_opt) — Construction & Trades
+  ✓ PASS (756w, 19 tools)
+[34/134] Incident Response Agent (incident_resp) — Cybersecurity
+  ✓ PASS (769w, 29 tools)
+[35/134] Pentest Planner (pentest_plan) — Cybersecurity
+  ✓ PASS (738w, 25 tools)
+[36/134] SOC Analyst Agent (soc_analyst) — Cybersecurity
+  ✓ PASS (795w, 29 tools)
+[37/134] Threat Modeling Agent (threat_model) — Cybersecurity
+  ✓ PASS (833w, 34 tools)
+[38/134] Vulnerability Manager (vuln_mgmt) — Cybersecurity
+  ✓ PASS (759w, 39 tools)
+[39/134] GRC Analyst (grc_analyst) — Cybersecurity
+  ✓ PASS (841w, 39 tools)
+[40/134] Treatment Plan Agent (dental_treatment) — Dental & Optometry
+  ✓ PASS (645w, 19 tools)
+[41/134] Insurance Verification Agent (ins_verify) — Dental & Optometry
+  ✓ PASS (711w, 28 tools)
+[42/134] Optical Sales Agent (optical_sales) — Dental & Optometry
+  ✓ PASS (740w, 17 tools)
+[43/134] Patient Communications Agent (patient_comms) — Dental & Optometry
+  ✓ PASS (741w, 15 tools)
+[44/134] Practice Manager Agent (practice_mgmt) — Dental & Optometry
+  ✓ PASS (775w, 18 tools)
+[45/134] Cart Recovery Agent (abandon_cart) — E-commerce & DTC
+  ✓ PASS (743w, 20 tools)
+[46/134] Listing Optimizer (listing_opt) — E-commerce & DTC
+  ✓ PASS (741w, 19 tools)
+[47/134] Pricing Intelligence Agent (pricing_intel) — E-commerce & DTC
+  ✓ PASS (836w, 20 tools)
+[48/134] Product Description Agent (product_desc) — E-commerce & DTC
+  ✓ PASS (723w, 22 tools)
+[49/134] Review Management Agent (review_mgmt) — E-commerce & DTC
+  ✓ PASS (770w, 23 tools)
+[50/134] Email Marketing Agent (ecomm_email) — E-commerce & DTC
+  ✓ PASS (800w, 25 tools)
+--- Batch 2 complete (50/134) ---
+[51/134] Energy Audit Agent (energy_audit) — Energy & Utilities
+  ✗ ERROR: Connection error.
+[52/134] Field Service Agent (field_service) — Energy & Utilities
+  ✗ ERROR: Connection error.
+[53/134] Grid Operations Agent (grid_ops) — Energy & Utilities
+  ✗ ERROR: Request timed out.
+[54/134] Renewable Development Agent (renew_dev) — Energy & Utilities
+  ✓ PASS (712w, 40 tools)
+[55/134] Utility Regulatory Agent (util_reg) — Energy & Utilities
+  ✓ PASS (789w, 20 tools)
+[56/134] Renewable Finance Agent (renew_finance) — Energy & Utilities
+  ✓ PASS (823w, 38 tools)
+[57/134] Class Schedule Agent (class_sched) — Fitness & Wellness
+  ✓ PASS (782w, 14 tools)
+[58/134] Client Progress Agent (client_progress) — Fitness & Wellness
+  ✓ PASS (782w, 14 tools)
+[59/134] Nutrition Planning Agent (nutrition_plan) — Fitness & Wellness
+  ✓ PASS (787w, 15 tools)
+[60/134] Program Design Agent (program_design) — Fitness & Wellness
+  ✓ PASS (790w, 22 tools)
+[61/134] Wellness Coach Agent (wellness_coach) — Fitness & Wellness
+  ✓ PASS (851w, 24 tools)
+[62/134] Client Onboarding Agent (client_onboard) — Freelancers & Solopreneurs
+  ✓ PASS (735w, 20 tools)
+[63/134] Freelance Pitch Writer (freelance_pitch) — Freelancers & Solopreneurs
+  ✓ PASS (752w, 19 tools)
+[64/134] Portfolio Builder (portfolio_build) — Freelancers & Solopreneurs
+  ✓ PASS (743w, 15 tools)
+[65/134] Rate & Pricing Agent (rate_calc) — Freelancers & Solopreneurs
+  ✓ PASS (784w, 11 tools)
+[66/134] Scope Guard Agent (scope_guard) — Freelancers & Solopreneurs
+  ✓ PASS (777w, 21 tools)
+[67/134] Lean Manufacturing Agent (lean_agent) — Manufacturing
+  ✓ PASS (704w, 23 tools)
+[68/134] Maintenance Planner (maint_plan) — Manufacturing
+  ✓ PASS (769w, 35 tools)
+[69/134] Procurement Agent (proc_agent) — Manufacturing
+  ✓ PASS (834w, 29 tools)
+[70/134] Production Scheduler (prod_sched) — Manufacturing
+  ✓ PASS (801w, 39 tools)
+[71/134] Quality Control Agent (quality_ctrl) — Manufacturing
+  ✓ PASS (713w, 28 tools)
+[72/134] EHS Compliance Agent (ehs_agent) — Manufacturing
+  ✓ PASS (715w, 29 tools)
+[73/134] Audience Development Agent (audience_dev) — Media & Publishing
+  ✓ PASS (741w, 26 tools)
+[74/134] Content Calendar Agent (content_cal) — Media & Publishing
+  ✓ PASS (844w, 25 tools)
+[75/134] Copy Editor Agent (copy_editor) — Media & Publishing
+  ✓ PASS (745w, 13 tools)
+--- Batch 3 complete (75/134) ---
+[76/134] Editorial Agent (editorial_agent) — Media & Publishing
+  ✓ PASS (820w, 17 tools)
+[77/134] Rights & Licensing Agent (rights_mgmt) — Media & Publishing
+  ✓ PASS (727w, 31 tools)
+[78/134] Constituent Service Agent (constituent_svc) — Nonprofit & Government
+  ✓ PASS (754w, 15 tools)
+[79/134] Grant Writer Agent (ngo_grant_writer) — Nonprofit & Government
+  ✓ PASS (825w, 29 tools)
+[80/134] Impact Report Generator (impact_report) — Nonprofit & Government
+  ✓ PASS (846w, 23 tools)
+[81/134] Policy Analyst Agent (policy_analyst) — Nonprofit & Government
+  ✓ PASS (788w, 16 tools)
+[82/134] Volunteer Coordinator (volunteer_coord) — Nonprofit & Government
+  ✓ PASS (695w, 12 tools)
+[83/134] Clinical Trial Agent (clin_trial) — Pharma & Biotech
+  ✓ PASS (780w, 38 tools)
+[84/134] Drug Safety Agent (drug_safety) — Pharma & Biotech
+  ✓ PASS (811w, 43 tools)
+[85/134] Medical Affairs Agent (med_affairs) — Pharma & Biotech
+  ✓ PASS (759w, 23 tools)
+[86/134] Pharma QA/QC Agent (pharma_qc) — Pharma & Biotech
+  ✓ PASS (680w, 39 tools)
+[87/134] Regulatory Submission Agent (reg_submit) — Pharma & Biotech
+  ✓ PASS (837w, 30 tools)
+[88/134] Lease Management Agent (lease_mgmt) — Property Management
+  ✓ PASS (852w, 26 tools)
+[89/134] Maintenance Coordinator (maint_coord) — Property Management
+  ✗ FAIL — no question in first msg
+[90/134] Property Financials Agent (prop_financials) — Property Management
+  ✓ PASS (821w, 21 tools)
+[91/134] Tenant Communications Agent (tenant_comms) — Property Management
+  ✓ PASS (784w, 19 tools)
+[92/134] Tenant Screening Agent (tenant_screen) — Property Management
+  ✓ PASS (818w, 17 tools)
+[93/134] Employer Brand Agent (employer_brand) — Recruitment & Staffing
+  ✓ PASS (863w, 22 tools)
+[94/134] Job Description Writer (job_desc) — Recruitment & Staffing
+  ✓ PASS (802w, 21 tools)
+[95/134] Offer Letter Agent (offer_letter) — Recruitment & Staffing
+  ✓ PASS (775w, 22 tools)
+[96/134] Recruiting Pipeline Agent (recruit_pipe) — Recruitment & Staffing
+  ✓ PASS (713w, 30 tools)
+[97/134] Sourcing Agent (source_agent) — Recruitment & Staffing
+  ✓ PASS (816w, 21 tools)
+[98/134] Contingent Workforce Agent (contingent_mgmt) — Recruitment & Staffing
+  ✓ PASS (849w, 23 tools)
+[99/134] Churn Analyst (churn_analyst) — SaaS & Product
+  ✓ PASS (789w, 27 tools)
+[100/134] Feature Prioritization Agent (feature_prior) — SaaS & Product
+  ✓ PASS (773w, 24 tools)
+--- Batch 4 complete (100/134) ---
+[101/134] PRD Writer (prd_writer) — SaaS & Product
+  ✓ PASS (741w, 30 tools)
+[102/134] Release Notes Writer (release_notes) — SaaS & Product
+  ✓ PASS (731w, 27 tools)
+[103/134] User Research Agent (user_research) — SaaS & Product
+  ✓ PASS (815w, 17 tools)
+[104/134] Onboarding Flow Designer (onboard_flow) — SaaS & Product
+  ✓ PASS (743w, 15 tools)
+[105/134] Athlete Performance Agent (athlete_perf) — Sports & Athletics
+  ✓ PASS (724w, 21 tools)
+[106/134] Fan Engagement Agent (fan_engage) — Sports & Athletics
+  ✓ PASS (786w, 20 tools)
+[107/134] Game Plan Agent (game_plan) — Sports & Athletics
+  ✓ PASS (792w, 17 tools)
+[108/134] Scouting Analyst (scout_analyst) — Sports & Athletics
+  ✓ PASS (759w, 15 tools)
+[109/134] Sports Operations Agent (sports_ops) — Sports & Athletics
+  ✓ PASS (783w, 21 tools)
+[110/134] Pet Owner Communications (pet_comms) — Veterinary
+  ✓ PASS (758w, 15 tools)
+[111/134] Practice Growth Agent (practice_growth) — Veterinary
+  ✓ PASS (768w, 18 tools)
+[112/134] Veterinary Billing Agent (vet_billing) — Veterinary
+  ✓ PASS (758w, 14 tools)
+[113/134] Veterinary Records Agent (vet_records) — Veterinary
+  ✓ PASS (767w, 19 tools)
+[114/134] Veterinary Triage Agent (vet_triage) — Veterinary
+  ✓ PASS (737w, 24 tools)
+[115/134] Agent Architecture Designer (agent_arch) — AI Agent Development
+  ✓ PASS (783w, 27 tools)
+[116/134] Tool Use Designer (tool_builder) — AI Agent Development
+  ✓ PASS (820w, 25 tools)
+[117/134] Prompt Evaluation Agent (eval_agent) — AI Agent Development
+  ✓ PASS (785w, 19 tools)
+[118/134] Multi-Agent Orchestrator (multi_orch) — AI Agent Development
+  ✓ PASS (753w, 24 tools)
+[119/134] SOUL.md Writer (soul_writer) — AI Agent Development
+  ✓ PASS (780w, 19 tools)
+[120/134] Agent Memory Architect (memory_arch) — AI Agent Development
+  ✓ PASS (685w, 28 tools)
+[121/134] AgentSkill Builder (skill_builder) — AI Agent Development
+  ✓ PASS (719w, 25 tools)
+[122/134] OpenClaw Deployment Agent (openclaw_deploy) — AI Agent Development
+  ✓ PASS (723w, 25 tools)
+[123/134] Agent Security Auditor (agent_sec) — AI Agent Development
+  ✓ PASS (731w, 31 tools)
+[124/134] Agent Testing Strategist (agent_test) — AI Agent Development
+  ✓ PASS (819w, 28 tools)
+[125/134] OSINT Investigation Planner (osint_planner) — Cyber Intelligence
+  ✓ PASS (757w, 27 tools)
+--- Batch 5 complete (125/134) ---
+[126/134] Digital Footprint Analyst (digi_footprint) — Cyber Intelligence
+  ✓ PASS (736w, 27 tools)
+[127/134] Threat Intelligence Analyst (threat_intel) — Cyber Intelligence
+  ✓ PASS (762w, 25 tools)
+[128/134] Credential Exposure Monitor (cred_exposure) — Cyber Intelligence
+  ✓ PASS (821w, 21 tools)
+[129/134] Domain & Infrastructure Recon (domain_recon) — Cyber Intelligence
+  ✓ PASS (709w, 21 tools)
+[130/134] Dark Web Monitor (darkweb_mon) — Cyber Intelligence
+  ✓ PASS (759w, 23 tools)
+[131/134] Social Media Intelligence (socmedia_intel) — Cyber Intelligence
+  ✓ PASS (757w, 28 tools)
+[132/134] Corporate Due Diligence Agent (corp_dd) — Cyber Intelligence
+  ✓ PASS (856w, 30 tools)
+[133/134] Disinformation Analyst (disinfo_analyst) — Cyber Intelligence
+  ✓ PASS (778w, 25 tools)
+[134/134] Geolocation Intelligence (geoloc_intel) — Cyber Intelligence
+  ✓ PASS (777w, 36 tools)
+
+════════════════════════════════════════
+QUALITY GATE TIER 1 — FINAL SUMMARY
+════════════════════════════════════════
+Total tested: 134
+Passed: 130
+Failed: 4
+
+Failures:
+  - Energy Audit Agent (energy_audit): API error: Connection error.
+  - Field Service Agent (field_service): API error: Connection error.
+  - Grid Operations Agent (grid_ops): API error: Request timed out.
+  - Maintenance Coordinator (maint_coord): no question in first msg
+════════════════════════════════════════
