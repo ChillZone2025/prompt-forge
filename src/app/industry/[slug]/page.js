@@ -415,6 +415,35 @@ export default function IndustryPage({ params }) {
         <span style={{ margin: '0 6px' }}>·</span>
         <Link href="/terms">Terms</Link>
       </footer>
+
+      {/* JSON-LD STRUCTURED DATA */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'CollectionPage',
+            name: `AI Agents for ${name}`,
+            description: meta.description,
+            url: `https://getpromptforge.net/industry/${slug}`,
+            isPartOf: {
+              '@type': 'WebSite',
+              name: 'Prompt Forge',
+              url: 'https://getpromptforge.net',
+            },
+            mainEntity: {
+              '@type': 'ItemList',
+              numberOfItems: agents.length,
+              itemListElement: agents.map((agent, i) => ({
+                '@type': 'ListItem',
+                position: i + 1,
+                name: agent.name,
+                description: agent.desc,
+              })),
+            },
+          }),
+        }}
+      />
     </>
   )
 }
