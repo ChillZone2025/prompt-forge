@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { toSlug } from './data/industries'
 
 export const metadata = {
   title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
@@ -555,16 +556,16 @@ export default function Home() {
               { icon:'🔒', name:'Cybersecurity', count:'5 AGENTS', pro:true, agents:['Incident Response','Pentest Planner','SOC Analyst'] },
               { icon:'🚀', name:'SaaS & Product', count:'5 AGENTS', pro:true, agents:['PRD Writer','Churn Analyst','Feature Prioritization'] },
             ].map(ind => (
-              <div className="lp-ind-card" key={ind.name}>
+              <Link href={`/industry/${toSlug(ind.name)}`} className="lp-ind-card" key={ind.name} style={{textDecoration:'none',color:'inherit'}}>
                 <span className="lp-ind-icon">{ind.icon}</span>
                 <div className="lp-ind-name">{ind.name}{ind.pro && <span className="lp-pro-badge">PRO</span>}</div>
                 <div className="lp-ind-count">{ind.count}</div>
                 <div className="lp-ind-agents">
                   {ind.agents.map(a => <span className="lp-ind-agent" key={a}>{a}</span>)}
                 </div>
-              </div>
+              </Link>
             ))}
-            <Link href="/forge" className="lp-ind-more">+25 more industries →</Link>
+            <Link href="/forge" className="lp-ind-more">+25 more industries in the Forge →</Link>
           </div>
         </div>
       </section>
