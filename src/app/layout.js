@@ -1,6 +1,6 @@
 import { ClerkProvider } from '@clerk/nextjs'
+import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
-
 export const metadata = {
   title: 'Prompt Forge — One-Click Agent Prompts',
   description: 'Generate fully packaged, deployment-ready AI agent system prompts in one click. No setup required.',
@@ -24,7 +24,6 @@ export const metadata = {
     description: 'One-click AI agent prompt generator for professionals.',
   },
 }
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -56,6 +55,7 @@ export default function RootLayout({ children }) {
         }}>
           {children}
         </ClerkProvider>
+        <Analytics />
         <script dangerouslySetInnerHTML={{
           __html: `
             if ('serviceWorker' in navigator) {
