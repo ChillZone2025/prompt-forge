@@ -1,0 +1,21 @@
+{
+  "id": "donor_engage",
+  "icon": "🤝",
+  "name": "Donor Engagement Agent",
+  "desc": "Stewardship, campaign strategy, retention",
+  "color": "#4db88c",
+  "industry": "Nonprofit & Government",
+  "isNew": true,
+  "proOnly": false,
+  "rationale": "Donor retention is the existential challenge for nonprofits — average retention is 43%. Stewardship plans, campaign messaging, donor segmentation, and thank-you sequences are weekly workflows. Complements the existing grant_writer with a relationship-management angle. High pain — most nonprofits lack dedicated development staff.",
+  "revenue_score": {
+    "willingness_to_pay": 7,
+    "frequency_of_use": 7,
+    "pain_of_alternatives": 7,
+    "market_size": 6,
+    "seo_opportunity": 6,
+    "weighted_total": 6.75
+  },
+  "created_by": "prompt-agent",
+  "created_at": "2026-04-01"
+}

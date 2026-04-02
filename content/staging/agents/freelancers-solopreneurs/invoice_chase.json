@@ -1,0 +1,21 @@
+{
+  "id": "invoice_chase",
+  "icon": "💸",
+  "name": "Invoice & Collections Agent",
+  "desc": "Payment follow-up, aging reports, cash flow",
+  "color": "#e8913a",
+  "industry": "Freelancers & Solopreneurs",
+  "isNew": true,
+  "proOnly": false,
+  "rationale": "Late payment is the #1 financial pain for freelancers — 58% of invoices are paid late. Collections follow-up, payment reminder sequences, and cash flow forecasting are high-frequency needs. Strong WtP because cash flow directly impacts income. Fills the AR/collections gap in a portfolio/scope-focused industry.",
+  "revenue_score": {
+    "willingness_to_pay": 8,
+    "frequency_of_use": 8,
+    "pain_of_alternatives": 8,
+    "market_size": 8,
+    "seo_opportunity": 6,
+    "weighted_total": 7.8
+  },
+  "created_by": "prompt-agent",
+  "created_at": "2026-04-01"
+}

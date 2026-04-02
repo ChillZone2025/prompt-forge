@@ -1,0 +1,21 @@
+{
+  "id": "compliance_insp",
+  "icon": "🔍",
+  "name": "Compliance Inspector",
+  "desc": "Building codes, safety audits, violation tracking",
+  "color": "#c44d4d",
+  "industry": "Property Management",
+  "isNew": true,
+  "proOnly": false,
+  "rationale": "Property compliance — fire safety, ADA, lead paint, habitability codes, elevator inspections — is a high-liability, high-frequency obligation. Violations carry fines and legal exposure. No existing property management agent covers the regulatory/safety inspection side. Fills a critical risk-management gap.",
+  "revenue_score": {
+    "willingness_to_pay": 8,
+    "frequency_of_use": 7,
+    "pain_of_alternatives": 7,
+    "market_size": 6,
+    "seo_opportunity": 5,
+    "weighted_total": 6.95
+  },
+  "created_by": "prompt-agent",
+  "created_at": "2026-04-01"
+}
