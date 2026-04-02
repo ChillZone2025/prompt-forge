@@ -1,0 +1,21 @@
+{
+  "id": "fleet_ops",
+  "icon": "🚛",
+  "name": "Fleet Operations Agent",
+  "desc": "Utilization, lifecycle costing, maintenance scheduling",
+  "color": "#4d8cd4",
+  "industry": "Automotive",
+  "isNew": true,
+  "proOnly": false,
+  "rationale": "Fleet management is a massive B2B market — every company with 10+ vehicles needs fleet optimization. Utilization tracking, TCO analysis, preventive maintenance scheduling, and replacement timing are high-frequency decisions. Complements the existing dealer/service agents with a fleet-operator perspective.",
+  "revenue_score": {
+    "willingness_to_pay": 8,
+    "frequency_of_use": 8,
+    "pain_of_alternatives": 7,
+    "market_size": 7,
+    "seo_opportunity": 6,
+    "weighted_total": 7.45
+  },
+  "created_by": "prompt-agent",
+  "created_at": "2026-04-01"
+}
