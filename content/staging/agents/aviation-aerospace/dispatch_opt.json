@@ -1,0 +1,21 @@
+{
+  "id": "dispatch_opt",
+  "icon": "✈",
+  "name": "Dispatch Optimizer",
+  "desc": "Route efficiency, fuel savings, delay recovery",
+  "color": "#d4a84d",
+  "industry": "Aviation & Aerospace",
+  "isNew": true,
+  "proOnly": true,
+  "rationale": "Flight dispatch optimization directly impacts airline profitability — fuel is 25-30% of operating costs. Route efficiency, alternate planning, and delay recovery are daily high-stakes decisions. Complements existing flight_ops and safety_mgmt agents with a cost-optimization lens.",
+  "revenue_score": {
+    "willingness_to_pay": 9,
+    "frequency_of_use": 9,
+    "pain_of_alternatives": 8,
+    "market_size": 5,
+    "seo_opportunity": 5,
+    "weighted_total": 7.8
+  },
+  "created_by": "prompt-agent",
+  "created_at": "2026-04-01"
+}

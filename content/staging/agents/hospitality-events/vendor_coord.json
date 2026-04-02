@@ -1,0 +1,21 @@
+{
+  "id": "vendor_coord",
+  "icon": "📋",
+  "name": "Vendor Coordinator",
+  "desc": "Supplier management, contract negotiation",
+  "color": "#d4834d",
+  "industry": "Hospitality & Events",
+  "isNew": true,
+  "proOnly": false,
+  "rationale": "Event vendor management is a high-frequency pain point — caterers, AV companies, florists, venues, rental companies all require contracts, timelines, and coordination. No existing agent covers the supplier/procurement side of events. High daily use for event planners managing multiple vendors per event.",
+  "revenue_score": {
+    "willingness_to_pay": 7,
+    "frequency_of_use": 8,
+    "pain_of_alternatives": 7,
+    "market_size": 7,
+    "seo_opportunity": 5,
+    "weighted_total": 7.05
+  },
+  "created_by": "prompt-agent",
+  "created_at": "2026-04-01"
+}
