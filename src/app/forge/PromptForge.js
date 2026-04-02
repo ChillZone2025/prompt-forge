@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useUser, useClerk, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { track } from '@vercel/analytics'
 import { INDUSTRIES, PRO_INDUSTRIES, INDUSTRY_TABS } from '../data/industries'
 
 const LS_LIB = 'pf_library'
@@ -402,6 +403,12 @@ export default function PromptForge() {
     return () => clearInterval(t)
   }, [loading])
 
+  // Funnel: browse — fires when user changes industry or searches agents
+  useEffect(() => { if (mounted) track('funnel_browse') }, [industry, agentSearch])
+
+  // Funnel: signup — fires when user signs in
+  useEffect(() => { if (isSignedIn) track('funnel_signup') }, [isSignedIn])
+
   const FREE_LIMIT = 3
   const atLimit = !isPro && usage >= FREE_LIMIT
   const remaining = Math.max(0, FREE_LIMIT - usage)
@@ -413,6 +420,7 @@ export default function PromptForge() {
 
   const activatePro = async () => {
     if (!isSignedIn) { openSignIn(); return }
+    track('funnel_convert')
     try {
       setModal(null)
       const res = await fetch('/api/checkout', {
@@ -469,6 +477,7 @@ export default function PromptForge() {
   const generate = async (agent, context) => {
     if (!isSignedIn) { openSignIn(); return }
     if (atLimit) { setModal('upgrade'); return }
+    track('funnel_generate', { agent: agent.name, industry: agent._industry || industry })
     setContextAgent(null)
     setSelected(agent)
     setPrompt('')

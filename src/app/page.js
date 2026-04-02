@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { toSlug } from './data/industries'
+import LandingTracker from './LandingTracker'
 
 export const metadata = {
   title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
@@ -16,6 +17,7 @@ export default function Home() {
 
   return (
     <>
+      <LandingTracker />
       <style>{`
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
