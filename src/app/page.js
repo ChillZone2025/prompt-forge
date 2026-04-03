@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { toSlug } from './data/industries'
 import LandingTracker from './LandingTracker'
+import VerticalSelector from './components/onboarding/VerticalSelector'
 
 export const metadata = {
   title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
@@ -457,6 +458,11 @@ export default function Home() {
             <div className="lp-proof-item"><span className="lp-proof-icon">✓</span> Deploy in 30 seconds</div>
           </div>
         </div>
+      </section>
+
+      {/* VERTICAL SELECTOR — intent-first onboarding */}
+      <section style={{ background: '#13120F', padding: '80px 24px', textAlign: 'center' }}>
+        <VerticalSelector />
       </section>
 
       {/* STATS */}
