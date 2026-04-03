@@ -11,7 +11,7 @@
 - **Agents with fixedPrompt:** 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer)
 - **Prompt engine version:** v2 (XML-tagged, 8-section output, userContext support, max_tokens: 4096)
 - **Free limit:** 3 generates
-- **UI features:** Streaming output, Regenerate button, Generation metadata, userContext input (Pro only), Global search, Industry dropdown, Filter pills, Pro-only blur/lock system, SEO landing pages (/industry/{slug}), URL deep-linking (/forge?industry=)
+- **UI features:** Streaming output, Regenerate button, Generation metadata, userContext input (Pro only), Global search, Industry dropdown, Filter pills, Pro-only blur/lock system, SEO landing pages (/industry/{slug}), URL deep-linking (/forge?industry=), VerticalSelector onboarding component (landing page), Vercel Analytics funnel events (5 stages)
 - **Pro-only industries:** AI Agent Development, Cyber Intelligence, Cybersecurity, Consulting & Strategy, Architecture & Engineering, SaaS & Product, Banking & Lending, Pharma & Biotech, Aviation & Aerospace, Executive & Leadership
 - **Gated features:** userContext personalization, Save to Library, Custom Agent Builder
 - **Pricing:** $12/month Pro (LOCKED — see competitive-intel.md)
@@ -102,3 +102,6 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-01 — Add SEO landing pages for all 41 industries (/industry/{slug}) — `4bf1aca`
 - 2026-04-01 — Add JSON-LD structured data to SEO pages — `a3ee1fc`
 - 2026-04-01 — Link homepage industry cards to SEO pages — `6fb97f2`
+- 2026-04-02 — Add Vercel Analytics funnel events (5 stages) — `15defe1`
+- 2026-04-02 — Add memory sync protocol to AGENTS.md — `19c1290`
+- 2026-04-03 — Add VerticalSelector onboarding component to landing page — `03dcfbc`
