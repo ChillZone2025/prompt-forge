@@ -311,6 +311,7 @@ export default function Home() {
           transition: all 0.2s; text-decoration: none;
         }
         .lp-ind-more:hover { border-color: rgba(200,80,26,0.3); color: var(--accent); }
+        .lp-ind-cta { text-align: center; margin-top: 48px; }
 
         /* ── PRICING ── */
         .lp-pricing-cards {
@@ -572,17 +573,10 @@ export default function Home() {
               { icon:'📊', name:'Finance', count:'5 AGENTS', agents:['Autonomous Close','Credit Risk','Tax Strategy'] },
               { icon:'📣', name:'Comms & Sales', count:'8 AGENTS', agents:['Autonomous SDR','Call Center','Content Repurposer','Email Sequence'] },
               { icon:'🎓', name:'Education', count:'7 AGENTS', agents:['Curriculum Designer','Career Coach','Grant Writer'] },
-              { icon:'💰', name:'Personal Finance', count:'7 AGENTS', agents:['Financial Advisor','Tax Optimizer','Budget Architect'] },
               { icon:'🏡', name:'Real Estate', count:'6 AGENTS', agents:['Listing Generator','Market Comp','Lead Nurture'] },
-              { icon:'📋', name:'Legal & Compliance', count:'5 AGENTS', agents:['Contract Analyzer','Compliance Monitor','Dispute Resolution'] },
               { icon:'📈', name:'Marketing & Growth', count:'6 AGENTS', agents:['SEO Content','Campaign Optimizer','A/B Test Analyst'] },
-              { icon:'👥', name:'HR & People Ops', count:'5 AGENTS', agents:['Resume Screener','Interview Architect','Onboarding'] },
-              { icon:'🏢', name:'Accounting & Tax', count:'6 AGENTS', agents:['AI Bookkeeper','Invoice Agent','Tax Prep'] },
-              { icon:'🛡️', name:'Insurance', count:'6 AGENTS', agents:['Claims Processor','Underwriting','Policy Comparator'] },
               { icon:'🧠', name:'AI Agent Development', count:'10 AGENTS', pro:true, agents:['Agent Architecture','SOUL.md Writer','Multi-Agent Orchestrator'] },
               { icon:'🔎', name:'Cyber Intelligence', count:'10 AGENTS', pro:true, agents:['OSINT Planner','Threat Intel','Digital Footprint'] },
-              { icon:'🔒', name:'Cybersecurity', count:'5 AGENTS', pro:true, agents:['Incident Response','Pentest Planner','SOC Analyst'] },
-              { icon:'🚀', name:'SaaS & Product', count:'5 AGENTS', pro:true, agents:['PRD Writer','Churn Analyst','Feature Prioritization'] },
             ].map(ind => (
               <Link href={`/industry/${toSlug(ind.name)}`} className="lp-ind-card" key={ind.name} style={{textDecoration:'none',color:'inherit'}}>
                 <span className="lp-ind-icon">{ind.icon}</span>
@@ -593,7 +587,10 @@ export default function Home() {
                 </div>
               </Link>
             ))}
-            <Link href="/forge" className="lp-ind-more">+25 more industries in the Forge →</Link>
+            <Link href="/forge" className="lp-ind-more">Browse all 251 agents →</Link>
+          </div>
+          <div className="lp-ind-cta">
+            <Link href="/forge" className="lp-btn-primary">Build my first agent free →</Link>
           </div>
         </div>
       </section>
