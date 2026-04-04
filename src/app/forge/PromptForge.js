@@ -124,6 +124,19 @@ Write the exact first message this agent sends when activated. This message shou
 const CSS = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
+  :root {
+    --accent: #c8501a;
+    --accent-hover: #8c3510;
+    --accent-light: rgba(200,80,26,0.08);
+    --ink: #0f0e0d;
+    --ink-soft: #4a4742;
+    --ink-muted: #8a877f;
+    --border: rgba(15,14,13,0.10);
+    --surface: #ffffff;
+    --bg: #f8f7f4;
+    --bg-warm: #f2ede5;
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
@@ -145,11 +158,11 @@ const CSS = `
   .agent-card::after {
     content: 'Generate →';
     position: absolute; bottom: 16px; right: 16px;
-    font-size: 10px; color: #9ca3af; font-family: 'Inter', sans-serif;
+    font-size: 10px; color: var(--ink-muted); font-family: 'Inter', sans-serif;
     font-weight: 500; letter-spacing: 0.02em; transition: all 0.18s;
   }
   .agent-card:hover {
-    border-color: rgba(245,197,24,0.25);
+    border-color: rgba(200,80,26,0.20);
     transform: translateY(-2px);
     box-shadow: 0 8px 32px rgba(0,0,0,0.08);
     background: #fefdf9;
@@ -161,7 +174,7 @@ const CSS = `
   .agent-card.locked::after { content: '🔒 Pro'; color: #9ca3af; }
   .agent-new-badge {
     position: absolute; top: 12px; right: 12px;
-    background: #f5c518; color: #0f1117;
+    background: var(--accent); color: #ffffff;
     font-size: 8px; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; padding: 2px 8px; border-radius: 4px;
   }
@@ -174,14 +187,14 @@ const CSS = `
   }
   .btn:hover { border-color: #d4c9b0; color: #6b7390; background: rgba(0,0,0,0.02); }
   .btn:active { transform: scale(0.98); transition-duration: 0.06s; }
-  .btn.primary { background: #f5c518; border-color: #f5c518; color: #0f1117; font-weight: 600; }
-  .btn.primary:hover { background: #f7cc33; border-color: #f7cc33; }
-  .btn.primary:active { background: #e5b616; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #ffffff; font-weight: 600; }
+  .btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+  .btn.primary:active { background: var(--accent-hover); }
   .btn.success { background: #10b981; border-color: #10b981; color: #fff; }
   .btn.danger { border-color: rgba(239,68,68,0.3); color: #ef4444; }
   .btn.danger:hover { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.5); }
-  .btn.accent { border-color: rgba(245,197,24,0.3); color: #f5c518; }
-  .btn.accent:hover { background: rgba(245,197,24,0.08); border-color: rgba(245,197,24,0.5); }
+  .btn.accent { border-color: rgba(200,80,26,0.25); color: var(--accent); }
+  .btn.accent:hover { background: var(--accent-light); border-color: rgba(200,80,26,0.40); }
   .btn.iron { border-color: #e8e4dc; color: #374151; }
   .btn:disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; }
 
@@ -192,10 +205,10 @@ const CSS = `
     transition: all 0.14s; white-space: nowrap; position: relative;
   }
   .ind-tab:hover { color: #1a1a2e; }
-  .ind-tab.on { color: #f5c518; border-bottom-color: #f5c518; }
+  .ind-tab.on { color: var(--accent); border-bottom-color: var(--accent); }
   .ind-tab.on::after {
     content: ''; position: absolute; bottom: -1px; left: 25%; right: 25%;
-    height: 4px; background: #f5c518; border-radius: 2px 2px 0 0;
+    height: 4px; background: var(--accent); border-radius: 2px 2px 0 0;
     filter: blur(6px); opacity: 0.5;
   }
 
@@ -206,7 +219,7 @@ const CSS = `
     letter-spacing: 0.01em;
   }
   .nav-tab:hover { color: #1a1a2e; }
-  .nav-tab.on { color: #1a1a2e; border-bottom-color: #f5c518; font-weight: 600; }
+  .nav-tab.on { color: #1a1a2e; border-bottom-color: var(--accent); font-weight: 600; }
 
   .pill {
     background: none; border: 1px solid #e8e4dc; color: #6b7390;
@@ -214,7 +227,7 @@ const CSS = `
     font-weight: 500; cursor: pointer; border-radius: 20px; transition: all 0.14s;
   }
   .pill:hover { border-color: #d4c9b0; color: #1a1a2e; }
-  .pill.on { border-color: rgba(245,197,24,0.4); color: #f5c518; background: rgba(245,197,24,0.06); }
+  .pill.on { border-color: rgba(200,80,26,0.30); color: var(--accent); background: var(--accent-light); }
 
   .finput {
     background: #ffffff; border: 1px solid #e8e4dc; color: #1a1a2e;
@@ -222,7 +235,7 @@ const CSS = `
     border-radius: 8px; outline: none; width: 100%; transition: border-color 0.14s;
     line-height: 1.6;
   }
-  .finput:focus { border-color: rgba(245,197,24,0.5); box-shadow: 0 0 0 3px rgba(245,197,24,0.06); }
+  .finput:focus { border-color: rgba(200,80,26,0.40); box-shadow: 0 0 0 3px var(--accent-light); }
   .finput::placeholder { color: #9ca3af; }
   textarea.finput { resize: vertical; min-height: 80px; }
 
@@ -233,12 +246,12 @@ const CSS = `
   .lib-card:hover { border-color: #d4c9b0; background: #fefdf9; }
 
   .pout {
-    border-left: 2px solid #f5c518;
+    border-left: 2px solid var(--accent);
     padding-left: 24px;
   }
   .pout h2 {
     font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
-    letter-spacing: 0.1em; text-transform: uppercase; color: #f5c518;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
     margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #e8e4dc;
   }
   .pout h2:first-child { margin-top: 0; }
@@ -257,7 +270,7 @@ const CSS = `
 
   .stream-bar {
     height: 2px; border-radius: 1px; margin-top: 16px;
-    background: linear-gradient(90deg, transparent, #f5c518, transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
     background-size: 200px 100%;
     animation: shimmer 1.2s ease-in-out infinite;
   }
@@ -279,7 +292,7 @@ const CSS = `
     display: flex; align-items: center; justify-content: space-between; gap: 8;
     min-width: 220px; width: 100%;
   }
-  .ind-dropdown-btn:hover { border-color: rgba(245,197,24,0.3); }
+  .ind-dropdown-btn:hover { border-color: rgba(200,80,26,0.25); }
 
   .ind-dropdown-panel {
     position: absolute; top: 100%; left: 0; right: 0; z-index: 100;
@@ -298,8 +311,8 @@ const CSS = `
     border: none; background: none; width: 100%; text-align: left;
     font-family: 'Inter', sans-serif;
   }
-  .ind-dropdown-item:hover { background: rgba(245,197,24,0.04); color: #1a1a2e; }
-  .ind-dropdown-item.on { color: #f5c518; font-weight: 600; }
+  .ind-dropdown-item:hover { background: rgba(200,80,26,0.04); color: #1a1a2e; }
+  .ind-dropdown-item.on { color: var(--accent); font-weight: 600; }
 
   .ind-tag {
     display: inline-block; font-size: 9px; font-weight: 500; color: #6b7390;
@@ -311,7 +324,7 @@ const CSS = `
   .agent-card.pro-locked { position: relative; cursor: pointer; }
   .agent-card.pro-locked .card-content { filter: blur(6px); pointer-events: none; user-select: none; }
   .agent-card.pro-locked::after { display: none; }
-  .agent-card.pro-locked:hover { transform: none; border-color: rgba(245,197,24,0.15); }
+  .agent-card.pro-locked:hover { transform: none; border-color: rgba(200,80,26,0.12); }
   .pro-overlay {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center;
@@ -321,7 +334,7 @@ const CSS = `
   .pro-overlay:hover { background: rgba(248,247,244,0.5); }
 
   .pro-tab-badge {
-    display: inline-block; background: #f5c518; color: #0f1117;
+    display: inline-block; background: var(--accent); color: #ffffff;
     font-size: 8px; font-weight: 700; letter-spacing: 0.08em;
     text-transform: uppercase; padding: 1px 6px; border-radius: 3px;
     margin-left: 6px; vertical-align: middle;
@@ -574,7 +587,7 @@ export default function PromptForge() {
         fontSize: 14, fontWeight: 600, cursor: 'pointer', transition: 'all 0.14s',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
-        onMouseEnter={e => { e.currentTarget.style.borderColor = '#f5c518'; e.currentTarget.style.color = '#f5c518' }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = '#c8501a'; e.currentTarget.style.color = '#c8501a' }}
         onMouseLeave={e => { e.currentTarget.style.borderColor = '#e8e4dc'; e.currentTarget.style.color = '#6b7390' }}
       >?</button>
 
@@ -584,7 +597,7 @@ export default function PromptForge() {
           <div className="modal" style={{ maxWidth: 480, width: '92%' }} onClick={e => e.stopPropagation()}>
             <div style={{ display: 'flex', gap: 6, marginBottom: 28 }}>
               {WALKTHROUGH.map((_, i) => (
-                <div key={i} style={{ height: 2, flex: 1, borderRadius: 2, background: i <= wStep ? '#f5c518' : '#e8e4dc', transition: 'background 0.2s' }} />
+                <div key={i} style={{ height: 2, flex: 1, borderRadius: 2, background: i <= wStep ? '#c8501a' : '#e8e4dc', transition: 'background 0.2s' }} />
               ))}
             </div>
             <div style={{ fontSize: 32, marginBottom: 14 }}>{WALKTHROUGH[wStep].icon}</div>
@@ -612,7 +625,7 @@ export default function PromptForge() {
       {modal === 'upgrade' && (
         <div className="overlay" onClick={() => setModal(null)}>
           <div className="modal" style={{ maxWidth: 460, width: '90%' }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontSize: 11, color: '#f5c518', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>Upgrade to unlock</div>
+            <div style={{ fontSize: 11, color: '#c8501a', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>Upgrade to unlock</div>
             <h2 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 26, color: '#1a1a2e', marginBottom: 10 }}>
               Upgrade to Pro
             </h2>
@@ -708,7 +721,7 @@ export default function PromptForge() {
               <span style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400 }}>Prompt</span>
               <span style={{ color: '#c8501a' }}>Forge</span>
             </h1>
-            <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.6, maxWidth: 420 }}>
+            <p style={{ fontSize: 14, color: '#4a4742', lineHeight: 1.6, maxWidth: 420 }}>
               Generate deployment-ready AI agent prompts in one click. Pick an industry, pick a role, deploy.
             </p>
           </div>
@@ -729,7 +742,7 @@ export default function PromptForge() {
                 <div>
                   <div style={{ fontSize: 11, color: '#6b7390', fontWeight: 500, marginBottom: 6 }}>Plan</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                    <span style={{ color: '#f5c518', fontSize: 14 }}>★</span>
+                    <span style={{ color: '#c8501a', fontSize: 14 }}>★</span>
                     <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 13, color: '#1a1a2e' }}>Pro</span>
                   </div>
                 </div>
@@ -737,13 +750,13 @@ export default function PromptForge() {
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                     <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Free Plan</span>
-                    <span style={{ fontSize: 12, color: remaining > 0 ? '#f5c518' : '#ef4444', fontWeight: 600 }}>{remaining}/{FREE_LIMIT} left</span>
+                    <span style={{ fontSize: 12, color: remaining > 0 ? '#c8501a' : '#ef4444', fontWeight: 600 }}>{remaining}/{FREE_LIMIT} left</span>
                   </div>
                   <div style={{ background: '#e8e4dc', borderRadius: 3, height: 3, marginBottom: 12, overflow: 'hidden' }}>
                     <div style={{
                       height: '100%', borderRadius: 2,
                       width: `${Math.min(100, (usage / FREE_LIMIT) * 100)}%`,
-                      background: remaining > 0 ? '#f5c518' : '#ef4444',
+                      background: remaining > 0 ? '#c8501a' : '#ef4444',
                       transition: 'width 0.4s ease',
                       boxShadow: 'none',
                     }} />
@@ -844,7 +857,7 @@ export default function PromptForge() {
                     {proLocked && (
                       <div className="pro-overlay">
                         <div style={{ fontSize: 24, marginBottom: 8 }}>🔒</div>
-                        <div style={{ fontSize: 12, fontWeight: 600, color: '#f5c518', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Pro Only</div>
+                        <div style={{ fontSize: 12, fontWeight: 600, color: '#c8501a', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Pro Only</div>
                       </div>
                     )}
                     <div className={proLocked ? 'card-content' : undefined}>
@@ -941,7 +954,7 @@ export default function PromptForge() {
 
             <div style={{
               background: '#ffffff',
-              border: `1px solid ${loading ? 'rgba(245,197,24,0.15)' : '#e8e4dc'}`,
+              border: `1px solid ${loading ? 'rgba(200,80,26,0.12)' : '#e8e4dc'}`,
               borderRadius: 12, padding: 36, minHeight: 360,
               transition: 'border-color 0.18s',
             }}>
@@ -950,7 +963,7 @@ export default function PromptForge() {
                   <div style={{
                     width: 32, height: 32,
                     border: '2px solid #e8e4dc',
-                    borderTop: '2px solid #f5c518',
+                    borderTop: '2px solid #c8501a',
                     borderRadius: '50%', animation: 'spin 0.75s linear infinite',
                   }} />
                   <div style={{ textAlign: 'center' }}>
