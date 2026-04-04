@@ -12,16 +12,25 @@ export const metadata = {
     title: 'Prompt Forge',
   },
   openGraph: {
-    title: 'Prompt Forge',
-    description: 'One-click AI agent prompt generator for professionals. 251 archetypes across 41 industries.',
-    url: 'https://getpromptforge.net',
+    title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
+    description: 'Generate deployment-ready AI agent system prompts in one click. 251 professional archetypes across 41 industries.',
+    url: 'https://www.getpromptforge.net',
     siteName: 'Prompt Forge',
+    images: [
+      {
+        url: 'https://www.getpromptforge.net/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'Prompt Forge — AI agent system prompts for professionals',
+      },
+    ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Prompt Forge',
-    description: 'One-click AI agent prompt generator for professionals.',
+    title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
+    description: 'Generate deployment-ready AI agent system prompts in one click. 251 archetypes, 41 industries.',
+    images: ['https://www.getpromptforge.net/og.png'],
   },
 }
 export default function RootLayout({ children }) {
