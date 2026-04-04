@@ -700,11 +700,14 @@ export default function PromptForge() {
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 48, flexWrap: 'wrap', gap: 20 }}>
           <div>
             <h1 style={{
-              fontFamily: "'Inter', sans-serif", fontWeight: 800,
-              fontSize: 'clamp(28px, 5vw, 36px)', letterSpacing: '-0.02em', lineHeight: 1,
+              fontFamily: "'DM Sans', sans-serif", fontWeight: 700,
+              fontSize: 'clamp(22px, 4vw, 30px)', letterSpacing: '-0.01em', lineHeight: 1,
               color: '#1a1a2e',
               marginBottom: 10,
-            }}>PROMPT <span style={{ color: '#f5c518' }}>FORGE</span></h1>
+            }}>
+              <span style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400 }}>Prompt</span>
+              <span style={{ color: '#c8501a' }}>Forge</span>
+            </h1>
             <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.6, maxWidth: 420 }}>
               Generate deployment-ready AI agent prompts in one click. Pick an industry, pick a role, deploy.
             </p>
