@@ -67,11 +67,10 @@ Inspired by production agent orchestration patterns (OpenClaw, CrewAI, LangGraph
 
 ## TASK-006: Rebuild landing page to 7-section conversion architecture
 
-**Status:** QUEUED  
+**Status:** deployed  
 **Assigned to:** The Forger  
 **Priority:** HIGH  
-**Depends on:** None (Clerk auth not required — all sections are public)  
-**Milestone gate:** None — ship immediately on completion  
+**Completed:** 2026-04-04  
 
 ---
 
