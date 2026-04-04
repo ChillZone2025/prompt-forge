@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { Redis } from '@upstash/redis'
 import { toSlug } from './data/industries'
 import LandingTracker from './LandingTracker'
 import VerticalSelector from './components/onboarding/VerticalSelector'
@@ -12,13 +13,26 @@ export const metadata = {
   description: 'Generate deployment-ready AI agent system prompts in one click. 251 professional archetypes across 41 industries. Free to start.',
 }
 
-export default function Home() {
+export default async function Home() {
   // UPDATE THESE AFTER EVERY MAJOR INTEGRATION
   const TOTAL_AGENTS = 251
   const TOTAL_INDUSTRIES = 41
   const FREE_INDUSTRIES = 31
   const PRO_INDUSTRIES = 10
   const TOTAL_STARTERS = 24
+
+  const redis = new Redis({
+    url: process.env.UPSTASH_REDIS_REST_URL,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  })
+
+  let totalGenerates = 1247
+  try {
+    const count = await redis.get('pf:total_generates')
+    if (count) totalGenerates = Number(count)
+  } catch (e) {
+    // silent fallback — never break the landing page
+  }
 
   return (
     <>
@@ -417,7 +431,7 @@ export default function Home() {
       </section>
 
       {/* SOCIAL PROOF */}
-      <SocialProof count={1247} />
+      <SocialProof count={totalGenerates} />
 
       {/* PRICING */}
       <section className="lp-section lp-section-alt" id="pricing">
