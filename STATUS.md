@@ -4,7 +4,7 @@
 
 ## Live Platform Stats
 
-- **Total agents:** 251
+- **Total agents:** 267
 - **Total industries:** 41 (10 Pro-only)
 - **Total starter prompts:** 24
 - **Starter categories:** 4 (Work, Writing, Learning, Life)
@@ -34,31 +34,31 @@
 | Finance | 6 | Live |
 | Legal & Compliance | 6 | Live |
 | HR & People Ops | 6 | Live |
-| Architecture & Engineering | 5 | Live (Pro-only) |
+| Architecture & Engineering | 6 | Live (Pro-only) |
 | Consulting & Strategy | 6 | Live (Pro-only) |
-| Executive & Leadership | 5 | Live (Pro-only) |
-| Hospitality & Events | 5 | Live |
+| Executive & Leadership | 6 | Live (Pro-only) |
+| Hospitality & Events | 6 | Live |
 | Logistics & Supply Chain | 6 | Live |
-| Agriculture & Farming | 5 | Live |
-| Automotive | 5 | Live |
-| Aviation & Aerospace | 5 | Live (Pro-only) |
+| Agriculture & Farming | 6 | Live |
+| Automotive | 6 | Live |
+| Aviation & Aerospace | 6 | Live (Pro-only) |
 | Banking & Lending | 6 | Live (Pro-only) |
-| Construction & Trades | 5 | Live |
+| Construction & Trades | 6 | Live |
 | Cybersecurity | 6 | Live (Pro-only) |
-| Dental & Optometry | 5 | Live |
+| Dental & Optometry | 6 | Live |
 | E-commerce & DTC | 6 | Live |
 | Energy & Utilities | 6 | Live |
-| Fitness & Wellness | 5 | Live |
-| Freelancers & Solopreneurs | 5 | Live |
+| Fitness & Wellness | 6 | Live |
+| Freelancers & Solopreneurs | 6 | Live |
 | Manufacturing | 6 | Live |
-| Media & Publishing | 5 | Live |
-| Nonprofit & Government | 5 | Live |
-| Pharma & Biotech | 5 | Live (Pro-only) |
-| Property Management | 5 | Live |
+| Media & Publishing | 6 | Live |
+| Nonprofit & Government | 6 | Live |
+| Pharma & Biotech | 6 | Live (Pro-only) |
+| Property Management | 6 | Live |
 | Recruitment & Staffing | 6 | Live |
 | SaaS & Product | 6 | Live (Pro-only) |
-| Sports & Athletics | 5 | Live |
-| Veterinary | 5 | Live |
+| Sports & Athletics | 6 | Live |
+| Veterinary | 6 | Live |
 | AI Agent Development | 10 | Live (Pro-only) |
 | Cyber Intelligence | 10 | Live (Pro-only) |
 
@@ -109,3 +109,4 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-04 — Forge visual alignment to landing page — light theme (TASK-007) — `3ec3380`
 - 2026-04-04 — Dark wrapper fix + forge header typography (TASK-008) — `bb99fe3`
 - 2026-04-04 — Full design system alignment — yellow→orange, CSS variables (TASK-009) — `0483912`
+- 2026-04-04 — Integrate 16 gap-fill agents across industries (total 267) — `dafb35b`
