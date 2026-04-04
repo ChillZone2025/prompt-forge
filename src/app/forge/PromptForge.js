@@ -127,14 +127,14 @@ const CSS = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #1e2030; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #2a2d42; }
+  ::-webkit-scrollbar-thumb { background: #e8e4dc; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #d4c9b0; }
 
-  body { background: #0f1117; min-height: 100vh; }
+  body { background: #f8f7f4; min-height: 100vh; }
 
   .agent-card {
-    background: #161822;
-    border: 1px solid #1e2030;
+    background: #ffffff;
+    border: 1px solid #e8e4dc;
     border-radius: 12px;
     padding: 24px 22px 46px;
     cursor: pointer;
@@ -145,20 +145,20 @@ const CSS = `
   .agent-card::after {
     content: 'Generate →';
     position: absolute; bottom: 16px; right: 16px;
-    font-size: 10px; color: #2a2d42; font-family: 'Inter', sans-serif;
+    font-size: 10px; color: #9ca3af; font-family: 'Inter', sans-serif;
     font-weight: 500; letter-spacing: 0.02em; transition: all 0.18s;
   }
   .agent-card:hover {
     border-color: rgba(245,197,24,0.25);
     transform: translateY(-2px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-    background: #1a1d2a;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    background: #fefdf9;
   }
   .agent-card:hover::after { color: var(--ac); }
   .agent-card:active { transform: translateY(-1px); transition-duration: 0.06s; }
   .agent-card.locked { opacity: 0.3; cursor: not-allowed; }
-  .agent-card.locked:hover { transform: none; box-shadow: none; border-color: #1e2030; background: #161822; }
-  .agent-card.locked::after { content: '🔒 Pro'; color: #2a2d42; }
+  .agent-card.locked:hover { transform: none; box-shadow: none; border-color: #e8e4dc; background: #ffffff; }
+  .agent-card.locked::after { content: '🔒 Pro'; color: #9ca3af; }
   .agent-new-badge {
     position: absolute; top: 12px; right: 12px;
     background: #f5c518; color: #0f1117;
@@ -167,12 +167,12 @@ const CSS = `
   }
 
   .btn {
-    background: none; border: 1px solid #1e2030; color: #6b7280;
+    background: none; border: 1px solid #e8e4dc; color: #6b7390;
     padding: 10px 20px; font-family: 'Inter', sans-serif;
     font-size: 12px; font-weight: 500; cursor: pointer;
     border-radius: 8px; transition: all 0.14s; white-space: nowrap;
   }
-  .btn:hover { border-color: #2e3248; color: #9ca3af; background: rgba(255,255,255,0.02); }
+  .btn:hover { border-color: #d4c9b0; color: #6b7390; background: rgba(0,0,0,0.02); }
   .btn:active { transform: scale(0.98); transition-duration: 0.06s; }
   .btn.primary { background: #f5c518; border-color: #f5c518; color: #0f1117; font-weight: 600; }
   .btn.primary:hover { background: #f7cc33; border-color: #f7cc33; }
@@ -182,16 +182,16 @@ const CSS = `
   .btn.danger:hover { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.5); }
   .btn.accent { border-color: rgba(245,197,24,0.3); color: #f5c518; }
   .btn.accent:hover { background: rgba(245,197,24,0.08); border-color: rgba(245,197,24,0.5); }
-  .btn.iron { border-color: #1e2030; color: #374151; }
+  .btn.iron { border-color: #e8e4dc; color: #374151; }
   .btn:disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; }
 
   .ind-tab {
     background: none; border: none; border-bottom: 2px solid transparent;
     font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
-    cursor: pointer; padding: 12px 16px; color: #374151;
+    cursor: pointer; padding: 12px 16px; color: #6b7390;
     transition: all 0.14s; white-space: nowrap; position: relative;
   }
-  .ind-tab:hover { color: #6b7280; }
+  .ind-tab:hover { color: #1a1a2e; }
   .ind-tab.on { color: #f5c518; border-bottom-color: #f5c518; }
   .ind-tab.on::after {
     content: ''; position: absolute; bottom: -1px; left: 25%; right: 25%;
@@ -202,35 +202,35 @@ const CSS = `
   .nav-tab {
     background: none; border: none; border-bottom: 2px solid transparent;
     font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
-    cursor: pointer; padding: 12px 20px; color: #374151; transition: all 0.14s;
+    cursor: pointer; padding: 12px 20px; color: #6b7390; transition: all 0.14s;
     letter-spacing: 0.01em;
   }
-  .nav-tab:hover { color: #6b7280; }
-  .nav-tab.on { color: #e5e7eb; border-bottom-color: #f5c518; font-weight: 600; }
+  .nav-tab:hover { color: #1a1a2e; }
+  .nav-tab.on { color: #1a1a2e; border-bottom-color: #f5c518; font-weight: 600; }
 
   .pill {
-    background: none; border: 1px solid #1e2030; color: #6b7280;
+    background: none; border: 1px solid #e8e4dc; color: #6b7390;
     padding: 6px 16px; font-family: 'Inter', sans-serif; font-size: 12px;
     font-weight: 500; cursor: pointer; border-radius: 20px; transition: all 0.14s;
   }
-  .pill:hover { border-color: #2e3248; color: #9ca3af; }
+  .pill:hover { border-color: #d4c9b0; color: #1a1a2e; }
   .pill.on { border-color: rgba(245,197,24,0.4); color: #f5c518; background: rgba(245,197,24,0.06); }
 
   .finput {
-    background: #12141c; border: 1px solid #1e2030; color: #e5e7eb;
+    background: #ffffff; border: 1px solid #e8e4dc; color: #1a1a2e;
     padding: 12px 16px; font-family: 'Inter', sans-serif; font-size: 13px;
     border-radius: 8px; outline: none; width: 100%; transition: border-color 0.14s;
     line-height: 1.6;
   }
   .finput:focus { border-color: rgba(245,197,24,0.5); box-shadow: 0 0 0 3px rgba(245,197,24,0.06); }
-  .finput::placeholder { color: #2a2d42; }
+  .finput::placeholder { color: #9ca3af; }
   textarea.finput { resize: vertical; min-height: 80px; }
 
   .lib-card {
-    background: #161822; border: 1px solid #1e2030; border-radius: 12px;
+    background: #ffffff; border: 1px solid #e8e4dc; border-radius: 12px;
     padding: 20px 22px; cursor: pointer; transition: all 0.14s;
   }
-  .lib-card:hover { border-color: rgba(245,197,24,0.15); background: #1a1d2a; }
+  .lib-card:hover { border-color: #d4c9b0; background: #fefdf9; }
 
   .pout {
     border-left: 2px solid #f5c518;
@@ -239,11 +239,11 @@ const CSS = `
   .pout h2 {
     font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 600;
     letter-spacing: 0.1em; text-transform: uppercase; color: #f5c518;
-    margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #1e2030;
+    margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #e8e4dc;
   }
   .pout h2:first-child { margin-top: 0; }
   .pout p {
-    font-family: 'JetBrains Mono', 'Fira Code', monospace; color: #c9cdd6;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace; color: #374151;
     line-height: 1.8; font-size: 13px; margin-bottom: 4px;
   }
 
@@ -263,19 +263,19 @@ const CSS = `
   }
 
   .overlay {
-    position: fixed; inset: 0; background: rgba(8,9,14,0.8);
+    position: fixed; inset: 0; background: rgba(248,247,244,0.85);
     display: flex; align-items: center; justify-content: center;
     z-index: 500; backdrop-filter: blur(16px); animation: fadeUp 0.18s ease;
   }
   .modal {
-    background: #161822; border: 1px solid #1e2030; border-radius: 14px;
-    padding: 36px; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+    background: #ffffff; border: 1px solid #e8e4dc; border-radius: 14px;
+    padding: 36px; position: relative; box-shadow: 0 24px 80px rgba(0,0,0,0.12);
   }
 
   .ind-dropdown-btn {
-    background: #161822; border: 1px solid #1e2030; border-radius: 8px;
+    background: #ffffff; border: 1px solid #e8e4dc; border-radius: 8px;
     padding: 10px 16px; font-family: 'Inter', sans-serif; font-size: 13px;
-    font-weight: 500; color: #e5e7eb; cursor: pointer; transition: all 0.14s;
+    font-weight: 500; color: #1a1a2e; cursor: pointer; transition: all 0.14s;
     display: flex; align-items: center; justify-content: space-between; gap: 8;
     min-width: 220px; width: 100%;
   }
@@ -283,27 +283,27 @@ const CSS = `
 
   .ind-dropdown-panel {
     position: absolute; top: 100%; left: 0; right: 0; z-index: 100;
-    background: #161822; border: 1px solid #1e2030; border-radius: 10px;
+    background: #ffffff; border: 1px solid #e8e4dc; border-radius: 10px;
     margin-top: 4px; max-height: 320px; overflow-y: auto;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-    scrollbar-width: thin; scrollbar-color: #1e2030 transparent;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    scrollbar-width: thin; scrollbar-color: #e8e4dc transparent;
   }
   .ind-dropdown-panel::-webkit-scrollbar { width: 4px; }
-  .ind-dropdown-panel::-webkit-scrollbar-thumb { background: #1e2030; border-radius: 2px; }
+  .ind-dropdown-panel::-webkit-scrollbar-thumb { background: #e8e4dc; border-radius: 2px; }
 
   .ind-dropdown-item {
-    padding: 10px 16px; font-size: 13px; color: #6b7280;
+    padding: 10px 16px; font-size: 13px; color: #6b7390;
     cursor: pointer; transition: all 0.1s; display: flex;
     align-items: center; justify-content: space-between;
     border: none; background: none; width: 100%; text-align: left;
     font-family: 'Inter', sans-serif;
   }
-  .ind-dropdown-item:hover { background: rgba(245,197,24,0.04); color: #e5e7eb; }
+  .ind-dropdown-item:hover { background: rgba(245,197,24,0.04); color: #1a1a2e; }
   .ind-dropdown-item.on { color: #f5c518; font-weight: 600; }
 
   .ind-tag {
-    display: inline-block; font-size: 9px; font-weight: 500; color: #374151;
-    background: rgba(255,255,255,0.04); border: 1px solid #1e2030;
+    display: inline-block; font-size: 9px; font-weight: 500; color: #6b7390;
+    background: rgba(0,0,0,0.03); border: 1px solid #e8e4dc;
     padding: 1px 6px; border-radius: 3px; margin-top: 6px;
     letter-spacing: 0.02em;
   }
@@ -315,10 +315,10 @@ const CSS = `
   .pro-overlay {
     position: absolute; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    background: rgba(15,17,23,0.5); border-radius: 12px;
+    background: rgba(248,247,244,0.6); border-radius: 12px;
     cursor: pointer; z-index: 2; transition: background 0.14s;
   }
-  .pro-overlay:hover { background: rgba(15,17,23,0.4); }
+  .pro-overlay:hover { background: rgba(248,247,244,0.5); }
 
   .pro-tab-badge {
     display: inline-block; background: #f5c518; color: #0f1117;
@@ -561,7 +561,7 @@ export default function PromptForge() {
   if (!mounted || !isLoaded) return null
 
   return (
-    <div style={{ minHeight: '100vh', background: '#0f1117', color: '#c9cdd6', fontFamily: "'Inter', sans-serif", position: 'relative' }}>
+    <div style={{ minHeight: '100vh', background: '#f8f7f4', color: '#1a1a2e', fontFamily: "'Inter', sans-serif", position: 'relative' }}>
       <style>{CSS}</style>
 
 
@@ -569,13 +569,13 @@ export default function PromptForge() {
       <button onClick={() => { setWStep(0); setShowWalkthrough(true) }} style={{
         position: 'fixed', bottom: 24, right: 24, zIndex: 400,
         width: 34, height: 34, borderRadius: '50%',
-        background: '#161822', border: '1px solid #1e2030',
-        color: '#6b7280', fontFamily: "'Inter', sans-serif",
+        background: '#ffffff', border: '1px solid #e8e4dc',
+        color: '#6b7390', fontFamily: "'Inter', sans-serif",
         fontSize: 14, fontWeight: 600, cursor: 'pointer', transition: 'all 0.14s',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}
         onMouseEnter={e => { e.currentTarget.style.borderColor = '#f5c518'; e.currentTarget.style.color = '#f5c518' }}
-        onMouseLeave={e => { e.currentTarget.style.borderColor = '#2e3248'; e.currentTarget.style.color = '#6b7280' }}
+        onMouseLeave={e => { e.currentTarget.style.borderColor = '#e8e4dc'; e.currentTarget.style.color = '#6b7390' }}
       >?</button>
 
       {/* Walkthrough Modal */}
@@ -584,14 +584,14 @@ export default function PromptForge() {
           <div className="modal" style={{ maxWidth: 480, width: '92%' }} onClick={e => e.stopPropagation()}>
             <div style={{ display: 'flex', gap: 6, marginBottom: 28 }}>
               {WALKTHROUGH.map((_, i) => (
-                <div key={i} style={{ height: 2, flex: 1, borderRadius: 2, background: i <= wStep ? '#f5c518' : '#2e3248', transition: 'background 0.2s' }} />
+                <div key={i} style={{ height: 2, flex: 1, borderRadius: 2, background: i <= wStep ? '#f5c518' : '#e8e4dc', transition: 'background 0.2s' }} />
               ))}
             </div>
             <div style={{ fontSize: 32, marginBottom: 14 }}>{WALKTHROUGH[wStep].icon}</div>
-            <div style={{ fontSize: 10, color: '#6b7280', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>
+            <div style={{ fontSize: 10, color: '#6b7390', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8 }}>
               Step {WALKTHROUGH[wStep].step} of {WALKTHROUGH.length}
             </div>
-            <h2 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 22, color: '#f0f2ff', marginBottom: 12 }}>
+            <h2 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 22, color: '#1a1a2e', marginBottom: 12 }}>
               {WALKTHROUGH[wStep].title}
             </h2>
             <p style={{ fontFamily: "'Inter', sans-serif", color: '#9ca3af', fontSize: 14, lineHeight: 1.8, marginBottom: 28 }}>
@@ -613,13 +613,13 @@ export default function PromptForge() {
         <div className="overlay" onClick={() => setModal(null)}>
           <div className="modal" style={{ maxWidth: 460, width: '90%' }} onClick={e => e.stopPropagation()}>
             <div style={{ fontSize: 11, color: '#f5c518', letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 10, fontWeight: 600 }}>Upgrade to unlock</div>
-            <h2 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 26, color: '#f0f2ff', marginBottom: 10 }}>
+            <h2 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 26, color: '#1a1a2e', marginBottom: 10 }}>
               Upgrade to Pro
             </h2>
             <p style={{ color: '#9ca3af', fontSize: 14, lineHeight: 1.7, marginBottom: 22 }}>
               {atLimit ? `You've used your ${FREE_LIMIT} free generates. ` : ''}Unlock unlimited access to all agents and features.
             </p>
-            <div style={{ background: '#0f1117', border: '1px solid #1e2030', borderRadius: 10, padding: 18, marginBottom: 24 }}>
+            <div style={{ background: '#f8f7f4', border: '1px solid #e8e4dc', borderRadius: 10, padding: 18, marginBottom: 24 }}>
               {['Unlimited prompt generation', 'Unlimited library saves', 'Custom agent builder', 'All industry archetypes', 'Team sharing (coming soon)'].map(f => (
                 <div key={f} style={{ display: 'flex', gap: 10, marginBottom: 8, fontSize: 13, color: '#9ca3af', alignItems: 'center' }}>
                   <span style={{ color: '#10b981', flexShrink: 0 }}>✓</span>{f}
@@ -628,8 +628,8 @@ export default function PromptForge() {
             </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div>
-                <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: 32, color: '#f0f2ff' }}>$12</span>
-                <span style={{ color: '#6b7280', fontSize: 13 }}> /mo</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 800, fontSize: 32, color: '#1a1a2e' }}>$12</span>
+                <span style={{ color: '#6b7390', fontSize: 13 }}> /mo</span>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button className="btn" onClick={() => setModal(null)}>Cancel</button>
@@ -680,7 +680,7 @@ export default function PromptForge() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 22, flexWrap: 'wrap', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <span style={{ color: modal.agentColor, fontSize: 18 }}>{modal.agentIcon}</span>
-                <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 14, color: '#f0f2ff' }}>{modal.agentName}</span>
+                <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 14, color: '#1a1a2e' }}>{modal.agentName}</span>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button className="btn primary" onClick={() => copy(modal.prompt)}>{copied ? '✓ Copied' : 'Copy'}</button>
@@ -702,7 +702,7 @@ export default function PromptForge() {
             <h1 style={{
               fontFamily: "'Inter', sans-serif", fontWeight: 800,
               fontSize: 'clamp(28px, 5vw, 36px)', letterSpacing: '-0.02em', lineHeight: 1,
-              color: '#e5e7eb',
+              color: '#1a1a2e',
               marginBottom: 10,
             }}>PROMPT <span style={{ color: '#f5c518' }}>FORGE</span></h1>
             <p style={{ fontSize: 14, color: '#374151', lineHeight: 1.6, maxWidth: 420 }}>
@@ -712,7 +712,7 @@ export default function PromptForge() {
 
           {/* Auth + Usage widget */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <div style={{ background: '#161822', border: '1px solid #1e2030', borderRadius: 12, padding: '16px 20px', minWidth: 180 }}>
+            <div style={{ background: '#ffffff', border: '1px solid #e8e4dc', borderRadius: 12, padding: '16px 20px', minWidth: 180 }}>
               {!isSignedIn ? (
                 <div>
                   <div style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500, marginBottom: 10 }}>Sign in to generate prompts</div>
@@ -724,10 +724,10 @@ export default function PromptForge() {
                 </div>
               ) : isPro ? (
                 <div>
-                  <div style={{ fontSize: 11, color: '#6b7280', fontWeight: 500, marginBottom: 6 }}>Plan</div>
+                  <div style={{ fontSize: 11, color: '#6b7390', fontWeight: 500, marginBottom: 6 }}>Plan</div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                     <span style={{ color: '#f5c518', fontSize: 14 }}>★</span>
-                    <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 13, color: '#f0f2ff' }}>Pro</span>
+                    <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 700, fontSize: 13, color: '#1a1a2e' }}>Pro</span>
                   </div>
                 </div>
               ) : (
@@ -736,7 +736,7 @@ export default function PromptForge() {
                     <span style={{ fontSize: 12, color: '#9ca3af', fontWeight: 500 }}>Free Plan</span>
                     <span style={{ fontSize: 12, color: remaining > 0 ? '#f5c518' : '#ef4444', fontWeight: 600 }}>{remaining}/{FREE_LIMIT} left</span>
                   </div>
-                  <div style={{ background: '#1e2030', borderRadius: 3, height: 3, marginBottom: 12, overflow: 'hidden' }}>
+                  <div style={{ background: '#e8e4dc', borderRadius: 3, height: 3, marginBottom: 12, overflow: 'hidden' }}>
                     <div style={{
                       height: '100%', borderRadius: 2,
                       width: `${Math.min(100, (usage / FREE_LIMIT) * 100)}%`,
@@ -764,7 +764,7 @@ export default function PromptForge() {
         </div>
 
         {/* Main Nav */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #1e2030', marginBottom: 0 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e8e4dc', marginBottom: 0 }}>
           <div style={{ display: 'flex' }}>
             <button className={`nav-tab ${view === 'forge' ? 'on' : ''}`} onClick={() => { setView('forge'); reset() }}>Forge</button>
             <button className={`nav-tab ${view === 'library' ? 'on' : ''}`} onClick={() => setView('library')}>
@@ -809,7 +809,7 @@ export default function PromptForge() {
                 <div style={{ position: 'relative', marginLeft: 'auto' }}>
                   <button className="ind-dropdown-btn" onClick={() => setIndDropOpen(!indDropOpen)}>
                     <span>{industry}{PRO_INDUSTRIES.includes(industry) && <span className="pro-tab-badge">PRO</span>}</span>
-                    <span style={{ fontSize: 10, color: '#374151' }}>{indDropOpen ? '▲' : '▼'}</span>
+                    <span style={{ fontSize: 10, color: '#9ca3af' }}>{indDropOpen ? '▲' : '▼'}</span>
                   </button>
                   {indDropOpen && (
                     <div className="ind-dropdown-panel">
@@ -847,8 +847,8 @@ export default function PromptForge() {
                     <div className={proLocked ? 'card-content' : undefined}>
                       {agent.isNew && <span className="agent-new-badge">NEW</span>}
                       <div style={{ fontSize: 18, marginBottom: 10, color: agent.color, opacity: 0.9 }}>{agent.icon}</div>
-                      <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', marginBottom: 6, lineHeight: 1.4 }}>{agent.name}</div>
-                      <div style={{ fontSize: 11, color: '#6b7280', lineHeight: 1.6 }}>{agent.desc}</div>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#1a1a2e', marginBottom: 6, lineHeight: 1.4 }}>{agent.name}</div>
+                      <div style={{ fontSize: 11, color: '#6b7390', lineHeight: 1.6 }}>{agent.desc}</div>
                       {isSearching && <div className="ind-tag">{agentIndustry}</div>}
                     </div>
                   </div>
@@ -867,21 +867,21 @@ export default function PromptForge() {
         {contextAgent && (
           <div style={{
             position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-            background: 'rgba(8,9,14,0.8)', backdropFilter: 'blur(16px)',
+            background: 'rgba(248,247,244,0.85)', backdropFilter: 'blur(16px)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             zIndex: 1000, padding: 20,
           }} onClick={e => { if (e.target === e.currentTarget) setContextAgent(null) }}
              onKeyDown={e => { if (e.key === 'Escape') setContextAgent(null) }}>
             <div style={{
-              background: '#161822', border: '1px solid #1e2030', borderRadius: 14,
+              background: '#ffffff', border: '1px solid #e8e4dc', borderRadius: 14,
               padding: 36, maxWidth: 480, width: '100%',
-              boxShadow: '0 24px 80px rgba(0,0,0,0.5)',
+              boxShadow: '0 24px 80px rgba(0,0,0,0.12)',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
                 <span style={{ fontSize: 22 }}>{contextAgent.icon}</span>
                 <div>
-                  <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 15, color: '#f0f2ff' }}>{contextAgent.name}</div>
-                  <div style={{ fontSize: 12, color: '#6b7280' }}>{contextAgent.desc}</div>
+                  <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 15, color: '#1a1a2e' }}>{contextAgent.name}</div>
+                  <div style={{ fontSize: 12, color: '#6b7390' }}>{contextAgent.desc}</div>
                 </div>
               </div>
               <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#9ca3af', marginBottom: 6 }}>
@@ -937,8 +937,8 @@ export default function PromptForge() {
             </div>
 
             <div style={{
-              background: '#161822',
-              border: `1px solid ${loading ? 'rgba(245,197,24,0.15)' : '#1e2030'}`,
+              background: '#ffffff',
+              border: `1px solid ${loading ? 'rgba(245,197,24,0.15)' : '#e8e4dc'}`,
               borderRadius: 12, padding: 36, minHeight: 360,
               transition: 'border-color 0.18s',
             }}>
@@ -946,12 +946,12 @@ export default function PromptForge() {
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 300, gap: 20 }}>
                   <div style={{
                     width: 32, height: 32,
-                    border: '2px solid #1e2030',
+                    border: '2px solid #e8e4dc',
                     borderTop: '2px solid #f5c518',
                     borderRadius: '50%', animation: 'spin 0.75s linear infinite',
                   }} />
                   <div style={{ textAlign: 'center' }}>
-                    <div style={{ color: '#e5e7eb', fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
+                    <div style={{ color: '#1a1a2e', fontSize: 13, fontWeight: 600, marginBottom: 4 }}>
                       Generating{dots}
                     </div>
                     <div style={{ color: '#374151', fontSize: 12 }}>{selected.name}</div>
@@ -987,7 +987,7 @@ export default function PromptForge() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
               <input className="finput" placeholder="Search library..." value={libSearch}
                 onChange={e => setLibSearch(e.target.value)} style={{ maxWidth: 280 }} />
-              <span style={{ fontSize: 12, color: '#6b7280', whiteSpace: 'nowrap' }}>
+              <span style={{ fontSize: 12, color: '#6b7390', whiteSpace: 'nowrap' }}>
                 {visibleLib.length} prompt{visibleLib.length !== 1 ? 's' : ''}
               </span>
             </div>
@@ -1007,12 +1007,12 @@ export default function PromptForge() {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 9 }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                         <span style={{ color: item.agentColor, fontSize: 15 }}>{item.agentIcon}</span>
-                        <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb' }}>{item.agentName}</span>
+                        <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#1a1a2e' }}>{item.agentName}</span>
                       </div>
                       <button className="btn steel" style={{ padding: '2px 7px', fontSize: 9 }}
                         onClick={e => { e.stopPropagation(); deleteFromLib(item.id) }}>✕</button>
                     </div>
-                    <div style={{ fontSize: 12, color: '#6b7280', marginBottom: 10, lineHeight: 1.5 }}>
+                    <div style={{ fontSize: 12, color: '#6b7390', marginBottom: 10, lineHeight: 1.5 }}>
                       {item.agentDesc}
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -1042,17 +1042,17 @@ export default function PromptForge() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 9 }}>
               {visibleStarter.map(item => (
                 <div key={item.id} style={{
-                  background: '#1c1f30',
-                  border: '1px solid #2a2d42', borderRadius: 10,
+                  background: '#ffffff',
+                  border: '1px solid #e8e4dc', borderRadius: 10,
                   padding: '18px 18px 16px', position: 'relative', transition: 'border-color 0.16s',
                 }}
                   onMouseEnter={e => e.currentTarget.style.borderColor = item.color + '88'}
-                  onMouseLeave={e => e.currentTarget.style.borderColor = '#2a2d42'}
+                  onMouseLeave={e => e.currentTarget.style.borderColor = '#e8e4dc'}
                 >
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 8, gap: 10 }}>
                     <div>
                       <div style={{ fontSize: 10, color: item.color, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 5 }}>{item.category}</div>
-                      <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#e5e7eb', lineHeight: 1.4 }}>{item.title}</div>
+                      <div style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#1a1a2e', lineHeight: 1.4 }}>{item.title}</div>
                     </div>
                     <button
                       className={`btn ${starterCopied === item.id ? 'success' : 'accent'}`}
@@ -1064,9 +1064,9 @@ export default function PromptForge() {
                       }}
                     >{starterCopied === item.id ? '✓' : 'Copy'}</button>
                   </div>
-                  <div style={{ fontSize: 12, color: '#6b7280', lineHeight: 1.6, marginBottom: 12 }}>{item.desc}</div>
+                  <div style={{ fontSize: 12, color: '#6b7390', lineHeight: 1.6, marginBottom: 12 }}>{item.desc}</div>
                   <div style={{
-                    background: '#13151f', border: '1px solid #2a2d42', borderRadius: 6,
+                    background: '#f8f7f4', border: '1px solid #e8e4dc', borderRadius: 6,
                     padding: '10px 12px', fontSize: 11, color: '#4b5563', lineHeight: 1.7,
                     fontFamily: "'JetBrains Mono', monospace", whiteSpace: 'pre-wrap',
                     maxHeight: 72, overflow: 'hidden',
@@ -1080,9 +1080,9 @@ export default function PromptForge() {
         )}
 
         {/* Footer */}
-        <div style={{ marginTop: 60, paddingTop: 18, borderTop: '1px solid #2a2d42', display: 'flex', justifyContent: 'space-between' }}>
-          <span style={{ fontSize: 11, color: '#374151' }}>Prompt Forge</span>
-          <span style={{ fontSize: 11, color: '#374151' }}>Powered by Claude</span>
+        <div style={{ marginTop: 60, paddingTop: 18, borderTop: '1px solid #e8e4dc', display: 'flex', justifyContent: 'space-between' }}>
+          <span style={{ fontSize: 11, color: '#9ca3af' }}>Prompt Forge</span>
+          <span style={{ fontSize: 11, color: '#9ca3af' }}>Powered by Claude</span>
         </div>
       </div>
     </div>
