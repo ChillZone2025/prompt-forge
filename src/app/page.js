@@ -171,6 +171,18 @@ export default function Home() {
         .lp-proof-item { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--ink-dim); }
         .lp-proof-icon { color: #2d9e6b; font-size: 13px; }
 
+        .lp-chips {
+          display: flex; align-items: center; justify-content: center;
+          gap: 8px; flex-wrap: wrap; margin-bottom: 40px;
+          animation: fadeUp 0.6s 0.25s ease both;
+        }
+        .lp-chip {
+          font-size: 12px; color: var(--ink-muted);
+          background: var(--surface); border: 1px solid var(--border);
+          border-radius: 20px; padding: 5px 14px;
+          font-weight: 400; white-space: nowrap;
+        }
+
         @keyframes fadeUp {
           from { opacity: 0; transform: translateY(18px); }
           to   { opacity: 1; transform: translateY(0); }
@@ -447,6 +459,14 @@ export default function Home() {
             Most people use AI like a search engine. The professionals getting real results use{' '}
             <strong>system prompts</strong> — and Prompt Forge builds them in one click.
           </p>
+          <div className="lp-chips">
+            <span className="lp-chip" data-filter="onboarding">Client onboarding</span>
+            <span className="lp-chip" data-filter="finance">Financial analysis</span>
+            <span className="lp-chip" data-filter="email">Email triage</span>
+            <span className="lp-chip" data-filter="content">Content creation</span>
+            <span className="lp-chip" data-filter="research">Research &amp; intel</span>
+            <span className="lp-chip" data-filter="automation">Process automation</span>
+          </div>
           <div className="lp-actions">
             <Link href="/forge" className="lp-btn-primary">Start Forging Free →</Link>
             <a href="#how" className="lp-btn-secondary">See How It Works</a>
