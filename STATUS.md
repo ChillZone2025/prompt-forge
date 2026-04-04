@@ -107,3 +107,5 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-03 — Add VerticalSelector onboarding component to landing page — `03dcfbc`
 - 2026-04-04 — Rebuild landing page to 7-section conversion architecture (TASK-006) — `b331cd0`
 - 2026-04-04 — Forge visual alignment to landing page — light theme (TASK-007) — `3ec3380`
+- 2026-04-04 — Dark wrapper fix + forge header typography (TASK-008) — `bb99fe3`
+- 2026-04-04 — Full design system alignment — yellow→orange, CSS variables (TASK-009) — `0483912`
