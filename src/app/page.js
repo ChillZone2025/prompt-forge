@@ -2,6 +2,10 @@ import Link from 'next/link'
 import { toSlug } from './data/industries'
 import LandingTracker from './LandingTracker'
 import VerticalSelector from './components/onboarding/VerticalSelector'
+import BeforeAfter from './components/landing/BeforeAfter'
+import HowItWorks from './components/landing/HowItWorks'
+import SocialProof from './components/landing/SocialProof'
+import FinalCTA from './components/landing/FinalCTA'
 
 export const metadata = {
   title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
@@ -188,29 +192,6 @@ export default function Home() {
           to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── STATS BAR ── */
-        .lp-stats-bar {
-          background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05);
-          border-bottom: 1px solid rgba(255,255,255,0.05);
-          padding: 40px 24px;
-        }
-        .lp-stats-inner {
-          max-width: 900px; margin: 0 auto;
-          display: grid; grid-template-columns: repeat(4, 1fr); text-align: center;
-        }
-        .lp-stat { padding: 0 24px; }
-        .lp-stat + .lp-stat { border-left: 1px solid rgba(255,255,255,0.08); }
-        .lp-stat-num {
-          font-family: 'DM Serif Display', serif;
-          font-size: 40px; color: #fff;
-          display: block; line-height: 1; margin-bottom: 8px;
-        }
-        .lp-stat-label { font-size: 13px; color: rgba(255,255,255,0.4); font-weight: 400; }
-
-        /* ── SOCIAL PROOF ── */
-        .lp-social-proof { text-align: center; padding: 20px 24px 0; }
-        .lp-social-proof-text { font-size: 14px; color: var(--ink-muted); }
-        .lp-social-proof-text strong { color: var(--accent); font-weight: 500; }
 
         /* ── SECTIONS ── */
         .lp-section { padding: 100px 24px; }
@@ -231,51 +212,6 @@ export default function Home() {
         .lp-title .acc { color: var(--accent); font-style: italic; }
         .lp-body { font-size: 17px; color: var(--ink-soft); line-height: 1.75; max-width: 600px; font-weight: 300; }
 
-        /* ── PROBLEM ── */
-        .lp-problem-grid {
-          display: grid; grid-template-columns: 1fr 1fr;
-          gap: 16px; margin-top: 56px;
-        }
-        .lp-problem-card {
-          background: var(--surface);
-          border: 1px solid var(--border);
-          border-radius: var(--radius); padding: 28px;
-          position: relative; overflow: hidden;
-          transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .lp-problem-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(15,14,13,0.07); }
-        .lp-problem-card::before {
-          content:''; position:absolute; top:0; left:0; right:0; height:2px;
-          background: linear-gradient(90deg, transparent, rgba(200,80,26,0.3), transparent);
-        }
-        .lp-prob-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-        .lp-prob-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
-        .lp-prob-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.65; font-weight: 300; }
-
-        /* ── HOW IT WORKS ── */
-        .lp-steps {
-          display: grid; grid-template-columns: repeat(3,1fr);
-          gap: 32px; margin-top: 56px; position: relative;
-        }
-        .lp-steps::before {
-          content:''; position:absolute; top:28px; left:15%; right:15%; height:1px;
-          background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
-        }
-        .lp-step { text-align: center; }
-        .lp-step-num {
-          width: 56px; height: 56px; border-radius: 50%;
-          background: var(--accent-light);
-          border: 1px solid rgba(200,80,26,0.2);
-          display: flex; align-items: center; justify-content: center;
-          font-family: 'DM Serif Display', serif;
-          font-size: 22px; color: var(--accent);
-          margin: 0 auto 20px; position: relative; z-index: 1;
-        }
-        .lp-step-title { font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
-        .lp-step-desc { font-size: 14px; color: var(--ink-muted); line-height: 1.65; font-weight: 300; }
-
-        .lp-powered { text-align: center; padding: 24px 24px 0; }
-        .lp-powered-text { font-size: 12px; color: var(--ink-dim); }
 
         /* ── INDUSTRIES ── */
         .lp-ind-grid {
@@ -356,48 +292,6 @@ export default function Home() {
         .lp-plan-btn.pro { background: var(--accent); color: #fff; }
         .lp-plan-btn.pro:hover { background: var(--accent-hover); transform: translateY(-1px); }
 
-        /* ── FOUNDER ── */
-        .lp-founder { padding: 100px 24px; }
-        .lp-founder-inner { max-width: 760px; margin: 0 auto; text-align: center; }
-        .lp-quote-mark {
-          font-family: 'DM Serif Display', serif;
-          font-size: 80px; color: var(--accent-light);
-          line-height: 0.8; margin-bottom: 24px; display: block;
-        }
-        .lp-quote-text {
-          font-family: 'DM Serif Display', serif;
-          font-size: clamp(18px, 2.5vw, 22px);
-          color: var(--ink-soft); line-height: 1.7;
-          font-style: italic; margin-bottom: 32px;
-        }
-        .lp-quote-text strong { color: var(--ink); font-style: normal; font-weight: 400; }
-        .lp-quote-author { display: flex; align-items: center; justify-content: center; gap: 14px; }
-        .lp-author-avatar {
-          width: 44px; height: 44px; border-radius: 50%;
-          background: var(--accent-light); border: 1px solid rgba(200,80,26,0.2);
-          display: flex; align-items: center; justify-content: center;
-          font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 14px; color: var(--accent-hover);
-        }
-        .lp-author-name { font-size: 14px; font-weight: 500; color: var(--ink); text-align: left; }
-        .lp-author-title { font-size: 12px; color: var(--ink-muted); text-align: left; font-weight: 300; }
-
-        /* ── CTA ── */
-        .lp-cta {
-          padding: 100px 24px;
-          background: var(--ink);
-          border-top: 1px solid rgba(255,255,255,0.04);
-        }
-        .lp-cta-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-        .lp-cta-title {
-          font-family: 'DM Serif Display', serif;
-          font-weight: 400;
-          font-size: clamp(36px, 6vw, 64px);
-          line-height: 1.05; letter-spacing: -0.02em;
-          color: #fff; margin-bottom: 20px;
-        }
-        .lp-cta-title .acc { color: var(--accent-light); font-style: italic; }
-        .lp-cta-sub { font-size: 17px; color: rgba(255,255,255,0.45); margin-bottom: 40px; font-weight: 300; }
-        .lp-cta-note { font-size: 12px; color: rgba(255,255,255,0.25); margin-top: 16px; }
 
         /* ── FOOTER ── */
         .lp-footer {
@@ -421,12 +315,7 @@ export default function Home() {
         @media(max-width:768px){
           .lp-nav { padding: 0 20px; }
           .lp-nav-links { display: none; }
-          .lp-problem-grid { grid-template-columns: 1fr; }
-          .lp-steps { grid-template-columns: 1fr; }
-          .lp-steps::before { display: none; }
           .lp-pricing-cards { grid-template-columns: 1fr; }
-          .lp-stats-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
-          .lp-stat + .lp-stat { border-left: none; }
           .lp-footer { flex-direction: column; text-align: center; padding: 28px 20px; }
         }
       `}</style>
@@ -486,81 +375,13 @@ export default function Home() {
         <VerticalSelector />
       </section>
 
-      {/* STATS */}
-      <div className="lp-stats-bar">
-        <div className="lp-stats-inner">
-          <div className="lp-stat"><span className="lp-stat-num">{TOTAL_AGENTS}</span><span className="lp-stat-label">Agent Archetypes</span></div>
-          <div className="lp-stat"><span className="lp-stat-num">{TOTAL_INDUSTRIES}</span><span className="lp-stat-label">Industries</span></div>
-          <div className="lp-stat"><span className="lp-stat-num">{TOTAL_STARTERS}</span><span className="lp-stat-label">Starter Prompts</span></div>
-          <div className="lp-stat"><span className="lp-stat-num">30s</span><span className="lp-stat-label">To Deploy</span></div>
-        </div>
-      </div>
-
-      {/* SOCIAL PROOF */}
-      <div className="lp-social-proof">
-        <p className="lp-social-proof-text">Join <strong>500+</strong> professionals using Prompt Forge</p>
-      </div>
-
-      {/* PROBLEM */}
-      <section className="lp-section">
-        <div className="lp-section-inner">
-          <span className="lp-label">The Problem</span>
-          <h2 className="lp-title">You&apos;re using AI wrong.<br/><span className="acc">It&apos;s not your fault.</span></h2>
-          <p className="lp-body">Nobody teaches professionals how to configure AI — they just hand you a chatbox and expect magic. The gap between &ldquo;AI is mediocre&rdquo; and &ldquo;AI is transformative&rdquo; is almost entirely a prompt quality problem.</p>
-          <div className="lp-problem-grid">
-            <div className="lp-problem-card">
-              <span className="lp-prob-icon">😤</span>
-              <div className="lp-prob-title">Generic, frustrating outputs</div>
-              <div className="lp-prob-desc">Without a system prompt, AI has no context about who you are, what you need, or how to behave. Every response starts from zero.</div>
-            </div>
-            <div className="lp-problem-card">
-              <span className="lp-prob-icon">⏰</span>
-              <div className="lp-prob-title">Hours wasted on prompt tweaking</div>
-              <div className="lp-prob-desc">Writing a good system prompt from scratch takes hours of trial and error — time professionals don&apos;t have.</div>
-            </div>
-            <div className="lp-problem-card">
-              <span className="lp-prob-icon">🔍</span>
-              <div className="lp-prob-title">No professional archetypes exist</div>
-              <div className="lp-prob-desc">Generic prompt libraries don&apos;t understand your industry. A treasury analyst needs different AI behavior than a sales rep.</div>
-            </div>
-            <div className="lp-problem-card">
-              <span className="lp-prob-icon">🔄</span>
-              <div className="lp-prob-title">Starting over every session</div>
-              <div className="lp-prob-desc">Without a saved library, you re-explain your context to AI every single time. That&apos;s not a workflow — that&apos;s a tax.</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* BEFORE / AFTER */}
+      <BeforeAfter />
 
       {/* HOW IT WORKS */}
-      <section className="lp-section lp-section-alt" id="how">
-        <div className="lp-section-inner">
-          <span className="lp-label">How It Works</span>
-          <h2 className="lp-title">From zero to <span className="acc">deployed agent</span><br/>in three clicks.</h2>
-          <div className="lp-steps">
-            <div className="lp-step">
-              <div className="lp-step-num">1</div>
-              <div className="lp-step-title">Choose Your Agent</div>
-              <div className="lp-step-desc">Pick from {TOTAL_AGENTS} professional archetypes across {TOTAL_INDUSTRIES} industries — or describe your own custom agent.</div>
-            </div>
-            <div className="lp-step">
-              <div className="lp-step-num">2</div>
-              <div className="lp-step-title">Generate in One Click</div>
-              <div className="lp-step-desc">Claude builds a complete system prompt — identity, capabilities, behavioral guidelines, domain knowledge, interaction protocol, output format, safety constraints, and a first message.</div>
-            </div>
-            <div className="lp-step">
-              <div className="lp-step-num">3</div>
-              <div className="lp-step-title">Copy &amp; Deploy</div>
-              <div className="lp-step-desc">Paste into any AI tool — Claude, ChatGPT, or your own API. Save to your personal library for future sessions.</div>
-            </div>
-          </div>
-        </div>
-        <div className="lp-powered">
-          <p className="lp-powered-text">Powered by Claude — Anthropic&apos;s most capable AI model</p>
-        </div>
-      </section>
+      <HowItWorks />
 
-      {/* INDUSTRIES */}
+      {/* INDUSTRIES / AGENT PREVIEW */}
       <section className="lp-section" id="industries">
         <div className="lp-section-inner">
           <span className="lp-label">{TOTAL_AGENTS} Agents · {TOTAL_INDUSTRIES} Industries</span>
@@ -594,6 +415,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* SOCIAL PROOF */}
+      <SocialProof count={1247} />
 
       {/* PRICING */}
       <section className="lp-section lp-section-alt" id="pricing">
@@ -639,35 +463,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOUNDER */}
-      <section className="lp-founder">
-        <div className="lp-founder-inner">
-          <span className="lp-quote-mark">&ldquo;</span>
-          <p className="lp-quote-text">
-            I built this because I needed it. As a treasury analyst managing an $850M derivatives portfolio,
-            I was spending hours configuring AI tools that kept forgetting context.{' '}
-            <strong>One well-crafted system prompt changed everything.</strong>{' '}
-            I built Prompt Forge so every professional could have that same unlock — in one click.
-          </p>
-          <div className="lp-quote-author">
-            <div className="lp-author-avatar">RH</div>
-            <div>
-              <div className="lp-author-name">Rob Hilbert</div>
-              <div className="lp-author-title">Senior Treasury Analyst · Founder, Prompt Forge</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="lp-cta">
-        <div className="lp-cta-inner">
-          <h2 className="lp-cta-title">Stop prompting.<br/>Start <span className="acc">forging.</span></h2>
-          <p className="lp-cta-sub">Generate your first professional AI agent prompt in under 30 seconds. Free to start, no account needed.</p>
-          <Link href="/forge" className="lp-btn-primary">Start Forging Free →</Link>
-          <p className="lp-cta-note">Works with Claude, ChatGPT, Gemini, and any AI that accepts system prompts.</p>
-        </div>
-      </section>
+      {/* FINAL CTA */}
+      <FinalCTA />
 
       {/* FOOTER */}
       <footer className="lp-footer">
