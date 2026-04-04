@@ -579,7 +579,7 @@ export default function PromptForge() {
 
 
       {/* ? Button */}
-      <button onClick={() => { setWStep(0); setShowWalkthrough(true) }} style={{
+      <button title="How to use Prompt Forge" onClick={() => { setWStep(0); setShowWalkthrough(true) }} style={{
         position: 'fixed', bottom: 24, right: 24, zIndex: 400,
         width: 34, height: 34, borderRadius: '50%',
         background: '#ffffff', border: '1px solid #e8e4dc',
@@ -614,7 +614,7 @@ export default function PromptForge() {
               <button className="btn" style={{ visibility: wStep === 0 ? 'hidden' : 'visible' }} onClick={() => setWStep(s => s - 1)}>← Back</button>
               {wStep < WALKTHROUGH.length - 1
                 ? <button className="btn primary" onClick={() => setWStep(s => s + 1)}>Next →</button>
-                : <button className="btn primary" onClick={closeWalkthrough}>Start Generating →</button>
+                : <button className="btn primary" title="Close walkthrough and start" onClick={closeWalkthrough}>Start Generating →</button>
               }
             </div>
           </div>
@@ -696,8 +696,8 @@ export default function PromptForge() {
                 <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 14, color: '#1a1a2e' }}>{modal.agentName}</span>
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
-                <button className="btn primary" onClick={() => copy(modal.prompt)}>{copied ? '✓ Copied' : 'Copy'}</button>
-                <button className="btn danger" onClick={() => deleteFromLib(modal.id)}>Delete</button>
+                <button className="btn primary" title="Copy prompt to clipboard" onClick={() => copy(modal.prompt)}>{copied ? '✓ Copied' : 'Copy'}</button>
+                <button className="btn danger" title="Delete this prompt" onClick={() => deleteFromLib(modal.id)}>Delete</button>
                 <button className="btn" onClick={() => setModal(null)}>✕</button>
               </div>
             </div>
@@ -761,7 +761,7 @@ export default function PromptForge() {
                       boxShadow: 'none',
                     }} />
                   </div>
-                  <button className="btn primary" style={{ width: '100%', padding: '7px 0', fontSize: 12 }} onClick={() => setModal('upgrade')}>
+                  <button className="btn primary" title="Unlock unlimited generates and all industries" style={{ width: '100%', padding: '7px 0', fontSize: 12 }} onClick={() => setModal('upgrade')}>
                     Upgrade to Pro · $12/mo
                   </button>
                 </div>
@@ -788,7 +788,7 @@ export default function PromptForge() {
             </button>
             <button className={`nav-tab ${view === 'starter' ? 'on' : ''}`} onClick={() => setView('starter')}>Starter</button>
           </div>
-          <button className="btn accent" style={{ fontSize: 12 }} onClick={() => {
+          <button className="btn accent" title="Build a prompt for any role (Pro)" style={{ fontSize: 12 }} onClick={() => {
             if (!isSignedIn) { openSignIn(); return }
             isPro ? setModal('custom') : setModal('upgrade')
           }}>
@@ -816,14 +816,14 @@ export default function PromptForge() {
               {/* Filter pills */}
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {['All', 'Free', 'Pro Only', 'New'].map(f => (
-                  <button key={f} className={`pill ${agentFilter === f ? 'on' : ''}`} onClick={() => setAgentFilter(f)}>{f}</button>
+                  <button key={f} className={`pill ${agentFilter === f ? 'on' : ''}`} title={{All:'Show all agents',Free:'Show free-tier agents only','Pro Only':'Show Pro-only agents',New:'Show recently added agents'}[f]} onClick={() => setAgentFilter(f)}>{f}</button>
                 ))}
               </div>
 
               {/* Industry dropdown */}
               {!isSearching && (
                 <div style={{ position: 'relative', marginLeft: 'auto' }}>
-                  <button className="ind-dropdown-btn" onClick={() => setIndDropOpen(!indDropOpen)}>
+                  <button className="ind-dropdown-btn" title="Filter by industry" onClick={() => setIndDropOpen(!indDropOpen)}>
                     <span>{industry}{PRO_INDUSTRIES.includes(industry) && <span className="pro-tab-badge">PRO</span>}</span>
                     <span style={{ fontSize: 10, color: '#9ca3af' }}>{indDropOpen ? '▲' : '▼'}</span>
                   </button>
@@ -931,21 +931,21 @@ export default function PromptForge() {
           <div className="fu" style={{ marginTop: 24 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24, flexWrap: 'wrap', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                <button className="btn" onClick={reset}>← Back</button>
+                <button className="btn" title="Back to agent list" onClick={reset}>← Back</button>
                 <span style={{ color: selected.color, fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 14 }}>
                   {selected.icon} {selected.name}
                 </span>
               </div>
               {!loading && prompt && (
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button className="btn accent" onClick={() => generate(selected, userContext || undefined)}>Regenerate ↻</button>
+                  <button className="btn accent" title="Generate a new version of this prompt" onClick={() => generate(selected, userContext || undefined)}>Regenerate ↻</button>
                   {!isPro
-                    ? <button className="btn" onClick={() => isSignedIn ? setModal('upgrade') : openSignIn()}>🔒 Save to Library — Pro</button>
+                    ? <button className="btn" title="Upgrade to Pro to save prompts" onClick={() => isSignedIn ? setModal('upgrade') : openSignIn()}>🔒 Save to Library — Pro</button>
                     : !saved
-                      ? <button className="btn accent" onClick={saveToLib}>+ Save to Library</button>
+                      ? <button className="btn accent" title="Save this prompt to your personal library" onClick={saveToLib}>+ Save to Library</button>
                       : <button className="btn iron" disabled>✓ Saved</button>
                   }
-                  <button className={`btn ${copied ? 'success' : 'primary'}`} onClick={() => copy(prompt)}>
+                  <button className={`btn ${copied ? 'success' : 'primary'}`} title={copied ? 'Copied to clipboard' : 'Copy prompt to clipboard'} onClick={() => copy(prompt)}>
                     {copied ? '✓ Copied!' : 'Copy Prompt'}
                   </button>
                 </div>
@@ -1026,7 +1026,7 @@ export default function PromptForge() {
                         <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: 13, color: '#1a1a2e' }}>{item.agentName}</span>
                       </div>
                       <button className="btn steel" style={{ padding: '2px 7px', fontSize: 9 }}
-                        onClick={e => { e.stopPropagation(); deleteFromLib(item.id) }}>✕</button>
+                        title="Delete this prompt" onClick={e => { e.stopPropagation(); deleteFromLib(item.id) }}>✕</button>
                     </div>
                     <div style={{ fontSize: 12, color: '#6b7390', marginBottom: 10, lineHeight: 1.5 }}>
                       {item.agentDesc}
