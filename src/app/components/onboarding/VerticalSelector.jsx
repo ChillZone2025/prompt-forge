@@ -315,7 +315,7 @@ export default function VerticalSelector() {
       </div>
 
       <div className="vs-footer" aria-label="Product stats">
-        <span className="vs-stat">251 agents</span>
+        <span className="vs-stat">267 agents</span>
         <span className="vs-stat"><span className="vs-stat-dot" aria-hidden="true" />41 industries</span>
         <span className="vs-stat"><span className="vs-stat-dot" aria-hidden="true" />Quality-tested 9.0/10</span>
       </div>

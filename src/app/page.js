@@ -10,12 +10,12 @@ import FinalCTA from './components/landing/FinalCTA'
 
 export const metadata = {
   title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
-  description: 'Generate deployment-ready AI agent system prompts in one click. 251 professional archetypes across 41 industries. Free to start.',
+  description: 'Generate deployment-ready AI agent system prompts in one click. 267 professional archetypes across 41 industries. Free to start.',
 }
 
 export default async function Home() {
   // UPDATE THESE AFTER EVERY MAJOR INTEGRATION
-  const TOTAL_AGENTS = 251
+  const TOTAL_AGENTS = 267
   const TOTAL_INDUSTRIES = 41
   const FREE_INDUSTRIES = 31
   const PRO_INDUSTRIES = 10
@@ -422,7 +422,7 @@ export default async function Home() {
                 </div>
               </Link>
             ))}
-            <Link href="/forge" className="lp-ind-more">Browse all 251 agents →</Link>
+            <Link href="/forge" className="lp-ind-more">Browse all 267 agents →</Link>
           </div>
           <div className="lp-ind-cta">
             <Link href="/forge" className="lp-btn-primary">Build my first agent free →</Link>

@@ -13,7 +13,7 @@ export const metadata = {
   },
   openGraph: {
     title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
-    description: 'Generate deployment-ready AI agent system prompts in one click. 251 professional archetypes across 41 industries.',
+    description: 'Generate deployment-ready AI agent system prompts in one click. 267 professional archetypes across 41 industries.',
     url: 'https://www.getpromptforge.net',
     siteName: 'Prompt Forge',
     images: [
@@ -29,7 +29,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Prompt Forge — One-Click AI Agent Prompts for Professionals',
-    description: 'Generate deployment-ready AI agent system prompts in one click. 251 archetypes, 41 industries.',
+    description: 'Generate deployment-ready AI agent system prompts in one click. 267 archetypes, 41 industries.',
     images: ['https://www.getpromptforge.net/og.png'],
   },
 }

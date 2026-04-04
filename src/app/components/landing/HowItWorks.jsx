@@ -97,7 +97,7 @@ export default function HowItWorks() {
           <div className="hiw-step">
             <div className="hiw-step-num">1</div>
             <div className="hiw-step-title">Pick Your Role</div>
-            <div className="hiw-step-desc">Choose from 251 professional archetypes across 41 industries.</div>
+            <div className="hiw-step-desc">Choose from 267 professional archetypes across 41 industries.</div>
           </div>
           <div className="hiw-step">
             <div className="hiw-step-num">2</div>
