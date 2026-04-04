@@ -371,7 +371,7 @@ export default function Home() {
       </section>
 
       {/* VERTICAL SELECTOR — intent-first onboarding */}
-      <section style={{ background: '#13120F', padding: '80px 24px', textAlign: 'center' }}>
+      <section style={{ background: 'var(--bg-warm)', padding: '80px 24px', textAlign: 'center' }}>
         <VerticalSelector />
       </section>
 
