@@ -106,3 +106,4 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-02 — Add memory sync protocol to AGENTS.md — `19c1290`
 - 2026-04-03 — Add VerticalSelector onboarding component to landing page — `03dcfbc`
 - 2026-04-04 — Rebuild landing page to 7-section conversion architecture (TASK-006) — `b331cd0`
+- 2026-04-04 — Forge visual alignment to landing page — light theme (TASK-007) — `3ec3380`
