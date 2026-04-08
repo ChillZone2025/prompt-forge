@@ -51,3 +51,53 @@ Your app will be live at `https://your-project.vercel.app` in ~2 minutes.
 - 3 free generates, then upgrade modal
 - Upgrade flow ready to wire to Stripe
 - Pro state stored in localStorage (swap for DB when ready)
+
+## MCP Server
+
+Prompt Forge ships as an MCP (Model Context Protocol) server, giving Claude Code, Claude Desktop, and Cursor users direct access to the agent library from their terminal.
+
+```bash
+npx promptforge-mcp
+```
+
+### Tools
+
+| Tool | Description |
+|------|-------------|
+| `generate_prompt` | Generate a deployment-ready system prompt for any agent role |
+| `list_agents` | Browse 251 agents across 41 industries |
+| `list_industries` | List all 41 industries with agent counts |
+
+### Quick Install — Claude Code
+
+```bash
+claude mcp add --transport stdio promptforge -- npx -y promptforge-mcp
+```
+
+### Quick Install — Claude Desktop
+
+Add to `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "promptforge": {
+      "command": "npx",
+      "args": ["-y", "promptforge-mcp"],
+      "env": {
+        "ANTHROPIC_API_KEY": "your-key-here"
+      }
+    }
+  }
+}
+```
+
+### npm
+
+[![npm version](https://badge.fury.io/js/promptforge-mcp.svg)](https://www.npmjs.com/package/promptforge-mcp)
+
+```bash
+npm install -g promptforge-mcp
+```
+
+Full MCP server documentation: [mcp-server/README.md](./mcp-server/README.md)
