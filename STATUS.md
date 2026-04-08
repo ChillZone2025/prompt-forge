@@ -112,3 +112,4 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-04 — Integrate 16 gap-fill agents across industries (total 267) — `dafb35b`
 - 2026-04-08 — Add MCP server section to root README for Glama submission — `c86ab8a`
 - 2026-04-08 — Rewrite root README to lead with MCP for Glama scanner — `d962545`
+- 2026-04-08 — Fix: Pro status not recognized after login — add verify-subscription sync + user.reload() on sign-in — `085fc93`
