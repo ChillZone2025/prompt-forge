@@ -110,3 +110,5 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-04 — Dark wrapper fix + forge header typography (TASK-008) — `bb99fe3`
 - 2026-04-04 — Full design system alignment — yellow→orange, CSS variables (TASK-009) — `0483912`
 - 2026-04-04 — Integrate 16 gap-fill agents across industries (total 267) — `dafb35b`
+- 2026-04-08 — Add MCP server section to root README for Glama submission — `c86ab8a`
+- 2026-04-08 — Rewrite root README to lead with MCP for Glama scanner — `d962545`
