@@ -422,6 +422,16 @@ export default function PromptForge() {
   // Funnel: signup — fires when user signs in
   useEffect(() => { if (isSignedIn) track('funnel_signup') }, [isSignedIn])
 
+  // Sync Pro status from Stripe on sign-in — verify-subscription writes isPro into Clerk metadata,
+  // then user.reload() refreshes the in-memory Clerk user so isPro reads correctly.
+  useEffect(() => {
+    if (!isSignedIn || !isLoaded) return
+    fetch('/api/verify-subscription', { method: 'POST' })
+      .then(r => r.json())
+      .then(data => { if (data.isPro) user.reload() })
+      .catch(() => {})
+  }, [isSignedIn, isLoaded])
+
   const FREE_LIMIT = 3
   const atLimit = !isPro && usage >= FREE_LIMIT
   const remaining = Math.max(0, FREE_LIMIT - usage)
