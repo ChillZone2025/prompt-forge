@@ -401,6 +401,7 @@ export default function PromptForge() {
   const [agentSearch, setAgentSearch]   = useState('')
   const [agentFilter, setAgentFilter]  = useState('All')
   const [indDropOpen, setIndDropOpen]   = useState(false)
+  const [proChecked, setProChecked]     = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -428,8 +429,8 @@ export default function PromptForge() {
     if (!isSignedIn || !isLoaded) return
     fetch('/api/verify-subscription', { method: 'POST' })
       .then(r => r.json())
-      .then(data => { if (data.isPro) user.reload() })
-      .catch(() => {})
+      .then(data => { if (data.isPro) user.reload(); setProChecked(true) })
+      .catch(() => { setProChecked(true) })
   }, [isSignedIn, isLoaded])
 
   const FREE_LIMIT = 3
@@ -482,6 +483,8 @@ export default function PromptForge() {
   const handleAgentClick = (agent) => {
     // Require sign-in to generate
     if (!isSignedIn) { openSignIn(); return }
+    // Wait for Pro check to resolve before proceeding — prevents isPro race condition
+    if (!proChecked) return
     if (atLimit) { setModal('upgrade'); return }
     // Fixed prompts skip context step entirely
     if (agent.fixedPrompt) {

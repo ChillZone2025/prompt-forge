@@ -2,21 +2,17 @@ import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 import { clerkClient } from '@clerk/nextjs/server'
 
-export async function POST(request) {
-  const body = await request.text()
-  const sig = request.headers.get('stripe-signature')
+export const config = { api: { bodyParser: false } }
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2023-10-16' })
+
+export async function POST(req) {
+  const body = await req.text()
+  const sig = req.headers.get('stripe-signature')
 
   let event
-
   try {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-      apiVersion: '2023-10-16',
-    })
-    event = stripe.webhooks.constructEvent(
-      body,
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET || 'placeholder'
-    )
+    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET)
   } catch (err) {
     console.error('Webhook signature error:', err.message)
     return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
@@ -25,10 +21,11 @@ export async function POST(request) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object
     const clerkUserId = session.metadata?.clerkUserId
+    const stripeCustomerId = session.customer
     if (clerkUserId) {
       try {
         await clerkClient.users.updateUserMetadata(clerkUserId, {
-          publicMetadata: { isPro: true, stripeCustomerId: session.customer },
+          publicMetadata: { isPro: true, stripeCustomerId },
         })
         console.log('Pro activated for Clerk user:', clerkUserId)
       } catch (err) {
@@ -38,13 +35,10 @@ export async function POST(request) {
   }
 
   if (event.type === 'customer.subscription.deleted') {
-    const subscription = event.data.object
-    const customerId = subscription.customer
-
-    // Find the Clerk user by stripeCustomerId and revoke Pro
+    const stripeCustomerId = event.data.object.customer
     try {
-      const users = await clerkClient.users.getUserList({ limit: 100 })
-      const user = users.data.find(u => u.publicMetadata?.stripeCustomerId === customerId)
+      const result = await clerkClient.users.getUserList({ query: stripeCustomerId })
+      const user = result.data?.find(u => u.publicMetadata?.stripeCustomerId === stripeCustomerId)
       if (user) {
         await clerkClient.users.updateUserMetadata(user.id, {
           publicMetadata: { isPro: false },
