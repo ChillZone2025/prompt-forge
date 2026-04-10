@@ -1,0 +1,26 @@
+wing: prompt_forge
+rooms:
+- name: agentic_os
+  description: Files from agentic-os/
+- name: agents
+  description: Files from agents/
+- name: content
+  description: Files from content/
+- name: documentation
+  description: Files from docs/
+- name: downloads
+  description: Files from Downloads/
+- name: mcp_server
+  description: Files from mcp-server/
+- name: public
+  description: Files from public/
+- name: scripts
+  description: Files from scripts/
+- name: simulations
+  description: Files from simulations/
+- name: src
+  description: Files from src/
+- name: costs
+  description: Files from finance/
+- name: general
+  description: Files that don't fit other rooms

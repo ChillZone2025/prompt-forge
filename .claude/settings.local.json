@@ -62,7 +62,8 @@
       "Bash(mkdir -p \"C:/Users/rober/Downloads/prompt-forge/prompt-forge/docs/superpowers/plans\")",
       "Bash(mkdir -p \"C:/Users/rober/Downloads/prompt-forge/prompt-forge/docs/superpowers/specs\")",
       "Bash(python3 scripts/build_industries.py)",
-      "Bash(python scripts/build_industries.py)"
+      "Bash(python scripts/build_industries.py)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }
