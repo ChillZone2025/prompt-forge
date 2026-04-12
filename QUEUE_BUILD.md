@@ -16,6 +16,7 @@
 | B008 | Email capture for free users | Forger | ✅ DEPLOYED | P1 | Clerk captures email on sign-up — verified by Rob |
 | B009 | Supabase integration for user data | Forger | OPEN | P3 | Saved prompts, generation history, usage analytics persisted in DB |
 | B010 | Agent Orchestra Builder (Phase 4) | Forger | BLOCKED | P4 | Visual drag-and-drop canvas for multi-agent systems — deferred to 500 subscribers |
+| B011 | Quality Score Badge | Forger | ✅ DEPLOYED `72917ef` | P2 | QualityBadge pill on all scored prompts, hover tooltip, copy suffix |
 
 ## Completed Tasks Archive
 
