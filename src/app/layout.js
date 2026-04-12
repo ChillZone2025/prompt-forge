@@ -33,7 +33,7 @@ export const metadata = {
     images: ['https://www.getpromptforge.net/og.png'],
   },
   verification: {
-    google: 'googlef3291af3bd3862cf',
+    google: 'googlef3291af3bd3862cf.html',
   },
 }
 export default function RootLayout({ children }) {
