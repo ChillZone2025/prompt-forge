@@ -1,11 +1,4 @@
 {
-  "mcpServers": {
-    "promptforge": {
-      "path": "mcp-server",
-      "build": {
-        "command": "npm install",
-        "startCommand": "node index.js"
-      }
-    }
-  }
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "maintainers": ["ChillZone2025"]
 }
