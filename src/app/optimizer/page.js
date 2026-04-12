@@ -1,4 +1,9 @@
-import OptimizerPage from '../../components/optimizer/OptimizerPage'
+import dynamic from 'next/dynamic'
+
+const OptimizerPage = dynamic(
+  () => import('../../components/optimizer/OptimizerPage'),
+  { ssr: false }
+)
 
 export const metadata = {
   title: 'AI Token Calculator & Prompt Optimizer | Prompt Forge',
