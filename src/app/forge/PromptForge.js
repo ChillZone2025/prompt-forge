@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { useUser, useClerk, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { track } from '@vercel/analytics'
 import { INDUSTRIES, PRO_INDUSTRIES, INDUSTRY_TABS } from '../data/industries'
+import QualityBadge from '../../components/QualityBadge'
 
 const LS_LIB = 'pf_library'
 const LS_SEEN = 'pf_seen'
@@ -547,7 +548,8 @@ export default function PromptForge() {
   }
 
   const copy = (text) => {
-    navigator.clipboard.writeText(text)
+    const suffix = selected?.qualityScore ? '\n\n--- Quality verified by Prompt Forge' : ''
+    navigator.clipboard.writeText(text + suffix)
     setCopied(true); setTimeout(() => setCopied(false), 2000)
   }
 
@@ -990,6 +992,15 @@ export default function PromptForge() {
                 <div>
                   <div className="pout fu">{parsePrompt(prompt)}</div>
                   {loading && <div className="stream-bar" />}
+                  {!loading && selected?.qualityScore && (
+                    <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid #e8e4dc' }}>
+                      <QualityBadge
+                        score={selected.qualityScore}
+                        tier1Passed={selected.tier1Pass ?? true}
+                        lastValidated={selected.validatedAt}
+                      />
+                    </div>
+                  )}
                 </div>
               ) : null}
             </div>
