@@ -17,22 +17,22 @@ export function generateMetadata({ params }) {
   const slug = params.slug
 
   return {
-    title: `AI Agents for ${name} — ${agents.length} System Prompts | Prompt Forge`,
-    description: `${agents.length} deployment-ready AI agent prompts for ${name}: ${first3}, and more. Generate structured system prompts in one click.`,
+    title: `AI Agent Prompts for ${name} | Prompt Forge`,
+    description: `${agents.length} deployment-ready AI agent system prompts for ${name} professionals. Quality-verified, one-click generation.`,
     openGraph: {
-      title: `AI Agents for ${name} — ${agents.length} System Prompts | Prompt Forge`,
-      description: meta.description || '',
-      url: `https://getpromptforge.net/industry/${slug}`,
+      title: `AI Agent Prompts for ${name} | Prompt Forge`,
+      description: `${agents.length} deployment-ready AI agent system prompts for ${name} professionals. Quality-verified, one-click generation.`,
+      url: `https://www.getpromptforge.net/industry/${slug}`,
       siteName: 'Prompt Forge',
       type: 'website',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `AI Agents for ${name} | Prompt Forge`,
-      description: `${agents.length} deployment-ready AI agent prompts for ${name}.`,
+      title: `AI Agent Prompts for ${name} | Prompt Forge`,
+      description: `${agents.length} deployment-ready AI agent system prompts for ${name} professionals. Quality-verified, one-click generation.`,
     },
     alternates: {
-      canonical: `https://getpromptforge.net/industry/${slug}`,
+      canonical: `https://www.getpromptforge.net/industry/${slug}`,
     },
   }
 }
@@ -317,10 +317,15 @@ export default function IndustryPage({ params }) {
       <section className="ind-hero">
         <div className="ind-hero-icon">{meta.icon || '⚡'}</div>
         <h1>
-          AI Agents for <em>{name}</em>
+          AI Agent Prompts for <em>{name}</em>
           {isPro && <span className="ind-pro-badge">PRO</span>}
         </h1>
-        <p className="ind-hero-desc">{meta.description || ''}</p>
+        <p className="ind-hero-desc">
+          {agents.length} deployment-ready system prompts for {name} professionals. Every agent passes a 3-tier quality simulation.
+        </p>
+        <a href="#agents" className="ind-cta-btn" style={{ display: 'inline-block', marginBottom: 32 }}>
+          Generate Free
+        </a>
         <div className="ind-stats">
           <div className="ind-stat">
             <div className="ind-stat-num">{agents.length}</div>
@@ -338,17 +343,19 @@ export default function IndustryPage({ params }) {
       </section>
 
       {/* AGENT GRID */}
-      <section className="ind-grid-section">
+      <section id="agents" className="ind-grid-section">
         <h2 className="ind-grid-title">All {name} Agents</h2>
         <div className="ind-grid">
           {agents.map(agent => (
-            <div key={agent.id} className="ind-card">
-              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: agent.color, borderRadius: '12px 12px 0 0' }} />
-              {agent.isNew && <div className="ind-card-new">NEW</div>}
-              <div className="ind-card-icon">{agent.icon}</div>
-              <div className="ind-card-name">{agent.name}</div>
-              <div className="ind-card-desc">{agent.desc}</div>
-            </div>
+            <Link key={agent.id} href={`/agent/${agent.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="ind-card">
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 3, background: agent.color, borderRadius: '12px 12px 0 0' }} />
+                {agent.isNew && <div className="ind-card-new">NEW</div>}
+                <div className="ind-card-icon">{agent.icon}</div>
+                <div className="ind-card-name">{agent.name}</div>
+                <div className="ind-card-desc">{agent.desc}</div>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
@@ -422,25 +429,17 @@ export default function IndustryPage({ params }) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'CollectionPage',
-            name: `AI Agents for ${name}`,
-            description: meta.description,
-            url: `https://getpromptforge.net/industry/${slug}`,
-            isPartOf: {
-              '@type': 'WebSite',
-              name: 'Prompt Forge',
-              url: 'https://getpromptforge.net',
-            },
-            mainEntity: {
-              '@type': 'ItemList',
-              numberOfItems: agents.length,
-              itemListElement: agents.map((agent, i) => ({
-                '@type': 'ListItem',
-                position: i + 1,
-                name: agent.name,
-                description: agent.desc,
-              })),
-            },
+            '@type': 'ItemList',
+            name: `AI Agent Prompts for ${name}`,
+            description: `${agents.length} deployment-ready AI agent system prompts for ${name} professionals.`,
+            url: `https://www.getpromptforge.net/industry/${slug}`,
+            numberOfItems: agents.length,
+            itemListElement: agents.map((agent, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: agent.name,
+              url: `https://www.getpromptforge.net/agent/${agent.id}`,
+            })),
           }),
         }}
       />

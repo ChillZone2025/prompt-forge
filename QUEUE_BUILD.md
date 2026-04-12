@@ -11,6 +11,7 @@
 | B003 | Landing page — real numbers | Forger | ✅ DEPLOYED | P0 | 251/41/24 shown, pricing cards accurate |
 | B004 | Checkmark rendering fix | Forger | ✅ DEPLOYED | P1 | All ✓ symbols render correctly |
 | B005 | Tooltips on buttons | Forger | OPEN | P2 | Hover tooltips on all action buttons in /forge |
+| B012 | SEO Landing Page Template System | Forger | IN PROGRESS — Forger | P1 | Agent pages + industry page upgrades + sitemap + robots + ?agent= param |
 | B006 | SEO landing pages per industry | Forger | ✅ DEPLOYED | P1 | Each industry gets /industry/{slug} page with meta tags, agent list, sample output |
 | B007 | Vercel KV generation counter | Forger | OPEN | P2 | Real-time "X prompts generated" on landing page |
 | B008 | Email capture for free users | Forger | ✅ DEPLOYED | P1 | Clerk captures email on sign-up — verified by Rob |

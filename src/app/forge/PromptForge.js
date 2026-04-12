@@ -1,14 +1,35 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { useUser, useClerk, SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
 import { track } from '@vercel/analytics'
 import { INDUSTRIES, PRO_INDUSTRIES, INDUSTRY_TABS } from '../data/industries'
 import QualityBadge from '../../components/QualityBadge'
 
-const LS_LIB = 'pf_library'
 const LS_SEEN = 'pf_seen'
+
+// ─── Normalize Supabase row → library entry expected by the UI ────────────────
+const normalizeEntry = (row) => {
+  let agentColor = '#6b7390', agentIcon = '⚒', agentDesc = ''
+  outer: for (const agents of Object.values(INDUSTRIES)) {
+    for (const a of agents) {
+      if (a.id === row.agent_id) { agentColor = a.color; agentIcon = a.icon; agentDesc = a.desc; break outer }
+    }
+  }
+  return {
+    id: row.id,
+    agentName: row.agent_name,
+    agentColor,
+    agentIcon,
+    agentDesc,
+    prompt: row.prompt_text,
+    savedAt: new Date(row.created_at).getTime(),
+    industry: row.industry,
+    agent_id: row.agent_id,
+  }
+}
 
 // ─── Walkthrough ─────────────────────────────────────────────────────────────
 const WALKTHROUGH = [
@@ -364,6 +385,8 @@ const fmtDate = (ts) =>
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function PromptForge() {
   const searchParams = useSearchParams()
+  const agentParam   = searchParams.get('agent')
+  const agentParamHandled = useRef(false)
   const { user, isSignedIn, isLoaded } = useUser()
   const { openSignIn } = useClerk()
 
@@ -372,6 +395,12 @@ export default function PromptForge() {
 
   const [view, setView]           = useState('forge')
   const [industry, setIndustry]   = useState(() => {
+    // Pre-select industry from ?agent= param
+    if (agentParam) {
+      for (const [ind, agents] of Object.entries(INDUSTRIES)) {
+        if (agents.find(a => a.id === agentParam)) return ind
+      }
+    }
     const param = searchParams.get('industry')
     if (param) {
       const match = INDUSTRY_TABS.find(
@@ -388,6 +417,7 @@ export default function PromptForge() {
   const [copied, setCopied]       = useState(false)
   const [saved, setSaved]         = useState(false)
   const [library, setLibrary]     = useState([])
+  const [libLoading, setLibLoading] = useState(false)
   const [modal, setModal]         = useState(null)
   const [custName, setCustName]   = useState('')
   const [custDesc, setCustDesc]   = useState('')
@@ -407,10 +437,35 @@ export default function PromptForge() {
   useEffect(() => {
     setMounted(true)
     try {
-      setLibrary(JSON.parse(localStorage.getItem(LS_LIB) || '[]'))
       if (!localStorage.getItem(LS_SEEN)) setShowWalkthrough(true)
     } catch {}
   }, [])
+
+  // Load library from Supabase once Pro status is confirmed
+  useEffect(() => {
+    if (!isSignedIn || !isPro || !proChecked) return
+    setLibLoading(true)
+    fetch('/api/prompts/list')
+      .then(r => r.json())
+      .then(data => { if (data.prompts) setLibrary(data.prompts.map(normalizeEntry)) })
+      .catch(() => {})
+      .finally(() => setLibLoading(false))
+  }, [isSignedIn, isPro, proChecked])
+
+  // Auto-select agent from ?agent={id} URL param — fires once after auth resolves
+  useEffect(() => {
+    if (!mounted || !isLoaded || !proChecked || !agentParam || agentParamHandled.current) return
+    agentParamHandled.current = true
+    outer: for (const [ind, agents] of Object.entries(INDUSTRIES)) {
+      for (const a of agents) {
+        if (a.id === agentParam) {
+          setIndustry(ind)
+          handleAgentClick({ ...a, _industry: ind })
+          break outer
+        }
+      }
+    }
+  }, [mounted, isLoaded, proChecked, agentParam])
 
   useEffect(() => {
     if (!loading) return
@@ -460,25 +515,49 @@ export default function PromptForge() {
     }
   }
 
-  const saveToLib = () => {
-    if (!prompt || saved) return
-    const entry = {
-      id: Date.now(),
-      agentName: selected?.name || 'Custom',
-      prompt,
-      savedAt: Date.now(),
-    }
-    const updated = [entry, ...library]
-    setLibrary(updated)
+  const saveToLib = async () => {
+    if (!prompt || saved || !selected) return
     setSaved(true)
-    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
+    try {
+      const res = await fetch('/api/prompts/save', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          agent_id: selected.id,
+          agent_name: selected.name,
+          industry: selected._industry || industry,
+          prompt_text: prompt,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        const entry = normalizeEntry({
+          id: data.id,
+          agent_id: selected.id,
+          agent_name: selected.name,
+          industry: selected._industry || industry,
+          prompt_text: prompt,
+          created_at: new Date().toISOString(),
+        })
+        setLibrary(prev => [entry, ...prev])
+      } else {
+        setSaved(false)
+      }
+    } catch {
+      setSaved(false)
+    }
   }
 
-  const deleteFromLib = (id) => {
-    const updated = library.filter(item => item.id !== id)
-    setLibrary(updated)
+  const deleteFromLib = async (id) => {
+    setLibrary(prev => prev.filter(item => item.id !== id))
     if (modal?.id === id) setModal(null)
-    try { localStorage.setItem(LS_LIB, JSON.stringify(updated)) } catch {}
+    try {
+      await fetch('/api/prompts/delete', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      })
+    } catch {}
   }
 
   const handleAgentClick = (agent) => {
@@ -801,6 +880,11 @@ export default function PromptForge() {
             <button className={`nav-tab ${view === 'library' ? 'on' : ''}`} onClick={() => setView('library')}>
               Library {library.length > 0 && <span style={{ color: '#374151', marginLeft: 3 }}>({library.length})</span>}
             </button>
+            {isPro && (
+              <Link href="/dashboard" style={{ textDecoration: 'none' }}>
+                <button className="nav-tab" title="Open full-page library dashboard">Dashboard ↗</button>
+              </Link>
+            )}
             <button className={`nav-tab ${view === 'starter' ? 'on' : ''}`} onClick={() => setView('starter')}>Starter</button>
           </div>
           <button className="btn accent" title="Build a prompt for any role (Pro)" style={{ fontSize: 12 }} onClick={() => {
@@ -1028,11 +1112,15 @@ export default function PromptForge() {
               <input className="finput" placeholder="Search library..." value={libSearch}
                 onChange={e => setLibSearch(e.target.value)} style={{ maxWidth: 280 }} />
               <span style={{ fontSize: 12, color: '#6b7390', whiteSpace: 'nowrap' }}>
-                {visibleLib.length} prompt{visibleLib.length !== 1 ? 's' : ''}
+                {libLoading ? 'Loading…' : `${visibleLib.length} prompt${visibleLib.length !== 1 ? 's' : ''}`}
               </span>
             </div>
 
-            {visibleLib.length === 0 ? (
+            {libLoading ? (
+              <div style={{ textAlign: 'center', padding: '48px 20px', color: '#9ca3af', fontSize: 13 }}>
+                Loading your library…
+              </div>
+            ) : visibleLib.length === 0 ? (
               <div style={{ textAlign: 'center', padding: '56px 20px' }}>
                 <div style={{ fontSize: 32, marginBottom: 14, opacity: 0.2 }}>📚</div>
                 <div style={{ color: '#4b5563', fontSize: 14, marginBottom: 18 }}>
