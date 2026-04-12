@@ -3,7 +3,7 @@
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { track } from '@vercel/analytics'
-import { MODEL_PRICING } from '../../lib/modelPricing'
+import { MODEL_PRICING, PROVIDERS, DEFAULT_COMPARISON } from '../../lib/modelPricing'
 import { estimateTokens, calculateCostPerCall, projectCosts } from '../../lib/tokenCount'
 
 // ─── Diff Utility ────────────────────────────────────────────────────────────
@@ -41,6 +41,17 @@ function formatCost(value) {
   }).format(value)
 }
 
+// Short model name for compact table headers
+function shortName(modelId) {
+  const m = MODEL_PRICING[modelId]
+  if (!m) return modelId
+  // Strip provider prefix from name for brevity
+  return m.name
+    .replace('Claude ', '')
+    .replace('GPT-', 'GPT-')
+    .replace('Gemini 2.5 ', '')
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function OptimizerPage() {
@@ -55,7 +66,7 @@ export default function OptimizerPage() {
   const [compressResult, setCompressResult] = useState(null)
   const [compressLoading, setCompressLoading] = useState(false)
   const [compressError, setCompressError] = useState(null)
-  const [compressUsed, setCompressUsed] = useState(null) // null = show "5 of 5"
+  const [compressUsed, setCompressUsed] = useState(null)
   const [activeTab, setActiveTab] = useState('compressed')
   const [copied, setCopied] = useState(false)
 
@@ -64,6 +75,8 @@ export default function OptimizerPage() {
   const [outputTokens, setOutputTokens] = useState(500)
   const [callsPerDay, setCallsPerDay] = useState(1000)
   const [callsInput, setCallsInput] = useState('1000')
+  const [activeProvider, setActiveProvider] = useState('All')
+  const [mobileExpanded, setMobileExpanded] = useState(false)
 
   // ─── Module 1 Handler ──────────────────────────────────────────────────────
 
@@ -122,9 +135,7 @@ export default function OptimizerPage() {
       if (typeof data.rate_limit_remaining === 'number') {
         setCompressUsed(data.rate_limit_remaining)
       }
-      // Auto-populate Module 3 input tokens with original token count
       setInputTokens(origTokens)
-      // Fire analytics
       const compTokens = estimateTokens(data.compressed_prompt)
       track('optimizer_compress', {
         input_tokens: origTokens,
@@ -152,25 +163,47 @@ export default function OptimizerPage() {
 
   // ─── Module 3 Calculations ─────────────────────────────────────────────────
 
-  const models = ['haiku', 'sonnet', 'opus']
+  // Derive visible model columns from active provider filter
+  const visibleModels = activeProvider === 'All'
+    ? DEFAULT_COMPARISON
+    : Object.values(MODEL_PRICING)
+        .filter(m => m.provider === activeProvider)
+        .map(m => m.id)
+
   const costs = {}
-  for (const model of models) {
-    const pricing = MODEL_PRICING[model]
+  for (const modelId of visibleModels) {
+    const pricing = MODEL_PRICING[modelId]
+    if (!pricing) continue
     const costPerCall = calculateCostPerCall(inputTokens, outputTokens, pricing)
-    costs[model] = projectCosts(costPerCall, callsPerDay)
+    costs[modelId] = projectCosts(costPerCall, callsPerDay)
   }
 
   // Savings row: only shown if Module 2 ran and produced fewer tokens
   const showSavings = compressResult && compressedTokens < promptTokens && promptTokens > 0
   const savings = {}
   if (showSavings) {
-    for (const model of models) {
-      const pricing = MODEL_PRICING[model]
+    for (const modelId of visibleModels) {
+      const pricing = MODEL_PRICING[modelId]
+      if (!pricing) continue
       const origCostPerCall = calculateCostPerCall(promptTokens, outputTokens, pricing)
       const compCostPerCall = calculateCostPerCall(compressedTokens, outputTokens, pricing)
-      savings[model] = projectCosts(origCostPerCall - compCostPerCall, callsPerDay).annual
+      savings[modelId] = projectCosts(origCostPerCall - compCostPerCall, callsPerDay).annual
     }
   }
+
+  // Best value annotation: most expensive minus cheapest in visible set, if delta > $100/year
+  const annualValues = visibleModels
+    .map(id => costs[id]?.annual ?? 0)
+    .filter(v => v > 0)
+  const maxAnnual = Math.max(...annualValues)
+  const minAnnual = Math.min(...annualValues)
+  const bestValueDelta = maxAnnual - minAnnual
+  const cheapestModelId = visibleModels.find(id => costs[id]?.annual === minAnnual)
+  const mostExpensiveModelId = visibleModels.find(id => costs[id]?.annual === maxAnnual)
+  const showBestValue = bestValueDelta > 100 && cheapestModelId && mostExpensiveModelId
+
+  // Lowest annual cost column index for green tint
+  const lowestAnnualId = cheapestModelId
 
   const handleCallsPreset = (val) => {
     setCallsPerDay(val)
@@ -185,6 +218,21 @@ export default function OptimizerPage() {
   }
 
   const remainingDisplay = compressUsed === null ? '5 of 5' : `${compressUsed} of 5`
+
+  // Cost savings ratio for Module 1 message
+  function getPremiumRatio(recommendedId) {
+    const rec = MODEL_PRICING[recommendedId]
+    if (!rec) return null
+    // Find the cheapest premium model as comparison
+    const premiumModels = Object.values(MODEL_PRICING).filter(m => m.tier === 'premium')
+    if (premiumModels.length === 0) return null
+    const cheapestPremium = premiumModels.reduce((a, b) =>
+      a.inputPerMToken < b.inputPerMToken ? a : b
+    )
+    if (rec.tier === 'premium') return null
+    const ratio = Math.round(cheapestPremium.inputPerMToken / rec.inputPerMToken)
+    return { ratio, premiumName: cheapestPremium.name }
+  }
 
   return (
     <>
@@ -258,7 +306,7 @@ export default function OptimizerPage() {
           line-height: 1.6;
         }
         .opt-modules {
-          max-width: 800px;
+          max-width: 860px;
           margin: 0 auto;
           padding: 0 24px 80px;
           display: flex;
@@ -349,11 +397,21 @@ export default function OptimizerPage() {
         .opt-rec-row {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 8px;
           margin-bottom: 12px;
           flex-wrap: wrap;
         }
         .opt-rec-label { font-size: 13px; color: #8a877f; }
+        .opt-provider-badge {
+          font-size: 11px;
+          color: #8a877f;
+          padding: 2px 8px;
+          border: 1px solid #e8e4dc;
+          border-radius: 4px;
+          background: #fff;
+          font-weight: 500;
+          letter-spacing: 0.3px;
+        }
         .opt-chip {
           display: inline-flex;
           align-items: center;
@@ -365,6 +423,16 @@ export default function OptimizerPage() {
           text-transform: uppercase;
           letter-spacing: 0.5px;
         }
+        .opt-chip-secondary {
+          display: inline-flex;
+          align-items: center;
+          padding: 3px 10px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 500;
+          border: 1px solid currentColor;
+          opacity: 0.75;
+        }
         .opt-confidence {
           font-size: 13px;
           color: #8a877f;
@@ -373,9 +441,18 @@ export default function OptimizerPage() {
           font-size: 14px;
           line-height: 1.6;
           color: #0f0e0d;
-          margin-bottom: 12px;
+          margin-bottom: 10px;
         }
-        .opt-opus-note {
+        .opt-runner-up {
+          font-size: 13px;
+          color: #8a877f;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .opt-premium-note {
           font-size: 13px;
           color: #8a877f;
           display: flex;
@@ -447,10 +524,7 @@ export default function OptimizerPage() {
           flex-wrap: wrap;
           gap: 8px;
         }
-        .opt-token-delta {
-          font-size: 14px;
-          color: #0f0e0d;
-        }
+        .opt-token-delta { font-size: 14px; color: #0f0e0d; }
         .opt-token-delta .saving { color: #166534; font-weight: 500; }
         .opt-copy-btn {
           background: none;
@@ -464,15 +538,8 @@ export default function OptimizerPage() {
           transition: background 0.15s;
         }
         .opt-copy-btn:hover { background: #f2ede5; }
-        .opt-removed-list {
-          margin-top: 16px;
-          font-size: 13px;
-          color: #8a877f;
-        }
-        .opt-removed-list ul {
-          margin: 6px 0 0 0;
-          padding-left: 20px;
-        }
+        .opt-removed-list { margin-top: 16px; font-size: 13px; color: #8a877f; }
+        .opt-removed-list ul { margin: 6px 0 0 0; padding-left: 20px; }
         .opt-removed-list li { margin-bottom: 3px; }
 
         /* Module 3 */
@@ -502,9 +569,7 @@ export default function OptimizerPage() {
           outline: none;
         }
         .opt-number-input:focus { border-color: #c8501a; }
-        .opt-calls-row {
-          margin-bottom: 24px;
-        }
+        .opt-calls-row { margin-bottom: 20px; }
         .opt-calls-row label {
           display: block;
           font-size: 12px;
@@ -533,48 +598,91 @@ export default function OptimizerPage() {
         .opt-preset-btn:hover { background: #f2ede5; border-color: #c8501a; }
         .opt-preset-btn.on { background: #c8501a; color: #fff; border-color: #c8501a; }
         .opt-divider { color: #e8e4dc; }
-        .opt-table-wrapper { overflow-x: auto; margin-bottom: 16px; }
+
+        /* Provider filter */
+        .opt-provider-filter {
+          display: flex;
+          gap: 8px;
+          margin-bottom: 16px;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+        .opt-provider-filter-label {
+          font-size: 12px;
+          color: #8a877f;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-right: 4px;
+        }
+        .opt-filter-btn {
+          padding: 5px 14px;
+          border: 1px solid #e8e4dc;
+          border-radius: 6px;
+          background: #faf8f5;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px;
+          cursor: pointer;
+          color: #0f0e0d;
+          transition: all 0.15s;
+        }
+        .opt-filter-btn:hover { border-color: #c8501a; }
+        .opt-filter-btn.on { border-color: #c8501a; color: #c8501a; font-weight: 500; background: #fff8f5; }
+
+        /* Cost table */
+        .opt-table-wrapper { overflow-x: auto; margin-bottom: 8px; }
         .opt-table {
           width: 100%;
           border-collapse: collapse;
-          font-size: 14px;
-          min-width: 360px;
+          font-size: 13px;
+          min-width: 400px;
         }
         .opt-table th {
           text-align: right;
-          padding: 10px 14px;
+          padding: 8px 10px;
           color: #8a877f;
           font-weight: 500;
           border-bottom: 2px solid #e8e4dc;
-          font-size: 13px;
+          font-size: 11px;
+          vertical-align: bottom;
+          line-height: 1.4;
+          white-space: nowrap;
         }
-        .opt-table th:first-child { text-align: left; }
+        .opt-table th:first-child { text-align: left; min-width: 80px; }
+        .opt-table .th-provider { display: block; font-size: 10px; color: #b0ac9f; font-weight: 400; }
+        .opt-table .th-model { display: block; }
         .opt-table td {
-          padding: 10px 14px;
+          padding: 8px 10px;
           border-bottom: 1px solid #f2ede5;
           text-align: right;
+          white-space: nowrap;
         }
-        .opt-table td:first-child { text-align: left; color: #8a877f; font-size: 13px; }
+        .opt-table td:first-child { text-align: left; color: #8a877f; font-size: 12px; }
         .opt-table tr:last-child td { border-bottom: none; }
-        .opt-table .col-haiku { }
-        .opt-table .col-annual-haiku { background: #f0fdf4; }
-        .opt-table .col-annual-savings-haiku { background: #dcfce7; font-weight: 600; color: #166534; }
-        .opt-table .col-annual-savings-sonnet { background: #dcfce7; font-weight: 600; color: #166534; }
-        .opt-table .col-annual-savings-opus { background: #dcfce7; font-weight: 600; color: #166534; }
-        .opt-savings-label {
-          font-size: 12px;
-          color: #8a877f;
-          margin-bottom: 8px;
-          display: flex;
-          align-items: center;
-          gap: 6px;
+        .opt-col-cheapest { background: #f0fdf4; }
+        .opt-col-recommended { border-left: 2px solid #c8501a; border-right: 2px solid #c8501a; }
+        .opt-col-recommended-top th { border-top: 2px solid #c8501a; }
+        .opt-savings-row td { background: #dcfce7; font-weight: 600; color: #166534; }
+        .opt-savings-header td { padding-top: 14px; padding-bottom: 2px; }
+        .opt-best-value {
+          font-size: 13px;
+          color: #166534;
+          background: #f0fdf4;
+          border: 1px solid #bbf7d0;
+          border-radius: 6px;
+          padding: 10px 14px;
+          margin-bottom: 16px;
         }
-        .opt-savings-label::before {
-          content: '';
-          display: inline-block;
-          width: 12px;
-          height: 1px;
-          background: #e8e4dc;
+        .opt-mobile-toggle {
+          display: none;
+          background: none;
+          border: 1px solid #e8e4dc;
+          border-radius: 6px;
+          padding: 6px 14px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px;
+          cursor: pointer;
+          color: #c8501a;
+          margin-bottom: 12px;
         }
         .opt-cta-btn {
           display: block;
@@ -603,6 +711,9 @@ export default function OptimizerPage() {
           .opt-modules { padding: 0 16px 60px; }
           .opt-module { padding: 20px; }
           .opt-inputs-row { grid-template-columns: 1fr; }
+          .opt-mobile-toggle { display: inline-block; }
+          .opt-provider-filter { display: none; }
+          .opt-table-mobile-collapsed .opt-table-wrapper { overflow-x: hidden; }
         }
       `}</style>
 
@@ -661,30 +772,55 @@ export default function OptimizerPage() {
 
             {routeError && <div className="opt-error">{routeError}</div>}
 
-            {routeResult && (
-              <div className="opt-result-card">
-                <div className="opt-rec-row">
-                  <span className="opt-rec-label">Recommended:</span>
-                  <span
-                    className="opt-chip"
-                    style={{ background: MODEL_PRICING[routeResult.recommended_model]?.color || '#374151' }}
-                  >
-                    {MODEL_PRICING[routeResult.recommended_model]?.name || routeResult.recommended_model}
-                  </span>
-                  <span className="opt-confidence">Confidence: {routeResult.confidence === 'high' ? 'High' : 'Medium'}</span>
-                </div>
-                <p className="opt-justification">{routeResult.justification}</p>
-                <div className="opt-opus-note">
-                  {routeResult.would_opus_help ? (
-                    <>⚠ Opus would help here: {routeResult.would_opus_help_reason}</>
-                  ) : (
-                    <>
-                      ✓ Would Opus help? No — {routeResult.recommended_model === 'sonnet' ? 'Sonnet is ~5× cheaper' : routeResult.recommended_model === 'haiku' ? 'Haiku is ~19× cheaper' : 'this model handles it fully'} here.
-                    </>
+            {routeResult && (() => {
+              const rec = MODEL_PRICING[routeResult.recommended_model]
+              const runnerUp = MODEL_PRICING[routeResult.runner_up]
+              const premiumInfo = getPremiumRatio(routeResult.recommended_model)
+              return (
+                <div className="opt-result-card">
+                  {/* Primary recommendation */}
+                  <div className="opt-rec-row">
+                    <span className="opt-rec-label">Recommended:</span>
+                    {rec && <span className="opt-provider-badge">{rec.provider}</span>}
+                    <span
+                      className="opt-chip"
+                      style={{ background: rec?.color || '#374151' }}
+                    >
+                      {rec?.name || routeResult.recommended_model}
+                    </span>
+                    <span className="opt-confidence">Confidence: {routeResult.confidence === 'high' ? 'High' : 'Medium'}</span>
+                  </div>
+
+                  <p className="opt-justification">{routeResult.justification}</p>
+
+                  {/* Runner-up */}
+                  {runnerUp && routeResult.runner_up_reason && (
+                    <div className="opt-runner-up">
+                      <span>Also consider:</span>
+                      <span
+                        className="opt-chip-secondary"
+                        style={{ color: runnerUp.color, borderColor: runnerUp.color }}
+                      >
+                        {runnerUp.name}
+                      </span>
+                      <span>— {routeResult.runner_up_reason}</span>
+                    </div>
                   )}
+
+                  {/* Premium help note */}
+                  <div className="opt-premium-note">
+                    {routeResult.would_premium_help ? (
+                      <>✓ Premium recommended here: {routeResult.would_premium_help_reason}</>
+                    ) : (
+                      <>
+                        ✓ Would Premium help? No
+                        {premiumInfo ? ` — ${rec?.name} is ~${premiumInfo.ratio}× cheaper here.` : '.'}
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
+              )
+            })()}
           </div>
 
           {/* ── Module 2: Prompt Compressor ── */}
@@ -767,10 +903,7 @@ export default function OptimizerPage() {
                   {activeTab === 'diff' && (
                     <div className="opt-diff-container">
                       {buildDiff(promptInput, compressResult.compressed_prompt).map((line, i) => (
-                        <div
-                          key={i}
-                          className={`opt-diff-line opt-diff-${line.type}`}
-                        >
+                        <div key={i} className={`opt-diff-line opt-diff-${line.type}`}>
                           {line.text || '\u00A0'}
                         </div>
                       ))}
@@ -778,7 +911,7 @@ export default function OptimizerPage() {
                   )}
                 </div>
 
-                {(compressResult.removed_elements?.length > 0) && (
+                {compressResult.removed_elements?.length > 0 && (
                   <div className="opt-removed-list">
                     <strong>What was removed:</strong>
                     <ul>
@@ -845,74 +978,108 @@ export default function OptimizerPage() {
               </div>
             </div>
 
-            <div className="opt-table-wrapper">
-              <table className="opt-table">
-                <thead>
-                  <tr>
-                    <th></th>
-                    {models.map(model => (
-                      <th
-                        key={model}
-                        style={routeResult?.recommended_model === model
-                          ? { color: MODEL_PRICING[model].color, outline: `2px solid ${MODEL_PRICING[model].color}`, outlineOffset: -2, borderRadius: 4 }
-                          : {}
-                        }
-                      >
-                        {MODEL_PRICING[model].name}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Cost per call</td>
-                    {models.map(model => (
-                      <td key={model}>{formatCost(costs[model].perCall)}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td>Daily</td>
-                    {models.map(model => (
-                      <td key={model}>{formatCost(costs[model].daily)}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td>Monthly</td>
-                    {models.map(model => (
-                      <td key={model}>{formatCost(costs[model].monthly)}</td>
-                    ))}
-                  </tr>
-                  <tr>
-                    <td>Annual</td>
-                    {models.map((model, i) => (
-                      <td key={model} className={i === 0 ? 'col-annual-haiku' : ''}>
-                        {formatCost(costs[model].annual)}
-                      </td>
-                    ))}
-                  </tr>
-
-                  {showSavings && (
-                    <>
-                      <tr>
-                        <td colSpan={4} style={{ paddingBottom: 4, paddingTop: 16 }}>
-                          <div className="opt-savings-label">
-                            Annual savings if compressed ({compressedTokens.toLocaleString()} tokens)
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>You&apos;d save</td>
-                        {models.map(model => (
-                          <td key={model} className={`col-annual-savings-${model}`}>
-                            {formatCost(savings[model])}
-                          </td>
-                        ))}
-                      </tr>
-                    </>
-                  )}
-                </tbody>
-              </table>
+            {/* Provider filter — desktop */}
+            <div className="opt-provider-filter">
+              <span className="opt-provider-filter-label">Show:</span>
+              {['All', ...PROVIDERS].map(p => (
+                <button
+                  key={p}
+                  className={`opt-filter-btn${activeProvider === p ? ' on' : ''}`}
+                  onClick={() => setActiveProvider(p)}
+                >
+                  {p}
+                </button>
+              ))}
             </div>
+
+            {/* Mobile: default Anthropic-only, expand toggle */}
+            <button
+              className="opt-mobile-toggle"
+              onClick={() => setMobileExpanded(prev => !prev)}
+            >
+              {mobileExpanded ? '← Anthropic only' : 'Compare providers →'}
+            </button>
+
+            {/* Cost table */}
+            <div className={mobileExpanded ? '' : 'opt-table-mobile-collapsed'}>
+              <div className="opt-table-wrapper">
+                <table className="opt-table">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      {(mobileExpanded ? visibleModels : visibleModels.filter(id => MODEL_PRICING[id]?.provider === 'Anthropic' || mobileExpanded)).map(modelId => {
+                        const m = MODEL_PRICING[modelId]
+                        if (!m) return null
+                        const isRec = routeResult?.recommended_model === modelId
+                        return (
+                          <th
+                            key={modelId}
+                            style={isRec ? { color: m.color, borderTop: `2px solid ${m.color}` } : {}}
+                          >
+                            <span className="th-provider">{m.provider}</span>
+                            <span className="th-model">{shortName(modelId)}</span>
+                          </th>
+                        )
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {['Cost per call', 'Daily', 'Monthly', 'Annual'].map((rowLabel, rowIdx) => {
+                      const costKey = ['perCall', 'daily', 'monthly', 'annual'][rowIdx]
+                      const isAnnual = costKey === 'annual'
+                      const mobileModels = mobileExpanded ? visibleModels : visibleModels.filter(id => MODEL_PRICING[id]?.provider === 'Anthropic' || mobileExpanded)
+                      return (
+                        <tr key={rowLabel}>
+                          <td>{rowLabel}</td>
+                          {mobileModels.map(modelId => {
+                            const val = costs[modelId]?.[costKey] ?? 0
+                            const isCheapest = isAnnual && modelId === lowestAnnualId
+                            const isRec = routeResult?.recommended_model === modelId
+                            return (
+                              <td
+                                key={modelId}
+                                className={[
+                                  isCheapest ? 'opt-col-cheapest' : '',
+                                  isRec ? 'opt-col-recommended' : '',
+                                ].filter(Boolean).join(' ')}
+                              >
+                                {formatCost(val)}
+                              </td>
+                            )
+                          })}
+                        </tr>
+                      )
+                    })}
+
+                    {showSavings && (() => {
+                      const mobileModels = mobileExpanded ? visibleModels : visibleModels.filter(id => MODEL_PRICING[id]?.provider === 'Anthropic' || mobileExpanded)
+                      return (
+                        <>
+                          <tr className="opt-savings-header">
+                            <td colSpan={mobileModels.length + 1} style={{ fontSize: 11, color: '#8a877f', paddingBottom: 4 }}>
+                              Annual savings if compressed ({compressedTokens.toLocaleString()} tokens)
+                            </td>
+                          </tr>
+                          <tr className="opt-savings-row">
+                            <td>You&apos;d save</td>
+                            {mobileModels.map(modelId => (
+                              <td key={modelId}>{formatCost(savings[modelId] ?? 0)}</td>
+                            ))}
+                          </tr>
+                        </>
+                      )
+                    })()}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Best value annotation */}
+            {showBestValue && (
+              <div className="opt-best-value">
+                At {callsPerDay.toLocaleString()} calls/day, {MODEL_PRICING[cheapestModelId]?.name} saves {formatCost(bestValueDelta)}/year vs {MODEL_PRICING[mostExpensiveModelId]?.name}.
+              </div>
+            )}
 
             <Link
               href="/forge"
