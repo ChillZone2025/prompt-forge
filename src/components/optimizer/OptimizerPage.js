@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import Link from 'next/link'
 import { track } from '@vercel/analytics'
 import { MODEL_PRICING, PROVIDERS, DEFAULT_COMPARISON } from '../../lib/modelPricing'
@@ -51,6 +51,17 @@ function shortName(modelId) {
     .replace('GPT-', 'GPT-')
     .replace('Gemini 2.5 ', '')
 }
+
+// Pre-computed at module level — avoids Object.values() during render
+// Object iteration order is stable per spec for string keys in insertion order,
+// but computing once at module parse time removes any SSR/client ambiguity.
+const ALL_MODEL_IDS = Object.keys(MODEL_PRICING)
+const PREMIUM_MODELS = ALL_MODEL_IDS
+  .map(id => MODEL_PRICING[id])
+  .filter(m => m.tier === 'premium')
+const CHEAPEST_PREMIUM = PREMIUM_MODELS.length > 0
+  ? PREMIUM_MODELS.reduce((a, b) => a.inputPerMToken < b.inputPerMToken ? a : b)
+  : null
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -163,47 +174,59 @@ export default function OptimizerPage() {
 
   // ─── Module 3 Calculations ─────────────────────────────────────────────────
 
-  // Derive visible model columns from active provider filter
-  const visibleModels = activeProvider === 'All'
-    ? DEFAULT_COMPARISON
-    : Object.values(MODEL_PRICING)
-        .filter(m => m.provider === activeProvider)
-        .map(m => m.id)
+  // Stable ordered model list from active provider filter.
+  // Uses ALL_MODEL_IDS (module-level, insertion-order stable) instead of Object.values() during render.
+  const visibleModels = useMemo(() => {
+    if (activeProvider === 'All') return DEFAULT_COMPARISON
+    return ALL_MODEL_IDS.filter(id => MODEL_PRICING[id].provider === activeProvider)
+  }, [activeProvider])
 
-  const costs = {}
-  for (const modelId of visibleModels) {
-    const pricing = MODEL_PRICING[modelId]
-    if (!pricing) continue
-    const costPerCall = calculateCostPerCall(inputTokens, outputTokens, pricing)
-    costs[modelId] = projectCosts(costPerCall, callsPerDay)
-  }
+  const costs = useMemo(() => {
+    const result = {}
+    for (const modelId of visibleModels) {
+      const pricing = MODEL_PRICING[modelId]
+      if (!pricing) continue
+      const costPerCall = calculateCostPerCall(inputTokens, outputTokens, pricing)
+      result[modelId] = projectCosts(costPerCall, callsPerDay)
+    }
+    return result
+  }, [visibleModels, inputTokens, outputTokens, callsPerDay])
 
   // Savings row: only shown if Module 2 ran and produced fewer tokens
   const showSavings = compressResult && compressedTokens < promptTokens && promptTokens > 0
-  const savings = {}
-  if (showSavings) {
+
+  const savings = useMemo(() => {
+    if (!compressResult || compressedTokens >= promptTokens || promptTokens === 0) return {}
+    const result = {}
     for (const modelId of visibleModels) {
       const pricing = MODEL_PRICING[modelId]
       if (!pricing) continue
       const origCostPerCall = calculateCostPerCall(promptTokens, outputTokens, pricing)
       const compCostPerCall = calculateCostPerCall(compressedTokens, outputTokens, pricing)
-      savings[modelId] = projectCosts(origCostPerCall - compCostPerCall, callsPerDay).annual
+      result[modelId] = projectCosts(origCostPerCall - compCostPerCall, callsPerDay).annual
     }
-  }
+    return result
+  }, [compressResult, compressedTokens, promptTokens, visibleModels, outputTokens, callsPerDay])
 
-  // Best value annotation: most expensive minus cheapest in visible set, if delta > $100/year
-  const annualValues = visibleModels
-    .map(id => costs[id]?.annual ?? 0)
-    .filter(v => v > 0)
-  const maxAnnual = Math.max(...annualValues)
-  const minAnnual = Math.min(...annualValues)
-  const bestValueDelta = maxAnnual - minAnnual
-  const cheapestModelId = visibleModels.find(id => costs[id]?.annual === minAnnual)
-  const mostExpensiveModelId = visibleModels.find(id => costs[id]?.annual === maxAnnual)
-  const showBestValue = bestValueDelta > 100 && cheapestModelId && mostExpensiveModelId
-
-  // Lowest annual cost column index for green tint
-  const lowestAnnualId = cheapestModelId
+  // Best value annotation and cheapest/most expensive IDs — all in one memo to avoid cascading recompute
+  const { bestValueDelta, cheapestModelId, mostExpensiveModelId, showBestValue, lowestAnnualId } = useMemo(() => {
+    const annualValues = visibleModels.map(id => costs[id]?.annual ?? 0).filter(v => v > 0)
+    if (annualValues.length === 0) {
+      return { bestValueDelta: 0, cheapestModelId: null, mostExpensiveModelId: null, showBestValue: false, lowestAnnualId: null }
+    }
+    const maxAnnual = Math.max(...annualValues)
+    const minAnnual = Math.min(...annualValues)
+    const delta = maxAnnual - minAnnual
+    const cheapestId = visibleModels.find(id => costs[id]?.annual === minAnnual) ?? null
+    const mostExpensiveId = visibleModels.find(id => costs[id]?.annual === maxAnnual) ?? null
+    return {
+      bestValueDelta: delta,
+      cheapestModelId: cheapestId,
+      mostExpensiveModelId: mostExpensiveId,
+      showBestValue: delta > 100 && cheapestId !== null && mostExpensiveId !== null,
+      lowestAnnualId: cheapestId,
+    }
+  }, [visibleModels, costs])
 
   const handleCallsPreset = (val) => {
     setCallsPerDay(val)
@@ -219,19 +242,12 @@ export default function OptimizerPage() {
 
   const remainingDisplay = compressUsed === null ? '5 of 5' : `${compressUsed} of 5`
 
-  // Cost savings ratio for Module 1 message
+  // Cost savings ratio for Module 1 message — uses module-level CHEAPEST_PREMIUM (no Object.values during render)
   function getPremiumRatio(recommendedId) {
     const rec = MODEL_PRICING[recommendedId]
-    if (!rec) return null
-    // Find the cheapest premium model as comparison
-    const premiumModels = Object.values(MODEL_PRICING).filter(m => m.tier === 'premium')
-    if (premiumModels.length === 0) return null
-    const cheapestPremium = premiumModels.reduce((a, b) =>
-      a.inputPerMToken < b.inputPerMToken ? a : b
-    )
-    if (rec.tier === 'premium') return null
-    const ratio = Math.round(cheapestPremium.inputPerMToken / rec.inputPerMToken)
-    return { ratio, premiumName: cheapestPremium.name }
+    if (!rec || rec.tier === 'premium' || !CHEAPEST_PREMIUM) return null
+    const ratio = Math.round(CHEAPEST_PREMIUM.inputPerMToken / rec.inputPerMToken)
+    return { ratio, premiumName: CHEAPEST_PREMIUM.name }
   }
 
   return (
@@ -1077,7 +1093,7 @@ export default function OptimizerPage() {
             {/* Best value annotation */}
             {showBestValue && (
               <div className="opt-best-value">
-                At {callsPerDay.toLocaleString()} calls/day, {MODEL_PRICING[cheapestModelId]?.name} saves {formatCost(bestValueDelta)}/year vs {MODEL_PRICING[mostExpensiveModelId]?.name}.
+                At {callsPerDay.toLocaleString('en-US')} calls/day, {MODEL_PRICING[cheapestModelId]?.name} saves {formatCost(bestValueDelta)}/year vs {MODEL_PRICING[mostExpensiveModelId]?.name}.
               </div>
             )}
 
