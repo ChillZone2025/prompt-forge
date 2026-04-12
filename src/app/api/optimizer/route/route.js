@@ -30,12 +30,18 @@ export async function POST(request) {
       return NextResponse.json({ error: 'task is required' }, { status: 400 })
     }
 
-    const message = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 512,
-      system: SYSTEM_PROMPT,
-      messages: [{ role: 'user', content: task.trim() }],
-    })
+    let message
+    try {
+      message = await client.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 512,
+        system: SYSTEM_PROMPT,
+        messages: [{ role: 'user', content: task.trim() }],
+      })
+    } catch (err) {
+      console.error('Anthropic API error (route):', err.message)
+      return NextResponse.json({ error: err.message }, { status: 500 })
+    }
 
     const raw = message.content[0]?.text || ''
 
@@ -43,7 +49,7 @@ export async function POST(request) {
     try {
       result = JSON.parse(raw)
     } catch {
-      return NextResponse.json({ error: 'Parse failed' }, { status: 500 })
+      return NextResponse.json({ error: 'Parse failed', raw }, { status: 500 })
     }
 
     return NextResponse.json(result)
