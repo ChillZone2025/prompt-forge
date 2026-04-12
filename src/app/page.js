@@ -341,6 +341,7 @@ export default async function Home() {
           <a href="#how">How It Works</a>
           <a href="#industries">Industries</a>
           <a href="#pricing">Pricing</a>
+          <a href="/optimizer">Optimizer</a>
         </div>
         <Link href="/forge" className="lp-nav-cta">Start Forging Free →</Link>
       </nav>

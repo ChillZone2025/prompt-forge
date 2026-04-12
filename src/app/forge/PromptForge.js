@@ -877,6 +877,9 @@ export default function PromptForge() {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e8e4dc', marginBottom: 0 }}>
           <div style={{ display: 'flex' }}>
             <button className={`nav-tab ${view === 'forge' ? 'on' : ''}`} onClick={() => { setView('forge'); reset() }}>Forge</button>
+            <Link href="/optimizer" style={{ textDecoration: 'none' }}>
+              <button className="nav-tab">Optimizer</button>
+            </Link>
             <button className={`nav-tab ${view === 'library' ? 'on' : ''}`} onClick={() => setView('library')}>
               Library {library.length > 0 && <span style={{ color: '#374151', marginLeft: 3 }}>({library.length})</span>}
             </button>
