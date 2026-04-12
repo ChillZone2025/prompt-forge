@@ -115,3 +115,4 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-08 — Fix: Pro status not recognized after login — add verify-subscription sync + user.reload() on sign-in — `085fc93`
 - 2026-04-12 — Add QualityBadge: surface quality gate scores on generated prompts (30 agents scored, 7.6–9.2 range) — `72917ef`
 - 2026-04-12 — SEO template system: 267 agent pages, sitemap (309 URLs), robots.txt, industry page upgrades, Supabase library, /dashboard, ?agent= deep-link — `77562d6`
+- 2026-04-12 — Score remaining 237 agents with quality gate data (qualityScore, tier1Pass, validatedAt) — all 267 agents now scored — `36b5ad9`
