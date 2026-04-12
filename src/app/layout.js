@@ -32,6 +32,9 @@ export const metadata = {
     description: 'Generate deployment-ready AI agent system prompts in one click. 267 archetypes, 41 industries.',
     images: ['https://www.getpromptforge.net/og.png'],
   },
+  verification: {
+    google: 'googlef3291af3bd3862cf',
+  },
 }
 export default function RootLayout({ children }) {
   return (
