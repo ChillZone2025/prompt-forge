@@ -11,7 +11,7 @@
 - **Agents with fixedPrompt:** 8 (SOP Generator, Content Repurposer, Subscription Negotiator, Homework Helper, Listing Generator, Resume Screener, Site Report Generator, Proposal & SOW Writer)
 - **Prompt engine version:** v2 (XML-tagged, 8-section output, userContext support, max_tokens: 4096)
 - **Free limit:** 3 generates
-- **UI features:** Streaming output, Regenerate button, Generation metadata, userContext input (Pro only), Global search, Industry dropdown, Filter pills, Pro-only blur/lock system, SEO landing pages (/industry/{slug}), URL deep-linking (/forge?industry=), VerticalSelector onboarding component (landing page), Vercel Analytics funnel events (5 stages), 7-section conversion landing page (BeforeAfter, HowItWorks, SocialProof, FinalCTA components), hero use-case chips, QualityBadge (score pill + hover tooltip on validated agents)
+- **UI features:** Streaming output, Regenerate button, Generation metadata, userContext input (Pro only), Global search, Industry dropdown, Filter pills, Pro-only blur/lock system, SEO landing pages (/industry/{slug}), URL deep-linking (/forge?industry=, /forge?agent=), VerticalSelector onboarding component (landing page), Vercel Analytics funnel events (5 stages), 7-section conversion landing page (BeforeAfter, HowItWorks, SocialProof, FinalCTA components), hero use-case chips, QualityBadge (score pill + hover tooltip on validated agents), Agent pages (/agent/{id} — 267 pages), /sitemap.xml (309 URLs), /robots.txt, Supabase prompt library (save/list/delete), /dashboard saved prompts page
 - **Pro-only industries:** AI Agent Development, Cyber Intelligence, Cybersecurity, Consulting & Strategy, Architecture & Engineering, SaaS & Product, Banking & Lending, Pharma & Biotech, Aviation & Aerospace, Executive & Leadership
 - **Gated features:** userContext personalization, Save to Library, Custom Agent Builder
 - **Pricing:** $12/month Pro (LOCKED — see competitive-intel.md)
@@ -114,3 +114,4 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-08 — Rewrite root README to lead with MCP for Glama scanner — `d962545`
 - 2026-04-08 — Fix: Pro status not recognized after login — add verify-subscription sync + user.reload() on sign-in — `085fc93`
 - 2026-04-12 — Add QualityBadge: surface quality gate scores on generated prompts (30 agents scored, 7.6–9.2 range) — `72917ef`
+- 2026-04-12 — SEO template system: 267 agent pages, sitemap (309 URLs), robots.txt, industry page upgrades, Supabase library, /dashboard, ?agent= deep-link — `77562d6`
