@@ -1,11 +1,14 @@
 import { ClerkProvider } from '@clerk/nextjs'
 import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
+export const viewport = {
+  themeColor: '#c8501a',
+}
+
 export const metadata = {
   title: 'Prompt Forge — One-Click Agent Prompts',
   description: 'Generate fully packaged, deployment-ready AI agent system prompts in one click. No setup required.',
   manifest: '/manifest.json',
-  themeColor: '#c8501a',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
