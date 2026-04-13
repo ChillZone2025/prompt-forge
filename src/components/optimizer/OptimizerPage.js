@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import Link from 'next/link'
 import { track } from '@vercel/analytics'
 import { MODEL_PRICING, PROVIDERS, DEFAULT_COMPARISON } from '../../lib/modelPricing'
@@ -63,6 +63,15 @@ const CHEAPEST_PREMIUM = PREMIUM_MODELS.length > 0
   ? PREMIUM_MODELS.reduce((a, b) => a.inputPerMToken < b.inputPerMToken ? a : b)
   : null
 
+// ─── Provider/Model Groups ────────────────────────────────────────────────────
+// Ordered cheapest → most expensive by inputPerMToken within each group.
+// Column order matches spec exactly.
+const PROVIDER_MODEL_GROUPS = [
+  { provider: 'Anthropic', models: ['claude_haiku', 'claude_sonnet', 'claude_opus'] },
+  { provider: 'OpenAI',    models: ['gpt41_nano', 'gpt41_mini', 'gpt41', 'o4_mini'] },
+  { provider: 'Google',    models: ['gemini_flash_lite', 'gemini_flash', 'gemini_pro'] },
+]
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function OptimizerPage() {
@@ -86,8 +95,17 @@ export default function OptimizerPage() {
   const [outputTokens, setOutputTokens] = useState(500)
   const [callsPerDay, setCallsPerDay] = useState(1000)
   const [callsInput, setCallsInput] = useState('1000')
-  const [activeProvider, setActiveProvider] = useState('All')
-  const [mobileExpanded, setMobileExpanded] = useState(false)
+  const [activeProviders, setActiveProviders] = useState(new Set(['Anthropic', 'OpenAI', 'Google']))
+  const [mobileProvider, setMobileProvider] = useState('Anthropic')
+  const [isMobile, setIsMobile] = useState(false) // false = desktop-safe SSR default
+
+  // ─── Mobile detection (fires after first paint — isMobile starts false) ────
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
 
   // ─── Module 1 Handler ──────────────────────────────────────────────────────
 
@@ -174,12 +192,28 @@ export default function OptimizerPage() {
 
   // ─── Module 3 Calculations ─────────────────────────────────────────────────
 
-  // Stable ordered model list from active provider filter.
-  // Uses ALL_MODEL_IDS (module-level, insertion-order stable) instead of Object.values() during render.
+  // Stable ordered model list — driven by provider toggles (desktop) or single selector (mobile).
   const visibleModels = useMemo(() => {
-    if (activeProvider === 'All') return DEFAULT_COMPARISON
-    return ALL_MODEL_IDS.filter(id => MODEL_PRICING[id].provider === activeProvider)
-  }, [activeProvider])
+    if (isMobile) {
+      const group = PROVIDER_MODEL_GROUPS.find(g => g.provider === mobileProvider)
+      return group ? group.models : []
+    }
+    return PROVIDER_MODEL_GROUPS
+      .filter(g => activeProviders.has(g.provider))
+      .flatMap(g => g.models)
+  }, [activeProviders, mobileProvider, isMobile])
+
+  // Which model IDs start a new provider group (used to render column dividers)
+  const providerDividers = useMemo(() => {
+    const dividers = new Set()
+    let lastProvider = null
+    for (const id of visibleModels) {
+      const p = MODEL_PRICING[id]?.provider
+      if (lastProvider !== null && p !== lastProvider) dividers.add(id)
+      lastProvider = p
+    }
+    return dividers
+  }, [visibleModels])
 
   const costs = useMemo(() => {
     const result = {}
@@ -239,6 +273,22 @@ export default function OptimizerPage() {
     const num = parseInt(raw, 10)
     if (!isNaN(num) && num > 0) setCallsPerDay(num)
   }
+
+  // Toggle a provider on desktop; switch to that provider on mobile.
+  // At least one provider must stay active on desktop.
+  const handleProviderClick = useCallback((provider) => {
+    if (isMobile) {
+      setMobileProvider(provider)
+    } else {
+      setActiveProviders(prev => {
+        if (prev.has(provider) && prev.size === 1) return prev // prevent deselecting all
+        const next = new Set(prev)
+        if (next.has(provider)) next.delete(provider)
+        else next.add(provider)
+        return next
+      })
+    }
+  }, [isMobile])
 
   const remainingDisplay = compressUsed === null ? '5 of 5' : `${compressUsed} of 5`
 
@@ -675,8 +725,10 @@ export default function OptimizerPage() {
         .opt-table td:first-child { text-align: left; color: #8a877f; font-size: 12px; }
         .opt-table tr:last-child td { border-bottom: none; }
         .opt-col-cheapest { background: #f0fdf4; }
-        .opt-col-recommended { border-left: 2px solid #c8501a; border-right: 2px solid #c8501a; }
+        .opt-col-recommended { border-left: 2px solid #c8501a !important; border-right: 2px solid #c8501a; }
         .opt-col-recommended-top th { border-top: 2px solid #c8501a; }
+        .opt-col-divider { border-left: 2px solid #e8e4dc !important; }
+        .opt-col-divider-th { border-left: 2px solid #e8e4dc !important; }
         .opt-savings-row td { background: #dcfce7; font-weight: 600; color: #166534; }
         .opt-savings-header td { padding-top: 14px; padding-bottom: 2px; }
         .opt-best-value {
@@ -688,18 +740,7 @@ export default function OptimizerPage() {
           padding: 10px 14px;
           margin-bottom: 16px;
         }
-        .opt-mobile-toggle {
-          display: none;
-          background: none;
-          border: 1px solid #e8e4dc;
-          border-radius: 6px;
-          padding: 6px 14px;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
-          cursor: pointer;
-          color: #c8501a;
-          margin-bottom: 12px;
-        }
+        .opt-mobile-toggle { display: none; }
         .opt-cta-btn {
           display: block;
           width: 100%;
@@ -727,9 +768,6 @@ export default function OptimizerPage() {
           .opt-modules { padding: 0 16px 60px; }
           .opt-module { padding: 20px; }
           .opt-inputs-row { grid-template-columns: 1fr; }
-          .opt-mobile-toggle { display: inline-block; }
-          .opt-provider-filter { display: none; }
-          .opt-table-mobile-collapsed .opt-table-wrapper { overflow-x: hidden; }
         }
       `}</style>
 
@@ -994,100 +1032,98 @@ export default function OptimizerPage() {
               </div>
             </div>
 
-            {/* Provider filter — desktop */}
+            {/* Provider filter — toggle on desktop, single-select on mobile */}
             <div className="opt-provider-filter">
-              <span className="opt-provider-filter-label">Show:</span>
-              {['All', ...PROVIDERS].map(p => (
-                <button
-                  key={p}
-                  className={`opt-filter-btn${activeProvider === p ? ' on' : ''}`}
-                  onClick={() => setActiveProvider(p)}
-                >
-                  {p}
-                </button>
-              ))}
+              <span className="opt-provider-filter-label">Providers:</span>
+              {PROVIDERS.map(p => {
+                const isActive = isMobile ? mobileProvider === p : activeProviders.has(p)
+                return (
+                  <button
+                    key={p}
+                    className={`opt-filter-btn${isActive ? ' on' : ''}`}
+                    onClick={() => handleProviderClick(p)}
+                  >
+                    {p}
+                  </button>
+                )
+              })}
             </div>
 
-            {/* Mobile: default Anthropic-only, expand toggle */}
-            <button
-              className="opt-mobile-toggle"
-              onClick={() => setMobileExpanded(prev => !prev)}
-            >
-              {mobileExpanded ? '← Anthropic only' : 'Compare providers →'}
-            </button>
-
             {/* Cost table */}
-            <div className={mobileExpanded ? '' : 'opt-table-mobile-collapsed'}>
-              <div className="opt-table-wrapper">
-                <table className="opt-table">
-                  <thead>
-                    <tr>
-                      <th></th>
-                      {(mobileExpanded ? visibleModels : visibleModels.filter(id => MODEL_PRICING[id]?.provider === 'Anthropic' || mobileExpanded)).map(modelId => {
-                        const m = MODEL_PRICING[modelId]
-                        if (!m) return null
-                        const isRec = routeResult?.recommended_model === modelId
-                        return (
-                          <th
-                            key={modelId}
-                            style={isRec ? { color: m.color, borderTop: `2px solid ${m.color}` } : {}}
-                          >
-                            <span className="th-provider">{m.provider}</span>
-                            <span className="th-model">{shortName(modelId)}</span>
-                          </th>
-                        )
-                      })}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {['Cost per call', 'Daily', 'Monthly', 'Annual'].map((rowLabel, rowIdx) => {
-                      const costKey = ['perCall', 'daily', 'monthly', 'annual'][rowIdx]
-                      const isAnnual = costKey === 'annual'
-                      const mobileModels = mobileExpanded ? visibleModels : visibleModels.filter(id => MODEL_PRICING[id]?.provider === 'Anthropic' || mobileExpanded)
+            <div className="opt-table-wrapper">
+              <table className="opt-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    {visibleModels.map(modelId => {
+                      const m = MODEL_PRICING[modelId]
+                      if (!m) return null
+                      const isRec = routeResult?.recommended_model === modelId
+                      const isDivider = providerDividers.has(modelId)
                       return (
-                        <tr key={rowLabel}>
-                          <td>{rowLabel}</td>
-                          {mobileModels.map(modelId => {
-                            const val = costs[modelId]?.[costKey] ?? 0
-                            const isCheapest = isAnnual && modelId === lowestAnnualId
-                            const isRec = routeResult?.recommended_model === modelId
-                            return (
-                              <td
-                                key={modelId}
-                                className={[
-                                  isCheapest ? 'opt-col-cheapest' : '',
-                                  isRec ? 'opt-col-recommended' : '',
-                                ].filter(Boolean).join(' ')}
-                              >
-                                {formatCost(val)}
-                              </td>
-                            )
-                          })}
-                        </tr>
+                        <th
+                          key={modelId}
+                          className={isDivider ? 'opt-col-divider-th' : ''}
+                          style={isRec ? { color: m.color, borderTop: `2px solid ${m.color}` } : {}}
+                        >
+                          <span className="th-provider">{m.provider}</span>
+                          <span className="th-model">{shortName(modelId)}</span>
+                        </th>
                       )
                     })}
-
-                    {showSavings && (() => {
-                      const mobileModels = mobileExpanded ? visibleModels : visibleModels.filter(id => MODEL_PRICING[id]?.provider === 'Anthropic' || mobileExpanded)
-                      return (
-                        <>
-                          <tr className="opt-savings-header">
-                            <td colSpan={mobileModels.length + 1} style={{ fontSize: 11, color: '#8a877f', paddingBottom: 4 }}>
-                              Annual savings if compressed ({compressedTokens.toLocaleString()} tokens)
+                  </tr>
+                </thead>
+                <tbody>
+                  {['Cost per call', 'Daily', 'Monthly', 'Annual'].map((rowLabel, rowIdx) => {
+                    const costKey = ['perCall', 'daily', 'monthly', 'annual'][rowIdx]
+                    const isAnnual = costKey === 'annual'
+                    return (
+                      <tr key={rowLabel}>
+                        <td>{rowLabel}</td>
+                        {visibleModels.map(modelId => {
+                          const val = costs[modelId]?.[costKey] ?? 0
+                          const isCheapest = isAnnual && modelId === lowestAnnualId
+                          const isRec = routeResult?.recommended_model === modelId
+                          const isDivider = providerDividers.has(modelId)
+                          return (
+                            <td
+                              key={modelId}
+                              className={[
+                                isCheapest ? 'opt-col-cheapest' : '',
+                                isRec ? 'opt-col-recommended' : '',
+                                isDivider ? 'opt-col-divider' : '',
+                              ].filter(Boolean).join(' ')}
+                            >
+                              {formatCost(val)}
                             </td>
-                          </tr>
-                          <tr className="opt-savings-row">
-                            <td>You&apos;d save</td>
-                            {mobileModels.map(modelId => (
-                              <td key={modelId}>{formatCost(savings[modelId] ?? 0)}</td>
-                            ))}
-                          </tr>
-                        </>
-                      )
-                    })()}
-                  </tbody>
-                </table>
-              </div>
+                          )
+                        })}
+                      </tr>
+                    )
+                  })}
+
+                  {showSavings && (
+                    <>
+                      <tr className="opt-savings-header">
+                        <td colSpan={visibleModels.length + 1} style={{ fontSize: 11, color: '#8a877f', paddingBottom: 4 }}>
+                          Annual savings if compressed ({compressedTokens.toLocaleString()} tokens)
+                        </td>
+                      </tr>
+                      <tr className="opt-savings-row">
+                        <td>You&apos;d save</td>
+                        {visibleModels.map(modelId => (
+                          <td
+                            key={modelId}
+                            className={providerDividers.has(modelId) ? 'opt-col-divider' : ''}
+                          >
+                            {formatCost(savings[modelId] ?? 0)}
+                          </td>
+                        ))}
+                      </tr>
+                    </>
+                  )}
+                </tbody>
+              </table>
             </div>
 
             {/* Best value annotation */}
