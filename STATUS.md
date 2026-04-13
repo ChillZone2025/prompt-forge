@@ -116,3 +116,4 @@ Empty — all staged content has been integrated and staging cleaned up.
 - 2026-04-12 — Add QualityBadge: surface quality gate scores on generated prompts (30 agents scored, 7.6–9.2 range) — `72917ef`
 - 2026-04-12 — SEO template system: 267 agent pages, sitemap (309 URLs), robots.txt, industry page upgrades, Supabase library, /dashboard, ?agent= deep-link — `77562d6`
 - 2026-04-12 — Score remaining 237 agents with quality gate data (qualityScore, tier1Pass, validatedAt) — all 267 agents now scored — `36b5ad9`
+- 2026-04-13 — Optimizer: fix hydration (dynamic ssr:false, relative import); Module 3 full 10-model table with 3-provider toggle, dividers, mobile single-select — `9b3c446`
