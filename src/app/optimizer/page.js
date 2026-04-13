@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 const OptimizerPage = dynamic(
-  () => import('../../components/optimizer/OptimizerPage'),
+  () => import('@/components/optimizer/OptimizerPage'),
   { ssr: false }
 )
 
