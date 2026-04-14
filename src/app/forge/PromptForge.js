@@ -461,6 +461,11 @@ export default function PromptForge() {
         if (a.id === agentParam) {
           setIndustry(ind)
           handleAgentClick({ ...a, _industry: ind })
+          // Scroll to output section after React renders the selected state
+          setTimeout(() => {
+            const el = document.querySelector('.fu')
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }, 150)
           break outer
         }
       }
